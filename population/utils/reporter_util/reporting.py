@@ -167,7 +167,7 @@ class StdOutReporter(BaseReporter):
         logger(msg) if logger else print(msg)
     
     def species_stagnant(self, sid, s, logger=None):
-        msg = f"\nSpecies {sid} with {len(s.members)} members is stagnated (fitness: {round(s.fitness, 5)}): removed!"
+        msg = f" > Species {sid} with {len(s.members)} members is stagnated (fitness: {round(s.fitness, 5)}): removed!"
         logger(msg) if logger else print(msg)
     
     def info(self, msg, logger=None, print_result=True):
