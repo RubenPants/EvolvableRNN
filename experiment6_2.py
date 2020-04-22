@@ -13,10 +13,11 @@ from collections import Counter
 from glob import glob
 
 import matplotlib.pyplot as plt
-from six import iteritems
+from six import iteritems, itervalues
+from tqdm import tqdm
 
-from experiment6 import enforce_topology1, get_config as get_cfg, get_genome, get_genome_parameters, get_multi_env
-from main import get_folder, get_game_ids, train
+from experiment6 import enforce_topology, get_config as get_cfg, get_genome, get_genome_parameters, get_multi_env
+from main import get_folder, get_game_ids
 from population.population import Population
 from population.utils.gene_util.gru import GruNodeGene
 from population.utils.population_util.fitness_functions import calc_pop_fitness
@@ -25,16 +26,22 @@ from utils.myutils import get_subfolder
 
 # --------------------------------------------------> MAIN METHODS <-------------------------------------------------- #
 
-def main(topology_id: int, batch_size: int = 1000, train_batch: int = 5, unused_cpu: int = 2, use_backup: bool = False):
+def main(topology_id: int,
+         batch_size: int = 1000,
+         train_batch: int = 5,
+         unused_cpu: int = 2,
+         save_pop: bool = False,
+         use_backup: bool = False):
     """Run a population infinitely long and store all its good genomes."""
     # Get the CSV used to store the results in
-    csv_path = get_csv_path(topology_id, use_backup=use_backup)
+    csv_path, csv_name = get_csv_path(topology_id, use_backup=use_backup)
     
     # Create the population
+    name = csv_name if save_pop else 'dummy'
     cfg = get_config()
     folder = get_folder(experiment_id=6)
     pop = Population(
-            name="population",
+            name=name,
             config=cfg,
             folder_name=folder,
             use_backup=use_backup,
@@ -48,10 +55,11 @@ def main(topology_id: int, batch_size: int = 1000, train_batch: int = 5, unused_
                          population=pop.population,
                          generation=pop.generation,
                          logger=pop.log)
-    pop.log(f"\n\n\n\n\n===> RUNNING EXPERIMENT 6 <===\n")
+    pop.log(f"\n\n\n===> RUNNING EXPERIMENT 6 <===\n")
     
     # Set games and environment used for training and evaluation
     games_train, games_eval = get_game_ids(experiment_id=6)
+    train_env = get_multi_env(config=cfg)
     eval_env = get_multi_env(config=cfg)
     eval_env.set_games(games_eval, noise=False)
     
@@ -60,19 +68,57 @@ def main(topology_id: int, batch_size: int = 1000, train_batch: int = 5, unused_
     try:
         while added < batch_size:
             t = time.localtime()
-            print(f"> Genome creation at {added / batch_size}%, "
-                  f"storing in csv '{csv_path.split('/')[-1]}' "
-                  f"({t.tm_hour:02d}h-{t.tm_min:02d}m-{t.tm_sec:02d}s)")
-            train(
-                    debug=False,
-                    game_config=cfg,
-                    games=games_train,
-                    iterations=train_batch,
-                    population=pop,
-                    unused_cpu=unused_cpu,
-            )
+            pop.log(f"\n\n===> Selective genome creation at {added / batch_size}%, "
+                    f"storing in csv '{csv_path.split('/')[-1]}' "
+                    f"({t.tm_hour:02d}h-{t.tm_min:02d}m-{t.tm_sec:02d}s) <===")
+            
+            # Train the population
+            pop.log("\n===> Training <===")
+            for _ in tqdm(range(train_batch), desc="Training"):
+                train_env.set_games(games_train, noise=True)
+                genomes = list(iteritems(pop.population))
+                
+                # Initialize the evaluation-pool
+                pool = mp.Pool(mp.cpu_count() - unused_cpu)
+                manager = mp.Manager()
+                return_dict = manager.dict()
+                
+                for genome in genomes:
+                    pool.apply_async(func=train_env.eval_genome, args=(genome, return_dict))
+                pool.close()  # Close the pool
+                pool.join()  # Postpone continuation until everything is finished
+                
+                # Calculate the fitness from the given return_dict
+                fitness = calc_pop_fitness(
+                        fitness_cfg=pop.config.evaluation,
+                        game_cfg=cfg.game,
+                        game_obs=return_dict,
+                        gen=pop.generation,
+                )
+                for i, genome in genomes:
+                    genome.fitness = fitness[i]
+                
+                # Update the population's best_genome
+                best = None
+                for g in itervalues(pop.population):
+                    if best is None or g.fitness > best.fitness: best = g
+                genomes = sorted(pop.population.items(), key=lambda x: x[1].fitness, reverse=True)
+                pop.best_fitness[pop.generation] = genomes[0][1].fitness
+                pop.best_genome_hist[pop.generation] = genomes[0]
+                pop.best_genome = best
+                
+                # Let population evolve
+                pop.evolve()
+                
+                # Constraint each of the population's new genomes to the given topology
+                for g in pop.population.values():
+                    enforce_topology(g, topology_id=topology_id)
+            
+            # Save the population after training
+            pop.save()
             
             # Evaluate the current population as was done in experiment6
+            pop.log("\n===> EVALUATING <===")
             genomes = list(iteritems(pop.population))
             pool = mp.Pool(mp.cpu_count() - unused_cpu)
             manager = mp.Manager()
@@ -88,8 +134,11 @@ def main(topology_id: int, batch_size: int = 1000, train_batch: int = 5, unused_
                     game_cfg=cfg.game,
                     game_obs=return_dict,
             )
+            best_fitness = 0
             for i, genome in genomes:
                 genome.fitness = fitness[i]
+                if fitness[i] > best_fitness: best_fitness = fitness[i]
+            print(f"Best fitness: {round(best_fitness, 3)}")
             
             # Write the result to CSV
             with open(csv_path, 'a', newline='') as f:
@@ -102,12 +151,10 @@ def main(topology_id: int, batch_size: int = 1000, train_batch: int = 5, unused_
         os.remove(csv_path)
         raise KeyboardInterrupt
     finally:
-        # Remove the population
-        path = f"population{'_backup' if use_backup else ''}/" \
-               f"storage/" \
-               f"{pop.folder_name}/" \
-               f"{pop}/"
-        shutil.rmtree(path)
+        # Remove the dummy population if it exists
+        path = f"population{'_backup' if use_backup else ''}/storage/{pop.folder_name}/dummy/"
+        if os.path.exists(path):
+            shutil.rmtree(path)
 
 
 def visualize_bar(topology_id: int, csv_id: int = None, rounding: int = 2, use_backup: bool = False):
@@ -181,7 +228,7 @@ def get_csv_path(topology_id: int, use_backup: bool):
     
     # CSV exists, count number of rows
     if os.path.exists(path):
-        return path
+        return path, csv_name
     
     # CSV does not exist, create new
     else:
@@ -192,7 +239,7 @@ def get_csv_path(topology_id: int, use_backup: bool):
                              'weight_hr', 'weight_hz', 'weight_hh',
                              'conn1', 'conn2',
                              'fitness'])
-            return path
+            return path, csv_name
 
 
 def execution_test():
@@ -201,7 +248,7 @@ def execution_test():
     g = get_genome(1, g_id=0, cfg=cfg)
     for _ in range(100):
         g.mutate(cfg.genome)
-        enforce_topology1(g)
+        enforce_topology(g, topology_id=1)
     print(g)
     assert g.nodes[0].bias == 2
     assert g.nodes[1].bias == 0
@@ -213,17 +260,19 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate', type=bool, default=True)  # Evaluate new genomes
     parser.add_argument('--topology_id', type=int, default=1)  # ID of the used topology
-    parser.add_argument('--batch', type=int, default=10000)  # Number of genomes evaluated per batch
+    parser.add_argument('--batch', type=int, default=2000)  # Number of genomes evaluated per batch
     parser.add_argument('--unused_cpu', type=int, default=2)  # Number of CPU cores not used during evaluation
+    parser.add_argument('--save_population', type=bool, default=True)  # Save the final population after finishing
     parser.add_argument('--visualize', type=bool, default=True)  # Visualize the current results
     parser.add_argument('--test', type=bool, default=False)  # Visualize the current results
-    parser.add_argument('--use_backup', type=bool, default=False)  # Use the backup-data
+    parser.add_argument('--use_backup', type=bool, default=True)  # Use the backup-data
     args = parser.parse_args()
     
     # Run the program
     if args.evaluate:
         main(
                 topology_id=args.topology_id,
+                save_pop=args.save_population,
                 batch_size=args.batch,
                 unused_cpu=args.unused_cpu,
                 use_backup=args.use_backup,
