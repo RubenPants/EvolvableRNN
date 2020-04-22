@@ -106,6 +106,7 @@ def main(topology_id: int,
                 pop.best_fitness[pop.generation] = genomes[0][1].fitness
                 pop.best_genome_hist[pop.generation] = genomes[0]
                 pop.best_genome = best
+                pop.log(f"Best training fitness: {best.fitness}")
                 
                 # Let population evolve
                 pop.evolve()
@@ -138,7 +139,7 @@ def main(topology_id: int,
             for i, genome in genomes:
                 genome.fitness = fitness[i]
                 if fitness[i] > best_fitness: best_fitness = fitness[i]
-            print(f"Best fitness: {round(best_fitness, 3)}")
+            pop.log(f"Best evaluation fitness: {round(best_fitness, 3)}")
             
             # Write the result to CSV
             with open(csv_path, 'a', newline='') as f:
