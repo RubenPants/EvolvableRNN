@@ -204,6 +204,14 @@ def get_genome(topology_id: int, g_id: int, cfg: Config):
     return topology(g_id, cfg)
 
 
+def enforce_topology(g: Genome, topology_id: int):
+    """Enforce the genome to the requested topology. It is assumed that topology hasn't changed."""
+    if topology_id == 1:
+        enforce_topology1(g)
+    else:
+        raise Exception(f"Topology ID '{topology_id}' not supported")
+
+
 def get_topology1(gid: int, cfg: Config):
     """
     Create a uniformly and randomly sampled genome of fixed topology:
