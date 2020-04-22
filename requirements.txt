@@ -1,0 +1,13 @@
+# Manually install PyTorch if requested! (only used for tests)
+cython
+graphviz
+matplotlib
+neat
+neat-python
+pyglet
+pymunk
+pytest
+scipy
+tqdm
+psutil
+seaborn
