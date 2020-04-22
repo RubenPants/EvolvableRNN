@@ -1,0 +1,60 @@
+# EvolvableRNN
+Introducing GRU components in NEAT to enhance interpretation of its a robot's surroundings.
+
+
+## Main Idea
+
+Update a GRU his weights based on its current value, the value fed into the GRU and the result it obtained (i.e. difference in distance over the step)
+
+* Focus on the no-bearing task!
+    * I have the feeling that the other task is somewhat solved, where the no-bearing task definitely is not
+* Possible to update the GRU-weights (in NEAT) with the help of local (plastic) learning rules? (adaptively learn during its lifetime to improve weight updates)
+* Compare :
+    * NEAT
+    * NEAT-GRU
+    * NEAT-RNN
+    * Mutations on NEAT-GRU that lack some of the gates
+
+
+
+## TODO
+
+* Monitor for the SRU
+
+* Monitor the effect of bias-changes of a single genome
+
+* Create an experiment6_2 that performs NEAT with partial fix in topology/weights and saves all the population's genomes
+    After evolving, constraint the genomes back to a "ground state"!
+
+* Check: "Topology completely dictates the search space"
+
+* Cluster using t-SNE, do t-SNE tutorial: https://towardsdatascience.com/an-introduction-to-t-sne-with-python-example-5a3a293108d1
+
+* Add more in-depth "evaluation" to experiments (auto-run)
+* Evaluate not with only the current elites, but also those of previous (1, 2?) generations, use best_genome_hist to do so!
+
+* Same-distance training enough? Do variant on experiment1 and 2 with different-distance training (double circles).
+    If multiple of same-distance but different angle, then would statement "no knowledge about target based on position"
+    still hold!
+
+
+
+## Potential titles
+
+* *Distance Aware Gated Recurrent Units for Target Finding*
+    * Does not say a thing about NEAT
+    * "foot target findings" sounds so cheap
+* *Neuro-evolved Gated Recurrent Units for distance-based target finding*
+    * "foot target findings" sounds so cheap
+
+
+
+## Thesis layout
+
+1) Comparison between NEAT, NEAT-GRU, and NEAT-SRU on experiment 1-3
+2) Focus on NEAT-GRU (experiment4+5)
+    * Single node networks suffice, follows from NEAT's minimality assurance (minimal viable solution shall be found)
+3) Compare NEAT-GRU configurations
+    * What is the importance of the gates?
+    * Does the GRU-unit (single-unit networks) always converge (this reasoning follows from the linearity in the heatmaps)
+    * What if parent-selection=0? Always convergence when only following the elite?
