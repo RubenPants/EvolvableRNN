@@ -1,3 +1,4 @@
+six
 # Manually install PyTorch if requested! (only used for tests)
 cython
 graphviz

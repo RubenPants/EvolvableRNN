@@ -238,22 +238,20 @@ def get_game_ids(experiment_id):
     Get the games (train, eval) belonging to the given experiment ID. Training games will be randomized, where the
     evaluation games will not.
     """
-    if experiment_id == 1:
+    if experiment_id in [1]:
         return [10000, ] * 10, \
                [10000 + i for i in range(1, 21)]
-    elif experiment_id == 2:
+    elif experiment_id in [2]:
         return [10000, ] * 10, \
                [20000 + i for i in range(1, 19)] + [20100 + i for i in range(1, 19)]
-    elif experiment_id == 3:
+    elif experiment_id in [3, 6]:
         return [30000, ] * 10, \
                [30000 + i for i in range(1, 21)]
-    elif experiment_id == 4:  # Combines experiment1&2
+    elif experiment_id in [4]:  # Combines experiment1&2
         return [10000, ] * 10, \
                [10000 + i for i in range(1, 21)] + \
                [20000 + i for i in range(1, 19)] + \
                [20100 + i for i in range(1, 19)]
-    elif experiment_id == 6:  # Only uses evaluation games of experiment3
-        return [30000 + i for i in range(1, 21)]
     else:
         raise Exception(f"Experiment of ID {experiment_id} is not supported")
 

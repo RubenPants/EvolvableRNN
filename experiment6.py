@@ -35,17 +35,11 @@ def train(topology_id: int, batch_size: int = 1000, unused_cpu: int = 2, use_bac
     # Get the config
     cfg = get_config()
     
-    # Define used topology
-    if topology_id == 1:
-        topology = get_topology1
-    else:
-        raise Exception(f"Topology ID '{topology_id}' not supported")
-    
     # Get initial genome key
     g_key, csv_path = get_initial_keys(topology_id, use_backup=use_backup)
     
     # Setup the environment
-    games = get_game_ids(experiment_id=6)
+    _, games = get_game_ids(experiment_id=6)
     multi_env = get_multi_env(config=cfg)
     multi_env.set_games(games, noise=False)
     
@@ -53,7 +47,7 @@ def train(topology_id: int, batch_size: int = 1000, unused_cpu: int = 2, use_bac
     t = time.localtime()
     print(f"\nCurrent time: {t.tm_hour:02d}h-{t.tm_min:02d}m-{t.tm_sec:02d}s")
     print(f"> Evaluating {batch_size} genomes in csv '{csv_path.split('/')[-1]}'")
-    genomes = list(iteritems({g_key + i: topology(g_key + i, cfg) for i in range(batch_size)}))
+    genomes = list(iteritems({g_key + i: get_genome(topology_id, g_id=g_key + i, cfg=cfg) for i in range(batch_size)}))
     g_key += batch_size
     
     # Evaluate the genome-dictionary in parallel
@@ -86,7 +80,7 @@ def train(topology_id: int, batch_size: int = 1000, unused_cpu: int = 2, use_bac
         raise KeyboardInterrupt
 
 
-def visualize_bar(topology_id: int, csv_id: int = None, rounding: int = 2, use_backup: bool = False):  # TODO
+def visualize_bar(topology_id: int, csv_id: int = None, rounding: int = 2, use_backup: bool = False):
     """Visualize a bar-plot of how many genomes obtained which fitness score"""
     fitness = []
     path_shared = get_subfolder(f"population{'_backup' if use_backup else ''}/storage/", "experiment6")
@@ -126,6 +120,10 @@ def visualize_bar(topology_id: int, csv_id: int = None, rounding: int = 2, use_b
     plt.savefig(f"{path_images}{name}.png")
     # plt.show()
     plt.close()
+
+
+def visualize_tsne():  # TODO
+    pass
 
 
 # -------------------------------------------------> HELPER METHODS <------------------------------------------------- #
@@ -197,6 +195,15 @@ def get_initial_keys(topology_id: int, use_backup: bool):
 
 # ----------------------------------------------> POSSIBLE TOPOLOGIES <----------------------------------------------- #
 
+def get_genome(topology_id: int, g_id: int, cfg: Config):
+    """Get the genome corresponding the given topology_id."""
+    if topology_id == 1:
+        topology = get_topology1
+    else:
+        raise Exception(f"Topology ID '{topology_id}' not supported")
+    return topology(g_id, cfg)
+
+
 def get_topology1(gid: int, cfg: Config):
     """
     Create a uniformly and randomly sampled genome of fixed topology:
@@ -256,6 +263,13 @@ def get_topology1(gid: int, cfg: Config):
     
     genome.update_rnn_nodes(config=cfg.genome)
     return genome
+
+
+def enforce_topology1(g: Genome):
+    """Enforce the fixed parameters of topology1. It is assumed that topology hasn't changed."""
+    g.nodes[0].bias = 2  # Drive with 0.5 actuation by default
+    g.nodes[1].bias = 0  # Drive with 0.5 actuation by default
+    g.connections[(-1, 2)].weight = 1  # Simply forward distance
 
 
 if __name__ == '__main__':
