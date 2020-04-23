@@ -2,7 +2,7 @@
 
 # Default parameters
 iter=100;  # Number of training-iterations each loop
-cpu=1;  # Number of unused CPUs
+cpu=0;  # Number of unused CPUs
 
 # Run the program
 for v in {31..50}
