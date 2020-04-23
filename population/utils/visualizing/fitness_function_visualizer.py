@@ -5,7 +5,6 @@ Create visualizations for each of the fitness functions.
 """
 import argparse
 import os
-from math import sqrt
 
 import matplotlib.pyplot as plt
 from numpy import clip
@@ -16,7 +15,7 @@ from config import GameConfig
 def distance(save: bool = True):
     """Create an image for the distance-fitness."""
     cfg = GameConfig()
-    diagonal = sqrt(cfg.x_axis ** 2 + cfg.y_axis ** 2)
+    diagonal = 10
     
     # Define the function
     def get_score(d, reached=False):
@@ -30,7 +29,7 @@ def distance(save: bool = True):
         x.append(i / 100)
         y.append(get_score(i / 100))
     
-    plt.figure()
+    plt.figure(figsize=(7, 3))
     
     # Plot the distance function
     plt.plot(x, y, 'b', label='distance-based score')
@@ -43,7 +42,7 @@ def distance(save: bool = True):
     plt.ylabel("Fitness")
     plt.legend()
     plt.tight_layout()
-    plt.grid(axis='x')
+    plt.grid()
     if save: plt.savefig('population/utils/visualizing/images/distance_fitness.png')
     plt.show()
     plt.close()
