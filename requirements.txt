@@ -9,6 +9,7 @@ neat-python
 pyglet
 pymunk
 pytest
+scikit-learn
 scipy
 tqdm
 psutil
