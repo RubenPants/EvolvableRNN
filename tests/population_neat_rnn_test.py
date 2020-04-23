@@ -151,7 +151,6 @@ class PopulationNeatRnnTest(unittest.TestCase):
 
 
 def main():
-    # Test wall collision
     prnn = PopulationNeatRnnTest()
     prnn.test_creation()
     prnn.test_train()
