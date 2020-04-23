@@ -319,7 +319,7 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='topology_1_0',
+            name='topology_1_1',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='test',
             folder_name=get_folder(args.experiment),
