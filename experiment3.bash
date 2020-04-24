@@ -16,7 +16,7 @@ for v in {31..50}
     python3 experiment3.py --prob_gru=0 --prob_gru_nr=0 --prob_gru_nu=0 --prob_simple_rnn=0.6 --iterations=$iter --version=$v --unused_cpu=$cpu;
   done
 
-#  git add .;
-#  git commit -m "Ran experiment3 for version $v";
-#  git push;
+  git add .;
+  git commit -m "Ran experiment3 for version $v";
+  git push;
 done
