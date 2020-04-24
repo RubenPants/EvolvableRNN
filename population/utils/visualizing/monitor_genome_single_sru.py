@@ -1,7 +1,7 @@
 """
-monitor_genome_simple_gru.py
+monitor_genome_single_sru.py
 
-Monitor a single genome during its run on a single game. This monitoring focuses on the GRU-cell that must be present
+Monitor a single genome during its run on a single game. This monitoring focuses on the SRU-cell that must be present
 in the genome.
 """
 import argparse
@@ -18,11 +18,11 @@ from configs.game_config import GameConfig
 from environment.game import Game, get_game
 from main import get_game_ids
 from population.population import Population
-from population.utils.gene_util.gru import GruNodeGene
+from population.utils.gene_util.simple_rnn import SimpleRnnNodeGene
 from population.utils.genome import Genome
-from population.utils.network_util.activations import sigmoid
 from population.utils.network_util.feed_forward_net import make_net
-from population.utils.rnn_cell_util.berkeley_gru import GRUCell
+from population.utils.rnn_cell_util.simple_rnn import RNNCell
+from population.utils.visualizing.averaging_functions import SMA
 from utils.dictionary import D_DONE, D_SENSOR_LIST
 from utils.myutils import get_subfolder
 
@@ -32,12 +32,16 @@ TIME_SERIES_HEIGHT = 2
 CORRECTION = 1.06
 
 
-def main(population: Population, game_id: int, genome: Genome = None, game_cfg: Config = None, debug: bool = False):
+def main(population: Population,
+         game_id: int,
+         genome: Genome = None,
+         game_cfg: Config = None,
+         average: int = 1,
+         debug: bool = False):
     """
     Monitor the genome on the following elements:
         * Position
-        * Reset gate (Rt) and Update gate (Zt)
-        * Hidden state of GRU (Ht)
+        * Hidden state of SRU (Ht)
         * Actuation of both wheels
         * Distance
         * Delta distance
@@ -46,9 +50,9 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
     if not genome: genome = population.best_genome
     if not game_cfg: game_cfg = pop.config
     
-    # Check if valid genome (contains only one hidden node that is a GRU)
+    # Check if valid genome (contains only one hidden node that is a SRU)
     assert genome.size()[0] == 1
-    assert len([n for n in genome.get_used_nodes().values() if type(n) == GruNodeGene]) == 1
+    assert len([n for n in genome.get_used_nodes().values() if type(n) == SimpleRnnNodeGene]) == 1
     
     # Get the game
     game = get_game(game_id, cfg=game_cfg, noise=False)
@@ -68,8 +72,6 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
     delta_distance = []
     position = []
     Ht = []
-    Rt = []
-    Zt = []
     target_found = []
     score = 0
     
@@ -78,16 +80,14 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
     distance.append(state[0])
     delta_distance.append(0)
     position.append(game.player.pos.get_tuple())
-    ht, rt, zt = get_gru_states(gru=net.rnn_array[0], x=np.asarray([state]))
+    ht = get_sru_state(sru=net.rnn_array[0], x=np.asarray([state]))
     Ht.append(ht)
-    Rt.append(rt)
-    Zt.append(zt)
     if debug:
         print(f"Step: {step_num}")
         print(f"\t> Actuation: {(round(actuation[-1][0], 5), round(actuation[-1][1], 5))!r}")
         print(f"\t> Distance: {round(distance[-1], 5)} - Delta distance: {round(delta_distance[-1], 5)}")
         print(f"\t> Position: {(round(position[-1][0], 2), round(position[-1][1], 2))!r}")
-        print(f"\t> GRU states: Ht={round(Ht[-1], 5)} - Rt={round(Rt[-1], 5)} - Zt={round(Zt[-1], 5)}")
+        print(f"\t> SRU state: Ht={round(Ht[-1], 5)}")
     
     # Start monitoring
     while True:
@@ -121,16 +121,34 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
         distance.append(state[0])
         delta_distance.append(distance[-2] - distance[-1])
         position.append(game.player.pos.get_tuple())
-        ht, rt, zt = get_gru_states(gru=net.rnn_array[0], x=np.asarray([state]))
+        ht = get_sru_state(sru=net.rnn_array[0], x=np.asarray([state]))
         Ht.append(ht)
-        Rt.append(rt)
-        Zt.append(zt)
         if debug:
             print(f"Step: {step_num}")
             print(f"\t> Actuation: {(round(actuation[-1][0], 5), round(actuation[-1][1], 5))!r}")
             print(f"\t> Distance: {round(distance[-1], 5)} - Delta distance: {round(delta_distance[-1], 5)}")
             print(f"\t> Position: {(round(position[-1][0], 2), round(position[-1][1], 2))!r}")
-            print(f"\t> GRU states: Ht={round(Ht[-1], 5)} - Rt={round(Rt[-1], 5)} - Zt={round(Zt[-1], 5)}")
+            print(f"\t> SRU state: Ht={round(Ht[-1], 5)}")
+    
+    if average > 1:
+        # Average out the noise
+        x, y = zip(*actuation)
+        x = SMA(x, window=average)
+        y = SMA(y, window=average)
+        actuation = list(zip(x, y))
+        distance = SMA(distance, window=average)
+        delta_distance = SMA(delta_distance, window=average)
+        Ht = SMA(Ht, window=average)
+        
+        # Resolve weird artifacts at the beginning
+        actuation[1] = actuation[2]
+        actuation[0] = actuation[1]
+        distance[1] = distance[2]
+        distance[0] = distance[1]
+        delta_distance[1] = delta_distance[2]
+        delta_distance[0] = delta_distance[1]
+        Ht[1] = Ht[2]
+        Ht[0] = Ht[1]
     
     # Visualize the monitored values
     path = get_subfolder(f"population{'_backup' if population.use_backup else ''}/"
@@ -156,27 +174,16 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
                            target_found=target_found,
                            game_cfg=game_cfg.game,
                            save_path=f"{path}hidden_state.png")
-    visualize_reset_gate(Rt,
-                         target_found=target_found,
-                         game_cfg=game_cfg.game,
-                         save_path=f"{path}reset_gate.png")
-    visualize_update_gate(Zt,
-                          target_found=target_found,
-                          game_cfg=game_cfg.game,
-                          save_path=f"{path}update_gate.png")
     visualize_position(position,
                        game=game,
                        save_path=f"{path}trace.png")
     merge(f"Monitored genome={genome.key} on game={game.id}", path=path)
 
 
-def get_gru_states(gru: GRUCell, x):
-    W_xh = np.matmul(x, gru.weight_xh.transpose())
-    W_hh = np.matmul(gru.hx, gru.weight_hh.transpose())
-    R_t = sigmoid(W_xh[:, 0:1] + W_hh[:, 0:1] + gru.bias[0:1])
-    Z_t = sigmoid(W_xh[:, 1:2] + W_hh[:, 1:2] + gru.bias[1:2])
-    H_t = (1 - Z_t) * np.tanh(W_xh[:, 2:3] + R_t * W_hh[:, 2:3] + gru.bias[2:3]) + Z_t * gru.hx
-    return H_t[0, 0], R_t[0, 0], Z_t[0, 0]
+def get_sru_state(sru: RNNCell, x):
+    return np.tanh(np.matmul(sru.hx, sru.weight_hh.transpose()) +
+                   np.matmul(x, sru.weight_xh.transpose()) +
+                   sru.bias)[0, 0]
 
 
 def visualize_actuation(actuation_list: list, target_found: list, game_cfg: GameConfig, save_path: str):
@@ -256,45 +263,7 @@ def visualize_hidden_state(hidden_state: list, target_found: list, game_cfg: Gam
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Hidden state")
-    # plt.ylabel("GRU output value")
-    # plt.xlabel("Simulation time (s)")
-    plt.tight_layout()
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
-    plt.close()
-
-
-def visualize_reset_gate(reset_gate: list, target_found: list, game_cfg: GameConfig, save_path: str):
-    """Create a graph of the reset gate's value over time"""
-    time = [i / game_cfg.fps for i in range(len(reset_gate))]
-    
-    # Create the graph
-    ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT)).gca()
-    plt.plot(time, reset_gate)
-    for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
-    plt.grid()
-    ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
-    ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
-    plt.title("Reset gate")
-    # plt.ylabel("Gate value")
-    # plt.xlabel("Simulation time (s)")
-    plt.tight_layout()
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
-    plt.close()
-
-
-def visualize_update_gate(update_gate: list, target_found: list, game_cfg: GameConfig, save_path: str):
-    """Create a graph of the update gate's value over time"""
-    time = [i / game_cfg.fps for i in range(len(update_gate))]
-    
-    # Create the graph
-    ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT)).gca()
-    plt.plot(time, update_gate)
-    for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
-    plt.grid()
-    ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
-    ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
-    plt.title("Update gate")
-    # plt.ylabel("Gate value")
+    # plt.ylabel("SRU output value")
     # plt.xlabel("Simulation time (s)")
     plt.tight_layout()
     plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
@@ -361,11 +330,12 @@ def visualize_position(position_list: list, game: Game, save_path: str):
     plt.close()
 
 
-def merge(title: str, path: str):
+def merge(title: str, path: str):  # TODO
     """Merge each of the previously created images together"""
     # Load in all the images to merge
-    image_names = ['actuation', 'distance', 'delta_distance', 'hidden_state', 'reset_gate', 'update_gate']
-    images = [plt.imread(f'{path}{n}.png') for n in image_names]
+    images = [plt.imread('population/utils/visualizing/images/white.png')]
+    image_names = ['actuation', 'distance', 'delta_distance', 'hidden_state']
+    images += [plt.imread(f'{path}{n}.png') for n in image_names]
     trace = plt.imread(f'{path}trace.png')
     
     # Make sure width of all images is the same
@@ -376,13 +346,15 @@ def merge(title: str, path: str):
     
     # Concatenate the images, time_series vertical, and trace on the right
     try:
-        images.append(plt.imread('population/utils/visualizing/images/time774.png'))
+        images += [plt.imread('population/utils/visualizing/images/time774.png')]
+        images += [plt.imread('population/utils/visualizing/images/white.png')]
         time_series = np.concatenate(images, axis=0)
         result = np.concatenate([time_series, trace], axis=1)
     except ValueError:
         try:
             images.pop(-1)
-            images.append(plt.imread('population/utils/visualizing/images/time773.png'))
+            images += [plt.imread('population/utils/visualizing/images/time773.png')]
+            images += [plt.imread('population/utils/visualizing/images/white.png')]
             time_series = np.concatenate(images, axis=0)
             result = np.concatenate([time_series, trace], axis=1)
         except ValueError as e:
@@ -415,7 +387,7 @@ if __name__ == '__main__':
     config = Config()
     pop = Population(
             name='test',
-            # name='NEAT-GRU/v1',
+            # name='NEAT-SRU/v1',
             folder_name='test',
             # folder_name=get_folder(args.experiment),
             config=config,

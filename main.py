@@ -8,6 +8,9 @@ import traceback
 
 from config import Config
 from population.population import Population
+from population.utils.gene_util.gru import GruNodeGene
+from population.utils.gene_util.output_node import OutputNodeGene
+from population.utils.gene_util.simple_rnn import SimpleRnnNodeGene
 from population.utils.genome import Genome
 from process_killer import main as process_killer
 from utils.dictionary import D_DISTANCE
@@ -63,24 +66,45 @@ def evaluate(population: Population,
     )
 
 
-def gru_monitor(game_cfg: Config,
-                game_id: int,
-                population: Population,
-                debug: bool = False,
-                genome: Genome = None,
-                ):
+def monitor(game_cfg: Config,
+            game_id: int,
+            population: Population,
+            debug: bool = False,
+            genome: Genome = None,
+            ):
     """Monitor a single run of the given genome that contains a single GRU-node."""
-    from population.utils.visualizing.monitor_genome_single_gru import main as monitor
-    
     print("\n===> MONITORING GENOME <===\n")
+    if genome is None: genome = population.best_genome
     
-    monitor(
-            population=population,
-            game_id=game_id,
-            genome=genome,
-            game_cfg=game_cfg,
-            debug=debug,
-    )
+    node_type = None
+    for n in genome.get_used_nodes().values():
+        t = type(n)
+        if t != OutputNodeGene:
+            if node_type is not None:
+                raise Exception(f"More than two hidden nodes used in genome: '{node_type}' and '{t}'")
+            else:
+                node_type = t
+    if node_type is None:
+        raise Exception(f"No hidden node to monitor in genome {genome}")
+    
+    if node_type == GruNodeGene:
+        from population.utils.visualizing.monitor_genome_single_gru import main as gru_monitor
+        gru_monitor(
+                population=population,
+                game_id=game_id,
+                genome=genome,
+                game_cfg=game_cfg,
+                debug=debug,
+        )
+    elif node_type == SimpleRnnNodeGene:
+        from population.utils.visualizing.monitor_genome_single_sru import main as sru_monitor
+        sru_monitor(
+                population=population,
+                game_id=game_id,
+                genome=genome,
+                game_cfg=game_cfg,
+                debug=debug,
+        )
 
 
 def gru_analysis(population: Population,
@@ -292,16 +316,16 @@ if __name__ == '__main__':
     parser.add_argument('--train_overview', type=bool, default=False)
     parser.add_argument('--blueprint', type=bool, default=False)
     parser.add_argument('--trace', type=bool, default=False)  # Keep it False
-    parser.add_argument('--trace_fit', type=bool, default=True)
+    parser.add_argument('--trace_fit', type=bool, default=False)
     parser.add_argument('--evaluate', type=bool, default=False)
-    parser.add_argument('--genome', type=bool, default=True)
+    parser.add_argument('--genome', type=bool, default=False)
     parser.add_argument('--monitor', type=bool, default=True)
     parser.add_argument('--gru_analysis', type=bool, default=False)
     parser.add_argument('--live', type=bool, default=False)
     
     # Extra arguments
     parser.add_argument('--iterations', type=int, default=1)
-    parser.add_argument('--experiment', type=int, default=6)
+    parser.add_argument('--experiment', type=int, default=3)
     parser.add_argument('--unused_cpu', type=int, default=2)
     parser.add_argument('--version', type=int, default=11)
     parser.add_argument('--debug', type=bool, default=False)
@@ -319,10 +343,10 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='topology_1_1',
+            name='v2',
             # name=get_name(cfg=config, version=args.version),
-            # folder_name='test',
-            folder_name=get_folder(args.experiment),
+            folder_name='test',
+            # folder_name=get_folder(args.experiment),
             config=config,
             use_backup=args.use_backup,
     )
@@ -382,10 +406,10 @@ if __name__ == '__main__':
             )
         
         if args.monitor:
-            gru_monitor(
+            monitor(
                     debug=args.debug,
                     game_cfg=config,
-                    game_id=game_ids_eval[0],
+                    game_id=game_ids_eval[1],
                     genome=chosen_genome,
                     population=pop,
             )
