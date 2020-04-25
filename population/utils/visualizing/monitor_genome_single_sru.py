@@ -50,8 +50,8 @@ def main(population: Population,
     if not genome: genome = population.best_genome
     if not game_cfg: game_cfg = pop.config
     
-    # Check if valid genome (contains only one hidden SRU)
-    assert len([n for n in genome.get_used_nodes().values() if type(n) == SimpleRnnNodeGene]) == 1
+    # Check if valid genome (contains at least one hidden SRU, first SRU is monitored)
+    assert len([n for n in genome.get_used_nodes().values() if type(n) == SimpleRnnNodeGene]) >= 1
     
     # Get the game
     game = get_game(game_id, cfg=game_cfg, noise=False)
@@ -140,14 +140,11 @@ def main(population: Population,
         Ht = SMA(Ht, window=average)
         
         # Resolve weird artifacts at the beginning
-        actuation[1] = actuation[2]
-        actuation[0] = actuation[1]
-        distance[1] = distance[2]
-        distance[0] = distance[1]
-        delta_distance[1] = delta_distance[2]
-        delta_distance[0] = delta_distance[1]
-        Ht[1] = Ht[2]
-        Ht[0] = Ht[1]
+        for i in range(average, 0, -1):
+            actuation[i - 1] = actuation[i]
+            distance[i - 1] = distance[i]
+            delta_distance[i - 1] = delta_distance[i]
+            Ht[i - 1] = Ht[i]
     
     # Visualize the monitored values
     path = get_subfolder(f"population{'_backup' if population.use_backup else ''}/"
