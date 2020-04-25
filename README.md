@@ -21,10 +21,9 @@ Update a GRU his weights based on its current value, the value fed into the GRU 
 
 * Research: How long does the GRU remember?
 
-* Experiment: Distance via ping, update every 5 frames (0.5 seconds)
+* Monitor GRU; small variations in weights, how does path of genome change?
 
-* Add more in-depth "evaluation" to experiments (auto-run)
-* Evaluate not with only the current elites, but also those of previous (1, 2?) generations, use best_genome_hist to do so!
+* Experiment: Distance via ping, update every 5 frames (0.5 seconds)
 
 * Do more in-depth research on monitored behaviour of genomes
 

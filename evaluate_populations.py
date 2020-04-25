@@ -2,12 +2,15 @@
 evaluate_populations.py
 
 Evaluate all the populations across their generations and compare each of them against each other.
+
+Note: Evaluation is only done on backed-up populations.
 """
 import argparse
 
 import matplotlib.pyplot as plt
 import numpy as np
 
+from main import get_folder
 from population.population import Population
 from population.utils.population_util.evaluate import evaluate_generations as eval_gen
 from utils.dictionary import *
@@ -53,8 +56,7 @@ def evaluate_populations(folder: str, pop_folder: str, max_v: int = 50):
     score_dict = dict()
     distance_dict = dict()
     time_dict = dict()
-    # for g in range(0, max_gen + 1, HOPS):  TODO
-    for g in range(max_gen, max_gen + 1, HOPS):
+    for g in range(0, max_gen + 1, HOPS):
         fitness_dict[g] = []
         finished_dict[g] = []
         score_dict[g] = []
@@ -125,20 +127,31 @@ def plot_result(d: dict, ylabel: str, title: str, save_path: str):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
+    parser.add_argument('--evaluate_gen', type=int, default=1)
+    parser.add_argument('--evaluate_pop', type=int, default=1)
     parser.add_argument('--experiment', type=int, default=1)
+    parser.add_argument('--folder', type=str, default=None)
+    parser.add_argument('--folder_pop', type=str, default='NEAT-GRU')
+    parser.add_argument('--max_v', type=int, default=50)
     parser.add_argument('--unused_cpu', type=int, default=2)
     args = parser.parse_args()
     
-    # Execute the program
-    # evaluate_generations(
-    #         experiment_id=1,
-    #         folder='test',
-    #         pop_folder='NEAT-GRU',
-    #         max_v=50,
-    # )
+    # Set parameters
+    f = args.folder if args.folder else get_folder(args.experiment)
     
-    evaluate_populations(
-            folder='test',
-            pop_folder='NEAT-GRU',
-            max_v=50,
-    )
+    # Execute the program
+    if bool(args.evaluate_gen):
+        evaluate_generations(
+                experiment_id=args.experiment,
+                folder=f,
+                pop_folder=args.folder_pop,
+                max_v=args.max_v,
+                unused_cpu=args.unused_cpu,
+        )
+    
+    if bool(args.evaluate_pop):
+        evaluate_populations(
+                folder=f,
+                pop_folder=args.folder_pop,
+                max_v=args.max_v,
+        )
