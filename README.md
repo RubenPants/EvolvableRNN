@@ -19,23 +19,12 @@ Update a GRU his weights based on its current value, the value fed into the GRU 
 
 ## TODO
 
-* Monitor for the SRU
-
-* Monitor the effect of bias-changes of a single genome
-
-* Create an experiment6_2 that performs NEAT with partial fix in topology/weights and saves all the population's genomes
-    After evolving, constraint the genomes back to a "ground state"!
-
-* Check: "Topology completely dictates the search space"
-
-* Cluster using t-SNE, do t-SNE tutorial: https://towardsdatascience.com/an-introduction-to-t-sne-with-python-example-5a3a293108d1
-
 * Add more in-depth "evaluation" to experiments (auto-run)
 * Evaluate not with only the current elites, but also those of previous (1, 2?) generations, use best_genome_hist to do so!
 
-* Same-distance training enough? Do variant on experiment1 and 2 with different-distance training (double circles).
-    If multiple of same-distance but different angle, then would statement "no knowledge about target based on position"
-    still hold!
+* Do more in-depth research on monitored behaviour of genomes
+
+* Check: "Topology completely dictates the search space"
 
 
 

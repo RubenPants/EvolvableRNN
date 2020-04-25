@@ -1,0 +1,209 @@
+"""
+evaluate_population.py
+
+Evaluate a population throughout its lifetime.
+"""
+import os
+
+import matplotlib.pyplot as plt
+import numpy as np
+from tqdm import tqdm
+
+from main import evaluate, get_folder, get_game_ids
+from population.population import Population
+from utils.dictionary import *
+from utils.myutils import get_subfolder, load_dict
+
+
+def evaluate_generations(name, experiment_id, folder=None, hops: int = 10, unused_cpu: int = 2):
+    """
+    Evaluate the population for each of its intermediate states.
+
+    :param name: Name of the population
+    :param experiment_id: Experiment for which the population is trained (and now will be evaluated)
+    :param folder: Population-folder (~experiment level)
+    :param hops: Number of generations between each saved population
+    :param unused_cpu: Number of CPU cores not used
+    """
+    # Fetch population and evaluation games
+    folder = folder if folder else get_folder(experiment_id)
+    pop = Population(
+            name=name,
+            folder_name=folder,
+            log_print=False,
+            use_backup=True,
+    )
+    _, game_ids_eval = get_game_ids(experiment_id=experiment_id)
+    
+    # Perform the evaluations and parse the result
+    fitness_dict = dict()
+    finished_dict = dict()
+    score_dict = dict()
+    distance_dict = dict()
+    time_dict = dict()
+    max_gen = pop.generation
+    n_best = int(len(pop.population) * pop.config.population.parent_selection)  # Determine beforehand, can vary!
+    for gen in tqdm(range(hops, max_gen + 1, hops)):
+        pop.load(gen=gen)
+        evaluate(  # TODO: Test if evaluation already exists (saves time)
+                population=pop,
+                n_best=n_best,
+                game_config=pop.config,
+                games=game_ids_eval,
+                unused_cpu=unused_cpu,
+        )
+        results: dict = load_dict(f"population{'_backup' if pop.use_backup else ''}/"
+                                  f"storage/"
+                                  f"{pop.folder_name}/"
+                                  f"{pop}/"
+                                  f"evaluation/"
+                                  f"{gen:05d}/"
+                                  f"results")
+        
+        # Fitness
+        fitness = [results[k][D_FITNESS] for k in results.keys()]
+        fitness_dict[gen] = fitness
+        
+        # Finished
+        finished = [results[k][D_FINISHED] / 100 for k in results.keys()]  # Normalize to percentage (0..1)
+        finished_dict[gen] = finished
+        
+        # Score
+        score = [results[k][D_SCORE_AVG] for k in results.keys()]
+        score_dict[gen] = score
+        
+        # Distance
+        distance = [results[k][D_DISTANCE_AVG] for k in results.keys()]
+        distance_dict[gen] = distance
+        
+        # Time
+        time = [results[k][D_TIME_AVG] for k in results.keys()]
+        time_dict[gen] = time
+    
+    # Create visualizations for each of the results
+    sf = get_subfolder(f"population{'_backup' if pop.use_backup else ''}/"
+                       f"storage/"
+                       f"{pop.folder_name}/"
+                       f"{pop}/"
+                       f"images/", 'evaluation')
+    
+    if True:
+        plot_population(fitness_dict,
+                        ylabel="Fitness score",
+                        title="Fitness of population's parents (higher is better)",
+                        save_path=f'{sf}fitness_parents.png')
+        plot_elite(fitness_dict,
+                   f=max,
+                   ylabel="Fitness score",
+                   title="Fitness of population's elite (higher is better)",
+                   save_path=f'{sf}fitness_elite.png')
+    
+    if experiment_id != 3:
+        plot_population(finished_dict,
+                        ylabel="Percentage finished (%)",
+                        title="Percentage finished by population's parents (higher is better)",
+                        save_path=f'{sf}finished_parents.png')
+        plot_elite(finished_dict,
+                   f=max,
+                   ylabel="Percentage finished (%)",
+                   title="Percentage finished by population's elite (higher is better)",
+                   save_path=f'{sf}finished_elite.png')
+    
+    if True:
+        plot_population(score_dict,
+                        ylabel="Score",
+                        title="Final scores of population's parents (higher is better)",
+                        save_path=f'{sf}score_parents.png')
+        plot_elite(score_dict,
+                   f=max,
+                   ylabel="Score",
+                   title="Final score of population's elite (higher is better)",
+                   save_path=f'{sf}score_elite.png')
+    
+    if experiment_id != 3:
+        plot_population(distance_dict,
+                        ylabel="Distance (m)",
+                        title="Distance from target for population's parents (lower is better)",
+                        save_path=f'{sf}distance_parents.png')
+        plot_elite(distance_dict,
+                   f=min,
+                   ylabel="Distance (m)",
+                   title="Distance from target for population's elite (lower is better)",
+                   save_path=f'{sf}distance_elite.png')
+    
+    if experiment_id != 3:
+        plot_population(time_dict,
+                        ylabel="Time (s)",
+                        title="Time needed to reach target for population's parents (lower is better)",
+                        save_path=f'{sf}time_parents.png')
+        plot_elite(time_dict,
+                   f=min,
+                   ylabel="Time (s)",
+                   title="Time needed to reach target for population's elite (lower is better)",
+                   save_path=f'{sf}time_elite.png')
+        
+
+def evaluate_populations():
+    """
+    Evaluate several populations' intermediate generations and compare those. The data is visualized in a boxplot over
+    each of the
+    
+    :return:
+    """
+    pass  # TODO
+
+
+def avg(lst):
+    return sum(lst) / len(lst)
+
+
+def plot_population(d: dict, ylabel: str, title: str, save_path: str):
+    """Create a plot of the given dictionary. Each value of d consists of a list of length 3 (min, avg, max)."""
+    # Parse the values
+    keys = sorted(d.keys())
+    data = np.zeros((len(d[keys[0]]), len(keys)))
+    for i, k in enumerate(keys):
+        data[:, i] = d[k]
+    
+    # Create the plot
+    plt.figure(figsize=(len(keys) / 4, 3))
+    plt.boxplot(data, labels=[str(k) for k in keys], whis=[0, 100])
+    plt.title(title)
+    plt.xticks(rotation=90)
+    plt.xlabel("Generations")
+    plt.ylabel(ylabel)
+    plt.ylim(0, max(np.max(data) * 1.05, 1.01))
+    plt.grid()
+    plt.tight_layout()
+    plt.savefig(save_path)
+    plt.close()
+
+
+def plot_elite(d: dict, f, ylabel: str, title: str, save_path: str):
+    """Create a plot of the given dictionary. Each value of d consists of a list of length 3 (min, avg, max)."""
+    # Parse the values
+    keys = sorted(d.keys())
+    elite_data = [f(d[k]) for k in keys]
+    
+    # Create the plot
+    plt.figure(figsize=(len(keys) / 2, 3))
+    plt.plot(keys, elite_data)
+    plt.title(title)
+    plt.xlabel("Generations")
+    plt.ylabel(ylabel)
+    plt.ylim(0, max(elite_data) * 1.05)
+    plt.grid()
+    plt.tight_layout()
+    plt.savefig(save_path)
+    plt.close()
+
+
+if __name__ == '__main__':
+    os.chdir("../../")
+    main(
+            name="test",
+            experiment_id=2,
+            folder="test",
+            hops=100,  # TODO
+            unused_cpu=2,
+    )
