@@ -42,8 +42,9 @@ def blueprint(population: Population,
 def evaluate(population: Population,
              game_config: Config,
              games: list,
-             n_best: int = 10,
+             genomes: list = None,
              debug: bool = False,
+             overwrite: bool = False,
              unused_cpu: int = 0,
              ):
     """Evaluate the given population on the evaluation game-set."""
@@ -56,13 +57,17 @@ def evaluate(population: Population,
             games=games,
             unused_cpu=unused_cpu,
     )
-    genomes = sorted([g for g in population.population.values()],
-                     key=lambda x: x.fitness if x.fitness else 0,
-                     reverse=True)
+    if genomes is None:
+        genomes = sorted(
+                [g for g in population.population.values()],
+                key=lambda x: x.fitness if x.fitness else 0,
+                reverse=True,
+        )[:max(int(population.config.population.parent_selection * len(population.population)), 1)]
     evaluator.evaluate_genome_list(
-            genome_list=genomes[:n_best],  # Evaluate the ten best performing genomes
+            genome_list=genomes,  # Evaluate the ten best performing genomes
             pop=population,
             parallel=not debug,
+            overwrite=overwrite,
     )
 
 
