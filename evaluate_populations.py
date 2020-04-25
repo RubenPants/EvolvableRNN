@@ -53,7 +53,8 @@ def evaluate_populations(folder: str, pop_folder: str, max_v: int = 50):
     score_dict = dict()
     distance_dict = dict()
     time_dict = dict()
-    for g in range(0, max_gen + 1, HOPS):
+    # for g in range(0, max_gen + 1, HOPS):  TODO
+    for g in range(max_gen, max_gen + 1, HOPS):
         fitness_dict[g] = []
         finished_dict[g] = []
         score_dict[g] = []
@@ -129,15 +130,15 @@ if __name__ == '__main__':
     args = parser.parse_args()
     
     # Execute the program
-    evaluate_generations(
-            experiment_id=3,
-            folder='test',
-            pop_folder='NEAT-SRU',
-            max_v=28,
-    )
-    
-    # evaluate_populations(
+    # evaluate_generations(
+    #         experiment_id=1,
     #         folder='test',
     #         pop_folder='NEAT-GRU',
-    #         max_v=5,
+    #         max_v=50,
     # )
+    
+    evaluate_populations(
+            folder='test',
+            pop_folder='NEAT-GRU',
+            max_v=50,
+    )

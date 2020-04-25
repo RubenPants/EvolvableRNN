@@ -41,7 +41,8 @@ def evaluate_generations(name, experiment_id, folder=None, hops: int = 10, unuse
     
     # Perform the evaluations
     max_gen = pop.generation
-    for gen in tqdm(range(0, max_gen + 1, hops)):
+    for gen in tqdm(range(max_gen, max_gen + 1, hops)):  # TODO
+    # for gen in tqdm(range(0, max_gen + 1, hops)):
         # Load in the current generation
         pop.load(gen=gen)
         

@@ -19,6 +19,10 @@ Update a GRU his weights based on its current value, the value fed into the GRU 
 
 ## TODO
 
+* Research: How long does the GRU remember?
+
+* Experiment: Distance via ping, update every 5 frames (0.5 seconds)
+
 * Add more in-depth "evaluation" to experiments (auto-run)
 * Evaluate not with only the current elites, but also those of previous (1, 2?) generations, use best_genome_hist to do so!
 
