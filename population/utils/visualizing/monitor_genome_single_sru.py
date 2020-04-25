@@ -50,8 +50,7 @@ def main(population: Population,
     if not genome: genome = population.best_genome
     if not game_cfg: game_cfg = pop.config
     
-    # Check if valid genome (contains only one hidden node that is a SRU)
-    assert genome.size()[0] == 1
+    # Check if valid genome (contains only one hidden SRU)
     assert len([n for n in genome.get_used_nodes().values() if type(n) == SimpleRnnNodeGene]) == 1
     
     # Get the game

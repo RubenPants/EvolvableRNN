@@ -345,11 +345,12 @@ if __name__ == '__main__':
     config.bot.dist_enabled = True
     config.evaluation.fitness = D_DISTANCE
     config.genome.rnn_prob_simple_rnn = 0.6
+    config.game.duration = 200
     config.update()
     
     # Setup the population
     pop = Population(
-            name='NEAT-SRU/v0',
+            name='NEAT-GRU/v18',
             # name=get_name(cfg=config, version=args.version),
             folder_name='test',
             # folder_name=get_folder(args.experiment),
@@ -415,7 +416,7 @@ if __name__ == '__main__':
             monitor(
                     debug=args.debug,
                     game_cfg=config,
-                    game_id=game_ids_eval[1],
+                    game_id=game_ids_eval[0],
                     genome=chosen_genome,
                     population=pop,
             )
