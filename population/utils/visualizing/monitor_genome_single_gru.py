@@ -136,8 +136,8 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
     path = get_subfolder(f"population{'_backup' if population.use_backup else ''}/"
                          f"storage/"
                          f"{population.folder_name}/"
-                         f"{population}/"
-                         f"images/", "monitor")
+                         f"{population}/", "images")
+    path = get_subfolder(path, f"monitor")
     path = get_subfolder(path, f"{genome.key}")
     path = get_subfolder(path, f"{game_id}")
     visualize_actuation(actuation,

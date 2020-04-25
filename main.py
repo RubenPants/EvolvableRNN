@@ -85,10 +85,11 @@ def monitor(game_cfg: Config,
     for n in genome.get_used_nodes().values():
         t = type(n)
         if t != OutputNodeGene:
-            if node_type is not None:
+            if node_type is not None:  # TODO Check needed?
                 raise Exception(f"More than two hidden nodes used in genome: '{node_type}' and '{t}'")
             else:
                 node_type = t
+                break  # TODO
     if node_type is None:
         raise Exception(f"No hidden node to monitor in genome {genome}")
     
@@ -323,13 +324,13 @@ if __name__ == '__main__':
     parser.add_argument('--trace', type=bool, default=False)  # Keep it False
     parser.add_argument('--trace_fit', type=bool, default=False)
     parser.add_argument('--evaluate', type=bool, default=False)
-    parser.add_argument('--genome', type=bool, default=False)
+    parser.add_argument('--genome', type=bool, default=True)
     parser.add_argument('--monitor', type=bool, default=True)
     parser.add_argument('--gru_analysis', type=bool, default=False)
     parser.add_argument('--live', type=bool, default=False)
     
     # Extra arguments
-    parser.add_argument('--iterations', type=int, default=1)
+    parser.add_argument('--iterations', type=int, default=100)
     parser.add_argument('--experiment', type=int, default=3)
     parser.add_argument('--unused_cpu', type=int, default=2)
     parser.add_argument('--version', type=int, default=11)
@@ -343,12 +344,12 @@ if __name__ == '__main__':
     # config.bot.angular_dir = [True, False]
     config.bot.dist_enabled = True
     config.evaluation.fitness = D_DISTANCE
-    config.genome.rnn_prob_gru = 0.6
+    config.genome.rnn_prob_simple_rnn = 0.6
     config.update()
     
     # Setup the population
     pop = Population(
-            name='v2',
+            name='NEAT-SRU/v0',
             # name=get_name(cfg=config, version=args.version),
             folder_name='test',
             # folder_name=get_folder(args.experiment),

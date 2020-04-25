@@ -132,8 +132,8 @@ if __name__ == '__main__':
     evaluate_generations(
             experiment_id=3,
             folder='test',
-            pop_folder='NEAT-GRU',
-            max_v=5,
+            pop_folder='NEAT-SRU',
+            max_v=28,
     )
     
     # evaluate_populations(
