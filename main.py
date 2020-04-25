@@ -82,15 +82,13 @@ def monitor(game_cfg: Config,
     print("\n===> MONITORING GENOME <===\n")
     if genome is None: genome = population.best_genome
     
+    # Take first GRU or SRU node
     node_type = None
     for n in genome.get_used_nodes().values():
         t = type(n)
         if t != OutputNodeGene and t != SimpleNodeGene:
-            if node_type is not None:  # TODO Check needed?
-                raise Exception(f"More than two hidden nodes used in genome: '{node_type}' and '{t}'")
-            else:
-                node_type = t
-                break  # TODO
+            node_type = t
+            break
     if node_type is None:
         raise Exception(f"No hidden node to monitor in genome {genome}")
     
