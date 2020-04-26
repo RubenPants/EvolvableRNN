@@ -170,18 +170,14 @@ class Population:
     
     # ---------------------------------------------> FUNCTIONAL METHODS <--------------------------------------------- #
     
-    def add_evaluation_result(self, eval_result):
-        """
-        Append the result of the evaluation.
-        
-        :param eval_result: Dictionary
-        """
+    def add_evaluation_result(self, eval_result, overwrite: bool = False):
+        """Append the result of the evaluation."""
         sf = get_subfolder(f"population{'_backup' if self.use_backup else ''}/"
                            f"storage/"
                            f"{self.folder_name}/"
                            f'{self}/', 'evaluation')
         sf = get_subfolder(sf, f"{self.generation:05d}")
-        update_dict(f'{sf}results', eval_result)
+        update_dict(f'{sf}results', eval_result, overwrite=overwrite)
     
     def add_reporter(self, reporter):
         """

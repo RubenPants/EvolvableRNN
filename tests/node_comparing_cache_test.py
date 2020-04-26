@@ -9,8 +9,6 @@ import unittest
 from config import Config
 from configs.genome_config import GenomeConfig
 from population.utils.cache.node_comparing import NodeComparingCache
-
-
 # TODO: Test that two nodes with different keys are always comparable
 # TODO: More elaborate testing (?) --> merge-keys (first not comparable, then they are)
 from population.utils.gene_util.connection import ConnectionGene

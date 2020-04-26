@@ -131,6 +131,7 @@ dmypy.json
 # Ignore all experimental folders and files, but do include the 'tests' (unittest) folder
 **/test*.py
 **/test*.ipynb
+**/test*.bash
 **/test*/
 **/debug*
 !tests/

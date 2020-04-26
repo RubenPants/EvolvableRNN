@@ -26,16 +26,17 @@ def load_dict(full_path):
         return json.load(f)
 
 
-def update_dict(full_path, new_dict):
+def update_dict(full_path, new_dict, overwrite: bool = False):
     """
     Update existing dictionary if exists, otherwise create new.
     
     :param full_path: Path with name of JSON file (including '.json')
     :param new_dict: The JSON file that must be stored
+    :param overwrite: Overwrite the file if it already exists
     """
     files = glob(full_path)
     
-    if files:
+    if files and not overwrite:
         # Append new json
         with open(full_path, 'r') as f:
             original = json.load(f)

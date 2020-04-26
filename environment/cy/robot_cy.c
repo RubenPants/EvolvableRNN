@@ -1891,6 +1891,9 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
+/* None.proto */
+static CYTHON_INLINE long __Pyx_pow_long(long, long);
+
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 
@@ -2121,8 +2124,6 @@ static const char __pyx_k_radius[] = "radius";
 static const char __pyx_k_random[] = "random";
 static const char __pyx_k_reduce[] = "__reduce__";
 static const char __pyx_k_update[] = "update";
-static const char __pyx_k_x_axis[] = "x_axis";
-static const char __pyx_k_y_axis[] = "y_axis";
 static const char __pyx_k_RobotCy[] = "RobotCy";
 static const char __pyx_k_angle_2[] = "angle";
 static const char __pyx_k_asarray[] = "asarray";
@@ -2277,8 +2278,6 @@ static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_turning_speed;
 static PyObject *__pyx_kp_u_unknown_dtype_code_in_numpy_pxd;
 static PyObject *__pyx_n_s_update;
-static PyObject *__pyx_n_s_x_axis;
-static PyObject *__pyx_n_s_y_axis;
 static int __pyx_pf_11environment_2cy_8robot_cy_7RobotCy___init__(struct __pyx_obj_11environment_2cy_8robot_cy_RobotCy *__pyx_v_self, struct __pyx_obj_11environment_2cy_7game_cy_GameCy *__pyx_v_game, float __pyx_v_r); /* proto */
 static PyObject *__pyx_pf_11environment_2cy_8robot_cy_7RobotCy_2__str__(struct __pyx_obj_11environment_2cy_8robot_cy_RobotCy *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_11environment_2cy_8robot_cy_7RobotCy_4drive(struct __pyx_obj_11environment_2cy_8robot_cy_RobotCy *__pyx_v_self, float __pyx_v_dt, float __pyx_v_lw, float __pyx_v_rw); /* proto */
@@ -4875,7 +4874,6 @@ static void __pyx_f_11environment_2cy_8robot_cy_7RobotCy_add_distance_sensor(str
   PyObject *__pyx_t_4 = NULL;
   Py_ssize_t __pyx_t_5;
   PyObject *__pyx_t_6 = NULL;
-  PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("add_distance_sensor", 0);
   /* Check if called by wrapper */
   if (unlikely(__pyx_skip_dispatch)) ;
@@ -4926,7 +4924,7 @@ static void __pyx_f_11environment_2cy_8robot_cy_7RobotCy_add_distance_sensor(str
  *         """Single distance sensor which determines distance between agent's center and target's center."""
  *         self.sensors[len(self.sensors)] = DistanceSensorCy(
  *                 sensor_id=len(self.sensors),             # <<<<<<<<<<<<<<
- *                 normalizer=sqrt(self.game.game_config.x_axis ** 2 + self.game.game_config.y_axis ** 2),
+ *                 normalizer=sqrt(self.game.x_axis ** 2 + self.game.y_axis ** 2),
  *                 game=self.game)
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 153, __pyx_L1_error)
@@ -4947,38 +4945,26 @@ static void __pyx_f_11environment_2cy_8robot_cy_7RobotCy_add_distance_sensor(str
   /* "environment/cy/robot_cy.pyx":154
  *         self.sensors[len(self.sensors)] = DistanceSensorCy(
  *                 sensor_id=len(self.sensors),
- *                 normalizer=sqrt(self.game.game_config.x_axis ** 2 + self.game.game_config.y_axis ** 2),             # <<<<<<<<<<<<<<
+ *                 normalizer=sqrt(self.game.x_axis ** 2 + self.game.y_axis ** 2),             # <<<<<<<<<<<<<<
  *                 game=self.game)
  *         self.n_distance += 1
  */
   __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_sqrt); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->game->game_config, __pyx_n_s_x_axis); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 154, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_long((__Pyx_pow_long(((long)__pyx_v_self->game->x_axis), 2) + __Pyx_pow_long(((long)__pyx_v_self->game->y_axis), 2))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_6 = PyNumber_Power(__pyx_t_4, __pyx_int_2, Py_None); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 154, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self->game->game_config, __pyx_n_s_y_axis); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 154, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_7 = PyNumber_Power(__pyx_t_4, __pyx_int_2, Py_None); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 154, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyNumber_Add(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 154, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = NULL;
+  __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
-    __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_3);
-    if (likely(__pyx_t_7)) {
+    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_6)) {
       PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-      __Pyx_INCREF(__pyx_t_7);
+      __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(function);
       __Pyx_DECREF_SET(__pyx_t_3, function);
     }
   }
-  __pyx_t_2 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_7, __pyx_t_4) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4);
-  __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_2 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_6, __pyx_t_4) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -4988,7 +4974,7 @@ static void __pyx_f_11environment_2cy_8robot_cy_7RobotCy_add_distance_sensor(str
 
   /* "environment/cy/robot_cy.pyx":155
  *                 sensor_id=len(self.sensors),
- *                 normalizer=sqrt(self.game.game_config.x_axis ** 2 + self.game.game_config.y_axis ** 2),
+ *                 normalizer=sqrt(self.game.x_axis ** 2 + self.game.y_axis ** 2),
  *                 game=self.game)             # <<<<<<<<<<<<<<
  *         self.n_distance += 1
  * 
@@ -5000,7 +4986,7 @@ static void __pyx_f_11environment_2cy_8robot_cy_7RobotCy_add_distance_sensor(str
  *         """Single distance sensor which determines distance between agent's center and target's center."""
  *         self.sensors[len(self.sensors)] = DistanceSensorCy(             # <<<<<<<<<<<<<<
  *                 sensor_id=len(self.sensors),
- *                 normalizer=sqrt(self.game.game_config.x_axis ** 2 + self.game.game_config.y_axis ** 2),
+ *                 normalizer=sqrt(self.game.x_axis ** 2 + self.game.y_axis ** 2),
  */
   __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_11environment_2cy_10sensors_cy_DistanceSensorCy), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 152, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -5024,7 +5010,7 @@ static void __pyx_f_11environment_2cy_8robot_cy_7RobotCy_add_distance_sensor(str
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "environment/cy/robot_cy.pyx":156
- *                 normalizer=sqrt(self.game.game_config.x_axis ** 2 + self.game.game_config.y_axis ** 2),
+ *                 normalizer=sqrt(self.game.x_axis ** 2 + self.game.y_axis ** 2),
  *                 game=self.game)
  *         self.n_distance += 1             # <<<<<<<<<<<<<<
  * 
@@ -5048,7 +5034,6 @@ static void __pyx_f_11environment_2cy_8robot_cy_7RobotCy_add_distance_sensor(str
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_XDECREF(__pyx_t_7);
   __Pyx_WriteUnraisable("environment.cy.robot_cy.RobotCy.add_distance_sensor", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -9957,8 +9942,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_turning_speed, __pyx_k_turning_speed, sizeof(__pyx_k_turning_speed), 0, 0, 1, 1},
   {&__pyx_kp_u_unknown_dtype_code_in_numpy_pxd, __pyx_k_unknown_dtype_code_in_numpy_pxd, sizeof(__pyx_k_unknown_dtype_code_in_numpy_pxd), 0, 1, 0, 0},
   {&__pyx_n_s_update, __pyx_k_update, sizeof(__pyx_k_update), 0, 0, 1, 1},
-  {&__pyx_n_s_x_axis, __pyx_k_x_axis, sizeof(__pyx_k_x_axis), 0, 0, 1, 1},
-  {&__pyx_n_s_y_axis, __pyx_k_y_axis, sizeof(__pyx_k_y_axis), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
@@ -12476,6 +12459,33 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
         }\
         return (target_type) value;\
     }
+
+/* None */
+static CYTHON_INLINE long __Pyx_pow_long(long b, long e) {
+    long t = b;
+    switch (e) {
+        case 3:
+            t *= b;
+        CYTHON_FALLTHROUGH;
+        case 2:
+            t *= b;
+        CYTHON_FALLTHROUGH;
+        case 1:
+            return t;
+        case 0:
+            return 1;
+    }
+    #if 1
+    if (unlikely(e<0)) return 0;
+    #endif
+    t = 1;
+    while (likely(e)) {
+        t *= (b * (e&1)) | ((~e)&1);
+        b *= b;
+        e >>= 1;
+    }
+    return t;
+}
 
 /* CIntToPy */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
