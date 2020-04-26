@@ -11,7 +11,7 @@ from neat.six_util import iteritems, itervalues
 
 from config import Config
 from environment.env_multi import get_multi_env
-from main import evaluate, get_folder, get_game_ids, get_name, gru_analysis, gru_monitor, training_overview, \
+from main import evaluate, get_folder, get_game_ids, get_name, gru_analysis, monitor, training_overview, \
     visualize_genome
 from population.population import Population
 from population.utils.population_util.fitness_functions import calc_pop_fitness
@@ -104,7 +104,6 @@ def main(fitness,
         
         # Evaluate the trained population
         evaluate(
-                game_config=cfg,
                 games=games_eval,
                 population=pop,
                 unused_cpu=unused_cpu,
@@ -124,8 +123,7 @@ def main(fitness,
                     unused_cpu=unused_cpu,
                     experiment_id=4,
             )
-            gru_monitor(
-                    game_cfg=cfg,
+            monitor(
                     game_id=games_eval[0],
                     population=pop,
                     genome=pop.best_genome,
