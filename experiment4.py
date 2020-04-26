@@ -104,7 +104,6 @@ def main(fitness,
         
         # Evaluate the trained population
         evaluate(
-                game_config=cfg,
                 games=games_eval,
                 population=pop,
                 unused_cpu=unused_cpu,
@@ -125,7 +124,6 @@ def main(fitness,
                     experiment_id=4,
             )
             monitor(
-                    game_cfg=cfg,
                     game_id=games_eval[0],
                     population=pop,
                     genome=pop.best_genome,
