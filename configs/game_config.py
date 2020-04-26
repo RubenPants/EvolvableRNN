@@ -14,7 +14,7 @@ class GameConfig(BaseConfig):
     }
     
     def __init__(self):
-        # Number of seconds it takes for one game to complete  [def=60]  TODO
+        # Number of seconds it takes for one game to complete  [def=60]
         self.duration: int = 60
         # Number of frames each second  [def=10]
         self.fps: int = 10
@@ -22,7 +22,7 @@ class GameConfig(BaseConfig):
         self.p2m: int = 35
         # Target is reached when within this range, expressed in meters  [def=.5]
         self.target_reached: float = .5
-        # Number of meters the x-axis represents  [def=14]
-        self.x_axis: int = 14
-        # Number of meters the y-axis represents  [def=14]
-        self.y_axis: int = 14
+        # Number of meters the x-axis represents  [def=20]
+        self.x_axis: int = 20
+        # Number of meters the y-axis represents  [def=20]
+        self.y_axis: int = 20
