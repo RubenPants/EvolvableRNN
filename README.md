@@ -19,6 +19,21 @@ Update a GRU his weights based on its current value, the value fed into the GRU 
 
 ## TODO
 
+* All games are trained with the wrong axis.. (14 instead of 20, this has effects on the distance normalisation..)
+    Make game-config's layout fixed for each maze (i.e. axis, but not duration)
+    
+* Fixed training-set spawn-order for experiment3
+
+* Enlarge spawning range of targets in experiment 3, being targets within the maze spaced at least 1meter from the boundaries and the player's position
+
+* Do only 20 versions for experiment3
+
+* GRU is still not able to find target in all of the cases (for example when target further than training distance..)
+
+* Analyze model complexity across the populations (proof that GRU doesn't need a complex genome to be able to solve the problem)
+
+* Evaluate on OpenAI's gym environment (e.g. MountainCarContinuous-v0) to compare on another task?
+
 * Research: How long does the GRU remember?
 
 * Monitor GRU; small variations in weights, how does path of genome change?
@@ -37,7 +52,8 @@ Update a GRU his weights based on its current value, the value fed into the GRU 
     * Does not say a thing about NEAT
     * "foot target findings" sounds so cheap
 * *Neuro-evolved Gated Recurrent Units for distance-based target finding*
-    * "foot target findings" sounds so cheap
+    * "target finding" sounds so cheap
+* *An empirical study on the effectiveness of recurrent units as memory components in evolved neural networks*
 
 
 
