@@ -193,7 +193,6 @@ def evaluate_population(pop: Population, cfg: Config, cpu: int, experiment_id: i
     # Trace the most fit genome
     trace_most_fit(
             debug=False,
-            game_config=cfg,
             games=game_ids_eval,
             genome=best,
             population=pop,

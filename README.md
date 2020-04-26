@@ -21,7 +21,7 @@ Update a GRU his weights based on its current value, the value fed into the GRU 
 
 * All games are trained with the wrong axis.. (14 instead of 20, this has effects on the distance normalisation..)
     Make game-config's layout fixed for each maze (i.e. axis, but not duration)
-    
+
 * Fixed training-set spawn-order for experiment3
 
 * Enlarge spawning range of targets in experiment 3, being targets within the maze spaced at least 1meter from the boundaries and the player's position
