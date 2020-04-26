@@ -105,7 +105,7 @@ def get_game():
     cfg.game.x_axis = 1
     cfg.game.y_axis = 1
     cfg.update()
-    spawn = SpawnSimple()
+    spawn = SpawnSimple(game_config=cfg)
     spawn.add_location((10, 10))  # Dummy location
     game = GameCy(
             config=cfg,
