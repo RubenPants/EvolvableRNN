@@ -5,7 +5,7 @@ iter=100;  # Number of training-iterations each loop
 cpu=1;  # Number of unused CPUs
 
 # Run the program
-for v in {6..10}
+for v in {11..15}
   do
   for i in {1..5}
   do
