@@ -19,8 +19,19 @@ Update a GRU his weights based on its current value, the value fed into the GRU 
 
 ## TODO
 
-* Add more in-depth "evaluation" to experiments (auto-run)
-* Evaluate not with only the current elites, but also those of previous (1, 2?) generations, use best_genome_hist to do so!
+* Train only 20 versions for experiment3
+
+* Monitor, only show the targets found and the next one (the one it's currently driving towards)
+
+* Analyze model complexity across the populations (proof that GRU doesn't need a complex genome to be able to solve the problem)
+
+* Evaluate on OpenAI's gym environment (e.g. MountainCarContinuous-v0) to compare on another task? --> Would deviate too much from thesis I think
+
+* Research: How long does the GRU remember?
+
+* Monitor GRU; small variations in weights, how does path of genome change?
+
+* Experiment: Distance via ping, update every 5 frames (0.5 seconds)
 
 * Do more in-depth research on monitored behaviour of genomes
 
@@ -34,7 +45,8 @@ Update a GRU his weights based on its current value, the value fed into the GRU 
     * Does not say a thing about NEAT
     * "foot target findings" sounds so cheap
 * *Neuro-evolved Gated Recurrent Units for distance-based target finding*
-    * "foot target findings" sounds so cheap
+    * "target finding" sounds so cheap
+* *An empirical study on the effectiveness of recurrent units as memory components in evolved neural networks*
 
 
 

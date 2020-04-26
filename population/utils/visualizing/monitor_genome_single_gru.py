@@ -46,8 +46,8 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
     if not genome: genome = population.best_genome
     if not game_cfg: game_cfg = pop.config
     
-    # Check if valid genome (contains only one hidden GRU)
-    assert len([n for n in genome.get_used_nodes().values() if type(n) == GruNodeGene]) == 1
+    # Check if valid genome (contains at least one hidden GRU, first GRU is monitored)
+    assert len([n for n in genome.get_used_nodes().values() if type(n) == GruNodeGene]) >= 1
     
     # Get the game
     game = get_game(game_id, cfg=game_cfg, noise=False)

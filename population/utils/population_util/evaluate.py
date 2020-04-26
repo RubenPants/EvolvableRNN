@@ -65,7 +65,6 @@ def evaluate_generations(name, experiment_id, folder=None, hops: int = 10, unuse
         # Evaluate the selected genomes
         evaluate(
                 population=pop,
-                game_config=pop.config,
                 games=game_ids_eval,
                 genomes=genomes,
                 unused_cpu=unused_cpu,
@@ -222,6 +221,6 @@ if __name__ == '__main__':
             name="v1",
             experiment_id=1,
             folder="test",
-            hops=10,  # TODO
+            hops=10,
             unused_cpu=2,
     )
