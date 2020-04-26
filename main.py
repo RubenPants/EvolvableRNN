@@ -324,9 +324,9 @@ if __name__ == '__main__':
     parser.add_argument('--trace_fit', type=bool, default=False)
     parser.add_argument('--evaluate', type=bool, default=False)
     parser.add_argument('--genome', type=bool, default=False)
-    parser.add_argument('--monitor', type=bool, default=True)
+    parser.add_argument('--monitor', type=bool, default=False)
     parser.add_argument('--gru_analysis', type=bool, default=False)
-    parser.add_argument('--live', type=bool, default=False)
+    parser.add_argument('--live', type=bool, default=True)
     
     # Extra arguments
     parser.add_argument('--iterations', type=int, default=100)
@@ -349,9 +349,9 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='NEAT-SRU/v1',
+            name='NEAT-GRU/v1',
             # name=get_name(cfg=config, version=args.version),
-            folder_name='experiment1',
+            folder_name='experiment3',
             # folder_name=get_folder(args.experiment),
             config=config,
             use_backup=args.use_backup,
@@ -452,7 +452,7 @@ if __name__ == '__main__':
                     game_config=config,
                     genome=chosen_genome if chosen_genome else pop.best_genome,
                     population=pop,
-                    speedup=3,
+                    speedup=5,
             )
     except Exception as e:
         pop.log(traceback.format_exc(), print_result=False)
