@@ -19,20 +19,13 @@ Update a GRU his weights based on its current value, the value fed into the GRU 
 
 ## TODO
 
-* All games are trained with the wrong axis.. (14 instead of 20, this has effects on the distance normalisation..)
-    Make game-config's layout fixed for each maze (i.e. axis, but not duration)
+* Train only 20 versions for experiment3
 
-* Fixed training-set spawn-order for experiment3
-
-* Enlarge spawning range of targets in experiment 3, being targets within the maze spaced at least 1meter from the boundaries and the player's position
-
-* Do only 20 versions for experiment3
-
-* GRU is still not able to find target in all of the cases (for example when target further than training distance..)
+* Monitor, only show the targets found and the next one (the one it's currently driving towards)
 
 * Analyze model complexity across the populations (proof that GRU doesn't need a complex genome to be able to solve the problem)
 
-* Evaluate on OpenAI's gym environment (e.g. MountainCarContinuous-v0) to compare on another task?
+* Evaluate on OpenAI's gym environment (e.g. MountainCarContinuous-v0) to compare on another task? --> Would deviate too much from thesis I think
 
 * Research: How long does the GRU remember?
 

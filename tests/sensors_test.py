@@ -219,7 +219,7 @@ class DeltaDistanceSensorTest(unittest.TestCase):
 
 def get_game():
     cfg = Config()
-    spawn = SpawnSimple()
+    spawn = SpawnSimple(game_config=cfg)
     spawn.add_location((1, 1))  # Dummy location
     return Game(
             config=cfg,
