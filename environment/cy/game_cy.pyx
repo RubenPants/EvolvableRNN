@@ -116,6 +116,7 @@ cdef class GameCy:
     cpdef void randomize(self):
         """Randomize the maze."""
         self.player.randomize(max_noise=self.player_angle_noise)
+        self.spawn_function.randomize()
         self.sample_target()
     
     cpdef dict reset(self):
@@ -192,8 +193,7 @@ cdef class GameCy:
     
     cpdef void sample_target(self):
         """Sample a target from the target_list."""
-        self.target = Vec2dCy().load_tuple(self.spawn_function(game_config=self.game_config,
-                                                               player_pos=self.player.pos))
+        self.target = Vec2dCy().load_tuple(self.spawn_function())
     
     cpdef void set_player_init_angle(self, float a):
         """Set a new initial angle for the player."""

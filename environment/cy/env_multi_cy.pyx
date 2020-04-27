@@ -169,5 +169,4 @@ cdef class MultiEnvironmentCy:
         """
         self.games = np.asarray([get_game_cy(g, cfg=self.game_config, noise=noise) for g in games])
         self.batch_size = len(games)
-        if noise:
-            for g in self.games: g.randomize()
+        if noise: [g.randomize() for g in self.games]

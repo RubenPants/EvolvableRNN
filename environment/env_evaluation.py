@@ -53,6 +53,7 @@ class EvaluationEnv:
                              genome_list,
                              pop: Population,
                              parallel: bool = True,
+                             overwrite: bool = False
                              ):
         """
         Evaluate the population for a single evaluation-process.
@@ -60,6 +61,7 @@ class EvaluationEnv:
         :param genome_list: List of genomes that will be evaluated
         :param pop: The population to which the genomes belong (used to setup the network and query the config)
         :param parallel: Evaluate the given genomes in parallel
+        :param overwrite: Overwrite the evaluation dictionary if it already exists
         """
         # Create the environment which is responsible for evaluating the genomes
         multi_env = get_multi_env(pop=pop, game_config=self.game_config)
@@ -95,7 +97,7 @@ class EvaluationEnv:
                                                               game_cfg=pop.config.game,
                                                               game_obs={k: return_dict[k]},
                                                               gen=pop.generation)[k]
-        pop.add_evaluation_result(eval_result)
+        pop.add_evaluation_result(eval_result, overwrite=overwrite)
 
 
 def create_answer(games: list):

@@ -1,5 +1,5 @@
 """
-monitor_genome.py
+monitor_genome_simple_gru.py
 
 Monitor a single genome during its run on a single game. This monitoring focuses on the GRU-cell that must be present
 in the genome.
@@ -46,9 +46,8 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
     if not genome: genome = population.best_genome
     if not game_cfg: game_cfg = pop.config
     
-    # Check if valid genome (contains only one hidden node that is a GRU)
-    assert genome.size()[0] == 1
-    assert len([n for n in genome.get_used_nodes().values() if type(n) == GruNodeGene]) == 1
+    # Check if valid genome (contains at least one hidden GRU, first GRU is monitored)
+    assert len([n for n in genome.get_used_nodes().values() if type(n) == GruNodeGene]) >= 1
     
     # Get the game
     game = get_game(game_id, cfg=game_cfg, noise=False)
@@ -136,8 +135,8 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
     path = get_subfolder(f"population{'_backup' if population.use_backup else ''}/"
                          f"storage/"
                          f"{population.folder_name}/"
-                         f"{population}/"
-                         f"images/", "monitor")
+                         f"{population}/", "images")
+    path = get_subfolder(path, f"monitor")
     path = get_subfolder(path, f"{genome.key}")
     path = get_subfolder(path, f"{game_id}")
     visualize_actuation(actuation,
@@ -194,7 +193,6 @@ def visualize_actuation(actuation_list: list, target_found: list, game_cfg: Game
     plt.legend()
     plt.grid()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
-    # scientific_notation_y(ax, 1)
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Actuation force - Normalized")
     # plt.ylabel("Normalized force")
@@ -214,7 +212,6 @@ def visualize_distance(distance_list: list, target_found: list, game_cfg: GameCo
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
-    # scientific_notation_y(ax, 1)
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Distance to target - Normalized")
     # plt.ylabel("Normalized distance")
@@ -237,7 +234,6 @@ def visualize_delta_distance(delta_distance_list: list, target_found: list, game
     plt.grid()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     plt.ylim([-max_abs * 1.1, max_abs * 1.1])
-    # scientific_notation_y(ax, 1)
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Delta distance to target - Normalized")
     # plt.ylabel("Normalized delta distance")
@@ -257,7 +253,6 @@ def visualize_hidden_state(hidden_state: list, target_found: list, game_cfg: Gam
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
-    # scientific_notation_y(ax, 1)
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Hidden state")
     # plt.ylabel("GRU output value")
@@ -277,7 +272,6 @@ def visualize_reset_gate(reset_gate: list, target_found: list, game_cfg: GameCon
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
-    # scientific_notation_y(ax, 1)
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Reset gate")
     # plt.ylabel("Gate value")
@@ -297,7 +291,6 @@ def visualize_update_gate(update_gate: list, target_found: list, game_cfg: GameC
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
-    # scientific_notation_y(ax, 1)
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Update gate")
     # plt.ylabel("Gate value")
@@ -313,8 +306,10 @@ def visualize_position(position_list: list, game: Game, save_path: str):
     x_min, x_max = game.x_axis / 2, game.x_axis / 2
     y_min, y_max = game.y_axis / 2, game.y_axis / 2
     
-    # Create the blueprint
-    for i, t in enumerate(game.spawn_function.locations):
+    # Create the blueprint - Only visualize targets found by the agent
+    for i in range(game.score + 1):
+        t = game.spawn_function.locations[i]
+        
         # Plot the targets
         plt.plot(t[0], t[1], 'go')
         plt.annotate(str(i + 1), xy=(t[0] + 0.1, t[1] + 0.1))
@@ -354,7 +349,6 @@ def visualize_position(position_list: list, game: Game, save_path: str):
             )
     
     # Constraint the plot's boundaries
-    # TODO: With +1 delta or something, keep it squared!
     x_center = (x_max - x_min) / 2 + x_min
     y_center = (y_max - y_min) / 2 + y_min
     r = max((x_max - x_min) / 2 + 1, (y_max - y_min) / 2 + 1)
@@ -405,32 +399,6 @@ def merge(title: str, path: str):
     plt.tight_layout()
     plt.savefig(f"{path[:-1]}.png", bbox_inches='tight', pad_inches=0)
     plt.close()
-
-
-def scientific_notation_y(ax, decimals=1):
-    v = np.asarray(ax.get_yticks().tolist())
-    v_abs = np.abs(v)
-    v_max = np.max(v_abs)
-    exp = 0
-    
-    sign = '+'
-    if v_max >= 10:
-        sign = '+'
-        while v_max >= 10:
-            exp = exp + 1
-            v_max = v_max / 10
-        v = v / 10 ** exp
-    elif v_max <= 1:
-        sign = '-'
-        while v_max <= 1:
-            exp = exp + 1
-            v_max = v_max * 10
-        v = v * 10 ** exp
-    v = np.around(v, decimals)
-    ax.annotate(r'1e' + sign + str(exp), xycoords='axes fraction',
-                xy=(0, 0), xytext=(0, 1.05), size=10)
-    ax.set_yticklabels(v)
-    return
 
 
 if __name__ == '__main__':
