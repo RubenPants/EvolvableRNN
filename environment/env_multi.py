@@ -88,7 +88,7 @@ class MultiEnvironment:
             # Stop if agent reached target in all the games
             if all(finished): break
             step_num += 1
-
+        
         # Return the final observations
         if return_dict is not None: return_dict[genome_id] = [g.close() for g in self.games]
     
@@ -167,8 +167,7 @@ class MultiEnvironment:
         """
         self.games = np.asarray([get_game(g, cfg=self.game_config, noise=noise) for g in games])
         self.batch_size = len(games)
-        if noise:
-            for g in self.games: g.randomize()
+        if noise: [g.randomize() for g in self.games]
 
 
 def get_multi_env(pop: Population, game_config: Config):

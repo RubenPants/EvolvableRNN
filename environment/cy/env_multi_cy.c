@@ -4564,7 +4564,7 @@ static void __pyx_f_11environment_2cy_12env_multi_cy_18MultiEnvironmentCy_set_ga
  *         """
  *         self.games = np.asarray([get_game_cy(g, cfg=self.game_config, noise=noise) for g in games])             # <<<<<<<<<<<<<<
  *         self.batch_size = len(games)
- *         if noise:
+ *         if noise: [g.randomize() for g in self.games]
  */
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 170, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -4628,8 +4628,7 @@ static void __pyx_f_11environment_2cy_12env_multi_cy_18MultiEnvironmentCy_set_ga
  *         """
  *         self.games = np.asarray([get_game_cy(g, cfg=self.game_config, noise=noise) for g in games])
  *         self.batch_size = len(games)             # <<<<<<<<<<<<<<
- *         if noise:
- *             for g in self.games: g.randomize()
+ *         if noise: [g.randomize() for g in self.games]
  */
   if (unlikely(__pyx_v_games == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
@@ -4641,85 +4640,75 @@ static void __pyx_f_11environment_2cy_12env_multi_cy_18MultiEnvironmentCy_set_ga
   /* "environment/cy/env_multi_cy.pyx":172
  *         self.games = np.asarray([get_game_cy(g, cfg=self.game_config, noise=noise) for g in games])
  *         self.batch_size = len(games)
- *         if noise:             # <<<<<<<<<<<<<<
- *             for g in self.games: g.randomize()
+ *         if noise: [g.randomize() for g in self.games]             # <<<<<<<<<<<<<<
  */
   __pyx_t_10 = (__pyx_v_noise != 0);
   if (__pyx_t_10) {
-
-    /* "environment/cy/env_multi_cy.pyx":173
- *         self.batch_size = len(games)
- *         if noise:
- *             for g in self.games: g.randomize()             # <<<<<<<<<<<<<<
- */
+    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
     if (likely(PyList_CheckExact(((PyObject *)__pyx_v_self->games))) || PyTuple_CheckExact(((PyObject *)__pyx_v_self->games))) {
-      __pyx_t_1 = ((PyObject *)__pyx_v_self->games); __Pyx_INCREF(__pyx_t_1); __pyx_t_8 = 0;
+      __pyx_t_4 = ((PyObject *)__pyx_v_self->games); __Pyx_INCREF(__pyx_t_4); __pyx_t_8 = 0;
       __pyx_t_11 = NULL;
     } else {
-      __pyx_t_8 = -1; __pyx_t_1 = PyObject_GetIter(((PyObject *)__pyx_v_self->games)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 173, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_11 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 173, __pyx_L1_error)
+      __pyx_t_8 = -1; __pyx_t_4 = PyObject_GetIter(((PyObject *)__pyx_v_self->games)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 172, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_4);
+      __pyx_t_11 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 172, __pyx_L1_error)
     }
     for (;;) {
       if (likely(!__pyx_t_11)) {
-        if (likely(PyList_CheckExact(__pyx_t_1))) {
-          if (__pyx_t_8 >= PyList_GET_SIZE(__pyx_t_1)) break;
+        if (likely(PyList_CheckExact(__pyx_t_4))) {
+          if (__pyx_t_8 >= PyList_GET_SIZE(__pyx_t_4)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_8); __Pyx_INCREF(__pyx_t_4); __pyx_t_8++; if (unlikely(0 < 0)) __PYX_ERR(0, 173, __pyx_L1_error)
+          __pyx_t_2 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_8); __Pyx_INCREF(__pyx_t_2); __pyx_t_8++; if (unlikely(0 < 0)) __PYX_ERR(0, 172, __pyx_L1_error)
           #else
-          __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_8); __pyx_t_8++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 173, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_4);
+          __pyx_t_2 = PySequence_ITEM(__pyx_t_4, __pyx_t_8); __pyx_t_8++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_2);
           #endif
         } else {
-          if (__pyx_t_8 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
+          if (__pyx_t_8 >= PyTuple_GET_SIZE(__pyx_t_4)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_8); __Pyx_INCREF(__pyx_t_4); __pyx_t_8++; if (unlikely(0 < 0)) __PYX_ERR(0, 173, __pyx_L1_error)
+          __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_8); __Pyx_INCREF(__pyx_t_2); __pyx_t_8++; if (unlikely(0 < 0)) __PYX_ERR(0, 172, __pyx_L1_error)
           #else
-          __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_8); __pyx_t_8++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 173, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_4);
+          __pyx_t_2 = PySequence_ITEM(__pyx_t_4, __pyx_t_8); __pyx_t_8++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_2);
           #endif
         }
       } else {
-        __pyx_t_4 = __pyx_t_11(__pyx_t_1);
-        if (unlikely(!__pyx_t_4)) {
+        __pyx_t_2 = __pyx_t_11(__pyx_t_4);
+        if (unlikely(!__pyx_t_2)) {
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 173, __pyx_L1_error)
+            else __PYX_ERR(0, 172, __pyx_L1_error)
           }
           break;
         }
-        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_GOTREF(__pyx_t_2);
       }
-      __Pyx_XDECREF_SET(__pyx_v_g, __pyx_t_4);
-      __pyx_t_4 = 0;
-      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_g, __pyx_n_s_randomize); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 173, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_7 = NULL;
-      if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
-        __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_2);
-        if (likely(__pyx_t_7)) {
-          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-          __Pyx_INCREF(__pyx_t_7);
+      __Pyx_XDECREF_SET(__pyx_v_g, __pyx_t_2);
+      __pyx_t_2 = 0;
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_g, __pyx_n_s_randomize); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 172, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_7);
+      __pyx_t_5 = NULL;
+      if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_7))) {
+        __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_7);
+        if (likely(__pyx_t_5)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_7);
+          __Pyx_INCREF(__pyx_t_5);
           __Pyx_INCREF(function);
-          __Pyx_DECREF_SET(__pyx_t_2, function);
+          __Pyx_DECREF_SET(__pyx_t_7, function);
         }
       }
-      __pyx_t_4 = (__pyx_t_7) ? __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_7) : __Pyx_PyObject_CallNoArg(__pyx_t_2);
-      __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 173, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
+      __pyx_t_2 = (__pyx_t_5) ? __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_5) : __Pyx_PyObject_CallNoArg(__pyx_t_7);
+      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_2))) __PYX_ERR(0, 172, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-    /* "environment/cy/env_multi_cy.pyx":172
- *         self.games = np.asarray([get_game_cy(g, cfg=self.game_config, noise=noise) for g in games])
- *         self.batch_size = len(games)
- *         if noise:             # <<<<<<<<<<<<<<
- *             for g in self.games: g.randomize()
- */
   }
 
   /* "environment/cy/env_multi_cy.pyx":163

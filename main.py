@@ -5,18 +5,23 @@ All the possible method that can be queried on the population.
 """
 import argparse
 import traceback
+from copy import deepcopy
 
 from config import Config
 from population.population import Population
+from population.utils.gene_util.gru import GruNodeGene
+from population.utils.gene_util.output_node import OutputNodeGene
+from population.utils.gene_util.simple_node import SimpleNodeGene
+from population.utils.gene_util.simple_rnn import SimpleRnnNodeGene
 from population.utils.genome import Genome
 from process_killer import main as process_killer
-from utils.dictionary import D_DISTANCE
+from utils.dictionary import *
 
 
 def blueprint(population: Population,
-              game_config: Config,
               games: list,
               debug: bool = False,
+              duration: int = 0,
               unused_cpu: int = 0,
               ):
     """Create a blueprint evaluation for the given population on the first 5 games."""
@@ -24,6 +29,9 @@ def blueprint(population: Population,
     
     population.log("\n===> CREATING BLUEPRINTS <===\n")
     population.log(f"Creating blueprints for games: {games}")
+    
+    game_config = deepcopy(population.config)
+    if duration > 0: game_config.game.duration = duration
     
     visualizer = VisualizingEnv(
             game_config=game_config,
@@ -37,10 +45,11 @@ def blueprint(population: Population,
 
 
 def evaluate(population: Population,
-             game_config: Config,
              games: list,
-             n_best: int = 10,
+             genomes: list = None,
              debug: bool = False,
+             duration: int = 0,
+             overwrite: bool = False,
              unused_cpu: int = 0,
              ):
     """Evaluate the given population on the evaluation game-set."""
@@ -48,39 +57,69 @@ def evaluate(population: Population,
     
     population.log("\n===> EVALUATING <===\n")
     
+    game_config = deepcopy(population.config)
+    if duration > 0: game_config.game.duration = duration
+    
     evaluator = EvaluationEnv(
             game_config=game_config,
             games=games,
             unused_cpu=unused_cpu,
     )
-    genomes = sorted([g for g in population.population.values()],
-                     key=lambda x: x.fitness if x.fitness else 0,
-                     reverse=True)
+    if genomes is None:
+        genomes = sorted(
+                [g for g in population.population.values()],
+                key=lambda x: x.fitness if x.fitness else 0,
+                reverse=True,
+        )[:max(int(population.config.population.parent_selection * len(population.population)), 1)]
     evaluator.evaluate_genome_list(
-            genome_list=genomes[:n_best],  # Evaluate the ten best performing genomes
+            genome_list=genomes,  # Evaluate the ten best performing genomes
             pop=population,
             parallel=not debug,
+            overwrite=overwrite,
     )
 
 
-def gru_monitor(game_cfg: Config,
-                game_id: int,
-                population: Population,
-                debug: bool = False,
-                genome: Genome = None,
-                ):
+def monitor(game_id: int,
+            population: Population,
+            debug: bool = False,
+            duration: int = 0,
+            genome: Genome = None,
+            ):
     """Monitor a single run of the given genome that contains a single GRU-node."""
-    from population.utils.visualizing.monitor_genome_single_gru import main as monitor
-    
     print("\n===> MONITORING GENOME <===\n")
+    if genome is None: genome = population.best_genome
     
-    monitor(
-            population=population,
-            game_id=game_id,
-            genome=genome,
-            game_cfg=game_cfg,
-            debug=debug,
-    )
+    game_config = deepcopy(population.config)
+    if duration > 0: game_config.game.duration = duration
+    
+    # Take first GRU or SRU node
+    node_type = None
+    for n in genome.get_used_nodes().values():
+        t = type(n)
+        if t != OutputNodeGene and t != SimpleNodeGene:
+            node_type = t
+            break
+    if node_type is None:
+        raise Exception(f"No hidden node to monitor in genome {genome}")
+    
+    if node_type == GruNodeGene:
+        from population.utils.visualizing.monitor_genome_single_gru import main as gru_monitor
+        gru_monitor(
+                population=population,
+                game_id=game_id,
+                genome=genome,
+                game_cfg=game_config,
+                debug=debug,
+        )
+    elif node_type == SimpleRnnNodeGene:
+        from population.utils.visualizing.monitor_genome_single_sru import main as sru_monitor
+        sru_monitor(
+                population=population,
+                game_id=game_id,
+                genome=genome,
+                game_cfg=game_config,
+                debug=debug,
+        )
 
 
 def gru_analysis(population: Population,
@@ -109,9 +148,9 @@ def gru_analysis(population: Population,
 
 def live(game_id: int,
          population: Population,
-         game_config: Config,
          genome: Genome,
          debug: bool = False,
+         duration: int = 0,
          speedup: float = 3,
          ):
     """Create a live visualization for the performance of the given genome."""
@@ -119,6 +158,9 @@ def live(game_id: int,
     
     print("\n===> STARTING LIVE DEMO <===\n")
     print(f"Genome {genome.key} with size: {genome.size()}")
+    
+    game_config = deepcopy(population.config)
+    if duration > 0: game_config.game.duration = duration
     
     visualizer = LiveVisualizer(
             pop=population,
@@ -133,9 +175,9 @@ def live(game_id: int,
 
 
 def trace(population: Population,
-          game_config: Config,
           games: list,
           debug: bool = False,
+          duration: int = 0,
           unused_cpu: int = 0,
           ):
     """Create a trace evaluation for the given population on the provided games."""
@@ -143,6 +185,9 @@ def trace(population: Population,
     
     population.log("\n===> CREATING TRACES <===\n")
     population.log(f"Creating traces for games: {games}")
+    
+    game_config = deepcopy(population.config)
+    if duration > 0: game_config.game.duration = duration
     
     visualizer = VisualizingEnv(
             game_config=game_config,
@@ -156,14 +201,17 @@ def trace(population: Population,
 
 
 def trace_most_fit(population: Population,
-                   game_config: Config,
                    genome: Genome,
                    games: list,
                    debug: bool = False,
+                   duration: int = 0,
                    unused_cpu: int = 0,
                    ):
     """Create a trace evaluation for the given genome on the provided games."""
     from environment.env_visualizing import VisualizingEnv
+    
+    game_config = deepcopy(population.config)
+    if duration > 0: game_config.game.duration = duration
     
     population.log("\n===> CREATING GENOME TRACE <===\n")
     population.log(f"Creating traces for games: {games}")
@@ -181,16 +229,19 @@ def trace_most_fit(population: Population,
 
 
 def train(population: Population,
-          game_config: Config,
           games: list,
           iterations: int,
           debug: bool = False,
+          duration: int = 0,
           unused_cpu: int = 0,
           ):
     """Train the population on the requested number of iterations."""
     from environment.env_training import TrainingEnv
     
     population.log("\n===> TRAINING <===\n")
+    
+    game_config = deepcopy(population.config)
+    if duration > 0: game_config.game.duration = duration
     
     trainer = TrainingEnv(
             unused_cpu=unused_cpu,  # Use two cores less to keep laptop usable
@@ -292,20 +343,21 @@ if __name__ == '__main__':
     parser.add_argument('--train_overview', type=bool, default=False)
     parser.add_argument('--blueprint', type=bool, default=False)
     parser.add_argument('--trace', type=bool, default=False)  # Keep it False
-    parser.add_argument('--trace_fit', type=bool, default=True)
+    parser.add_argument('--trace_fit', type=bool, default=False)
     parser.add_argument('--evaluate', type=bool, default=False)
-    parser.add_argument('--genome', type=bool, default=True)
+    parser.add_argument('--genome', type=bool, default=False)
     parser.add_argument('--monitor', type=bool, default=True)
     parser.add_argument('--gru_analysis', type=bool, default=False)
     parser.add_argument('--live', type=bool, default=False)
     
     # Extra arguments
-    parser.add_argument('--iterations', type=int, default=1)
-    parser.add_argument('--experiment', type=int, default=6)
+    parser.add_argument('--iterations', type=int, default=50)
+    parser.add_argument('--experiment', type=int, default=3)
     parser.add_argument('--unused_cpu', type=int, default=2)
-    parser.add_argument('--version', type=int, default=11)
+    parser.add_argument('--version', type=int, default=1)
     parser.add_argument('--debug', type=bool, default=False)
-    parser.add_argument('--use_backup', type=bool, default=True)
+    parser.add_argument('--duration', type=int, default=100)
+    parser.add_argument('--use_backup', type=bool, default=False)
     args = parser.parse_args()
     
     # Load in current config-file
@@ -313,16 +365,16 @@ if __name__ == '__main__':
     # config.bot.delta_dist_enabled = True
     # config.bot.angular_dir = [True, False]
     config.bot.dist_enabled = True
-    config.evaluation.fitness = D_DISTANCE
+    config.evaluation.fitness = D_DISTANCE_SCORE
     config.genome.rnn_prob_gru = 0.6
     config.update()
     
     # Setup the population
     pop = Population(
-            name='topology_1_1',
+            name='test',
             # name=get_name(cfg=config, version=args.version),
-            # folder_name='test',
-            folder_name=get_folder(args.experiment),
+            folder_name='test',
+            # folder_name=get_folder(args.experiment),
             config=config,
             use_backup=args.use_backup,
     )
@@ -340,7 +392,7 @@ if __name__ == '__main__':
         if args.train:
             train(
                     debug=args.debug,
-                    game_config=config,
+                    duration=args.duration,
                     games=game_ids_train,
                     iterations=args.iterations,
                     population=pop,
@@ -355,7 +407,7 @@ if __name__ == '__main__':
         if args.blueprint:
             blueprint(
                     debug=args.debug,
-                    game_config=config,
+                    duration=args.duration,
                     games=game_ids_eval,
                     population=pop,
                     unused_cpu=args.unused_cpu,
@@ -364,7 +416,7 @@ if __name__ == '__main__':
         if args.trace:
             trace(
                     debug=args.debug,
-                    game_config=config,
+                    duration=args.duration,
                     games=game_ids_eval,
                     population=pop,
                     unused_cpu=args.unused_cpu,
@@ -373,7 +425,7 @@ if __name__ == '__main__':
         if args.trace_fit:
             trace_most_fit(
                     debug=args.debug,
-                    game_config=config,
+                    duration=args.duration,
                     games=game_ids_eval,
                     # games=[-11],
                     genome=chosen_genome if chosen_genome else pop.best_genome,
@@ -382,9 +434,9 @@ if __name__ == '__main__':
             )
         
         if args.monitor:
-            gru_monitor(
+            monitor(
                     debug=args.debug,
-                    game_cfg=config,
+                    duration=args.duration,
                     game_id=game_ids_eval[0],
                     genome=chosen_genome,
                     population=pop,
@@ -393,7 +445,7 @@ if __name__ == '__main__':
         if args.evaluate:
             evaluate(
                     debug=args.debug,
-                    game_config=config,
+                    duration=args.duration,
                     games=game_ids_eval,
                     population=pop,
                     unused_cpu=args.unused_cpu,
@@ -419,7 +471,7 @@ if __name__ == '__main__':
                     debug=args.debug,
                     # game_id=game_ids_eval[0],
                     game_id=30001,
-                    game_config=config,
+                    duration=args.duration,
                     genome=chosen_genome if chosen_genome else pop.best_genome,
                     population=pop,
                     speedup=3,
