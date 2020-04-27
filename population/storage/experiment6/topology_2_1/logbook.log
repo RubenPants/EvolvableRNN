@@ -1,0 +1,56 @@
+Population 'topology_2_1' saved! Current generation: 0
+Genetic distance:
+	- Maximum: 5.19625
+	- Mean: 2.96037
+	- Minimum: 0.00000
+	- Standard deviation: 0.97885
+Most complex genome '1' of size (1, 3) belongs to specie '1' with distance to representative of 0
+
+
+
+===> RUNNING EXPERIMENT 6 <===
+
+
+
+===> Selective genome creation at 0.0%, storing in csv 'topology_2_1.csv' (21h-08m-38s) <===
+
+===> Training <===
+Best training fitness: 0.5368142310107024
+Genetic distance:
+	- Maximum: 2.05220
+	- Mean: 0.96924
+	- Minimum: 0.00000
+	- Standard deviation: 0.36856
+Most complex genome '197' of size (1, 3) belongs to specie '12' with distance to representative of 0.528
+Best training fitness: 0.46194492491413486
+Genetic distance:
+	- Maximum: 2.04857
+	- Mean: 0.98848
+	- Minimum: 0.00000
+	- Standard deviation: 0.32202
+Most complex genome '622' of size (1, 3) belongs to specie '9' with distance to representative of 0.577
+Best training fitness: 0.4268192717794306
+Genetic distance:
+	- Maximum: 1.98463
+	- Mean: 0.99649
+	- Minimum: 0.00000
+	- Standard deviation: 0.32028
+Most complex genome '1293' of size (1, 3) belongs to specie '5' with distance to representative of 0.206
+Best training fitness: 0.7
+Genetic distance:
+	- Maximum: 1.98732
+	- Mean: 0.98673
+	- Minimum: 0.00000
+	- Standard deviation: 0.31655
+Most complex genome '1964' of size (1, 3) belongs to specie '12' with distance to representative of 0.575
+Best training fitness: 0.5149418709941115
+Genetic distance:
+	- Maximum: 1.96208
+	- Mean: 0.98575
+	- Minimum: 0.00000
+	- Standard deviation: 0.32087
+Most complex genome '2179' of size (1, 3) belongs to specie '12' with distance to representative of 0.576
+Population 'topology_2_1' saved! Current generation: 5
+
+===> EVALUATING <===
+Best evaluation fitness: 0.839
