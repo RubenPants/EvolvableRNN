@@ -261,12 +261,12 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate', type=bool, default=True)  # Evaluate new genomes
     parser.add_argument('--topology_id', type=int, default=1)  # ID of the used topology
-    parser.add_argument('--batch', type=int, default=10000)  # Number of genomes evaluated per batch
+    parser.add_argument('--batch', type=int, default=10)  # Number of genomes evaluated per batch
     parser.add_argument('--unused_cpu', type=int, default=2)  # Number of CPU cores not used during evaluation
     parser.add_argument('--save_population', type=bool, default=True)  # Save the final population after finishing
     parser.add_argument('--visualize', type=bool, default=True)  # Visualize the current results
     parser.add_argument('--test', type=bool, default=False)  # Visualize the current results
-    parser.add_argument('--use_backup', type=bool, default=True)  # Use the backup-data
+    parser.add_argument('--use_backup', type=bool, default=False)  # Use the backup-data
     args = parser.parse_args()
     
     # Run the program
