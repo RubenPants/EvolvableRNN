@@ -1,0 +1,18 @@
+
+Population 'NEAT/v23' loaded successfully! Current generation: 500
+
+
+
+
+
+===> RUNNING EXPERIMENT 2 FOR THE FOLLOWING CONFIGURATION: <===
+	> fitness:             distance
+	> GRU enabled:         False  (probability=0.0)
+	> GRU-NR enabled:      False  (probability=0.0)
+	> GRU-NU enabled:      False  (probability=0.0)
+	> SRU enabled:         False  (probability=0.0)
+	> Saving under folder: experiment2
+
+
+===> EVALUATING <===
+
