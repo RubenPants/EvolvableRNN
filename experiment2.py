@@ -6,21 +6,18 @@ Run the second experiment.
 import argparse
 import os
 import traceback
-from distutils.dir_util import copy_tree
 
 from config import Config
 from main import evaluate, get_folder, get_game_ids, get_name
 from population.population import Population
 from process_killer import main as process_killer
 from utils.dictionary import *
-from utils.myutils import get_subfolder
 
 
 def main(fitness,
          prob_gru: float,
-         prob_gru_nr: float,
-         prob_gru_nu: float,
-         prob_simple_rnn: float,
+         prob_sru: float,
+         prob_lstm: float,
          version=0,
          unused_cpu=1,
          ):
@@ -29,9 +26,8 @@ def main(fitness,
 
     :param fitness: Fitness function used to evaluate the population
     :param prob_gru: Probability of mutating towards a GRU-node
-    :param prob_gru_nr: Probability of mutating towards a GRU-NR-node
-    :param prob_gru_nu: Probability of mutating towards a GRU-NU-node
-    :param prob_simple_rnn: Probability of mutating towards a SimpleRNN-node
+    :param prob_sru: Probability of mutating towards a SRU-node
+    :param prob_lstm: Probability of mutating towards a LSTM-node
     :param version: Version of the model
     :param unused_cpu: Number of CPUs not used during training
     """
@@ -45,9 +41,8 @@ def main(fitness,
     
     # Let inputs apply to configuration
     cfg.genome.rnn_prob_gru = prob_gru
-    cfg.genome.rnn_prob_gru_nr = prob_gru_nr
-    cfg.genome.rnn_prob_gru_nu = prob_gru_nu
-    cfg.genome.rnn_prob_simple_rnn = prob_simple_rnn
+    cfg.genome.rnn_prob_simple_rnn = prob_sru
+    cfg.genome.rnn_prob_lstm = prob_lstm
     cfg.evaluation.fitness = fitness
     cfg.update()
     
@@ -57,36 +52,17 @@ def main(fitness,
     if not os.path.exists(path_exp1):
         raise Exception(f"Experiment 1 must be executed first for population {name}, terminating experiment 2...")
     
-    # Population exists in experiment1, copy over to experiment2
-    if len(name.split('/')) > 1:  # Versionized populations
-        a = name.split('/')[0]
-        get_subfolder(f'population/storage/experiment2/', f'{a}')
-    path_exp2 = get_subfolder(f'population/storage/experiment2/', f'{name}')
-    get_subfolder(path_exp2, 'generations')
-    copy_tree(f"{path_exp1}generations", f"{path_exp2}generations")
-    get_subfolder(path_exp2, 'images')
-    if os.path.exists(f"{path_exp1}images/architectures/"):
-        get_subfolder(f"{path_exp2}images/", 'architectures')
-        copy_tree(f"{path_exp1}images/architectures", f"{path_exp2}images/architectures")
-    if os.path.exists(f"{path_exp1}images/architectures_debug/"):
-        get_subfolder(f"{path_exp2}images/", 'architectures_debug')
-        copy_tree(f"{path_exp1}images/architectures_debug", f"{path_exp2}images/architectures_debug")
-    if os.path.exists(f"{path_exp1}images/elites/"):
-        get_subfolder(f"{path_exp2}images/", 'elites')
-        copy_tree(f"{path_exp1}images/elites", f"{path_exp2}images/elites")
-    if os.path.exists(f"{path_exp1}images/species/"):
-        get_subfolder(f"{path_exp2}images/", 'species')
-        copy_tree(f"{path_exp1}images/species", f"{path_exp2}images/species")
-    
-    # Load in the copied population
-    folder = get_folder(experiment_id=2)
+    # Population exists in experiment1, copy over to experiment2 (change experiment1 population's folder and save)
     pop = Population(
             name=name,
             config=cfg,
-            folder_name=folder,
-            use_backup=False,
+            folder_name=get_folder(experiment_id=1),
+            use_backup=False
     )
     assert pop.generation > 0  # Population is not new (redundant check)
+    folder = get_folder(experiment_id=2)
+    pop.folder_name = folder
+    pop.save()  # Overrides pre-existing populations!
     
     # Give overview of population
     gru = pop.config.genome.rnn_prob_gru
@@ -123,9 +99,8 @@ def main(fitness,
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--prob_gru', type=float, default=0)
-    parser.add_argument('--prob_gru_nr', type=float, default=0)
-    parser.add_argument('--prob_gru_nu', type=float, default=0)
-    parser.add_argument('--prob_simple_rnn', type=float, default=0)
+    parser.add_argument('--prob_sru', type=float, default=0)
+    parser.add_argument('--prob_lstm', type=float, default=0)
     parser.add_argument('--version', type=int, default=0)
     parser.add_argument('--unused_cpu', type=int, default=2)
     args = parser.parse_args()
@@ -133,9 +108,8 @@ if __name__ == '__main__':
     main(
             fitness=D_DISTANCE,
             prob_gru=args.prob_gru,
-            prob_gru_nr=args.prob_gru_nr,
-            prob_gru_nu=args.prob_gru_nu,
-            prob_simple_rnn=args.prob_simple_rnn,
+            prob_sru=args.prob_sru,
+            prob_lstm=args.prob_lstm,
             version=args.version,
             unused_cpu=args.unused_cpu,
     )
