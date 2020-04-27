@@ -151,7 +151,7 @@ class Robot:
         """Single distance sensor which determines distance between agent's center and target's center."""
         self.sensors[len(self.sensors)] = DistanceSensor(
                 sensor_id=len(self.sensors),
-                normalizer=sqrt(self.game.game_config.x_axis ** 2 + self.game.game_config.y_axis ** 2),
+                normalizer=sqrt(self.game.x_axis ** 2 + self.game.y_axis ** 2),
                 game=self.game)
         self.n_distance += 1
     

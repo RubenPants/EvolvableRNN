@@ -22,7 +22,7 @@ class BotConfig(BaseConfig):
         # Maximal turning speed of the robot expressed in radians per second  [def=2.5=0.5/0.2]
         self.turning_speed: float = 2.5
         
-        # Sensor-configurations  TODO
+        # Sensor-configurations
         # The clockwise directions for the angular sensors  [def=[]]
         self.angular_dir = []
         # The delta-distance sensor  [def=False]

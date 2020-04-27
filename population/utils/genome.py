@@ -121,7 +121,10 @@ class Genome(object):
         for cid, cg in self.connections.items():
             mut_enabled = cg.mutate(config)
             if mut_enabled is not None:
-                self.enable_connection(config=config, key=cid) if mut_enabled else self.disable_connection(key=cid)
+                if mut_enabled and not creates_cycle(list(iterkeys(self.get_used_connections())), cid):
+                    self.enable_connection(config=config, key=cid)
+                else:
+                    self.disable_connection(key=cid)
         
         # Mutate node genes (bias etc.)
         for ng in self.nodes.values():
@@ -223,7 +226,7 @@ class Genome(object):
         
         # Check if the new connection would create a cycle, discard if so
         key = (in_node, out_node)
-        if creates_cycle(list(iterkeys(self.connections)), key):
+        if creates_cycle(list(iterkeys(self.get_used_connections())), key):
             return
         
         # Don't duplicate connections
