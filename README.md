@@ -19,23 +19,21 @@ Update a GRU his weights based on its current value, the value fed into the GRU 
 
 ## TODO
 
-* Monitor for the SRU
+* Monitor, only show the targets found and the next one (the one it's currently driving towards)
 
-* Monitor the effect of bias-changes of a single genome
+* Analyze model complexity across the populations (proof that GRU doesn't need a complex genome to be able to solve the problem)
 
-* Create an experiment6_2 that performs NEAT with partial fix in topology/weights and saves all the population's genomes
-    After evolving, constraint the genomes back to a "ground state"!
+* Evaluate on OpenAI's gym environment (e.g. MountainCarContinuous-v0) to compare on another task? --> Would deviate too much from thesis I think
+
+* Research: How long does the GRU remember?
+
+* Monitor GRU; small variations in weights, how does path of genome change?
+
+* Experiment: Distance via ping, update every 5 frames (0.5 seconds)
+
+* Do more in-depth research on monitored behaviour of genomes
 
 * Check: "Topology completely dictates the search space"
-
-* Cluster using t-SNE, do t-SNE tutorial: https://towardsdatascience.com/an-introduction-to-t-sne-with-python-example-5a3a293108d1
-
-* Add more in-depth "evaluation" to experiments (auto-run)
-* Evaluate not with only the current elites, but also those of previous (1, 2?) generations, use best_genome_hist to do so!
-
-* Same-distance training enough? Do variant on experiment1 and 2 with different-distance training (double circles).
-    If multiple of same-distance but different angle, then would statement "no knowledge about target based on position"
-    still hold!
 
 
 
@@ -45,7 +43,8 @@ Update a GRU his weights based on its current value, the value fed into the GRU 
     * Does not say a thing about NEAT
     * "foot target findings" sounds so cheap
 * *Neuro-evolved Gated Recurrent Units for distance-based target finding*
-    * "foot target findings" sounds so cheap
+    * "target finding" sounds so cheap
+* *An empirical study on the effectiveness of recurrent units as memory components in evolved neural networks*
 
 
 
