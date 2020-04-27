@@ -19,8 +19,6 @@ Update a GRU his weights based on its current value, the value fed into the GRU 
 
 ## TODO
 
-* Monitor, only show the targets found and the next one (the one it's currently driving towards)
-
 * Analyze model complexity across the populations (proof that GRU doesn't need a complex genome to be able to solve the problem)
 
 * Evaluate on OpenAI's gym environment (e.g. MountainCarContinuous-v0) to compare on another task? --> Would deviate too much from thesis I think
