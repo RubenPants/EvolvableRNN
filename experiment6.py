@@ -73,7 +73,7 @@ def train(topology_id: int, batch_size: int = 1000, unused_cpu: int = 2, use_bac
         with open(csv_path, 'a', newline='') as f:
             writer = csv.writer(f)
             for _, g in genomes:
-                writer.writerow(get_genome_parameters(g))
+                writer.writerow(get_genome_parameters(g, topology_id=topology_id))
     except KeyboardInterrupt:
         # Remove the temporary CSV first
         os.remove(csv_path)
@@ -140,12 +140,17 @@ def get_config():
     return cfg
 
 
-def get_genome_parameters(g):
+def get_genome_parameters(g, topology_id: int):
     """Unravel the genome's parameters as an ordered list."""
     result = [v for v in g.nodes[2].bias_h]
     result += [v[0] for v in g.nodes[2].weight_xh_full]
     result += [v[0] for v in g.nodes[2].weight_hh]
-    result += [g.connections[(2, 1)].weight, g.connections[(-1, 1)].weight]
+    if topology_id == 1:
+        result += [g.connections[(2, 1)].weight, g.connections[(-1, 1)].weight]
+    elif topology_id == 2:
+        result += [g.connections[(2, 0)].weight, g.connections[(-1, 1)].weight]
+    else:
+        raise Exception(f"Topology of ID '{topology_id}' not supported")
     result += [g.fitness]
     return result
 
