@@ -15,9 +15,8 @@ from utils.dictionary import *
 
 def main(fitness,
          prob_gru: float,
-         prob_gru_nr: float,
-         prob_gru_nu: float,
-         prob_simple_rnn: float,
+         prob_sru: float,
+         prob_lstm: float,
          train_iterations=0,
          version=0,
          unused_cpu=1,
@@ -27,9 +26,8 @@ def main(fitness,
 
     :param fitness: Fitness function used to evaluate the population
     :param prob_gru: Probability of mutating towards a GRU-node
-    :param prob_gru_nr: Probability of mutating towards a GRU-NR-node
-    :param prob_gru_nu: Probability of mutating towards a GRU-NU-node
-    :param prob_simple_rnn: Probability of mutating towards a SimpleRNN-node
+    :param prob_sru: Probability of mutating towards a SRU-node
+    :param prob_lstm: Probability of mutating towards a LSTM-node
     :param train_iterations: Number of training generations
     :param version: Version of the model
     :param unused_cpu: Number of CPUs not used during training
@@ -44,9 +42,8 @@ def main(fitness,
     
     # Let inputs apply to configuration
     cfg.genome.rnn_prob_gru = prob_gru
-    cfg.genome.rnn_prob_gru_nr = prob_gru_nr
-    cfg.genome.rnn_prob_gru_nu = prob_gru_nu
-    cfg.genome.rnn_prob_simple_rnn = prob_simple_rnn
+    cfg.genome.rnn_prob_simple_rnn = prob_sru
+    cfg.genome.rnn_prob_lstm = prob_lstm
     cfg.evaluation.fitness = fitness
     cfg.update()
     
@@ -62,15 +59,13 @@ def main(fitness,
     
     # Give overview of population
     gru = cfg.genome.rnn_prob_gru
-    gru_nr = cfg.genome.rnn_prob_gru_nr
-    gru_nu = cfg.genome.rnn_prob_gru_nu
-    rnn = cfg.genome.rnn_prob_simple_rnn
+    sru = cfg.genome.rnn_prob_simple_rnn
+    lstm = cfg.genome.rnn_prob_lstm
     msg = f"\n\n\n\n\n===> RUNNING EXPERIMENT 1 FOR THE FOLLOWING CONFIGURATION: <===" \
           f"\n\t> fitness:             {cfg.evaluation.fitness}" \
           f"\n\t> GRU enabled:         {gru > 0}  (probability={round(gru, 2)})" \
-          f"\n\t> GRU-NR enabled:      {gru_nr > 0}  (probability={round(gru_nr, 2)})" \
-          f"\n\t> GRU-NU enabled:      {gru_nu > 0}  (probability={round(gru_nu, 2)})" \
-          f"\n\t> SRU enabled:         {rnn > 0}  (probability={round(rnn, 2)})" \
+          f"\n\t> SRU enabled:         {sru > 0}  (probability={round(sru, 2)})" \
+          f"\n\t> LSTM enabled:        {lstm > 0}  (probability={round(lstm, 2)})" \
           f"\n\t> Saving under folder: {folder}" \
           f"\n\t> Training iterations: {train_iterations}\n"
     pop.log(msg)
@@ -111,9 +106,8 @@ def main(fitness,
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--prob_gru', type=float, default=0)
-    parser.add_argument('--prob_gru_nr', type=float, default=0)
-    parser.add_argument('--prob_gru_nu', type=float, default=0)
-    parser.add_argument('--prob_simple_rnn', type=float, default=0)
+    parser.add_argument('--prob_sru', type=float, default=0)
+    parser.add_argument('--prob_lstm', type=float, default=0)
     parser.add_argument('--iterations', type=int, default=0)
     parser.add_argument('--version', type=int, default=0)
     parser.add_argument('--unused_cpu', type=int, default=2)
@@ -122,9 +116,8 @@ if __name__ == '__main__':
     main(
             fitness=D_DISTANCE,
             prob_gru=args.prob_gru,
-            prob_gru_nr=args.prob_gru_nr,
-            prob_gru_nu=args.prob_gru_nu,
-            prob_simple_rnn=args.prob_simple_rnn,
+            prob_sru=args.prob_sru,
+            prob_lstm=args.prob_lstm,
             train_iterations=args.iterations,
             version=args.version,
             unused_cpu=args.unused_cpu,
