@@ -36,7 +36,7 @@ def get_population():
             log_print=False,
     )
     
-    return pop, cfg
+    return pop
 
 
 class PopulationNeatTest(unittest.TestCase):
@@ -62,10 +62,9 @@ class PopulationNeatTest(unittest.TestCase):
         # Folder must be root to load in make_net properly
         if os.getcwd().split('\\')[-1] == 'tests': os.chdir('..')
         
-        pop, cfg = get_population()
+        pop = get_population()
         train(
                 population=pop,
-                game_config=cfg,
                 unused_cpu=0,
                 iterations=1,
                 debug=True,
@@ -77,11 +76,10 @@ class PopulationNeatTest(unittest.TestCase):
         # Folder must be root to load in make_net properly
         if os.getcwd().split('\\')[-1] == 'tests': os.chdir('..')
         
-        pop, cfg = get_population()
+        pop = get_population()
         blueprint(
                 population=pop,
                 games=[-1],  # Random game
-                game_config=cfg,
                 debug=True,
         )
     
@@ -90,11 +88,10 @@ class PopulationNeatTest(unittest.TestCase):
         # Folder must be root to load in make_net properly
         if os.getcwd().split('\\')[-1] == 'tests': os.chdir('..')
         
-        pop, cfg = get_population()
+        pop = get_population()
         trace(
                 population=pop,
                 games=[-1],  # Random game
-                game_config=cfg,
                 debug=True,
         )
     
@@ -103,13 +100,12 @@ class PopulationNeatTest(unittest.TestCase):
         # Folder must be root to load in make_net properly
         if os.getcwd().split('\\')[-1] == 'tests': os.chdir('..')
         
-        pop, cfg = get_population()
+        pop = get_population()
         genome = pop.best_genome if pop.best_genome else list(pop.population.values())[-1]
         trace_most_fit(
                 population=pop,
                 genome=genome,
                 games=[-1],  # Random game
-                game_config=cfg,
                 debug=True,
         )
     
@@ -118,10 +114,9 @@ class PopulationNeatTest(unittest.TestCase):
         # Folder must be root to load in make_net properly
         if os.getcwd().split('\\')[-1] == 'tests': os.chdir('..')
         
-        pop, cfg = get_population()
+        pop = get_population()
         evaluate(
                 population=pop,
-                game_config=cfg,
                 games=[-1],
                 debug=True,
         )
@@ -131,7 +126,7 @@ class PopulationNeatTest(unittest.TestCase):
         # Folder must be root to load in make_net properly
         if os.getcwd().split('\\')[-1] == 'tests': os.chdir('..')
         
-        pop, cfg = get_population()
+        pop = get_population()
         genome = pop.best_genome if pop.best_genome else list(pop.population.values())[-1]
         visualize_genome(
                 population=pop,

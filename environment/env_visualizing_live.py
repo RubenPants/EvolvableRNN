@@ -22,7 +22,7 @@ class LiveVisualizer:
     """
     
     __slots__ = {
-        'speedup', 'state', 'finished', 'time', 'score', 'p2m',
+        'speedup', 'state', 'finished', 'time', 'score', 'p2m', 'mouse_enabled',
         'make_net', 'pop_config', 'game_config',
         'debug',
     }
@@ -31,7 +31,9 @@ class LiveVisualizer:
                  pop: Population,
                  game_config: Config,
                  debug: bool = True,
-                 speedup: float = 3):
+                 speedup: float = 3,
+                 mouse_enabled: bool = True,
+                 ):
         """
         The visualizer provides methods used to visualize the performance of a single genome.
         
@@ -39,6 +41,7 @@ class LiveVisualizer:
         :param game_config: Config file for current game-configurations
         :param debug: Generates prints (CLI) during visualization
         :param speedup: Specifies the relative speedup the virtual environment faces towards the real world
+        :param mouse_enabled: Enable mouse-clicks to set new targets
         """
         # Visualizer specific parameters
         self.speedup = speedup
@@ -47,6 +50,7 @@ class LiveVisualizer:
         self.time = 0
         self.score = 0
         self.p2m = 0
+        self.mouse_enabled = mouse_enabled
         
         # Network specific parameters
         self.pop_config = pop.config
@@ -135,6 +139,14 @@ class LiveVisualizer:
             window.clear()
             label.draw()
             space.debug_draw(options=options)
+        
+        if self.mouse_enabled:
+            @window.event
+            def on_mouse_press(x, y, *_):
+                # Add new circle on mouse-clicked position
+                game.target.x = x / game.game_config.p2m
+                game.target.y = y / game.game_config.p2m
+                target_body.position = game.target * self.p2m
         
         def update_method(_):  # Input dt ignored
             dt = 1 / game.game_config.fps

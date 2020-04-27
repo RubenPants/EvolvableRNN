@@ -13,7 +13,6 @@ from config import Config
 from environment.game import Game
 from environment.robot import Robot
 from environment.spawn_functions.random import SpawnRandom
-from environment.spawn_functions.random_eval import SpawnRandomEval
 from environment.spawn_functions.simple import SpawnSimple
 from utils.vec2d import Vec2d
 
@@ -30,12 +29,12 @@ def get_game_id(i: int, experiment_id: int):
     return int(experiment_id * 1e4 + i)
 
 
-def check_and_save_game(g, show: bool = True):
+def check_and_save_game(g, show: bool = True, randomize: bool = True):
     """Test if the given game is implemented correctly. If so, then save it."""
-    g.load_target()
+    g.sample_target()
     g.close()
     g.reset()
-    g.randomize()
+    if randomize: g.randomize()
     g.get_distance_to_target()
     g.get_blueprint()
     g.get_observation()
@@ -56,7 +55,7 @@ def check_and_save_game(g, show: bool = True):
 def create_dummy_game(i: int = 0, overwrite: bool = True, show: bool = True):
     cfg = get_shared_config()
     ROBOT_INIT_POS = Vec2d(cfg.game.x_axis / 2, cfg.game.y_axis / 2)  # Initial position of the drone
-    spawn_f = SpawnSimple()
+    spawn_f = SpawnSimple(game_config=cfg, train=True)
     spawn_f.add_location((1, 1))
     game = Game(
             config=cfg,
@@ -89,7 +88,7 @@ def create_experiment_1(overwrite: bool = True, show: bool = True):
     ROBOT_INIT_POS = Vec2d(cfg.game.x_axis / 2, cfg.game.y_axis / 2)  # Initial position of the drone
     
     # Create the training game
-    spawn_f_train = SpawnSimple()
+    spawn_f_train = SpawnSimple(game_config=cfg, train=True)
     for i in range(0, 360, 10):  # Positions circular in hops of 10 degree
         angle = i / 180 * pi
         offset_x = 6 * cos(angle)
@@ -111,7 +110,7 @@ def create_experiment_1(overwrite: bool = True, show: bool = True):
     
     # Create the evaluation games, each of those only contains one target
     for i in range(1, 21):
-        spawn_f_eval = SpawnSimple()
+        spawn_f_eval = SpawnSimple(game_config=cfg, train=False)
         angle = i / 10 * pi
         offset_x = 6 * cos(angle)
         offset_y = 6 * sin(angle)
@@ -128,7 +127,7 @@ def create_experiment_1(overwrite: bool = True, show: bool = True):
         game.player = Robot(game=game)
         game.set_player_init_angle(a=ROBOT_INIT_ANGLE)
         game.set_player_init_pos(p=ROBOT_INIT_POS)
-        check_and_save_game(game, show=show)
+        check_and_save_game(game, show=show, randomize=False)
 
 
 def create_experiment_2(overwrite: bool = True, show: bool = True):
@@ -152,7 +151,7 @@ def create_experiment_2(overwrite: bool = True, show: bool = True):
     ROBOT_INIT_POS = Vec2d(cfg.game.x_axis / 2, cfg.game.y_axis / 2)  # Initial position of the drone
     
     # Create the training game
-    spawn_f_train = SpawnSimple()
+    spawn_f_train = SpawnSimple(game_config=cfg, train=True)
     for i in range(0, 360, 10):  # Positions circular in hops of 10 degree
         angle = i / 180 * pi
         offset_x = 6 * cos(angle)
@@ -174,7 +173,7 @@ def create_experiment_2(overwrite: bool = True, show: bool = True):
     
     # Create the inner circle of the evaluation games, each of those only contains one target
     for i in range(1, 19):
-        spawn_f_eval = SpawnSimple()
+        spawn_f_eval = SpawnSimple(game_config=cfg, train=False)
         angle = i / 9 * pi  # Hops of 20°
         offset_x = 4 * cos(angle)
         offset_y = 4 * sin(angle)
@@ -191,11 +190,11 @@ def create_experiment_2(overwrite: bool = True, show: bool = True):
         game.player = Robot(game=game)
         game.set_player_init_angle(a=ROBOT_INIT_ANGLE)
         game.set_player_init_pos(p=ROBOT_INIT_POS)
-        check_and_save_game(game, show=show)
+        check_and_save_game(game, show=show, randomize=False)
     
     # Create the outer circle of the evaluation games, each of those only contains one target
     for i in range(1, 19):
-        spawn_f_eval = SpawnSimple()
+        spawn_f_eval = SpawnSimple(game_config=cfg, train=False)
         angle = i / 9 * pi  # Hops of 20°
         offset_x = 8 * cos(angle)
         offset_y = 8 * sin(angle)
@@ -212,7 +211,7 @@ def create_experiment_2(overwrite: bool = True, show: bool = True):
         game.player = Robot(game=game)
         game.set_player_init_angle(a=ROBOT_INIT_ANGLE)
         game.set_player_init_pos(p=ROBOT_INIT_POS)
-        check_and_save_game(game, show=show)
+        check_and_save_game(game, show=show, randomize=False)
 
 
 def create_experiment_3(overwrite: bool = True, show: bool = True):
@@ -236,7 +235,7 @@ def create_experiment_3(overwrite: bool = True, show: bool = True):
     ROBOT_INIT_POS = Vec2d(cfg.game.x_axis / 2, cfg.game.y_axis / 2)  # Initial position of the drone
     
     # Create the training game
-    spawn_f_train = SpawnRandom()
+    spawn_f_train = SpawnRandom(game_config=cfg.game, train=True)
     game = Game(
             config=cfg,
             player_noise=0,
@@ -253,7 +252,7 @@ def create_experiment_3(overwrite: bool = True, show: bool = True):
     
     # Create 20 evaluation games
     for i in range(1, 21):
-        spawn_f_eval = SpawnRandomEval(game_config=cfg.game)
+        spawn_f_eval = SpawnRandom(game_config=cfg.game, train=False)
         game = Game(
                 config=cfg,
                 player_noise=0,
@@ -266,7 +265,7 @@ def create_experiment_3(overwrite: bool = True, show: bool = True):
         game.player = Robot(game=game)
         game.set_player_init_angle(a=ROBOT_INIT_ANGLE)
         game.set_player_init_pos(p=ROBOT_INIT_POS)
-        check_and_save_game(game, show=show)
+        check_and_save_game(game, show=show, randomize=False)
 
 
 if __name__ == '__main__':
@@ -282,7 +281,8 @@ if __name__ == '__main__':
     os.chdir('../../')
     
     # Create the experiments
-    create_dummy_game(i=0, overwrite=args.overwrite, show=args.show)
-    create_experiment_1(overwrite=args.overwrite, show=args.show)
-    create_experiment_2(overwrite=args.overwrite, show=args.show)
-    create_experiment_3(overwrite=args.overwrite, show=args.show)
+    # for i in [0, -1, -2, -3, -4]:
+    #     create_dummy_game(i=i, overwrite=args.overwrite, show=args.show)
+    # create_experiment_1(overwrite=args.overwrite, show=args.show)
+    # create_experiment_2(overwrite=args.overwrite, show=args.show)
+    # create_experiment_3(overwrite=args.overwrite, show=args.show)

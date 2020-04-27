@@ -82,7 +82,6 @@ def main(fitness,
     try:
         train(
                 debug=False,
-                game_config=cfg,
                 games=games_train,
                 iterations=train_iterations,
                 population=pop,
@@ -91,7 +90,6 @@ def main(fitness,
         
         # Evaluate the trained population
         evaluate(
-                game_config=cfg,
                 games=games_eval,
                 population=pop,
                 unused_cpu=unused_cpu,
