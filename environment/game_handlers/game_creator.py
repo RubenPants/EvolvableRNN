@@ -13,6 +13,7 @@ from config import Config
 from environment.game import Game
 from environment.robot import Robot
 from environment.spawn_functions.random import SpawnRandom
+from environment.spawn_functions.range import SpawnRange
 from environment.spawn_functions.simple import SpawnSimple
 from utils.vec2d import Vec2d
 
@@ -268,6 +269,64 @@ def create_experiment_3(overwrite: bool = True, show: bool = True):
         check_and_save_game(game, show=show, randomize=False)
 
 
+def create_experiment_6(overwrite: bool = True, show: bool = True):
+    """
+    Experiment 6 is another 'simplified' simulation in which the agents are trained on a harder environment than they
+     are tested on. The reason why is to keep a lower threshold for the 'solution' genomes (only interested in those).
+    
+    TRAINING
+     During training, new targets are spawned based on the agent's initial position. Each target will lay between 2 and
+     10 meters from the agent and will always be positioned inside of the maze.
+    
+    TESTING
+     Testing is done on 18 predefined targets position in a relative angle from the agent of k*20° and a distance of
+     either 4, 6, or 8 meters (sequential alternating).
+    """
+    cfg = get_shared_config()
+    
+    # Fixed parameters
+    ROBOT_INIT_ANGLE = pi / 2  # Looking up
+    ROBOT_INIT_POS = Vec2d(cfg.game.x_axis / 2, cfg.game.y_axis / 2)  # Initial position of the drone
+    
+    # Create the training game
+    spawn_f_train = SpawnRange(game_config=cfg.game, train=True, r_max=10, r_min=2)
+    game = Game(
+            config=cfg,
+            player_noise=0,
+            game_id=get_game_id(0, experiment_id=6),
+            overwrite=overwrite,
+            spawn_func=spawn_f_train,
+            stop_if_reached=True,
+            wall_bound=False,
+    )
+    game.player = Robot(game=game)
+    game.set_player_init_angle(a=ROBOT_INIT_ANGLE)
+    game.set_player_init_pos(p=ROBOT_INIT_POS)
+    check_and_save_game(game, show=show)
+    
+    # Create 18 evaluation games
+    for i in range(1, 19):
+        spawn_f_eval = SpawnSimple(game_config=cfg.game, train=False)
+        angle = i / 9 * pi  # Hops of 20°
+        d = 4 if i % 3 == 0 else 6 if i % 3 == 1 else 8
+        offset_x = d * cos(angle)
+        offset_y = d * sin(angle)
+        spawn_f_eval.add_location((ROBOT_INIT_POS[0] + offset_x, ROBOT_INIT_POS[1] + offset_y))
+        game = Game(
+                config=cfg,
+                player_noise=0,
+                game_id=get_game_id(i, experiment_id=6),
+                overwrite=overwrite,
+                spawn_func=spawn_f_eval,
+                stop_if_reached=True,
+                wall_bound=False,
+        )
+        game.player = Robot(game=game)
+        game.set_player_init_angle(a=ROBOT_INIT_ANGLE)
+        game.set_player_init_pos(p=ROBOT_INIT_POS)
+        check_and_save_game(game, show=show, randomize=False)
+
+
 if __name__ == '__main__':
     """
     Create game, option to choose from custom or auto-generated.
@@ -286,3 +345,4 @@ if __name__ == '__main__':
     # create_experiment_1(overwrite=args.overwrite, show=args.show)
     # create_experiment_2(overwrite=args.overwrite, show=args.show)
     # create_experiment_3(overwrite=args.overwrite, show=args.show)
+    create_experiment_6(overwrite=args.overwrite, show=args.show)
