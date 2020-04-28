@@ -343,23 +343,23 @@ if __name__ == '__main__':
     
     # Main methods
     parser.add_argument('--train', type=bool, default=False)
-    parser.add_argument('--train_overview', type=bool, default=False)
+    parser.add_argument('--train_overview', type=bool, default=True)
     parser.add_argument('--blueprint', type=bool, default=False)
     parser.add_argument('--trace', type=bool, default=False)  # Keep it False
-    parser.add_argument('--trace_fit', type=bool, default=False)
-    parser.add_argument('--evaluate', type=bool, default=False)
-    parser.add_argument('--genome', type=bool, default=False)
+    parser.add_argument('--trace_fit', type=bool, default=True)
+    parser.add_argument('--evaluate', type=bool, default=True)
+    parser.add_argument('--genome', type=bool, default=True)
     parser.add_argument('--monitor', type=bool, default=True)
     parser.add_argument('--gru_analysis', type=bool, default=False)
     parser.add_argument('--live', type=bool, default=False)
     
     # Extra arguments
     parser.add_argument('--iterations', type=int, default=50)
-    parser.add_argument('--experiment', type=int, default=3)
+    parser.add_argument('--experiment', type=int, default=6)
     parser.add_argument('--unused_cpu', type=int, default=2)
     parser.add_argument('--version', type=int, default=1)
     parser.add_argument('--debug', type=bool, default=False)
-    parser.add_argument('--duration', type=int, default=100)
+    parser.add_argument('--duration', type=int, default=60)
     parser.add_argument('--use_backup', type=bool, default=False)
     args = parser.parse_args()
     
@@ -374,9 +374,9 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='test',
+            name='topology_1_0',
             # name=get_name(cfg=config, version=args.version),
-            folder_name='test',
+            folder_name='experiment6',
             # folder_name=get_folder(args.experiment),
             config=config,
             use_backup=args.use_backup,
