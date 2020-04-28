@@ -307,7 +307,7 @@ def visualize_position(position_list: list, game: Game, save_path: str):
     y_min, y_max = game.y_axis / 2, game.y_axis / 2
     
     # Create the blueprint - Only visualize targets found by the agent
-    for i in range(game.score + 1):
+    for i in range(min(game.score + 1, len(game.spawn_function.locations))):
         t = game.spawn_function.locations[i]
         
         # Plot the targets

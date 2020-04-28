@@ -134,8 +134,8 @@ def get_config():
     cfg.bot.angular_dir = []
     cfg.bot.delta_dist_enabled = False
     cfg.bot.dist_enabled = True
-    cfg.game.duration = 60  # 60 seconds should be enough to reach the target from each starting orientation
     cfg.evaluation.fitness = D_DISTANCE_SCORE
+    cfg.game.duration = 60  # 60 seconds should be enough to reach the target from each starting orientation
     cfg.update()
     return cfg
 
