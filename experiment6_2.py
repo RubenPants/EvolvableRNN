@@ -76,7 +76,7 @@ def main(topology_id: int,
     try:
         while added < batch_size:
             t = time.localtime()
-            pop.log(f"\n\n===> Selective genome creation at {added / batch_size}%, "
+            pop.log(f"\n\n===> Selective genome creation at {added / batch_size * 100}%, "
                     f"storing in csv '{csv_path.split('/')[-1]}' "
                     f"({t.tm_hour:02d}h-{t.tm_min:02d}m-{t.tm_sec:02d}s) <===")
             
@@ -306,7 +306,7 @@ def execution_test():
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
-    parser.add_argument('--evaluate', type=bool, default=False)  # Evaluate new genomes
+    parser.add_argument('--evaluate', type=bool, default=True)  # Evaluate new genomes
     parser.add_argument('--topology_id', type=int, default=1)  # ID of the used topology
     parser.add_argument('--batch', type=int, default=10)  # Number of genomes evaluated per batch
     parser.add_argument('--min_finished', type=float, default=MIN_FINISHED)  # Minimal finish ratio before added to CSV
