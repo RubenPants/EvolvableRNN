@@ -36,19 +36,24 @@ if __name__ == '__main__':
     games = [0]  # Game Dummy
     
     # Experiment 1
-    exp1_train, exp1_eval = get_game_ids(1)
-    games += exp1_train[:1]  # Repeats itself
-    games += exp1_eval
+    # exp1_train, exp1_eval = get_game_ids(1)
+    # games += exp1_train[:1]  # Repeats itself
+    # games += exp1_eval
     
     # Experiment 2
-    exp2_train, exp2_eval = get_game_ids(2)
-    games += exp2_train[:1]  # Repeats itself
-    games += exp2_eval
+    # exp2_train, exp2_eval = get_game_ids(2)
+    # games += exp2_train[:1]  # Repeats itself
+    # games += exp2_eval
     
-    # Experiment 2
-    exp3_train, exp3_eval = get_game_ids(3)
-    games += exp3_train[:1]  # Repeats itself
-    games += exp3_eval
+    # Experiment 3
+    # exp3_train, exp3_eval = get_game_ids(3)
+    # games += exp3_train[:1]  # Repeats itself
+    # games += exp3_eval
+    
+    # Experiment 6
+    exp6_train, exp6_eval = get_game_ids(6)
+    games += exp6_train[:1]  # Repeats itself
+    games += exp6_eval
     
     # Create the visualizations
     for g_id in tqdm(games):
