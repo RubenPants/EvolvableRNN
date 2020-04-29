@@ -95,6 +95,7 @@ def visualize_positions(positions: dict,
                         annotate_time: bool = True,
                         save_path: str = None,
                         show: bool = False,
+                        title: str = '',
                         ):
     """Visualize the list of positions."""
     # Initialize the figure dimensions
@@ -159,6 +160,7 @@ def visualize_positions(positions: dict,
     
     # Add a legend to the figure and store/show
     plt.legend()
+    if title: plt.title(title)
     plt.tight_layout()
     if save_path: plt.savefig(save_path)
     if show: plt.show()

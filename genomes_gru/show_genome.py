@@ -8,17 +8,17 @@ import os
 
 from config import Config
 from genomes_gru.persist import load_genome
+from population.utils.genome import Genome
 from population.utils.visualizing.genome_visualizer import draw_net
 from utils.myutils import get_subfolder
 
 
-def main(g_name: str, show: bool = False):
+def main(genome: Genome, show: bool = False):
     """Visualize the genome's network."""
-    g = load_genome(g_name=g_name)
     cfg = Config()
-    path = get_subfolder('genomes_gru/images/', g_name)
+    path = get_subfolder(f'genomes_gru/images/', f"genome{genome.key}")
     draw_net(config=cfg.genome,
-             genome=g,
+             genome=genome,
              debug=True,
              filename=f'{path}architecture',
              view=show)
@@ -33,8 +33,11 @@ if __name__ == '__main__':
     # Go back to root
     os.chdir("..")
     
+    # Load in the genome
+    g = load_genome(g_name=args.name)
+    
     # Run the script
     main(
-            g_name=args.name,
+            genome=g,
             show=bool(args.show),
     )
