@@ -13,7 +13,7 @@ from matplotlib.ticker import FormatStrFormatter, MaxNLocator
 
 from config import Config
 from environment.game import get_game
-from genomes_gru.deviate_main import main as plot_positions, merge, get_save_path
+from genomes_gru.deviate_shared import get_save_path, merge, positions as plot_positions
 from genomes_gru.persist import load_genome
 from population.utils.gene_util.gru import GruNodeGene
 from population.utils.genome import Genome
@@ -73,6 +73,7 @@ def main(genome: Genome,
             save_name=f'reset/{name}_trajectory',
             gid=gid,
             duration=duration,
+            title="reset gate",
     )
     
     # Plot the activations

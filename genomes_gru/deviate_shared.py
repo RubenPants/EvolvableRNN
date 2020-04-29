@@ -16,16 +16,15 @@ from population.utils.gene_util.gru import GruNodeGene
 from population.utils.genome import Genome
 from utils.myutils import get_subfolder
 
-COLORS = ['r', 'b', 'c', 'm', 'y']
 
-
-def main(genome: Genome,
-         genome_plus: Genome,
-         genome_minus: Genome,
-         save_name: str,
-         gid: int,
-         duration: int = 60,
-         ):
+def positions(genome: Genome,
+              genome_plus: Genome,
+              genome_minus: Genome,
+              save_name: str,
+              gid: int,
+              duration: int = 60,
+              title:str='',
+              ):
     """Visualize the deviated genomes."""
     # Check if valid genome (contains at least one hidden GRU, first GRU is monitored)
     assert len([n for n in genome.get_used_nodes().values() if type(n) == GruNodeGene]) >= 1
@@ -49,6 +48,7 @@ def main(genome: Genome,
             annotate_time=False,
             save_path=f"{path}.png",
             show=False,
+            title=title,
     )
 
 
@@ -59,7 +59,7 @@ def merge(gid: int, save_name: str):
     trajectory = plt.imread(f"{path}_trajectory.png")
     state = plt.imread(f"{path}_state.png")
     result = np.concatenate([trajectory, state], axis=0)  # Concatenate vertically
-
+    
     # Create the figure
     plt.figure(figsize=(6, 8))
     plt.axis('off')
@@ -101,7 +101,7 @@ if __name__ == '__main__':
     g_plus = deepcopy(g)
     g_minus = deepcopy(g)
     # Execute the process
-    main(
+    positions(
             genome=g,
             genome_plus=g_plus,
             genome_minus=g_minus,
