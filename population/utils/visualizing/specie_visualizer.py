@@ -54,7 +54,7 @@ def specie_elite_fitness(pop: Population, func, window: int = 5, show: bool = Tr
         plt.title(f"Specie fitness in population: {pop}")
     plt.xlabel("generation")
     plt.ylabel("fitness of specie's elites")
-    box = ax.get_position()
+    box = ax.get_positions()
     ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
