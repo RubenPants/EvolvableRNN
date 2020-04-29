@@ -6,6 +6,7 @@ Run the second experiment.
 import argparse
 import os
 import traceback
+from distutils.dir_util import copy_tree
 
 from config import Config
 from main import evaluate, get_folder, get_game_ids, get_name
@@ -63,6 +64,10 @@ def main(fitness,
     folder = get_folder(experiment_id=2)
     pop.folder_name = folder
     pop.save()  # Overrides pre-existing populations!
+    
+    # Copy over all generations as well, since these are used during population evaluation
+    path = f"population{'_backup' if pop.use_backup else ''}/storage/{pop.folder_name}/{pop}/"
+    copy_tree(f"{path_exp1}generations", f"{path}generations")
     
     # Give overview of population
     gru = pop.config.genome.rnn_prob_gru

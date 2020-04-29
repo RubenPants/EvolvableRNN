@@ -129,10 +129,10 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate_gen', type=int, default=1)
     parser.add_argument('--evaluate_pop', type=int, default=1)
-    parser.add_argument('--experiment', type=int, default=1)
+    parser.add_argument('--experiment', type=int, default=2)
     parser.add_argument('--folder', type=str, default=None)
-    parser.add_argument('--folder_pop', type=str, default='NEAT-GRU')
-    parser.add_argument('--max_v', type=int, default=50)
+    parser.add_argument('--folder_pop', type=str, default='NEAT-LSTM')
+    parser.add_argument('--max_v', type=int, default=1)
     parser.add_argument('--unused_cpu', type=int, default=2)
     args = parser.parse_args()
     
