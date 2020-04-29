@@ -6,9 +6,11 @@ Evaluate all the populations across their generations and compare each of them a
 Note: Evaluation is only done on backed-up populations.
 """
 import argparse
+from glob import glob
 
 import matplotlib.pyplot as plt
 import numpy as np
+from tqdm import tqdm
 
 from main import get_folder
 from population.population import Population
@@ -125,11 +127,45 @@ def plot_result(d: dict, ylabel: str, title: str, save_path: str):
     plt.close()
 
 
+def correctness_check(folder: str = 'experiment1',
+                      neat: bool = True,
+                      neat_gru: bool = True,
+                      neat_lstm: bool = True,
+                      neat_sru: bool = True,
+                      neat_sru_s: bool = True,
+                      max_v: int = 50,
+                      max_gen: int = 500,
+                      gen_hops: int = 10,
+                      ):
+    """Test if all the files are present."""
+    # Collect all the populations
+    populations = []
+    if neat: populations.append('NEAT')
+    if neat_gru: populations.append('NEAT-GRU')
+    if neat_lstm: populations.append('NEAT-LSTM')
+    if neat_sru: populations.append('NEAT-SRU')
+    if neat_sru_s: populations.append('NEAT-SRU-S')
+    
+    # Go over all possibilities
+    path = f"population_backup/storage/{folder}/"
+    pbar = tqdm(range(int(len(populations) * max_v * max_gen / gen_hops)), desc="Evaluating correctness")
+    for pop in populations:
+        for v in range(1, max_v + 1):
+            for gen in range(0, max_gen + 1, gen_hops):
+                f = glob(f"{path}{pop}/v{v}/generations/gen_{gen:05d}")
+                # Load in the current generation
+                if len(f) == 0:
+                    raise Exception(f"Population {pop}/v{v} is not trained for generation {gen}")
+                pbar.update()
+    pbar.close()
+
+
 # TODO: Usage of backed-up populations is assumed
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate_gen', type=int, default=1)
     parser.add_argument('--evaluate_pop', type=int, default=1)
+    parser.add_argument('--test_correctness', type=bool, default=0)
     parser.add_argument('--experiment', type=int, default=2)
     parser.add_argument('--folder', type=str, default=None)
     parser.add_argument('--folder_pop', type=str, default='NEAT-LSTM')
@@ -141,6 +177,10 @@ if __name__ == '__main__':
     f = args.folder if args.folder else get_folder(args.experiment)
     
     # Execute the program
+    if bool(args.test_correctness):
+        correctness_check(folder='experiment1')  # Use the default parameters
+        correctness_check(folder='experiment2')  # Use the default parameters
+    
     if bool(args.evaluate_gen):
         evaluate_generations(
                 experiment_id=args.experiment,
