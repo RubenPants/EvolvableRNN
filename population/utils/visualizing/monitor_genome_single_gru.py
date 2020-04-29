@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.ticker import FormatStrFormatter, MaxNLocator
 
+
 from config import Config
 from configs.game_config import GameConfig
 from environment.game import Game, get_game
