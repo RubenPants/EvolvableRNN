@@ -125,6 +125,7 @@ def plot_result(d: dict, ylabel: str, title: str, save_path: str):
     plt.close()
 
 
+# TODO: Usage of backed-up populations is assumed
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate_gen', type=int, default=1)
