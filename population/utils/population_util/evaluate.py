@@ -43,7 +43,8 @@ def evaluate_generations(name, experiment_id, folder=None, hops: int = 10, unuse
     max_gen = pop.generation
     for gen in tqdm(range(0, max_gen + 1, hops)):
         # Load in the current generation
-        pop.load(gen=gen)
+        if not pop.load(gen=gen):
+            raise Exception(f"Population {name} is not trained for generation {gen}")
         
         # Collect the used genomes
         if gen > 5:
