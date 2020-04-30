@@ -11,6 +11,6 @@ pymunk
 pytest
 scikit-learn
 scipy
+seaborn
 tqdm
 psutil
-seaborn
