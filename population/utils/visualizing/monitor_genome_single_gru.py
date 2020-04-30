@@ -13,7 +13,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.ticker import FormatStrFormatter, MaxNLocator
 
-
 from config import Config
 from configs.game_config import GameConfig
 from environment.game import Game, get_game
@@ -65,9 +64,9 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
     # Containers to monitor
     actuation = []
     distance = []
-    delta_distance = []
     position = []
     Ht = []
+    Ht_tilde = []
     Rt = []
     Zt = []
     target_found = []
@@ -76,18 +75,22 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
     # Initialize the containers
     actuation.append([0, 0])
     distance.append(state[0])
-    delta_distance.append(0)
     position.append(game.player.pos.get_tuple())
-    ht, rt, zt = get_gru_states(gru=net.rnn_array[0], x=np.asarray([state]))
+    ht, ht_tilde, rt, zt = get_gru_states(gru=net.rnn_array[0], x=np.asarray([state]))
     Ht.append(ht)
+    Ht_tilde.append(ht_tilde)
     Rt.append(rt)
     Zt.append(zt)
     if debug:
         print(f"Step: {step_num}")
         print(f"\t> Actuation: {(round(actuation[-1][0], 5), round(actuation[-1][1], 5))!r}")
-        print(f"\t> Distance: {round(distance[-1], 5)} - Delta distance: {round(delta_distance[-1], 5)}")
+        print(f"\t> Distance: {round(distance[-1], 5)}")
         print(f"\t> Position: {(round(position[-1][0], 2), round(position[-1][1], 2))!r}")
-        print(f"\t> GRU states: Ht={round(Ht[-1], 5)} - Rt={round(Rt[-1], 5)} - Zt={round(Zt[-1], 5)}")
+        print(f"\t> GRU states: "
+              f"\t\tHt={round(Ht[-1], 5)}"
+              f"\t\tHt_tilde={round(Ht[-1], 5)}"
+              f"\t\tRt={round(Rt[-1], 5)}"
+              f"\t\tZt={round(Zt[-1], 5)}")
     
     # Start monitoring
     while True:
@@ -119,18 +122,22 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
         # Update the containers
         actuation.append(action[0])
         distance.append(state[0])
-        delta_distance.append(distance[-2] - distance[-1])
         position.append(game.player.pos.get_tuple())
-        ht, rt, zt = get_gru_states(gru=net.rnn_array[0], x=np.asarray([state]))
+        ht, ht_tilde, rt, zt = get_gru_states(gru=net.rnn_array[0], x=np.asarray([state]))
         Ht.append(ht)
+        Ht_tilde.append(ht_tilde)
         Rt.append(rt)
         Zt.append(zt)
         if debug:
             print(f"Step: {step_num}")
             print(f"\t> Actuation: {(round(actuation[-1][0], 5), round(actuation[-1][1], 5))!r}")
-            print(f"\t> Distance: {round(distance[-1], 5)} - Delta distance: {round(delta_distance[-1], 5)}")
+            print(f"\t> Distance: {round(distance[-1], 5)}")
             print(f"\t> Position: {(round(position[-1][0], 2), round(position[-1][1], 2))!r}")
-            print(f"\t> GRU states: Ht={round(Ht[-1], 5)} - Rt={round(Rt[-1], 5)} - Zt={round(Zt[-1], 5)}")
+            print(f"\t> GRU states: "
+                  f"\t\tHt={round(Ht[-1], 5)}"
+                  f"\t\tHt_tilde={round(Ht[-1], 5)}"
+                  f"\t\tRt={round(Rt[-1], 5)}"
+                  f"\t\tZt={round(Zt[-1], 5)}")
     
     # Visualize the monitored values
     path = get_subfolder(f"population{'_backup' if population.use_backup else ''}/"
@@ -148,14 +155,14 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
                        target_found=target_found,
                        game_cfg=game_cfg.game,
                        save_path=f"{path}distance.png")
-    visualize_delta_distance(delta_distance,
-                             target_found=target_found,
-                             game_cfg=game_cfg.game,
-                             save_path=f"{path}delta_distance.png")
     visualize_hidden_state(Ht,
                            target_found=target_found,
                            game_cfg=game_cfg.game,
                            save_path=f"{path}hidden_state.png")
+    visualize_candidate_hidden_state(Ht_tilde,
+                                     target_found=target_found,
+                                     game_cfg=game_cfg.game,
+                                     save_path=f"{path}candidate_hidden_state.png")
     visualize_reset_gate(Rt,
                          target_found=target_found,
                          game_cfg=game_cfg.game,
@@ -175,8 +182,9 @@ def get_gru_states(gru: GRUCell, x):
     W_hh = np.matmul(gru.hx, gru.weight_hh.transpose())
     R_t = sigmoid(W_xh[:, 0:1] + W_hh[:, 0:1] + gru.bias[0:1])
     Z_t = sigmoid(W_xh[:, 1:2] + W_hh[:, 1:2] + gru.bias[1:2])
-    H_t = (1 - Z_t) * np.tanh(W_xh[:, 2:3] + R_t * W_hh[:, 2:3] + gru.bias[2:3]) + Z_t * gru.hx
-    return H_t[0, 0], R_t[0, 0], Z_t[0, 0]
+    H_t_tilde = np.tanh(W_xh[:, 2:3] + R_t * W_hh[:, 2:3] + gru.bias[2:3])
+    H_t = (1 - Z_t) * H_t_tilde + Z_t * gru.hx
+    return H_t[0, 0], H_t_tilde[0, 0], R_t[0, 0], Z_t[0, 0]
 
 
 def visualize_actuation(actuation_list: list, target_found: list, game_cfg: GameConfig, save_path: str):
@@ -222,28 +230,6 @@ def visualize_distance(distance_list: list, target_found: list, game_cfg: GameCo
     plt.close()
 
 
-def visualize_delta_distance(delta_distance_list: list, target_found: list, game_cfg: GameConfig, save_path: str):
-    """Create a graph of the delta distance over time"""
-    delta_distance_list[0] = delta_distance_list[1]  # Ignore zero-delta at start
-    time = [i / game_cfg.fps for i in range(len(delta_distance_list))]
-    max_abs = sorted([abs(d) for d in delta_distance_list])[-10]
-    
-    # Create the graph
-    ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT)).gca()
-    plt.plot(time, delta_distance_list)
-    for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
-    plt.grid()
-    ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
-    plt.ylim([-max_abs * 1.1, max_abs * 1.1])
-    ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
-    plt.title("Delta distance to target - Normalized")
-    # plt.ylabel("Normalized delta distance")
-    # plt.xlabel("Simulation time (s)")
-    plt.tight_layout()
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
-    plt.close()
-
-
 def visualize_hidden_state(hidden_state: list, target_found: list, game_cfg: GameConfig, save_path: str):
     """Create a graph of the hidden stat's value over time"""
     time = [i / game_cfg.fps for i in range(len(hidden_state))]
@@ -256,6 +242,25 @@ def visualize_hidden_state(hidden_state: list, target_found: list, game_cfg: Gam
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Hidden state")
+    # plt.ylabel("GRU output value")
+    # plt.xlabel("Simulation time (s)")
+    plt.tight_layout()
+    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
+    plt.close()
+
+
+def visualize_candidate_hidden_state(c_hidden_state: list, target_found: list, game_cfg: GameConfig, save_path: str):
+    """Create a graph of the hidden stat's value over time"""
+    time = [i / game_cfg.fps for i in range(len(c_hidden_state))]
+    
+    # Create the graph
+    ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT)).gca()
+    plt.plot(time, c_hidden_state)
+    for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
+    plt.grid()
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
+    ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
+    plt.title("Candidate hidden state")
     # plt.ylabel("GRU output value")
     # plt.xlabel("Simulation time (s)")
     plt.tight_layout()
@@ -366,7 +371,7 @@ def visualize_position(position_list: list, game: Game, save_path: str):
 def merge(title: str, path: str):
     """Merge each of the previously created images together"""
     # Load in all the images to merge
-    image_names = ['actuation', 'distance', 'delta_distance', 'hidden_state', 'reset_gate', 'update_gate']
+    image_names = ['actuation', 'distance', 'hidden_state', 'candidate_hidden_state', 'reset_gate', 'update_gate']
     images = [plt.imread(f'{path}{n}.png') for n in image_names]
     trace = plt.imread(f'{path}trace.png')
     
