@@ -112,7 +112,7 @@ def combine_all_populations(folder: str,
                             neat_gru: bool = True,
                             neat_lstm: bool = False,
                             neat_sru: bool = True,
-                            neat_sru_s: bool = False,
+                            neat_sru_s: bool = True,
                             ):
     """Combine the scores for all of the populations in a given folder."""
     # Collect all the populations
@@ -255,7 +255,7 @@ def plot_distribution(folder: str,
                       neat_gru: bool = True,
                       neat_lstm: bool = False,
                       neat_sru: bool = True,
-                      neat_sru_s: bool = False,
+                      neat_sru_s: bool = True,
                       gen: int = 500,
                       ):
     """
@@ -347,9 +347,9 @@ if __name__ == '__main__':
     parser.add_argument('--evaluate_pop', type=int, default=0)
     parser.add_argument('--combine_pop', type=int, default=1)  # Goes over all the populations
     parser.add_argument('--evaluate_training', type=int, default=0)
-    parser.add_argument('--plot_distribution', type=int, default=0)  # Goes over all the populations
+    parser.add_argument('--plot_distribution', type=int, default=1)  # Goes over all the populations
     parser.add_argument('--test_correctness', type=bool, default=0)
-    parser.add_argument('--experiment', type=int, default=2)
+    parser.add_argument('--experiment', type=int, default=1)
     parser.add_argument('--folder', type=str, default=None)
     parser.add_argument('--folder_pop', type=str, default='NEAT')
     parser.add_argument('--max_v', type=int, default=50)
