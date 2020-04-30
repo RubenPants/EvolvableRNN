@@ -46,6 +46,7 @@ def evaluate_populations(folder: str, pop_folder: str, max_v: int = 50):
     if pop_folder[-1] != '/': pop_folder += '/'
     
     # Load in dummy population
+    print(f"\n===> COMBINING POPULATION RESULTS OF FOLDER {folder}{pop_folder} <===")
     pop = Population(
             name=f'{pop_folder}v1',
             folder_name=folder,
@@ -166,16 +167,16 @@ def plot_result(d: dict, ylabel: str, title: str, save_path: str):
         data[:, i] = d[k]
     
     # Create the plot
-    plt.figure(figsize=(len(keys) / 4, 3))
+    plt.figure(figsize=(10, 2.5))
     plt.boxplot(data, labels=[str(k) for k in keys], whis=[0, 100])
-    plt.title(title)
+    # plt.title(title)  TODO: Title needed?
     plt.xticks(rotation=90)
     plt.xlabel("generations")
     plt.ylabel(ylabel)
-    plt.ylim(0, max(np.max(data) * 1.05, 1.01))
+    plt.ylim(0, max(np.max(data) * 1.05, 1.05))
     plt.grid()
     plt.tight_layout()
-    plt.savefig(save_path)
+    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
     # plt.show()
     plt.close()
 
@@ -280,11 +281,11 @@ def correctness_check(folder: str,
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate_gen', type=int, default=0)
-    parser.add_argument('--evaluate_pop', type=int, default=0)
+    parser.add_argument('--evaluate_pop', type=int, default=1)
     parser.add_argument('--evaluate_training', type=int, default=0)
-    parser.add_argument('--plot_distribution', type=int, default=1)
+    parser.add_argument('--plot_distribution', type=int, default=0)
     parser.add_argument('--test_correctness', type=bool, default=0)
-    parser.add_argument('--experiment', type=int, default=2)
+    parser.add_argument('--experiment', type=int, default=1)
     parser.add_argument('--folder', type=str, default=None)
     parser.add_argument('--folder_pop', type=str, default='NEAT')
     parser.add_argument('--max_v', type=int, default=50)
