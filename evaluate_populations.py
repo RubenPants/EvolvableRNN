@@ -107,6 +107,75 @@ def evaluate_populations(folder: str, pop_folder: str, max_v: int = 50):
                 save_path=f'{path_images}time.png')
 
 
+def combine_all_populations(folder: str,
+                            neat: bool = True,
+                            neat_gru: bool = True,
+                            neat_lstm: bool = False,
+                            neat_sru: bool = True,
+                            neat_sru_s: bool = False,
+                            ):
+    """Combine the scores for all of the populations in a given folder."""
+    # Collect all the populations
+    populations = []
+    if neat: populations.append('NEAT')
+    if neat_gru: populations.append('NEAT-GRU')
+    if neat_lstm: populations.append('NEAT-LSTM')
+    if neat_sru: populations.append('NEAT-SRU')
+    if neat_sru_s: populations.append('NEAT-SRU-S')
+    if len(populations) == 0: return
+    
+    # Collect all the measure options
+    OPTIONS = ['distance', 'finished', 'fitness', 'score', 'time', 'training']
+    
+    # Go over all possibilities
+    print(f"\n===> COMBINING POPULATIONS OF FOLDER {folder} <===")
+    path = f"population_backup/storage/{folder}/"
+    path_images = get_subfolder(path, 'images')
+    for option in OPTIONS:
+        plt.figure(figsize=(10, 3))  # TODO: Good?
+        max_data = 0
+        for idx, pop in enumerate(populations):
+            # Load the dictionary
+            d = load_dict(f"{path}{pop}/evaluation/{option}")
+            size = len(list(d.values())[0])
+            
+            # Prepare the data containers
+            q1 = []
+            q2 = []  # Median
+            q3 = []
+            idx_q1 = int(round(1 / 4 * size))
+            idx_q2 = int(round(2 / 4 * size))
+            idx_q3 = int(round(3 / 4 * size))
+            
+            # Loop over each iteration
+            x = sorted([int(k) for k in d.keys()])
+            for g in x:
+                lst = sorted(d[str(g)])  # Sort values from low to high
+                q1.append(lst[idx_q1])
+                q2.append(lst[idx_q2])
+                q3.append(lst[idx_q3])
+            
+            # Plot the results
+            plt.plot(x, q1, color=COLORS[idx], linestyle=":", linewidth=.5)
+            plt.plot(x, q3, color=COLORS[idx], linestyle=":", linewidth=.5)
+            plt.plot(x, q2, color=COLORS[idx], linestyle="-", linewidth=2, label=pop)
+            plt.fill_between(x, q1, q3, color=COLORS[idx], alpha=0.2)
+            
+            # Update the max-counter
+            if max(q3) > max_data: max_data = max(q3)
+        
+        # Finalize the figure
+        plt.legend()
+        plt.xlabel("generation")
+        plt.ylabel(option)
+        plt.ylim(0, max(max_data * 1.05, 1.05))
+        plt.grid()
+        plt.tight_layout()
+        plt.savefig(f"{path_images}comb_{option}.png", bbox_inches='tight', pad_inches=0.02)
+        # plt.show()
+        plt.close()
+
+
 def evaluate_training(experiment_id: int, pop_folder: str, folder: str = None, max_v: int = 50):
     """Evaluate the fitness of a population's elite each training generation."""
     if pop_folder[-1] != '/': pop_folder += '/'
@@ -204,23 +273,17 @@ def plot_distribution(folder: str,
     # Collect all the measure options
     OPTIONS = ['distance', 'finished', 'fitness', 'score', 'time', 'training']
     
-    def round_dist(lst):
-        """Round to 0.05"""
-        for i, x in enumerate(lst):
-            lst[i] = round(x * 20) / 20
-    
     # Go over all possibilities
     print(f"\n===> CREATING POPULATION DISTRIBUTIONS <===")
     path = f"population_backup/storage/{folder}/"
     path_images = get_subfolder(path, 'images')
     for option in OPTIONS:
-        plt.figure(figsize=(8, 3))
+        plt.figure(figsize=(10, 2.5))
         min_val = float("inf")
         max_val = -float("inf")
         for idx, pop in enumerate(populations):
             d = load_dict(f"{path}{pop}/evaluation/{option}")
             dist = d[str(gen)]
-            round_dist(dist)
             if min(dist) < min_val: min_val = min(dist)
             if max(dist) > max_val: max_val = max(dist)
             sns.distplot(dist,
@@ -281,7 +344,8 @@ def correctness_check(folder: str,
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate_gen', type=int, default=0)
-    parser.add_argument('--evaluate_pop', type=int, default=1)
+    parser.add_argument('--evaluate_pop', type=int, default=0)
+    parser.add_argument('--combine_pop', type=int, default=1)
     parser.add_argument('--evaluate_training', type=int, default=0)
     parser.add_argument('--plot_distribution', type=int, default=0)
     parser.add_argument('--test_correctness', type=bool, default=0)
@@ -314,6 +378,12 @@ if __name__ == '__main__':
                 pop_folder=args.folder_pop,
                 max_v=args.max_v,
         )
+    
+    if bool(args.combine_pop):
+        combine_all_populations(
+                folder=f,
+        )
+    
     if bool(args.evaluate_training):
         evaluate_training(
                 experiment_id=args.experiment,
@@ -321,5 +391,6 @@ if __name__ == '__main__':
                 pop_folder=args.folder_pop,
                 max_v=args.max_v,
         )
+    
     if bool(args.plot_distribution):
         plot_distribution(folder=f)
