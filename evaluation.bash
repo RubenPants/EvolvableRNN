@@ -14,5 +14,7 @@ do
 #  python3 evaluate_populations.py --folder_pop=NEAT-GRU --evaluate_gen=$evaluate_gen --evaluate_pop=$evaluate_pop --evaluate_training=$evaluate_train --experiment=$experiment --max_v=$max_v --unused_cpu=$unused_cpu;
 #  python3 evaluate_populations.py --folder_pop=NEAT-LSTM --evaluate_gen=$evaluate_gen --evaluate_pop=$evaluate_pop --evaluate_training=$evaluate_train --experiment=$experiment --max_v=$max_v --unused_cpu=$unused_cpu;
 #  python3 evaluate_populations.py --folder_pop=NEAT-SRU --evaluate_gen=$evaluate_gen --evaluate_pop=$evaluate_pop --evaluate_training=$evaluate_train --experiment=$experiment --max_v=$max_v --unused_cpu=$unused_cpu;
-  python3 evaluate_populations.py --folder_pop=NEAT-SRU-S --evaluate_gen=$evaluate_gen --evaluate_pop=$evaluate_pop --evaluate_training=$evaluate_train --experiment=$experiment --max_v=$max_v --unused_cpu=$unused_cpu;
+
+#  Never run NEAT-SRU-S in main since it uses NEAT-SRU's class! Go to modified branch instead
+#  python3 evaluate_populations.py --folder_pop=NEAT-SRU-S --evaluate_gen=$evaluate_gen --evaluate_pop=$evaluate_pop --evaluate_training=$evaluate_train --experiment=$experiment --max_v=$max_v --unused_cpu=$unused_cpu;
 done
