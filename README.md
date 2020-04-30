@@ -23,7 +23,7 @@ Update a GRU his weights based on its current value, the value fed into the GRU 
 
 * Remove delta-distance graph from monitors
 
-* Create an LSTM monitor
+* Create an LSTM monitor (?)
 
 * Analyze topology complexity across the populations (proof that GRU doesn't need a complex genome to be able to solve the problem)
 
