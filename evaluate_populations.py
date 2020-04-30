@@ -104,6 +104,57 @@ def evaluate_populations(folder: str, pop_folder: str, max_v: int = 50):
                 save_path=f'{path_images}time.png')
 
 
+def evaluate_training(experiment_id: int, pop_folder: str, folder: str = None, max_v: int = 50):
+    """Evaluate the fitness of a population's elite each training generation."""
+    if pop_folder[-1] != '/': pop_folder += '/'
+    folder = folder if folder else get_folder(experiment_id)
+    if folder[-1] != '/': folder += '/'
+    
+    # Get dummy population
+    pop = Population(
+            name=f"{pop_folder}v1",
+            folder_name=folder,
+            log_print=False,
+            use_backup=True,
+    )
+    max_gen = pop.generation
+    
+    # Initialize data container
+    training_fitness = dict()
+    for g in range(0, max_gen + 1, HOPS):
+        training_fitness[g] = []
+    
+    # Pull the training scores
+    print(f"\n===> PULLING TRAINING FITNESS OF THE {pop_folder} POPULATIONS <===")
+    pbar = tqdm(range(int(max_v * max_gen / HOPS)))
+    for v in range(1, max_v + 1):
+        name = f"{pop_folder}v{v}"
+        pop = Population(
+                name=name,
+                folder_name=folder,
+                log_print=False,
+                use_backup=True,
+        )
+        
+        # Perform the evaluations
+        max_gen = pop.generation
+        for gen in range(0, max_gen + 1, HOPS):
+            if not pop.load(gen=gen):
+                raise Exception(f"Population {name} is not trained for generation {gen}")
+            training_fitness[gen].append(pop.best_genome.fitness if pop.best_genome else 0)
+            pbar.update()
+    pbar.close()
+    
+    # Plot the result
+    path = get_subfolder(f'population_backup/storage/{folder}{pop_folder}', 'evaluation')
+    update_dict(f'{path}training', training_fitness, overwrite=True)
+    path_images = get_subfolder(path, 'images')
+    plot_result(d=training_fitness,
+                ylabel="fitness",
+                title="Average simulation time",
+                save_path=f'{path_images}training.png')
+
+
 def plot_result(d: dict, ylabel: str, title: str, save_path: str):
     """Create a plot of the given dictionary. Each value of d consists of a list of length 3 (min, avg, max)."""
     # Parse the values
@@ -163,13 +214,14 @@ def correctness_check(folder: str = 'experiment1',
 # TODO: Usage of backed-up populations is assumed
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
-    parser.add_argument('--evaluate_gen', type=int, default=1)
-    parser.add_argument('--evaluate_pop', type=int, default=1)
+    parser.add_argument('--evaluate_gen', type=int, default=0)
+    parser.add_argument('--evaluate_pop', type=int, default=0)
+    parser.add_argument('--evaluate_training', type=int, default=1)
     parser.add_argument('--test_correctness', type=bool, default=0)
-    parser.add_argument('--experiment', type=int, default=2)
+    parser.add_argument('--experiment', type=int, default=1)
     parser.add_argument('--folder', type=str, default=None)
-    parser.add_argument('--folder_pop', type=str, default='NEAT-LSTM')
-    parser.add_argument('--max_v', type=int, default=1)
+    parser.add_argument('--folder_pop', type=str, default='NEAT')
+    parser.add_argument('--max_v', type=int, default=50)
     parser.add_argument('--unused_cpu', type=int, default=2)
     args = parser.parse_args()
     
@@ -192,6 +244,13 @@ if __name__ == '__main__':
     
     if bool(args.evaluate_pop):
         evaluate_populations(
+                folder=f,
+                pop_folder=args.folder_pop,
+                max_v=args.max_v,
+        )
+    if bool(args.evaluate_training):
+        evaluate_training(
+                experiment_id=args.experiment,
                 folder=f,
                 pop_folder=args.folder_pop,
                 max_v=args.max_v,
