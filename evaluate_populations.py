@@ -255,7 +255,7 @@ def plot_distribution(folder: str,
                       neat_gru: bool = True,
                       neat_lstm: bool = False,
                       neat_sru: bool = True,
-                      neat_sru_s: bool = True,
+                      neat_sru_s: bool = False,
                       gen: int = 500,
                       ):
     """
