@@ -228,13 +228,13 @@ def plot_distribution(folder: str,
                          norm_hist=True,
                          bins=100,
                          color=COLORS[idx],
-                         kde_kws={'linewidth': 4},
+                         kde_kws={'linewidth': 2},
                          label=pop,
                          )
         plt.xlim(min_val, max_val)
         plt.title(f"Probability density across populations for '{option}' at generation {gen}")
         plt.xlabel(option)
-        plt.yticks([])
+        # plt.yticks([])
         plt.ylabel('probability density')
         plt.legend()
         plt.tight_layout()
@@ -284,7 +284,7 @@ if __name__ == '__main__':
     parser.add_argument('--evaluate_training', type=int, default=0)
     parser.add_argument('--plot_distribution', type=int, default=1)
     parser.add_argument('--test_correctness', type=bool, default=0)
-    parser.add_argument('--experiment', type=int, default=1)
+    parser.add_argument('--experiment', type=int, default=2)
     parser.add_argument('--folder', type=str, default=None)
     parser.add_argument('--folder_pop', type=str, default='NEAT')
     parser.add_argument('--max_v', type=int, default=50)
