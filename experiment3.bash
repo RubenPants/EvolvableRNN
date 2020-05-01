@@ -6,7 +6,7 @@ cpu=1;  # Number of unused CPUs
 push=1;  # After how many version git should push
 
 # Run the program
-for v in {6..10}
+for v in {11..15}
 do
   for i in {1..5}
   do
