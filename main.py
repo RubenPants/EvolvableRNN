@@ -343,7 +343,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     
     # Main methods
-    parser.add_argument('--train', type=bool, default=False)
+    parser.add_argument('--train', type=bool, default=True)
     parser.add_argument('--train_overview', type=bool, default=False)
     parser.add_argument('--blueprint', type=bool, default=False)
     parser.add_argument('--trace', type=bool, default=False)  # Keep it False
@@ -356,7 +356,7 @@ if __name__ == '__main__':
     
     # Extra arguments
     parser.add_argument('--iterations', type=int, default=50)
-    parser.add_argument('--experiment', type=int, default=2)
+    parser.add_argument('--experiment', type=int, default=3)
     parser.add_argument('--unused_cpu', type=int, default=2)
     parser.add_argument('--version', type=int, default=3)
     parser.add_argument('--debug', type=bool, default=False)
@@ -375,7 +375,7 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='NEAT-SRU/v1',
+            name='NEAT/v1',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment1',
             folder_name=get_folder(args.experiment),
