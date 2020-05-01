@@ -21,7 +21,6 @@ from config import Config
 from main import get_game_ids
 from population.utils.gene_util.connection import ConnectionGene
 from population.utils.gene_util.gru import GruNodeGene
-from population.utils.gene_util.lstm import LstmNodeGene
 from population.utils.gene_util.output_node import OutputNodeGene
 from population.utils.genome import Genome
 from population.utils.population_util.fitness_functions import calc_pop_fitness
@@ -218,10 +217,6 @@ def get_genome(topology_id: int, g_id: int, cfg: Config):
         topology = get_topology2
     elif topology_id == 3:
         topology = get_topology3
-    elif topology_id == 4:
-        topology = get_topology4
-    elif topology_id == 5:
-        topology = get_topology5
     else:
         raise Exception(f"Topology ID '{topology_id}' not supported")
     return topology(g_id, cfg)
@@ -235,10 +230,6 @@ def enforce_topology(g: Genome, topology_id: int):
         enforce_topology2(g)
     elif topology_id == 3:
         enforce_topology3(g)
-    elif topology_id == 4:
-        enforce_topology4(g)
-    elif topology_id == 5:
-        enforce_topology5(g)
     else:
         raise Exception(f"Topology ID '{topology_id}' not supported")
 
@@ -307,67 +298,6 @@ def get_topology1(gid: int, cfg: Config):
 def get_topology2(gid: int, cfg: Config):
     """
     Create a uniformly and randomly sampled genome of fixed topology:
-      (key=0, bias=2)      (key=1, bias=0)
-                     ____ /   /
-                   /         /
-               LSTM         /
-                |     _____/
-                |   /
-              (key=-1)
-    """
-    # Create an initial dummy genome with fixed configuration
-    genome = Genome(
-            key=gid,
-            num_outputs=cfg.genome.num_outputs,
-            bot_config=cfg.bot,
-    )
-    
-    # Create the nodes
-    genome.nodes[0] = OutputNodeGene(key=0, cfg=cfg.genome)  # OutputNode 0
-    genome.nodes[0].bias = 2  # Drive with full actuation by default
-    genome.nodes[1] = OutputNodeGene(key=1, cfg=cfg.genome)  # OutputNode 1
-    genome.nodes[1].bias = 0  # Drive with 0.5 actuation by default
-    genome.nodes[2] = LstmNodeGene(key=2, cfg=cfg.genome, input_keys=[-1], input_keys_full=[-1])  # Hidden node
-    genome.nodes[2].bias = 0  # Bias is irrelevant for GRU-node
-    
-    # Setup the parameter-ranges
-    conn_range = cfg.genome.weight_max_value - cfg.genome.weight_min_value
-    bias_range = cfg.genome.bias_max_value - cfg.genome.bias_min_value
-    rnn_range = cfg.genome.rnn_max_value - cfg.genome.rnn_min_value
-    
-    # Uniformly sample the genome's LSTM-component
-    genome.nodes[2].bias_h = rand_arr((4,)) * bias_range + cfg.genome.bias_min_value
-    genome.nodes[2].weight_xh_full = rand_arr((4, 1)) * rnn_range + cfg.genome.weight_min_value
-    genome.nodes[2].weight_hh = rand_arr((4, 1)) * rnn_range + cfg.genome.weight_min_value
-    
-    # Create the connections
-    genome.connections = dict()
-    
-    # input2gru
-    key = (-1, 2)
-    genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
-    genome.connections[key].weight = 1  # Simply forward distance
-    genome.connections[key].enabled = True
-    
-    # gru2output - Uniformly sampled
-    key = (2, 1)
-    genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
-    genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
-    genome.connections[key].enabled = True
-    
-    # input2output - Uniformly sampled
-    key = (-1, 1)
-    genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
-    genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
-    genome.connections[key].enabled = True
-    
-    genome.update_rnn_nodes(config=cfg.genome)
-    return genome
-
-
-def get_topology3(gid: int, cfg: Config):
-    """
-    Create a uniformly and randomly sampled genome of fixed topology:
     Sigmoid with bias 1.5 --> Actuation default of 95,3%
       (key=0, bias=1.5)      (key=1, bias=?)
                      ____ /   /
@@ -427,69 +357,7 @@ def get_topology3(gid: int, cfg: Config):
     return genome
 
 
-def get_topology4(gid: int, cfg: Config):
-    """
-    Create a uniformly and randomly sampled genome of fixed topology:
-    Sigmoid with bias 1.5 --> Actuation default of 95,3%
-      (key=0, bias=1.5)      (key=1, bias=?)
-                     ____ /   /
-                   /         /
-               LSTM         /
-                |     _____/
-                |   /
-              (key=-1)
-    """
-    # Create an initial dummy genome with fixed configuration
-    genome = Genome(
-            key=gid,
-            num_outputs=cfg.genome.num_outputs,
-            bot_config=cfg.bot,
-    )
-    
-    # Setup the parameter-ranges
-    conn_range = cfg.genome.weight_max_value - cfg.genome.weight_min_value
-    bias_range = cfg.genome.bias_max_value - cfg.genome.bias_min_value
-    rnn_range = cfg.genome.rnn_max_value - cfg.genome.rnn_min_value
-    
-    # Create the nodes
-    genome.nodes[0] = OutputNodeGene(key=0, cfg=cfg.genome)  # OutputNode 0
-    genome.nodes[0].bias = 1.5  # Drive with 0.953 actuation by default
-    genome.nodes[1] = OutputNodeGene(key=1, cfg=cfg.genome)  # OutputNode 1
-    genome.nodes[1].bias = random() * bias_range + cfg.genome.bias_min_value  # Uniformly sampled bias
-    genome.nodes[2] = LstmNodeGene(key=2, cfg=cfg.genome, input_keys=[-1], input_keys_full=[-1])  # Hidden node
-    genome.nodes[2].bias = 0  # Bias is irrelevant for GRU-node
-    
-    # Uniformly sample the genome's GRU-component
-    genome.nodes[2].bias_h = rand_arr((4,)) * bias_range + cfg.genome.bias_min_value
-    genome.nodes[2].weight_xh_full = rand_arr((4, 1)) * rnn_range + cfg.genome.weight_min_value
-    genome.nodes[2].weight_hh = rand_arr((4, 1)) * rnn_range + cfg.genome.weight_min_value
-    
-    # Create the connections
-    genome.connections = dict()
-    
-    # input2gru
-    key = (-1, 2)
-    genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
-    genome.connections[key].weight = 1  # Simply forward distance
-    genome.connections[key].enabled = True
-    
-    # gru2output - Uniformly sampled
-    key = (2, 1)
-    genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
-    genome.connections[key].weight = 3  # Enforce capabilities of full spectrum
-    genome.connections[key].enabled = True
-    
-    # input2output - Uniformly sampled
-    key = (-1, 1)
-    genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
-    genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
-    genome.connections[key].enabled = True
-    
-    genome.update_rnn_nodes(config=cfg.genome)
-    return genome
-
-
-def get_topology5(gid: int, cfg: Config):
+def get_topology3(gid: int, cfg: Config):
     """
     Create a uniformly and randomly sampled genome of fixed topology:
     Sigmoid with bias 1.5 --> Actuation default of 95,3%
@@ -554,26 +422,12 @@ def enforce_topology1(g: Genome):
 
 def enforce_topology2(g: Genome):
     """Enforce the fixed parameters of topology2. It is assumed that topology hasn't changed."""
-    g.nodes[0].bias = 2  # Drive with full speed by default
-    g.nodes[1].bias = 0  # Drive with 0.5 actuation by default
+    g.nodes[0].bias = 1.5  # Drive with 0.953 actuation by default
     g.connections[(-1, 2)].weight = 1  # Simply forward distance
+    g.connections[(2, 1)].weight = 3  # Enforce capabilities of full spectrum
 
 
 def enforce_topology3(g: Genome):
-    """Enforce the fixed parameters of topology2. It is assumed that topology hasn't changed."""
-    g.nodes[0].bias = 1.5  # Drive with 0.953 actuation by default
-    g.connections[(-1, 2)].weight = 1  # Simply forward distance
-    g.connections[(2, 1)].weight = 3  # Enforce capabilities of full spectrum
-
-
-def enforce_topology4(g: Genome):
-    """Enforce the fixed parameters of topology2. It is assumed that topology hasn't changed."""
-    g.nodes[0].bias = 1.5  # Drive with 0.953 actuation by default
-    g.connections[(-1, 2)].weight = 1  # Simply forward distance
-    g.connections[(2, 1)].weight = 3  # Enforce capabilities of full spectrum
-
-
-def enforce_topology5(g: Genome):
     """Enforce the fixed parameters of topology2. It is assumed that topology hasn't changed."""
     g.nodes[0].bias = 1.5  # Drive with 0.953 actuation by default
     g.connections[(-1, 2)].weight = 1  # Simply forward distance
