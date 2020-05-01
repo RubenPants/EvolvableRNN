@@ -43,6 +43,6 @@ if __name__ == '__main__':
     os.chdir("..")
     
     pull(
-            pop_name='NEAT-GRU/v8',
+            pop_name='NEAT-SRU/v12',
             pop_folder='experiment3',
     )

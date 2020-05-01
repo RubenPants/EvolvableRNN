@@ -23,7 +23,7 @@ def positions(genome: Genome,
               save_name: str,
               gid: int,
               duration: int = 60,
-              title:str='',
+              title: str = '',
               ):
     """Visualize the deviated genomes."""
     # Check if valid genome (contains at least one hidden GRU, first GRU is monitored)
@@ -58,7 +58,8 @@ def merge(gid: int, save_name: str):
     path = get_save_path(gid=gid, save_name=f"{save_name}")
     trajectory = plt.imread(f"{path}_trajectory.png")
     state = plt.imread(f"{path}_state.png")
-    result = np.concatenate([trajectory, state], axis=0)  # Concatenate vertically
+    hidden = plt.imread(f"{path}_hidden.png")
+    result = np.concatenate([trajectory, state, hidden], axis=0)  # Concatenate vertically
     
     # Create the figure
     plt.figure(figsize=(6, 8))
@@ -85,8 +86,8 @@ def get_save_path(gid: int, save_name):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
-    parser.add_argument('--duration', type=int, default=60)  # Simulation duration
-    parser.add_argument('--gid', type=int, default=30001)  # First evaluation game of experiment3
+    parser.add_argument('--duration', type=int, default=25)  # Simulation duration
+    parser.add_argument('--gid', type=int, default=60001)  # First evaluation game of experiment3
     parser.add_argument('--name', type=str, default='genome1')
     parser.add_argument('--show', type=int, default=1)
     args = parser.parse_args()

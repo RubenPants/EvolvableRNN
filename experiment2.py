@@ -70,16 +70,14 @@ def main(fitness,
     copy_tree(f"{path_exp1}generations", f"{path}generations")
     
     # Give overview of population
-    gru = pop.config.genome.rnn_prob_gru
-    gru_nr = pop.config.genome.rnn_prob_gru_nr
-    gru_nu = pop.config.genome.rnn_prob_gru_nu
-    rnn = pop.config.genome.rnn_prob_simple_rnn
+    gru = cfg.genome.rnn_prob_gru
+    sru = cfg.genome.rnn_prob_simple_rnn
+    lstm = cfg.genome.rnn_prob_lstm
     msg = f"\n\n\n\n\n===> RUNNING EXPERIMENT 2 FOR THE FOLLOWING CONFIGURATION: <===" \
           f"\n\t> fitness:             {cfg.evaluation.fitness}" \
           f"\n\t> GRU enabled:         {gru > 0}  (probability={round(gru, 2)})" \
-          f"\n\t> GRU-NR enabled:      {gru_nr > 0}  (probability={round(gru_nr, 2)})" \
-          f"\n\t> GRU-NU enabled:      {gru_nu > 0}  (probability={round(gru_nu, 2)})" \
-          f"\n\t> SRU enabled:         {rnn > 0}  (probability={round(rnn, 2)})" \
+          f"\n\t> SRU enabled:         {sru > 0}  (probability={round(sru, 2)})" \
+          f"\n\t> LSTM enabled:        {lstm > 0}  (probability={round(lstm, 2)})" \
           f"\n\t> Saving under folder: {folder}\n"
     pop.log(msg)
     

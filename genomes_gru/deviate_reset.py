@@ -17,9 +17,8 @@ from genomes_gru.deviate_shared import get_save_path, merge, positions as plot_p
 from genomes_gru.persist import load_genome
 from population.utils.gene_util.gru import GruNodeGene
 from population.utils.genome import Genome
-from population.utils.network_util.activations import sigmoid
 from population.utils.network_util.feed_forward_net import make_net
-from population.utils.rnn_cell_util.berkeley_gru import GRUCell
+from population.utils.visualizing.monitor_genome_single_gru import get_gru_states
 from utils.dictionary import *
 
 COLORS = ['r', 'b', 'c', 'm', 'y']
@@ -87,7 +86,7 @@ def main(genome: Genome,
     plot_states(
             gid=genome.key,
             states=states,
-            save_name=f"reset/{name}_state",
+            save_name=f"reset/{name}",
     )
     
     # Merge the two graphs together
@@ -101,25 +100,39 @@ def plot_states(gid: int, states: dict, save_name: str):
     """Plot the reset-gate's state for each time moment."""
     # Validate the input
     size = len(list(states.values())[0][0])
-    for state, _ in states.values():
+    for state, _, _ in states.values():
         assert size == len(state)
     
     # Setup
     cfg = Config()
     time = [i / cfg.game.fps for i in range(size)]
     
-    # Create the graph
+    # Create the graph for the reset gate
     ax = plt.figure(figsize=(6, 2)).gca()
     for idx, (name, state) in enumerate(states.items()):
         plt.plot(time, state[0], color=COLORS[idx], label=name)
-        for t in state[1]: plt.axvline(x=t / cfg.game.fps, color=COLORS[idx], linestyle=':', linewidth=2)
+        for t in state[2]: plt.axvline(x=t / cfg.game.fps, color=COLORS[idx], linestyle=':', linewidth=2)
+    plt.grid()
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
+    ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
+    # plt.xlabel("Simulation time (s)")
+    plt.tight_layout()
+    path = get_save_path(gid=gid, save_name=save_name)
+    plt.savefig(f"{path}_state.png")
+    plt.close()
+    
+    # Create the graph for the hidden state
+    ax = plt.figure(figsize=(6, 2)).gca()
+    for idx, (name, state) in enumerate(states.items()):
+        plt.plot(time, state[1], color=COLORS[idx], label=name)
+        for t in state[2]: plt.axvline(x=t / cfg.game.fps, color=COLORS[idx], linestyle=':', linewidth=2)
     plt.grid()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.xlabel("Simulation time (s)")
     plt.tight_layout()
     path = get_save_path(gid=gid, save_name=save_name)
-    plt.savefig(f"{path}.png")
+    plt.savefig(f"{path}_hidden.png")
     plt.close()
 
 
@@ -145,14 +158,18 @@ def monitor_activation(genome: Genome, gid: int, debug: bool = False, duration: 
                    )
     
     # Containers to monitor
+    Ht = []
     Rt = []
     target_found = []
     score = 0
     
     # Initialize the containers
-    Rt.append(get_state(gru=net.rnn_array[0], x=np.asarray([state])))
+    ht, _, rt, _ = get_gru_states(gru=net.rnn_array[0], x=np.asarray([state]))
+    Ht.append(ht)
+    Rt.append(rt)
     if debug:
         print(f"Step: {step_num}")
+        print(f"\t> Hidden state: {round(Ht[-1], 5)}")
         print(f"\t> Reset gate state: {round(Rt[-1], 5)}")
     
     # Start monitoring
@@ -183,28 +200,25 @@ def monitor_activation(genome: Genome, gid: int, debug: bool = False, duration: 
         step_num += 1
         
         # Update the containers
-        Rt.append(get_state(gru=net.rnn_array[0], x=np.asarray([state])))
+        ht, _, rt, _ = get_gru_states(gru=net.rnn_array[0], x=np.asarray([state]))
+        Ht.append(ht)
+        Rt.append(rt)
         if debug:
             print(f"Step: {step_num}")
+            print(f"\t> Hidden state: {round(Ht[-1], 5)}")
             print(f"\t> Reset gate state: {round(Rt[-1], 5)}")
-    return Rt, target_found
-
-
-def get_state(gru: GRUCell, x):
-    W_xh = np.matmul(x, gru.weight_xh.transpose())
-    W_hh = np.matmul(gru.hx, gru.weight_hh.transpose())
-    return sigmoid(W_xh[:, 0:1] + W_hh[:, 0:1] + gru.bias[0:1])[0, 0]
+    return Rt, Ht, target_found
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
-    parser.add_argument('--delta', type=float, default=.1)  # Deviation
-    parser.add_argument('--duration', type=int, default=30)  # Simulation duration
-    parser.add_argument('--gid', type=int, default=30001)  # First evaluation game of experiment3
+    parser.add_argument('--delta', type=float, default=.01)  # Deviation
+    parser.add_argument('--duration', type=int, default=25)  # Simulation duration
+    parser.add_argument('--gid', type=int, default=60001)  # First evaluation game of experiment3
     parser.add_argument('--mut_bias', type=int, default=1)  # Mutate the bias component of the reset gate
     parser.add_argument('--mut_hh', type=int, default=1)  # Mutate the hidden-hidden weight of the reset gate
     parser.add_argument('--mut_xh', type=int, default=1)  # Mutate the input-hidden weight of the reset gate
-    parser.add_argument('--name', type=str, default='genome1')
+    parser.add_argument('--name', type=str, default='genome2')
     parser.add_argument('--show', type=int, default=1)
     args = parser.parse_args()
     
