@@ -8,11 +8,11 @@ evaluate_train=1;  # Compare the training fitness over the populations [bint]
 max_v=50;  # Maximum version for evaluation  [int]
 
 # Run the program
-for experiment in {2,}
+for experiment in {1,2,}
 do
 #  python3 evaluate_populations.py --folder_pop=NEAT --evaluate_gen=$evaluate_gen --evaluate_pop=$evaluate_pop --evaluate_training=$evaluate_train --experiment=$experiment --max_v=$max_v --unused_cpu=$unused_cpu;
 #  python3 evaluate_populations.py --folder_pop=NEAT-GRU --evaluate_gen=$evaluate_gen --evaluate_pop=$evaluate_pop --evaluate_training=$evaluate_train --experiment=$experiment --max_v=$max_v --unused_cpu=$unused_cpu;
-#  python3 evaluate_populations.py --folder_pop=NEAT-LSTM --evaluate_gen=$evaluate_gen --evaluate_pop=$evaluate_pop --evaluate_training=$evaluate_train --experiment=$experiment --max_v=$max_v --unused_cpu=$unused_cpu;
+  python3 evaluate_populations.py --folder_pop=NEAT-LSTM --evaluate_gen=$evaluate_gen --evaluate_pop=$evaluate_pop --evaluate_training=$evaluate_train --experiment=$experiment --max_v=$max_v --unused_cpu=$unused_cpu;
 #  python3 evaluate_populations.py --folder_pop=NEAT-SRU --evaluate_gen=$evaluate_gen --evaluate_pop=$evaluate_pop --evaluate_training=$evaluate_train --experiment=$experiment --max_v=$max_v --unused_cpu=$unused_cpu;
 
 #  Never run NEAT-SRU-S in main since it uses NEAT-SRU's class! Go to modified branch instead

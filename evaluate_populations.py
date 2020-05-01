@@ -112,7 +112,7 @@ def combine_all_populations(folder: str,
                             neat_gru: bool = True,
                             neat_lstm: bool = False,
                             neat_sru: bool = True,
-                            neat_sru_s: bool = True,
+                            neat_sru_s: bool = False,
                             ):
     """Combine the scores for all of the populations in a given folder."""
     # Collect all the populations
@@ -255,7 +255,7 @@ def plot_distribution(folder: str,
                       neat_gru: bool = True,
                       neat_lstm: bool = False,
                       neat_sru: bool = True,
-                      neat_sru_s: bool = True,
+                      neat_sru_s: bool = False,
                       gen: int = 500,
                       ):
     """
@@ -310,9 +310,9 @@ def plot_distribution(folder: str,
 def correctness_check(folder: str,
                       neat: bool = True,
                       neat_gru: bool = True,
-                      neat_lstm: bool = True,
+                      neat_lstm: bool = False,
                       neat_sru: bool = True,
-                      neat_sru_s: bool = True,
+                      neat_sru_s: bool = False,
                       max_v: int = 50,
                       max_gen: int = 500,
                       gen_hops: int = 10,
@@ -345,14 +345,14 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate_gen', type=int, default=0)
     parser.add_argument('--evaluate_pop', type=int, default=0)
-    parser.add_argument('--combine_pop', type=int, default=1)  # Goes over all the populations
+    parser.add_argument('--combine_pop', type=int, default=0)  # Goes over all the populations
     parser.add_argument('--evaluate_training', type=int, default=0)
-    parser.add_argument('--plot_distribution', type=int, default=1)  # Goes over all the populations
-    parser.add_argument('--test_correctness', type=bool, default=0)
+    parser.add_argument('--plot_distribution', type=int, default=0)  # Goes over all the populations
+    parser.add_argument('--test_correctness', type=int, default=0)
     parser.add_argument('--experiment', type=int, default=2)
     parser.add_argument('--folder', type=str, default=None)
     parser.add_argument('--folder_pop', type=str, default='NEAT')
-    parser.add_argument('--max_v', type=int, default=50)
+    parser.add_argument('--max_v', type=int, default=20)
     parser.add_argument('--unused_cpu', type=int, default=2)
     args = parser.parse_args()
     
@@ -361,7 +361,14 @@ if __name__ == '__main__':
     
     # Execute the program
     if bool(args.test_correctness):
-        correctness_check(folder=f)  # Use the default parameters
+        correctness_check(folder=f,
+                          neat=True,
+                          neat_gru=True,
+                          neat_lstm=True,
+                          neat_sru=True,
+                          neat_sru_s=False,
+                          max_v=args.max_v,
+                          )  # Use the default parameters
     
     if bool(args.evaluate_gen):
         evaluate_generations(
@@ -382,6 +389,11 @@ if __name__ == '__main__':
     if bool(args.combine_pop):
         combine_all_populations(
                 folder=f,
+                neat=True,
+                neat_gru=True,
+                neat_lstm=True,
+                neat_sru=True,
+                neat_sru_s=True,
         )
     
     if bool(args.evaluate_training):
@@ -393,4 +405,10 @@ if __name__ == '__main__':
         )
     
     if bool(args.plot_distribution):
-        plot_distribution(folder=f)
+        plot_distribution(folder=f,
+                          neat=True,
+                          neat_gru=True,
+                          neat_lstm=True,
+                          neat_sru=True,
+                          neat_sru_s=True,
+                          )
