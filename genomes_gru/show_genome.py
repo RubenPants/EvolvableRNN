@@ -26,7 +26,7 @@ def main(genome: Genome, show: bool = False):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
-    parser.add_argument('--name', type=str, default='genome1')
+    parser.add_argument('--name', type=str, default='genome2')
     parser.add_argument('--show', type=int, default=1)
     args = parser.parse_args()
     
