@@ -2,10 +2,10 @@
 
 # Default parameters
 batch=10000;  # Number of training-iterations each loop
-cpu=2;  # Number of unused CPUs
+cpu=0;  # Number of unused CPUs
 
 # Run the program
-for t in {2,}  # TODO: Update topology2 first (unable to find solution!)
+for t in {3,4,}
 do
   python3 experiment6_2.py --topology_id=$t --batch=$batch --unused_cpu=$cpu;
 

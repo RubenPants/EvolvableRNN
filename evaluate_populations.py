@@ -6,9 +6,12 @@ Evaluate all the populations across their generations and compare each of them a
 Note: Evaluation is only done on backed-up populations.
 """
 import argparse
+from glob import glob
 
 import matplotlib.pyplot as plt
 import numpy as np
+import seaborn as sns
+from tqdm import tqdm
 
 from main import get_folder
 from population.population import Population
@@ -17,6 +20,7 @@ from utils.dictionary import *
 from utils.myutils import get_subfolder, load_dict, update_dict
 
 HOPS = 10
+COLORS = ['r', 'b', 'c', 'm', 'y']
 
 
 def evaluate_generations(experiment_id: int, pop_folder: str, folder: str = None, max_v: int = 50, unused_cpu: int = 2):
@@ -42,6 +46,7 @@ def evaluate_populations(folder: str, pop_folder: str, max_v: int = 50):
     if pop_folder[-1] != '/': pop_folder += '/'
     
     # Load in dummy population
+    print(f"\n===> COMBINING POPULATION RESULTS OF FOLDER {folder}{pop_folder} <===")
     pop = Population(
             name=f'{pop_folder}v1',
             folder_name=folder,
@@ -102,6 +107,126 @@ def evaluate_populations(folder: str, pop_folder: str, max_v: int = 50):
                 save_path=f'{path_images}time.png')
 
 
+def combine_all_populations(folder: str,
+                            neat: bool = True,
+                            neat_gru: bool = True,
+                            neat_lstm: bool = False,
+                            neat_sru: bool = True,
+                            neat_sru_s: bool = True,
+                            ):
+    """Combine the scores for all of the populations in a given folder."""
+    # Collect all the populations
+    populations = []
+    if neat: populations.append('NEAT')
+    if neat_gru: populations.append('NEAT-GRU')
+    if neat_lstm: populations.append('NEAT-LSTM')
+    if neat_sru: populations.append('NEAT-SRU')
+    if neat_sru_s: populations.append('NEAT-SRU-S')
+    if len(populations) == 0: return
+    
+    # Collect all the measure options
+    OPTIONS = ['distance', 'finished', 'fitness', 'score', 'time', 'training']
+    
+    # Go over all possibilities
+    print(f"\n===> COMBINING POPULATIONS OF FOLDER {folder} <===")
+    path = f"population_backup/storage/{folder}/"
+    path_images = get_subfolder(path, 'images')
+    for option in OPTIONS:
+        plt.figure(figsize=(10, 3))  # TODO: Good?
+        max_data = 0
+        for idx, pop in enumerate(populations):
+            # Load the dictionary
+            d = load_dict(f"{path}{pop}/evaluation/{option}")
+            size = len(list(d.values())[0])
+            
+            # Prepare the data containers
+            q1 = []
+            q2 = []  # Median
+            q3 = []
+            idx_q1 = int(round(1 / 4 * size))
+            idx_q2 = int(round(2 / 4 * size))
+            idx_q3 = int(round(3 / 4 * size))
+            
+            # Loop over each iteration
+            x = sorted([int(k) for k in d.keys()])
+            for g in x:
+                lst = sorted(d[str(g)])  # Sort values from low to high
+                q1.append(lst[idx_q1])
+                q2.append(lst[idx_q2])
+                q3.append(lst[idx_q3])
+            
+            # Plot the results
+            plt.plot(x, q1, color=COLORS[idx], linestyle=":", linewidth=.5)
+            plt.plot(x, q3, color=COLORS[idx], linestyle=":", linewidth=.5)
+            plt.plot(x, q2, color=COLORS[idx], linestyle="-", linewidth=2, label=pop)
+            plt.fill_between(x, q1, q3, color=COLORS[idx], alpha=0.2)
+            
+            # Update the max-counter
+            if max(q3) > max_data: max_data = max(q3)
+        
+        # Finalize the figure
+        plt.legend()
+        plt.xlabel("generation")
+        plt.ylabel(option)
+        plt.ylim(0, max(max_data * 1.05, 1.05))
+        plt.grid()
+        plt.tight_layout()
+        plt.savefig(f"{path_images}comb_{option}.png", bbox_inches='tight', pad_inches=0.02)
+        # plt.show()
+        plt.close()
+
+
+def evaluate_training(experiment_id: int, pop_folder: str, folder: str = None, max_v: int = 50):
+    """Evaluate the fitness of a population's elite each training generation."""
+    if pop_folder[-1] != '/': pop_folder += '/'
+    folder = folder if folder else get_folder(experiment_id)
+    if folder[-1] != '/': folder += '/'
+    
+    # Get dummy population
+    pop = Population(
+            name=f"{pop_folder}v1",
+            folder_name=folder,
+            log_print=False,
+            use_backup=True,
+    )
+    max_gen = pop.generation
+    
+    # Initialize data container
+    training_fitness = dict()
+    for g in range(0, max_gen + 1, HOPS):
+        training_fitness[g] = []
+    
+    # Pull the training scores
+    print(f"\n===> PULLING TRAINING FITNESS OF THE {pop_folder} POPULATIONS <===")
+    pbar = tqdm(range(int(max_v * max_gen / HOPS)))
+    for v in range(1, max_v + 1):
+        name = f"{pop_folder}v{v}"
+        pop = Population(
+                name=name,
+                folder_name=folder,
+                log_print=False,
+                use_backup=True,
+        )
+        
+        # Perform the evaluations
+        max_gen = pop.generation
+        for gen in range(0, max_gen + 1, HOPS):
+            if not pop.load(gen=gen):
+                raise Exception(f"Population {name} is not trained for generation {gen}")
+            training_fitness[gen].append(pop.best_genome.fitness if pop.best_genome else 0)
+            pbar.update()
+    pbar.close()
+    
+    # Plot the result
+    path = get_subfolder(f'population_backup/storage/{folder}{pop_folder}', 'evaluation')
+    update_dict(f'{path}training', training_fitness, overwrite=True)
+    path_images = get_subfolder(path, 'images')
+    plot_result(d=training_fitness,
+                ylabel="fitness",
+                title="Average training fitness",
+                save_path=f'{path_images}training.png')
+
+
 def plot_result(d: dict, ylabel: str, title: str, save_path: str):
     """Create a plot of the given dictionary. Each value of d consists of a list of length 3 (min, avg, max)."""
     # Parse the values
@@ -111,29 +236,123 @@ def plot_result(d: dict, ylabel: str, title: str, save_path: str):
         data[:, i] = d[k]
     
     # Create the plot
-    plt.figure(figsize=(len(keys) / 4, 3))
+    plt.figure(figsize=(10, 2.5))
     plt.boxplot(data, labels=[str(k) for k in keys], whis=[0, 100])
-    plt.title(title)
+    # plt.title(title)  TODO: Title needed?
     plt.xticks(rotation=90)
     plt.xlabel("generations")
     plt.ylabel(ylabel)
-    plt.ylim(0, max(np.max(data) * 1.05, 1.01))
+    plt.ylim(0, max(np.max(data) * 1.05, 1.05))
     plt.grid()
     plt.tight_layout()
-    plt.savefig(save_path)
+    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
     # plt.show()
     plt.close()
+
+
+def plot_distribution(folder: str,
+                      neat: bool = True,
+                      neat_gru: bool = True,
+                      neat_lstm: bool = False,
+                      neat_sru: bool = True,
+                      neat_sru_s: bool = True,
+                      gen: int = 500,
+                      ):
+    """
+    Plot the one-dimensional distribution of all of the populations on each of the evaluation measures for the requested
+     generation. It is assumed that the evaluation-data has already been collected.
+     """
+    # Collect all the populations
+    populations = []
+    if neat: populations.append('NEAT')
+    if neat_gru: populations.append('NEAT-GRU')
+    if neat_lstm: populations.append('NEAT-LSTM')
+    if neat_sru: populations.append('NEAT-SRU')
+    if neat_sru_s: populations.append('NEAT-SRU-S')
+    
+    # Collect all the measure options
+    OPTIONS = ['distance', 'finished', 'fitness', 'score', 'time', 'training']
+    
+    # Go over all possibilities
+    print(f"\n===> CREATING POPULATION DISTRIBUTIONS <===")
+    path = f"population_backup/storage/{folder}/"
+    path_images = get_subfolder(path, 'images')
+    for option in OPTIONS:
+        plt.figure(figsize=(10, 2.5))
+        min_val = float("inf")
+        max_val = -float("inf")
+        for idx, pop in enumerate(populations):
+            d = load_dict(f"{path}{pop}/evaluation/{option}")
+            dist = d[str(gen)]
+            if min(dist) < min_val: min_val = min(dist)
+            if max(dist) > max_val: max_val = max(dist)
+            sns.distplot(dist,
+                         hist=False,
+                         kde=True,
+                         norm_hist=True,
+                         bins=100,
+                         color=COLORS[idx],
+                         kde_kws={'linewidth': 2},
+                         label=pop,
+                         )
+        plt.xlim(min_val, max_val)
+        plt.title(f"Probability density across populations for '{option}' at generation {gen}")
+        plt.xlabel(option)
+        # plt.yticks([])
+        plt.ylabel('probability density')
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(f"{path_images}dist_{option}.png")
+        # plt.show()
+        plt.close()
+
+
+def correctness_check(folder: str,
+                      neat: bool = True,
+                      neat_gru: bool = True,
+                      neat_lstm: bool = True,
+                      neat_sru: bool = True,
+                      neat_sru_s: bool = True,
+                      max_v: int = 50,
+                      max_gen: int = 500,
+                      gen_hops: int = 10,
+                      ):
+    """Test if all the files are present."""
+    # Collect all the populations
+    populations = []
+    if neat: populations.append('NEAT')
+    if neat_gru: populations.append('NEAT-GRU')
+    if neat_lstm: populations.append('NEAT-LSTM')
+    if neat_sru: populations.append('NEAT-SRU')
+    if neat_sru_s: populations.append('NEAT-SRU-S')
+    
+    # Go over all possibilities
+    path = f"population_backup/storage/{folder}/"
+    pbar = tqdm(range(int(len(populations) * max_v * max_gen / gen_hops)), desc="Evaluating correctness")
+    for pop in populations:
+        for v in range(1, max_v + 1):
+            for gen in range(0, max_gen + 1, gen_hops):
+                files = glob(f"{path}{pop}/v{v}/generations/gen_{gen:05d}")
+                # Load in the current generation
+                if len(files) == 0:
+                    raise Exception(f"Population {pop}/v{v} is not trained for generation {gen}")
+                pbar.update()
+    pbar.close()
 
 
 # TODO: Usage of backed-up populations is assumed
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
-    parser.add_argument('--evaluate_gen', type=int, default=1)
-    parser.add_argument('--evaluate_pop', type=int, default=1)
+    parser.add_argument('--evaluate_gen', type=int, default=0)
+    parser.add_argument('--evaluate_pop', type=int, default=0)
+    parser.add_argument('--combine_pop', type=int, default=1)  # Goes over all the populations
+    parser.add_argument('--evaluate_training', type=int, default=0)
+    parser.add_argument('--plot_distribution', type=int, default=1)  # Goes over all the populations
+    parser.add_argument('--test_correctness', type=bool, default=0)
     parser.add_argument('--experiment', type=int, default=2)
     parser.add_argument('--folder', type=str, default=None)
-    parser.add_argument('--folder_pop', type=str, default='NEAT-LSTM')
-    parser.add_argument('--max_v', type=int, default=1)
+    parser.add_argument('--folder_pop', type=str, default='NEAT')
+    parser.add_argument('--max_v', type=int, default=50)
     parser.add_argument('--unused_cpu', type=int, default=2)
     args = parser.parse_args()
     
@@ -141,6 +360,9 @@ if __name__ == '__main__':
     f = args.folder if args.folder else get_folder(args.experiment)
     
     # Execute the program
+    if bool(args.test_correctness):
+        correctness_check(folder=f)  # Use the default parameters
+    
     if bool(args.evaluate_gen):
         evaluate_generations(
                 experiment_id=args.experiment,
@@ -156,3 +378,19 @@ if __name__ == '__main__':
                 pop_folder=args.folder_pop,
                 max_v=args.max_v,
         )
+    
+    if bool(args.combine_pop):
+        combine_all_populations(
+                folder=f,
+        )
+    
+    if bool(args.evaluate_training):
+        evaluate_training(
+                experiment_id=args.experiment,
+                folder=f,
+                pop_folder=args.folder_pop,
+                max_v=args.max_v,
+        )
+    
+    if bool(args.plot_distribution):
+        plot_distribution(folder=f)

@@ -19,6 +19,12 @@ Update a GRU his weights based on its current value, the value fed into the GRU 
 
 ## TODO
 
+* GRU monitor needs extension; also the candidate hidden state!
+
+* Remove delta-distance graph from monitors
+
+* Create an LSTM monitor (?)
+
 * Analyze topology complexity across the populations (proof that GRU doesn't need a complex genome to be able to solve the problem)
 
 * Evaluate on OpenAI's gym environment (e.g. MountainCarContinuous-v0) to compare on another task? --> Would deviate too much from thesis I think

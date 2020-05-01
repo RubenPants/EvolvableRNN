@@ -114,6 +114,7 @@ def monitor(game_id: int,
     elif node_type == SimpleRnnNodeGene:
         from population.utils.visualizing.monitor_genome_single_sru import main as sru_monitor
         sru_monitor(
+                average=2,
                 population=population,
                 game_id=game_id,
                 genome=genome,
@@ -348,19 +349,19 @@ if __name__ == '__main__':
     parser.add_argument('--trace', type=bool, default=False)  # Keep it False
     parser.add_argument('--trace_fit', type=bool, default=False)
     parser.add_argument('--evaluate', type=bool, default=False)
-    parser.add_argument('--genome', type=bool, default=True)
-    parser.add_argument('--monitor', type=bool, default=False)
+    parser.add_argument('--genome', type=bool, default=False)
+    parser.add_argument('--monitor', type=bool, default=True)
     parser.add_argument('--gru_analysis', type=bool, default=False)
     parser.add_argument('--live', type=bool, default=False)
     
     # Extra arguments
     parser.add_argument('--iterations', type=int, default=50)
-    parser.add_argument('--experiment', type=int, default=2)
+    parser.add_argument('--experiment', type=int, default=3)
     parser.add_argument('--unused_cpu', type=int, default=2)
-    parser.add_argument('--version', type=int, default=1)
+    parser.add_argument('--version', type=int, default=3)
     parser.add_argument('--debug', type=bool, default=False)
     parser.add_argument('--duration', type=int, default=60)
-    parser.add_argument('--use_backup', type=bool, default=False)
+    parser.add_argument('--use_backup', type=bool, default=True)
     args = parser.parse_args()
     
     # Load in current config-file
@@ -374,10 +375,10 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='topology_2_0',
+            name='NEAT-SRU/v12',
             # name=get_name(cfg=config, version=args.version),
-            folder_name='experiment6',
-            # folder_name=get_folder(args.experiment),
+            # folder_name='experiment1',
+            folder_name=get_folder(args.experiment),
             config=config,
             use_backup=args.use_backup,
     )

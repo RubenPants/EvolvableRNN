@@ -9,7 +9,7 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 
-from genomes_gru.deviate_hidden import main as hidden_main
+from genomes_gru.deviate_candidate_hidden import main as candidate_hidden_main
 from genomes_gru.deviate_reset import main as reset_main
 from genomes_gru.deviate_update import main as update_main
 from genomes_gru.monitor_genome import main as monitor_genome
@@ -64,7 +64,7 @@ def main(genome: Genome,
             mut_hh=mut_hh,
             mut_xh=mut_xh,
     )
-    hidden_main(
+    candidate_hidden_main(
             genome=genome,
             gid=gid,
             delta=delta,
@@ -82,7 +82,7 @@ def main(genome: Genome,
     path = f"genomes_gru/images/genome{genome.key}/"
     reset = plt.imread(f"{path}reset/{name}.png")
     update = plt.imread(f"{path}update/{name}.png")
-    hidden = plt.imread(f"{path}hidden/{name}.png")
+    hidden = plt.imread(f"{path}candidate_hidden/{name}.png")
     result = np.concatenate([reset, update, hidden], axis=1)  # Concatenate horizontally
     
     # Create the figure
@@ -97,9 +97,9 @@ def main(genome: Genome,
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--delta', type=float, default=.01)  # Deviation
-    parser.add_argument('--duration', type=int, default=60)  # Simulation duration
-    parser.add_argument('--gid', type=int, default=30001)  # First evaluation game of experiment3
-    parser.add_argument('--name', type=str, default='genome1')
+    parser.add_argument('--duration', type=int, default=25)  # Simulation duration
+    parser.add_argument('--gid', type=int, default=60001)  # First evaluation game of experiment3
+    parser.add_argument('--name', type=str, default='genome2')
     args = parser.parse_args()
     
     # Go back to root
