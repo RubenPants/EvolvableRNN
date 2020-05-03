@@ -198,7 +198,7 @@ def evaluate_training(experiment_id: int, pop_folder: str, folder: str = None, m
     
     # Pull the training scores
     print(f"\n===> PULLING TRAINING FITNESS OF THE {pop_folder} POPULATIONS <===")
-    pbar = tqdm(range(int(max_v * max_gen / HOPS)))
+    pbar = tqdm(range(int(max_v * (max_gen / HOPS + 1))))
     for v in range(1, max_v + 1):
         name = f"{pop_folder}v{v}"
         pop = Population(
@@ -236,7 +236,7 @@ def plot_result(d: dict, ylabel: str, title: str, save_path: str):
         data[:, i] = d[k]
     
     # Create the plot
-    plt.figure(figsize=(10, 2.5))
+    plt.figure(figsize=(12, 2.5))
     plt.boxplot(data, labels=[str(k) for k in keys], whis=[0, 100])
     # plt.title(title)  TODO: Title needed?
     plt.xticks(rotation=90)
@@ -344,15 +344,15 @@ def correctness_check(folder: str,
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate_gen', type=int, default=0)
-    parser.add_argument('--evaluate_pop', type=int, default=0)
-    parser.add_argument('--combine_pop', type=int, default=1)  # Goes over all the populations
+    parser.add_argument('--evaluate_pop', type=int, default=1)
+    parser.add_argument('--combine_pop', type=int, default=0)  # Goes over all the populations
     parser.add_argument('--evaluate_training', type=int, default=0)
-    parser.add_argument('--plot_distribution', type=int, default=1)  # Goes over all the populations
+    parser.add_argument('--plot_distribution', type=int, default=0)  # Goes over all the populations
     parser.add_argument('--test_correctness', type=int, default=0)
-    parser.add_argument('--experiment', type=int, default=2)
+    parser.add_argument('--experiment', type=int, default=1)
     parser.add_argument('--folder', type=str, default=None)
     parser.add_argument('--folder_pop', type=str, default='NEAT')
-    parser.add_argument('--max_v', type=int, default=20)
+    parser.add_argument('--max_v', type=int, default=50)
     parser.add_argument('--unused_cpu', type=int, default=2)
     args = parser.parse_args()
     
