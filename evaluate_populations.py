@@ -20,7 +20,6 @@ from utils.dictionary import *
 from utils.myutils import get_subfolder, load_dict, update_dict
 
 HOPS = 10
-COLORS = ['r', 'b', 'c', 'm', 'y']
 
 
 def evaluate_generations(experiment_id: int, pop_folder: str, folder: str = None, max_v: int = 50, unused_cpu: int = 2):
@@ -108,6 +107,7 @@ def evaluate_populations(folder: str, pop_folder: str, max_v: int = 50):
 
 
 def combine_all_populations(folder: str,
+                            assert_size: int = None,
                             neat: bool = True,
                             neat_gru: bool = True,
                             neat_lstm: bool = False,
@@ -117,11 +117,11 @@ def combine_all_populations(folder: str,
     """Combine the scores for all of the populations in a given folder."""
     # Collect all the populations
     populations = []
-    if neat: populations.append('NEAT')
-    if neat_gru: populations.append('NEAT-GRU')
-    if neat_lstm: populations.append('NEAT-LSTM')
-    if neat_sru: populations.append('NEAT-SRU')
-    if neat_sru_s: populations.append('NEAT-SRU-S')
+    if neat: populations.append(D_NEAT)
+    if neat_gru: populations.append(D_NEAT_GRU)
+    if neat_lstm: populations.append(D_NEAT_LSTM)
+    if neat_sru: populations.append(D_NEAT_SRU)
+    if neat_sru_s: populations.append(D_NEAT_SRU_S)
     if len(populations) == 0: return
     
     # Collect all the measure options
@@ -132,12 +132,14 @@ def combine_all_populations(folder: str,
     path = f"population_backup/storage/{folder}/"
     path_images = get_subfolder(path, 'images')
     for option in OPTIONS:
-        plt.figure(figsize=(10, 3))  # TODO: Good?
+        plt.figure(figsize=(10, 3))
         max_data = 0
-        for idx, pop in enumerate(populations):
+        max_gen = 0
+        for pop in populations:
             # Load the dictionary
             d = load_dict(f"{path}{pop}/evaluation/{option}")
             size = len(list(d.values())[0])
+            if assert_size: assert size == assert_size
             
             # Prepare the data containers
             q1 = []
@@ -150,23 +152,31 @@ def combine_all_populations(folder: str,
             # Loop over each iteration
             x = sorted([int(k) for k in d.keys()])
             for g in x:
+                if g > max_gen: max_gen = g
                 lst = sorted(d[str(g)])  # Sort values from low to high
                 q1.append(lst[idx_q1])
                 q2.append(lst[idx_q2])
                 q3.append(lst[idx_q3])
             
             # Plot the results
-            plt.plot(x, q1, color=COLORS[idx], linestyle=":", linewidth=.5)
-            plt.plot(x, q3, color=COLORS[idx], linestyle=":", linewidth=.5)
-            plt.plot(x, q2, color=COLORS[idx], linestyle="-", linewidth=2, label=pop)
-            plt.fill_between(x, q1, q3, color=COLORS[idx], alpha=0.2)
+            plt.plot(x, q1, color=COLORS[pop], linestyle=":", linewidth=.5)
+            plt.plot(x, q3, color=COLORS[pop], linestyle=":", linewidth=.5)
+            plt.plot(x, q2, color=COLORS[pop], linestyle="-", linewidth=2, label=pop)
+            plt.fill_between(x, q1, q3, color=COLORS[pop], alpha=0.2)
             
             # Update the max-counter
             if max(q3) > max_data: max_data = max(q3)
         
         # Finalize the figure
-        plt.legend()
+        leg = plt.legend(loc='upper center',
+                         bbox_to_anchor=(0.5, 1.18),
+                         fancybox=True,
+                         fontsize=10,
+                         ncol=len(populations))
+        for line in leg.get_lines():
+            line.set_linewidth(4.0)
         plt.xlabel("generation")
+        plt.xlim(0, max_gen)
         plt.ylabel(option)
         plt.ylim(0, max(max_data * 1.05, 1.05))
         plt.grid()
@@ -264,11 +274,12 @@ def plot_distribution(folder: str,
      """
     # Collect all the populations
     populations = []
-    if neat: populations.append('NEAT')
-    if neat_gru: populations.append('NEAT-GRU')
-    if neat_lstm: populations.append('NEAT-LSTM')
-    if neat_sru: populations.append('NEAT-SRU')
-    if neat_sru_s: populations.append('NEAT-SRU-S')
+    if neat: populations.append(D_NEAT)
+    if neat_gru: populations.append(D_NEAT_GRU)
+    if neat_lstm: populations.append(D_NEAT_LSTM)
+    if neat_sru: populations.append(D_NEAT_SRU)
+    if neat_sru_s: populations.append(D_NEAT_SRU_S)
+    if len(populations) == 0: return
     
     # Collect all the measure options
     OPTIONS = ['distance', 'finished', 'fitness', 'score', 'time', 'training']
@@ -281,7 +292,7 @@ def plot_distribution(folder: str,
         plt.figure(figsize=(10, 2.5))
         min_val = float("inf")
         max_val = -float("inf")
-        for idx, pop in enumerate(populations):
+        for pop in populations:
             d = load_dict(f"{path}{pop}/evaluation/{option}")
             dist = d[str(gen)]
             if min(dist) < min_val: min_val = min(dist)
@@ -291,7 +302,7 @@ def plot_distribution(folder: str,
                          kde=True,
                          norm_hist=True,
                          bins=100,
-                         color=COLORS[idx],
+                         color=COLORS[pop],
                          kde_kws={'linewidth': 2},
                          label=pop,
                          )
@@ -300,7 +311,14 @@ def plot_distribution(folder: str,
         plt.xlabel(option)
         # plt.yticks([])
         plt.ylabel('probability density')
-        plt.legend()
+        leg = plt.legend(loc='upper center',
+                         bbox_to_anchor=(0.5, 1.135),
+                         fancybox=True,
+                         fontsize=8,
+                         ncol=len(populations))
+        for line in leg.get_lines():
+            line.set_linewidth(4.0)
+            line.set_linewidth(4.0)
         plt.tight_layout()
         plt.savefig(f"{path_images}dist_{option}.png")
         # plt.show()
@@ -344,12 +362,12 @@ def correctness_check(folder: str,
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate_gen', type=int, default=0)
-    parser.add_argument('--evaluate_pop', type=int, default=1)
-    parser.add_argument('--combine_pop', type=int, default=0)  # Goes over all the populations
+    parser.add_argument('--evaluate_pop', type=int, default=0)
+    parser.add_argument('--combine_pop', type=int, default=2)  # Goes over all the populations
     parser.add_argument('--evaluate_training', type=int, default=0)
     parser.add_argument('--plot_distribution', type=int, default=0)  # Goes over all the populations
     parser.add_argument('--test_correctness', type=int, default=0)
-    parser.add_argument('--experiment', type=int, default=1)
+    parser.add_argument('--experiment', type=int, default=2)
     parser.add_argument('--folder', type=str, default=None)
     parser.add_argument('--folder_pop', type=str, default='NEAT')
     parser.add_argument('--max_v', type=int, default=50)
@@ -389,6 +407,7 @@ if __name__ == '__main__':
     if bool(args.combine_pop):
         combine_all_populations(
                 folder=f,
+                assert_size=50,
                 neat=True,
                 neat_gru=True,
                 neat_lstm=True,
