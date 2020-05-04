@@ -16,13 +16,12 @@ Introducing GRU components in NEAT to enhance interpretation of its a robot's su
         What if multiple connections?
     * Experiment 3, how does the graph change for different domains? (same simulations, just different distances) --> interesting?
 * Other remarks:
-    * Graphs of experiment1 are good, can directly go into the thesis
-    * 50pops is enough (increase experiment3 tot 30pop though --> currently training!)
+    * 50 pops is enough (increase experiment3 tot 30pop though --> currently training!)
     * Create statistical analysis of experiment1, var/mean conclusions, is there a significance between populations? (ANOVA?)
         If done, do them also for experiment2
     * Mention complexity of solutions (topology ~NEAT's claim of minimal viable solution)
     * Work further on experiment 3 if enough time left, first focus on experiment 1 and 2!
-    * Topology 3 is incapable of finding a solution (experiment6)
+    * Topology 3 (experiment6) is incapable of finding a solution
     * Perhaps interesting to show progress of probability distribution over time (GIF for experiment 2, see how distributions shift over the generations)
 * Questions:
     * Explain ANOVA in thesis, or just discuss my results for the ANOVA and how these are interpreted?

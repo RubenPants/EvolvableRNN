@@ -347,10 +347,10 @@ if __name__ == '__main__':
     parser.add_argument('--train_overview', type=bool, default=False)
     parser.add_argument('--blueprint', type=bool, default=False)
     parser.add_argument('--trace', type=bool, default=False)  # Keep it False
-    parser.add_argument('--trace_fit', type=bool, default=True)
+    parser.add_argument('--trace_fit', type=bool, default=False)
     parser.add_argument('--evaluate', type=bool, default=False)
     parser.add_argument('--genome', type=bool, default=False)
-    parser.add_argument('--monitor', type=bool, default=False)
+    parser.add_argument('--monitor', type=bool, default=True)
     parser.add_argument('--gru_analysis', type=bool, default=False)
     parser.add_argument('--live', type=bool, default=False)
     
@@ -375,7 +375,7 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='NEAT-SRU/v3',
+            name='NEAT-GRU/v1',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment1',
             folder_name=get_folder(args.experiment),
