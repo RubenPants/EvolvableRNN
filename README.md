@@ -23,6 +23,7 @@ Introducing GRU components in NEAT to enhance interpretation of its a robot's su
     * Mention complexity of solutions (topology ~NEAT's claim of minimal viable solution)
     * Work further on experiment 3 if enough time left, first focus on experiment 1 and 2!
     * Topology 3 is incapable of finding a solution (experiment6)
+    * Perhaps interesting to show progress of probability distribution over time (GIF for experiment 2, see how distributions shift over the generations)
 * Questions:
     * Explain ANOVA in thesis, or just discuss my results for the ANOVA and how these are interpreted?
 
