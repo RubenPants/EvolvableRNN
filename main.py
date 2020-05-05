@@ -375,7 +375,7 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='NEAT-GRU/v1',
+            name='NEAT-SRU/v2',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment1',
             folder_name=get_folder(args.experiment),
