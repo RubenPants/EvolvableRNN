@@ -6,6 +6,7 @@ Evaluate all the populations across their generations and compare each of them a
 Note: Evaluation is only done on backed-up populations.
 """
 import argparse
+from collections import Counter
 from glob import glob
 
 import matplotlib.pyplot as plt
@@ -20,7 +21,6 @@ from utils.dictionary import *
 from utils.myutils import get_subfolder, load_dict, update_dict
 
 HOPS = 10
-COLORS = ['r', 'b', 'c', 'm', 'y']
 
 
 def evaluate_generations(experiment_id: int, pop_folder: str, folder: str = None, max_v: int = 50, unused_cpu: int = 2):
@@ -108,20 +108,21 @@ def evaluate_populations(folder: str, pop_folder: str, max_v: int = 50):
 
 
 def combine_all_populations(folder: str,
-                            neat: bool = True,
-                            neat_gru: bool = True,
+                            assert_size: int = None,
+                            neat: bool = False,
+                            neat_gru: bool = False,
                             neat_lstm: bool = False,
-                            neat_sru: bool = True,
+                            neat_sru: bool = False,
                             neat_sru_s: bool = False,
                             ):
     """Combine the scores for all of the populations in a given folder."""
     # Collect all the populations
     populations = []
-    if neat: populations.append('NEAT')
-    if neat_gru: populations.append('NEAT-GRU')
-    if neat_lstm: populations.append('NEAT-LSTM')
-    if neat_sru: populations.append('NEAT-SRU')
-    if neat_sru_s: populations.append('NEAT-SRU-S')
+    if neat: populations.append(D_NEAT)
+    if neat_gru: populations.append(D_NEAT_GRU)
+    if neat_lstm: populations.append(D_NEAT_LSTM)
+    if neat_sru: populations.append(D_NEAT_SRU)
+    if neat_sru_s: populations.append(D_NEAT_SRU_S)
     if len(populations) == 0: return
     
     # Collect all the measure options
@@ -132,12 +133,14 @@ def combine_all_populations(folder: str,
     path = f"population_backup/storage/{folder}/"
     path_images = get_subfolder(path, 'images')
     for option in OPTIONS:
-        plt.figure(figsize=(10, 3))  # TODO: Good?
+        plt.figure(figsize=(10, 3))
         max_data = 0
-        for idx, pop in enumerate(populations):
+        max_gen = 0
+        for pop in populations:
             # Load the dictionary
             d = load_dict(f"{path}{pop}/evaluation/{option}")
             size = len(list(d.values())[0])
+            if assert_size: assert size == assert_size
             
             # Prepare the data containers
             q1 = []
@@ -150,23 +153,31 @@ def combine_all_populations(folder: str,
             # Loop over each iteration
             x = sorted([int(k) for k in d.keys()])
             for g in x:
+                if g > max_gen: max_gen = g
                 lst = sorted(d[str(g)])  # Sort values from low to high
                 q1.append(lst[idx_q1])
                 q2.append(lst[idx_q2])
                 q3.append(lst[idx_q3])
             
             # Plot the results
-            plt.plot(x, q1, color=COLORS[idx], linestyle=":", linewidth=.5)
-            plt.plot(x, q3, color=COLORS[idx], linestyle=":", linewidth=.5)
-            plt.plot(x, q2, color=COLORS[idx], linestyle="-", linewidth=2, label=pop)
-            plt.fill_between(x, q1, q3, color=COLORS[idx], alpha=0.2)
+            plt.plot(x, q1, color=COLORS[pop], linestyle=":", linewidth=.5)
+            plt.plot(x, q3, color=COLORS[pop], linestyle=":", linewidth=.5)
+            plt.plot(x, q2, color=COLORS[pop], linestyle="-", linewidth=2, label=pop)
+            plt.fill_between(x, q1, q3, color=COLORS[pop], alpha=0.2)
             
             # Update the max-counter
             if max(q3) > max_data: max_data = max(q3)
         
         # Finalize the figure
-        plt.legend()
+        leg = plt.legend(loc='upper center',
+                         bbox_to_anchor=(0.5, 1.18),
+                         fancybox=True,
+                         fontsize=10,
+                         ncol=len(populations))
+        for line in leg.get_lines():
+            line.set_linewidth(4.0)
         plt.xlabel("generation")
+        plt.xlim(0, max_gen)
         plt.ylabel(option)
         plt.ylim(0, max(max_data * 1.05, 1.05))
         plt.grid()
@@ -198,7 +209,7 @@ def evaluate_training(experiment_id: int, pop_folder: str, folder: str = None, m
     
     # Pull the training scores
     print(f"\n===> PULLING TRAINING FITNESS OF THE {pop_folder} POPULATIONS <===")
-    pbar = tqdm(range(int(max_v * max_gen / HOPS)))
+    pbar = tqdm(range(int(max_v * (max_gen / HOPS + 1))))
     for v in range(1, max_v + 1):
         name = f"{pop_folder}v{v}"
         pop = Population(
@@ -236,7 +247,7 @@ def plot_result(d: dict, ylabel: str, title: str, save_path: str):
         data[:, i] = d[k]
     
     # Create the plot
-    plt.figure(figsize=(10, 2.5))
+    plt.figure(figsize=(12, 2.5))
     plt.boxplot(data, labels=[str(k) for k in keys], whis=[0, 100])
     # plt.title(title)  TODO: Title needed?
     plt.xticks(rotation=90)
@@ -251,24 +262,25 @@ def plot_result(d: dict, ylabel: str, title: str, save_path: str):
 
 
 def plot_distribution(folder: str,
-                      neat: bool = True,
-                      neat_gru: bool = True,
+                      neat: bool = False,
+                      neat_gru: bool = False,
                       neat_lstm: bool = False,
-                      neat_sru: bool = True,
+                      neat_sru: bool = False,
                       neat_sru_s: bool = False,
                       gen: int = 500,
                       ):
     """
     Plot the one-dimensional distribution of all of the populations on each of the evaluation measures for the requested
      generation. It is assumed that the evaluation-data has already been collected.
-     """
+    """
     # Collect all the populations
     populations = []
-    if neat: populations.append('NEAT')
-    if neat_gru: populations.append('NEAT-GRU')
-    if neat_lstm: populations.append('NEAT-LSTM')
-    if neat_sru: populations.append('NEAT-SRU')
-    if neat_sru_s: populations.append('NEAT-SRU-S')
+    if neat: populations.append(D_NEAT)
+    if neat_gru: populations.append(D_NEAT_GRU)
+    if neat_lstm: populations.append(D_NEAT_LSTM)
+    if neat_sru: populations.append(D_NEAT_SRU)
+    if neat_sru_s: populations.append(D_NEAT_SRU_S)
+    if len(populations) == 0: return
     
     # Collect all the measure options
     OPTIONS = ['distance', 'finished', 'fitness', 'score', 'time', 'training']
@@ -281,37 +293,136 @@ def plot_distribution(folder: str,
         plt.figure(figsize=(10, 2.5))
         min_val = float("inf")
         max_val = -float("inf")
-        for idx, pop in enumerate(populations):
+        for pop in populations:
             d = load_dict(f"{path}{pop}/evaluation/{option}")
             dist = d[str(gen)]
             if min(dist) < min_val: min_val = min(dist)
             if max(dist) > max_val: max_val = max(dist)
+            
+            # Remove outliers first
+            dist = sorted(dist)
+            q1 = min(dist[int(round(1 / 4 * len(dist)))], dist[int(round(3 / 4 * len(dist)))])
+            q3 = max(dist[int(round(1 / 4 * len(dist)))], dist[int(round(3 / 4 * len(dist)))])
+            iqr = q3 - q1
+            
+            for i in range(len(dist) - 1, -1, -1):
+                if (dist[i] < (q1 - 1.5 * iqr)) or (dist[i] > (q3 + 1.5 * iqr)): del dist[i]
             sns.distplot(dist,
                          hist=False,
                          kde=True,
                          norm_hist=True,
                          bins=100,
-                         color=COLORS[idx],
+                         color=COLORS[pop],
                          kde_kws={'linewidth': 2},
                          label=pop,
                          )
         plt.xlim(min_val, max_val)
-        plt.title(f"Probability density across populations for '{option}' at generation {gen}")
+        # plt.title(f"Probability density across populations for '{option}' at generation {gen}")
         plt.xlabel(option)
         # plt.yticks([])
         plt.ylabel('probability density')
-        plt.legend()
+        leg = plt.legend(loc='upper center',
+                         bbox_to_anchor=(0.5, 1.2),
+                         fancybox=True,
+                         fontsize=8,
+                         ncol=len(populations))
+        for line in leg.get_lines():
+            line.set_linewidth(4.0)
+            line.set_linewidth(4.0)
         plt.tight_layout()
-        plt.savefig(f"{path_images}dist_{option}.png")
+        plt.savefig(f"{path_images}dist_{option}.png", bbox_inches='tight', pad_inches=0.02)
         # plt.show()
         plt.close()
 
 
+def compute_complexity(folder: str,
+                       neat: bool = False,
+                       neat_gru: bool = False,
+                       neat_lstm: bool = False,
+                       neat_sru: bool = False,
+                       neat_sru_s: bool = False,
+                       gen: int = 500,
+                       max_v: int = 50,
+                       ):
+    """Compute the complexity of the populations' elites."""
+    # Collect all the populations
+    populations = []
+    if neat: populations.append(D_NEAT)
+    if neat_gru: populations.append(D_NEAT_GRU)
+    if neat_lstm: populations.append(D_NEAT_LSTM)
+    if neat_sru: populations.append(D_NEAT_SRU)
+    if neat_sru_s: populations.append(D_NEAT_SRU_S)
+    if len(populations) == 0: return
+    
+    # Go over all possibilities
+    print(f"\n===> COMPUTING POPULATION'S ELITE COMPLEXITY <===")
+    path = f"population_backup/storage/{folder}/"
+    genes_dict = dict()
+    for pop in populations:
+        path_eval = get_subfolder(f"{path}{pop}/", 'evaluation')
+        complexity = Counter()
+        genes = Counter()
+        for v in range(1, max_v + 1):
+            population = Population(
+                    name=f'{pop}/v{v}',
+                    folder_name=folder,
+                    use_backup=True,
+            )
+            if population.generation == 0: raise Exception(f"Population {pop}/v{v} loaded incorrectly")
+            if population.generation != gen: population.load(gen=gen)
+            s = population.best_genome.size()
+            complexity[str(s)] += 1
+            genes[str(s[0] + s[1])] += 1
+        
+        # Store results at populations themselves
+        update_dict(f'{path_eval}complexity_topology', complexity, overwrite=True)
+        update_dict(f'{path_eval}complexity_genes', genes, overwrite=True)
+        
+        # Update global dictionary
+        keys = list(genes.keys())
+        for k in keys:
+            genes[int(k)] = genes[k]
+            del genes[k]
+        genes_dict[pop] = list(sorted(genes.items()))
+    
+    plt.figure(figsize=(10, 3))
+    max_x = max([max([a for a, _ in genes_dict[pop]]) for pop in populations])
+    min_x = min([min([a for a, _ in genes_dict[pop]]) for pop in populations])
+    for idx, pop in enumerate(populations):
+        keys = [a for a, _ in genes_dict[pop]]
+        for x in range(max_x):
+            if x not in keys: genes_dict[pop].append((x, 0))
+        x, y = zip(*genes_dict[pop])
+        width = 0.8 / len(populations)
+        plt.bar(x=np.asarray(x) - 0.4 + width / 2 + idx * width,
+                height=y,
+                width=width,
+                linewidth=2,
+                label=pop,
+                color=COLORS[pop])
+    
+    # Beautify the plot
+    plt.xlim(min_x - .5, max_x + .5)
+    plt.xticks([i for i in range(min_x, max_x + 1)])
+    leg = plt.legend(loc='upper center',
+                     bbox_to_anchor=(0.5, 1.135),
+                     fancybox=True,
+                     fontsize=10,
+                     ncol=len(populations))
+    for line in leg.get_lines():
+        line.set_linewidth(4.0)
+    plt.grid(axis='y')
+    plt.savefig(f"population_backup/storage/{folder}/images/complexity.png")
+    # plt.show()
+    plt.close()
+
+
 def correctness_check(folder: str,
-                      neat: bool = True,
-                      neat_gru: bool = True,
+                      neat: bool = False,
+                      neat_gru: bool = False,
                       neat_lstm: bool = False,
-                      neat_sru: bool = True,
+
+                      neat_sru: bool = False,
                       neat_sru_s: bool = False,
                       max_v: int = 50,
                       max_gen: int = 500,
@@ -345,14 +456,15 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate_gen', type=int, default=0)
     parser.add_argument('--evaluate_pop', type=int, default=0)
-    parser.add_argument('--combine_pop', type=int, default=1)  # Goes over all the populations
+    parser.add_argument('--combine_pop', type=int, default=0)  # Goes over all the populations
     parser.add_argument('--evaluate_training', type=int, default=0)
     parser.add_argument('--plot_distribution', type=int, default=1)  # Goes over all the populations
+    parser.add_argument('--compute_topology', type=int, default=0)  # Goes over all the populations
     parser.add_argument('--test_correctness', type=int, default=0)
     parser.add_argument('--experiment', type=int, default=2)
     parser.add_argument('--folder', type=str, default=None)
     parser.add_argument('--folder_pop', type=str, default='NEAT')
-    parser.add_argument('--max_v', type=int, default=20)
+    parser.add_argument('--max_v', type=int, default=50)
     parser.add_argument('--unused_cpu', type=int, default=2)
     args = parser.parse_args()
     
@@ -389,6 +501,7 @@ if __name__ == '__main__':
     if bool(args.combine_pop):
         combine_all_populations(
                 folder=f,
+                assert_size=50,
                 neat=True,
                 neat_gru=True,
                 neat_lstm=True,
@@ -412,3 +525,13 @@ if __name__ == '__main__':
                           neat_sru=True,
                           neat_sru_s=True,
                           )
+    
+    if bool(args.compute_topology):
+        compute_complexity(folder=f,
+                           neat=True,
+                           neat_gru=True,
+                           neat_lstm=True,
+                           neat_sru=True,
+                           neat_sru_s=True,
+                           max_v=args.max_v,  # TODO: args
+                           )
