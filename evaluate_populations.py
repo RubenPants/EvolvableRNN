@@ -421,7 +421,6 @@ def correctness_check(folder: str,
                       neat: bool = False,
                       neat_gru: bool = False,
                       neat_lstm: bool = False,
-
                       neat_sru: bool = False,
                       neat_sru_s: bool = False,
                       max_v: int = 50,
@@ -439,7 +438,7 @@ def correctness_check(folder: str,
     
     # Go over all possibilities
     path = f"population_backup/storage/{folder}/"
-    pbar = tqdm(range(int(len(populations) * max_v * max_gen / gen_hops)), desc="Evaluating correctness")
+    pbar = tqdm(range(int(len(populations) * max_v * (max_gen / gen_hops + 1))), desc="Evaluating correctness")
     for pop in populations:
         for v in range(1, max_v + 1):
             for gen in range(0, max_gen + 1, gen_hops):
@@ -458,13 +457,14 @@ if __name__ == '__main__':
     parser.add_argument('--evaluate_pop', type=int, default=0)
     parser.add_argument('--combine_pop', type=int, default=0)  # Goes over all the populations
     parser.add_argument('--evaluate_training', type=int, default=0)
-    parser.add_argument('--plot_distribution', type=int, default=1)  # Goes over all the populations
+    parser.add_argument('--plot_distribution', type=int, default=0)  # Goes over all the populations
     parser.add_argument('--compute_topology', type=int, default=0)  # Goes over all the populations
     parser.add_argument('--test_correctness', type=int, default=0)
-    parser.add_argument('--experiment', type=int, default=2)
+    parser.add_argument('--experiment', type=int, default=3)
     parser.add_argument('--folder', type=str, default=None)
     parser.add_argument('--folder_pop', type=str, default='NEAT')
-    parser.add_argument('--max_v', type=int, default=50)
+    parser.add_argument('--max_gen', type=int, default=1000)
+    parser.add_argument('--max_v', type=int, default=20)
     parser.add_argument('--unused_cpu', type=int, default=2)
     args = parser.parse_args()
     
@@ -476,9 +476,10 @@ if __name__ == '__main__':
         correctness_check(folder=f,
                           neat=True,
                           neat_gru=True,
-                          neat_lstm=True,
+                          neat_lstm=False,
                           neat_sru=True,
                           neat_sru_s=False,
+                          max_gen=args.max_gen,
                           max_v=args.max_v,
                           )  # Use the default parameters
     
