@@ -52,6 +52,11 @@ D_MEDIAN = 'median'
 D_MIN = 'min'
 
 # N
+D_NEAT = 'NEAT'
+D_NEAT_GRU = 'NEAT-GRU'
+D_NEAT_LSTM = 'NEAT-LSTM'
+D_NEAT_SRU = 'NEAT-SRU'
+D_NEAT_SRU_S = 'NEAT-SRU-S'
 D_NOVELTY = 'novelty'
 
 # P
@@ -86,3 +91,12 @@ D_X_AXIS = 'x_axis'
 
 # Y
 D_Y_AXIS = 'y_axis'
+
+# COLOR PALETTE
+COLORS = {
+    D_NEAT:       '#1f77b4',
+    D_NEAT_GRU:   '#ff7f0e',
+    D_NEAT_LSTM:  '#8c564b',
+    D_NEAT_SRU:   '#2ca02c',
+    D_NEAT_SRU_S: '#d62728',
+}
