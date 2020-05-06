@@ -2,6 +2,31 @@
 Introducing GRU components in NEAT to enhance interpretation of its a robot's surroundings.
 
 
+## Feedback meeting 1st of May
+
+* Discuss:
+    * SRU is overfitting in experiment 1 --> Always wants to go to 6m distances (visualize!)
+    * Observe that SRU does not have the capability of expressing the delta-distance difference
+    * Main question: Why does SRU perform better than GRU? (is the distance delay not possible in SRU?)
+* Research:
+    * Delay of distance as actuation, would this lead to a controller finding the target? (hand-made controller), 
+        If so, why isn't SRU able but GRU is to find this delay?
+    * Do all the GRU solutions follow the delay pattern?
+    * Symmetry of GRU --> Connections after GRU always positive? (half search space, which is a lot since exponential behavior)
+        What if multiple connections?
+    * Experiment 3, how does the graph change for different domains? (same simulations, just different distances) --> interesting?
+* Other remarks:
+    * 50 pops is enough (increase experiment3 tot 30pop though --> currently training!)
+    * Create statistical analysis of experiment1, var/mean conclusions, is there a significance between populations? (ANOVA?)
+        If done, do them also for experiment2
+    * Mention complexity of solutions (topology ~NEAT's claim of minimal viable solution)
+    * Work further on experiment 3 if enough time left, first focus on experiment 1 and 2!
+    * Topology 3 (experiment6) is incapable of finding a solution
+    * Perhaps interesting to show progress of probability distribution over time (GIF for experiment 2, see how distributions shift over the generations)
+* Questions:
+    * Explain ANOVA in thesis, or just discuss my results for the ANOVA and how these are interpreted?
+
+
 ## Main Idea
 
 Update a GRU his weights based on its current value, the value fed into the GRU and the result it obtained (i.e. difference in distance over the step)

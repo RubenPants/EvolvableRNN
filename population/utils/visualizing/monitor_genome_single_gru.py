@@ -22,7 +22,6 @@ from population.utils.gene_util.gru import GruNodeGene
 from population.utils.genome import Genome
 from population.utils.network_util.activations import sigmoid
 from population.utils.network_util.feed_forward_net import make_net
-from population.utils.rnn_cell_util.berkeley_gru import GRUCell
 from utils.dictionary import D_DONE, D_SENSOR_LIST
 from utils.myutils import get_subfolder
 
@@ -76,7 +75,7 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
     actuation.append([0, 0])
     distance.append(state[0])
     position.append(game.player.pos.get_tuple())
-    ht, ht_tilde, rt, zt = get_gru_states(gru=net.rnn_array[0], x=np.asarray([state]))
+    ht, ht_tilde, rt, zt = get_gru_states(net=net, x=np.asarray([state]))
     Ht.append(ht)
     Ht_tilde.append(ht_tilde)
     Rt.append(rt)
@@ -123,7 +122,7 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
         actuation.append(action[0])
         distance.append(state[0])
         position.append(game.player.pos.get_tuple())
-        ht, ht_tilde, rt, zt = get_gru_states(gru=net.rnn_array[0], x=np.asarray([state]))
+        ht, ht_tilde, rt, zt = get_gru_states(net=net, x=np.asarray([state]))
         Ht.append(ht)
         Ht_tilde.append(ht_tilde)
         Rt.append(rt)
@@ -177,8 +176,11 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
     merge(f"Monitored genome={genome.key} on game={game.id}", path=path)
 
 
-def get_gru_states(gru: GRUCell, x):
-    W_xh = np.matmul(x, gru.weight_xh.transpose())
+def get_gru_states(net, x):
+    gru = net.rnn_array[0]
+    inp = np.concatenate((net.in2hid[net.rnn_idx[0]] * x, net.hid2hid[net.rnn_idx[0]] * net.hidden_act),
+                         axis=1)[net.rnn_map[0]].reshape(net.bs, net.rnn_array[0].input_size)
+    W_xh = np.matmul(inp, gru.weight_xh.transpose())
     W_hh = np.matmul(gru.hx, gru.weight_hh.transpose())
     R_t = sigmoid(W_xh[:, 0:1] + W_hh[:, 0:1] + gru.bias[0:1])
     Z_t = sigmoid(W_xh[:, 1:2] + W_hh[:, 1:2] + gru.bias[1:2])
