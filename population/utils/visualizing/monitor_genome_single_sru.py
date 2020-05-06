@@ -21,7 +21,6 @@ from population.population import Population
 from population.utils.gene_util.simple_rnn import SimpleRnnNodeGene
 from population.utils.genome import Genome
 from population.utils.network_util.feed_forward_net import make_net
-from population.utils.rnn_cell_util.simple_rnn import RNNCell
 from population.utils.visualizing.averaging_functions import SMA
 from utils.dictionary import D_DONE, D_SENSOR_LIST
 from utils.myutils import get_subfolder
@@ -79,8 +78,7 @@ def main(population: Population,
     distance.append(state[0])
     delta_distance.append(0)
     position.append(game.player.pos.get_tuple())
-    ht = get_sru_state(sru=net.rnn_array[0], x=np.asarray([state]))
-    Ht.append(ht)
+    Ht.append(net.rnn_state[0, 0, 0])
     if debug:
         print(f"Step: {step_num}")
         print(f"\t> Actuation: {(round(actuation[-1][0], 5), round(actuation[-1][1], 5))!r}")
@@ -120,8 +118,7 @@ def main(population: Population,
         distance.append(state[0])
         delta_distance.append(distance[-2] - distance[-1])
         position.append(game.player.pos.get_tuple())
-        ht = get_sru_state(sru=net.rnn_array[0], x=np.asarray([state]))
-        Ht.append(ht)
+        Ht.append(net.rnn_state[0, 0, 0])
         if debug:
             print(f"Step: {step_num}")
             print(f"\t> Actuation: {(round(actuation[-1][0], 5), round(actuation[-1][1], 5))!r}")
@@ -174,12 +171,6 @@ def main(population: Population,
                        game=game,
                        save_path=f"{path}trace.png")
     merge(f"Monitored genome={genome.key} on game={game.id}", path=path)
-
-
-def get_sru_state(sru: RNNCell, x):
-    return np.tanh(np.matmul(sru.hx, sru.weight_hh.transpose()) +
-                   np.matmul(x, sru.weight_xh.transpose()) +
-                   sru.bias)[0, 0]
 
 
 def visualize_actuation(actuation_list: list, target_found: list, game_cfg: GameConfig, save_path: str):
