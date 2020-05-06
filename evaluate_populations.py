@@ -6,6 +6,7 @@ Evaluate all the populations across their generations and compare each of them a
 Note: Evaluation is only done on backed-up populations.
 """
 import argparse
+from collections import Counter
 from glob import glob
 
 import matplotlib.pyplot as plt
@@ -108,10 +109,10 @@ def evaluate_populations(folder: str, pop_folder: str, max_v: int = 50):
 
 def combine_all_populations(folder: str,
                             assert_size: int = None,
-                            neat: bool = True,
-                            neat_gru: bool = True,
+                            neat: bool = False,
+                            neat_gru: bool = False,
                             neat_lstm: bool = False,
-                            neat_sru: bool = True,
+                            neat_sru: bool = False,
                             neat_sru_s: bool = False,
                             ):
     """Combine the scores for all of the populations in a given folder."""
@@ -261,17 +262,17 @@ def plot_result(d: dict, ylabel: str, title: str, save_path: str):
 
 
 def plot_distribution(folder: str,
-                      neat: bool = True,
-                      neat_gru: bool = True,
+                      neat: bool = False,
+                      neat_gru: bool = False,
                       neat_lstm: bool = False,
-                      neat_sru: bool = True,
+                      neat_sru: bool = False,
                       neat_sru_s: bool = False,
                       gen: int = 500,
                       ):
     """
     Plot the one-dimensional distribution of all of the populations on each of the evaluation measures for the requested
      generation. It is assumed that the evaluation-data has already been collected.
-     """
+    """
     # Collect all the populations
     populations = []
     if neat: populations.append(D_NEAT)
@@ -325,11 +326,94 @@ def plot_distribution(folder: str,
         plt.close()
 
 
+def compute_complexity(folder: str,
+                       neat: bool = False,
+                       neat_gru: bool = False,
+                       neat_lstm: bool = False,
+                       neat_sru: bool = False,
+                       neat_sru_s: bool = False,
+                       gen: int = 500,
+                       max_v: int = 50,
+                       ):
+    """Compute the complexity of the populations' elites."""
+    # Collect all the populations
+    populations = []
+    if neat: populations.append(D_NEAT)
+    if neat_gru: populations.append(D_NEAT_GRU)
+    if neat_lstm: populations.append(D_NEAT_LSTM)
+    if neat_sru: populations.append(D_NEAT_SRU)
+    if neat_sru_s: populations.append(D_NEAT_SRU_S)
+    if len(populations) == 0: return
+    
+    # Go over all possibilities
+    print(f"\n===> COMPUTING POPULATION'S ELITE COMPLEXITY <===")
+    path = f"population_backup/storage/{folder}/"
+    genes_dict = dict()
+    for pop in populations:
+        path_eval = get_subfolder(f"{path}{pop}/", 'evaluation')
+        complexity = Counter()
+        genes = Counter()
+        for v in range(1, max_v + 1):
+            population = Population(
+                    name=f'{pop}/v{v}',
+                    folder_name=folder,
+                    use_backup=True,
+            )
+            if population.generation == 0: raise Exception(f"Population {pop}/v{v} loaded incorrectly")
+            if population.generation != gen: population.load(gen=gen)
+            s = population.best_genome.size()
+            complexity[str(s)] += 1
+            genes[str(s[0] + s[1])] += 1
+        
+        # Store results at populations themselves
+        update_dict(f'{path_eval}complexity_topology', complexity, overwrite=True)
+        update_dict(f'{path_eval}complexity_genes', genes, overwrite=True)
+        
+        # Update global dictionary
+        keys = list(genes.keys())
+        for k in keys:
+            genes[int(k)] = genes[k]
+            del genes[k]
+        genes_dict[pop] = list(sorted(genes.items()))
+    
+    plt.figure(figsize=(10, 3))
+    max_x = max([max([a for a, _ in genes_dict[pop]]) for pop in populations])
+    min_x = min([min([a for a, _ in genes_dict[pop]]) for pop in populations])
+    for idx, pop in enumerate(populations):
+        keys = [a for a, _ in genes_dict[pop]]
+        for x in range(max_x):
+            if x not in keys: genes_dict[pop].append((x, 0))
+        x, y = zip(*genes_dict[pop])
+        width = 0.8 / len(populations)
+        plt.bar(x=np.asarray(x) - 0.4 + width / 2 + idx * width,
+                height=y,
+                width=width,
+                linewidth=2,
+                label=pop,
+                color=COLORS[pop])
+    
+    # Beautify the plot
+    plt.xlim(min_x - .5, max_x + .5)
+    plt.xticks([i for i in range(min_x, max_x + 1)])
+    leg = plt.legend(loc='upper center',
+                     bbox_to_anchor=(0.5, 1.135),
+                     fancybox=True,
+                     fontsize=10,
+                     ncol=len(populations))
+    for line in leg.get_lines():
+        line.set_linewidth(4.0)
+    plt.grid(axis='y')
+    plt.savefig(f"population_backup/storage/{folder}/images/complexity.png")
+    # plt.show()
+    plt.close()
+
+
 def correctness_check(folder: str,
-                      neat: bool = True,
-                      neat_gru: bool = True,
+                      neat: bool = False,
+                      neat_gru: bool = False,
                       neat_lstm: bool = False,
-                      neat_sru: bool = True,
+
+                      neat_sru: bool = False,
                       neat_sru_s: bool = False,
                       max_v: int = 50,
                       max_gen: int = 500,
@@ -363,11 +447,12 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate_gen', type=int, default=0)
     parser.add_argument('--evaluate_pop', type=int, default=0)
-    parser.add_argument('--combine_pop', type=int, default=2)  # Goes over all the populations
+    parser.add_argument('--combine_pop', type=int, default=0)  # Goes over all the populations
     parser.add_argument('--evaluate_training', type=int, default=0)
     parser.add_argument('--plot_distribution', type=int, default=0)  # Goes over all the populations
+    parser.add_argument('--compute_topology', type=int, default=1)  # Goes over all the populations
     parser.add_argument('--test_correctness', type=int, default=0)
-    parser.add_argument('--experiment', type=int, default=2)
+    parser.add_argument('--experiment', type=int, default=1)
     parser.add_argument('--folder', type=str, default=None)
     parser.add_argument('--folder_pop', type=str, default='NEAT')
     parser.add_argument('--max_v', type=int, default=50)
@@ -431,3 +516,13 @@ if __name__ == '__main__':
                           neat_sru=True,
                           neat_sru_s=True,
                           )
+    
+    if bool(args.compute_topology):
+        compute_complexity(folder=f,
+                           neat=True,
+                           neat_gru=True,
+                           neat_lstm=True,
+                           neat_sru=True,
+                           neat_sru_s=True,
+                           max_v=args.max_v,  # TODO: args
+                           )
