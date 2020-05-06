@@ -298,6 +298,15 @@ def plot_distribution(folder: str,
             dist = d[str(gen)]
             if min(dist) < min_val: min_val = min(dist)
             if max(dist) > max_val: max_val = max(dist)
+            
+            # Remove outliers first
+            dist = sorted(dist)
+            q1 = min(dist[int(round(1 / 4 * len(dist)))], dist[int(round(3 / 4 * len(dist)))])
+            q3 = max(dist[int(round(1 / 4 * len(dist)))], dist[int(round(3 / 4 * len(dist)))])
+            iqr = q3 - q1
+            
+            for i in range(len(dist) - 1, -1, -1):
+                if (dist[i] < (q1 - 1.5 * iqr)) or (dist[i] > (q3 + 1.5 * iqr)): del dist[i]
             sns.distplot(dist,
                          hist=False,
                          kde=True,
@@ -308,12 +317,12 @@ def plot_distribution(folder: str,
                          label=pop,
                          )
         plt.xlim(min_val, max_val)
-        plt.title(f"Probability density across populations for '{option}' at generation {gen}")
+        # plt.title(f"Probability density across populations for '{option}' at generation {gen}")
         plt.xlabel(option)
         # plt.yticks([])
         plt.ylabel('probability density')
         leg = plt.legend(loc='upper center',
-                         bbox_to_anchor=(0.5, 1.135),
+                         bbox_to_anchor=(0.5, 1.2),
                          fancybox=True,
                          fontsize=8,
                          ncol=len(populations))
@@ -321,7 +330,7 @@ def plot_distribution(folder: str,
             line.set_linewidth(4.0)
             line.set_linewidth(4.0)
         plt.tight_layout()
-        plt.savefig(f"{path_images}dist_{option}.png")
+        plt.savefig(f"{path_images}dist_{option}.png", bbox_inches='tight', pad_inches=0.02)
         # plt.show()
         plt.close()
 
@@ -449,10 +458,10 @@ if __name__ == '__main__':
     parser.add_argument('--evaluate_pop', type=int, default=0)
     parser.add_argument('--combine_pop', type=int, default=0)  # Goes over all the populations
     parser.add_argument('--evaluate_training', type=int, default=0)
-    parser.add_argument('--plot_distribution', type=int, default=0)  # Goes over all the populations
-    parser.add_argument('--compute_topology', type=int, default=1)  # Goes over all the populations
+    parser.add_argument('--plot_distribution', type=int, default=1)  # Goes over all the populations
+    parser.add_argument('--compute_topology', type=int, default=0)  # Goes over all the populations
     parser.add_argument('--test_correctness', type=int, default=0)
-    parser.add_argument('--experiment', type=int, default=1)
+    parser.add_argument('--experiment', type=int, default=2)
     parser.add_argument('--folder', type=str, default=None)
     parser.add_argument('--folder_pop', type=str, default='NEAT')
     parser.add_argument('--max_v', type=int, default=50)
