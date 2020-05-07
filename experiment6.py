@@ -190,15 +190,13 @@ def get_initial_keys(topology_id: int, use_backup: bool):
         with open(path, 'w', newline='') as f:
             writer = csv.writer(f)
             # Construct the CSV's head, all genomes have the full GRU-parameter suite
-            head = ['bias0', 'bias1', 'bias2',
+            head = ['bias_r', 'bias_z', 'bias_h',
                     'weight_xr', 'weight_xz', 'weight_xh',
                     'weight_hr', 'weight_hz', 'weight_hh']
-            if topology_id in [1, 2]:
+            if topology_id in [1]:
                 head += ['conn1', 'conn2']
-            elif topology_id in [3, 4]:
+            elif topology_id in [2]:
                 head += ['bias_rw', 'conn2']
-            elif topology_id in [5]:
-                head += ['bias_rw', 'conn1']
             head += ['fitness']
             writer.writerow(head)
             return 1, path
