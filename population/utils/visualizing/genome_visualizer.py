@@ -9,12 +9,12 @@ import sys
 from graphviz import Digraph
 
 from configs.genome_config import GenomeConfig
+from population.utils.gene_util.gru import GruNodeGene
 from population.utils.gene_util.gru_no_reset import GruNoResetNodeGene
 from population.utils.gene_util.gru_no_update import GruNoUpdateNodeGene
-from population.utils.gene_util.simple_rnn import SimpleRnnNodeGene
-from population.utils.gene_util.gru import GruNodeGene
 from population.utils.gene_util.lstm import LstmNodeGene
 from population.utils.gene_util.simple_node import SimpleNodeGene
+from population.utils.gene_util.simple_rnn import SimpleRnnNodeGene
 from population.utils.genome import Genome
 from population.utils.network_util.graphs import required_for_output
 
@@ -84,6 +84,7 @@ def draw_net(config: GenomeConfig, genome: Genome, debug=False, filename=None, v
                 shape='box',
                 fillcolor=node_colors.get(key, '#bdc5ff'),
                 pos=f"{(num_inputs - 5) * 10 + index * 100}, "
+                # f"{200 + (50 if debug else 20)}!",  # TODO
                     f"{200 + len(used_hid_nodes) * (50 if debug else 20)}!",
         )
     
@@ -110,13 +111,28 @@ def draw_net(config: GenomeConfig, genome: Genome, debug=False, filename=None, v
                 genome.update_rnn_nodes(config)
             name = str(genome.nodes[key]).replace('\n', '\l') + '\l'  # Replace \n with \l to left-align the text
         else:
-            name = str(key)
+            if type(genome.nodes[key]) == SimpleNodeGene:
+                name = 'simple'
+            elif type(genome.nodes[key]) == LstmNodeGene:
+                name = 'LSTM'
+            elif type(genome.nodes[key]) == GruNodeGene:
+                name = 'GRU'
+            elif type(genome.nodes[key]) == GruNoResetNodeGene:
+                name = 'GRU-NR'
+            elif type(genome.nodes[key]) == GruNoUpdateNodeGene:
+                name = 'GRU-NU'
+            elif type(genome.nodes[key]) == SimpleRnnNodeGene:
+                name = 'SRU'
+            else:
+                raise Exception(f"Type of hidden node not supported: {genome.nodes[key]}")
         node_names.update({key: name})
         dot.node(
                 name,
                 style='filled',
                 shape='box',
                 fillcolor=node_colors.get(key, fillcolor),
+                # pos=f"{-120 + key * 20}, "
+                #     f"{110}!",  # TODO
         )
     
     # Add inputs to used_nodes (i.e. all inputs will always be visualized, even if they aren't used!)
