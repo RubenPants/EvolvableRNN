@@ -23,8 +23,7 @@ Introducing GRU components in NEAT to enhance interpretation of its a robot's su
     * Work further on experiment 3 if enough time left, first focus on experiment 1 and 2!
     * Topology 3 (experiment6) is incapable of finding a solution
     * Perhaps interesting to show progress of probability distribution over time (GIF for experiment 2, see how distributions shift over the generations)
-* Questions:
-    * Explain ANOVA in thesis, or just discuss my results for the ANOVA and how these are interpreted?
+    * Karl (Wannes?) are up to reading through the thesis for feedback 
 
 
 ## Main Idea
