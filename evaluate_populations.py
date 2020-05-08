@@ -26,7 +26,7 @@ HOPS = 10
 def evaluate_generations(experiment_id: int, pop_folder: str, folder: str = None, max_v: int = 50, unused_cpu: int = 2):
     """Evaluate all the populations' generations in a given folder of a given experiment."""
     if pop_folder[-1] != '/': pop_folder += '/'
-    for v in range(1, max_v + 1):
+    for v in range(21, max_v + 1):  # TODO: Put [start] back to 1
         print(f"\n===> EVALUATING POPULATION {pop_folder}v{v} <===")
         eval_gen(
                 name=f"{pop_folder}v{v}",
@@ -459,7 +459,7 @@ if __name__ == '__main__':
     parser.add_argument('--evaluate_training', type=int, default=0)
     parser.add_argument('--plot_distribution', type=int, default=0)  # Goes over all the populations
     parser.add_argument('--compute_topology', type=int, default=0)  # Goes over all the populations
-    parser.add_argument('--test_correctness', type=int, default=1)
+    parser.add_argument('--test_correctness', type=int, default=0)
     parser.add_argument('--experiment', type=int, default=3)
     parser.add_argument('--folder', type=str, default=None)
     parser.add_argument('--folder_pop', type=str, default='NEAT')
