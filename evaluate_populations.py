@@ -459,12 +459,12 @@ if __name__ == '__main__':
     parser.add_argument('--evaluate_training', type=int, default=0)
     parser.add_argument('--plot_distribution', type=int, default=0)  # Goes over all the populations
     parser.add_argument('--compute_topology', type=int, default=0)  # Goes over all the populations
-    parser.add_argument('--test_correctness', type=int, default=0)
+    parser.add_argument('--test_correctness', type=int, default=1)
     parser.add_argument('--experiment', type=int, default=3)
     parser.add_argument('--folder', type=str, default=None)
     parser.add_argument('--folder_pop', type=str, default='NEAT')
     parser.add_argument('--max_gen', type=int, default=1000)
-    parser.add_argument('--max_v', type=int, default=20)
+    parser.add_argument('--max_v', type=int, default=30)
     parser.add_argument('--unused_cpu', type=int, default=2)
     args = parser.parse_args()
     
