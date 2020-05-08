@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 from numpy import clip
 
 from config import GameConfig
+from utils.dictionary import *
 
 
 def distance(save: bool = True):
@@ -32,7 +33,7 @@ def distance(save: bool = True):
     plt.figure(figsize=(7, 3))
     
     # Plot the distance function
-    plt.plot(x, y, 'b', label='distance-based score')
+    plt.plot(x, y, color=COLORS[D_NEAT], label='distance-based score')
     plt.axvspan(0, cfg.target_reached, alpha=0.5, color='green', label='target reached')
     
     # Beautify the plot
@@ -40,10 +41,13 @@ def distance(save: bool = True):
     plt.xlabel("Distance to target")
     plt.xticks([i * 2 for i in range(round(diagonal / 2) + 1)])
     plt.ylabel("Fitness")
-    plt.legend()
+    leg = plt.legend()
+    for line in leg.get_lines():
+        line.set_linewidth(4.0)
     plt.tight_layout()
     plt.grid()
-    if save: plt.savefig('population/utils/visualizing/images/distance_fitness.png')
+    if save:
+        plt.savefig('population/utils/visualizing/images/distance_fitness.png', bbox_inches='tight', pad_inches=0.02)
     plt.show()
     plt.close()
 
