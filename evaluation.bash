@@ -3,10 +3,10 @@
 # Default parameters
 unused_cpu=2;  # Number of CPU threads not used  [int]
 evaluate_gen=1;  # Evaluate the generations  [bint]
-evaluate_pop=0;  # Combine population evaluations  [bint]
-evaluate_train=0;  # Compare the training fitness over the populations [bint]
+evaluate_pop=1;  # Combine population evaluations  [bint]
+evaluate_train=1;  # Compare the training fitness over the populations [bint]
 max_gen=1000;  # Maximum generation for evaluation  [int]
-max_v=20;  # Maximum version for evaluation  [int]
+max_v=30;  # Maximum version for evaluation  [int]
 
 # Run the program
 for experiment in {3,}
