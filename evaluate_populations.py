@@ -26,7 +26,7 @@ HOPS = 10
 def evaluate_generations(experiment_id: int, pop_folder: str, folder: str = None, max_v: int = 50, unused_cpu: int = 2):
     """Evaluate all the populations' generations in a given folder of a given experiment."""
     if pop_folder[-1] != '/': pop_folder += '/'
-    for v in range(21, max_v + 1):  # TODO: Put [start] back to 1
+    for v in range(1, max_v + 1):
         print(f"\n===> EVALUATING POPULATION {pop_folder}v{v} <===")
         eval_gen(
                 name=f"{pop_folder}v{v}",
@@ -108,7 +108,7 @@ def evaluate_populations(folder: str, pop_folder: str, max_v: int = 50):
 
 
 def combine_all_populations(folder: str,
-                            assert_size: int = None,
+                            max_v: int = None,
                             neat: bool = False,
                             neat_gru: bool = False,
                             neat_lstm: bool = False,
@@ -140,7 +140,7 @@ def combine_all_populations(folder: str,
             # Load the dictionary
             d = load_dict(f"{path}{pop}/evaluation/{option}")
             size = len(list(d.values())[0])
-            if assert_size: assert size == assert_size
+            if max_v: assert size == max_v
             
             # Prepare the data containers
             q1 = []
@@ -458,7 +458,7 @@ if __name__ == '__main__':
     parser.add_argument('--combine_pop', type=int, default=0)  # Goes over all the populations
     parser.add_argument('--evaluate_training', type=int, default=0)
     parser.add_argument('--plot_distribution', type=int, default=0)  # Goes over all the populations
-    parser.add_argument('--compute_topology', type=int, default=0)  # Goes over all the populations
+    parser.add_argument('--compute_topology', type=int, default=1)  # Goes over all the populations
     parser.add_argument('--test_correctness', type=int, default=0)
     parser.add_argument('--experiment', type=int, default=3)
     parser.add_argument('--folder', type=str, default=None)
@@ -502,12 +502,12 @@ if __name__ == '__main__':
     if bool(args.combine_pop):
         combine_all_populations(
                 folder=f,
-                assert_size=50,
+                max_v=args.max_v,
                 neat=True,
                 neat_gru=True,
-                neat_lstm=True,
+                neat_lstm=False,
                 neat_sru=True,
-                neat_sru_s=True,
+                neat_sru_s=False,
         )
     
     if bool(args.evaluate_training):
@@ -522,17 +522,18 @@ if __name__ == '__main__':
         plot_distribution(folder=f,
                           neat=True,
                           neat_gru=True,
-                          neat_lstm=True,
+                          neat_lstm=False,
                           neat_sru=True,
-                          neat_sru_s=True,
+                          neat_sru_s=False,
                           )
     
     if bool(args.compute_topology):
         compute_complexity(folder=f,
                            neat=True,
                            neat_gru=True,
-                           neat_lstm=True,
+                           neat_lstm=False,
                            neat_sru=True,
-                           neat_sru_s=True,
-                           max_v=args.max_v,  # TODO: args
+                           neat_sru_s=False,
+                           gen=args.max_gen,
+                           max_v=args.max_v,
                            )
