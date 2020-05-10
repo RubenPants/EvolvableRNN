@@ -10,6 +10,7 @@ from copy import deepcopy
 from config import Config
 from population.population import Population
 from population.utils.gene_util.gru import GruNodeGene
+from population.utils.gene_util.lstm import LstmNodeGene
 from population.utils.gene_util.output_node import OutputNodeGene
 from population.utils.gene_util.simple_node import SimpleNodeGene
 from population.utils.gene_util.simple_rnn import SimpleRnnNodeGene
@@ -121,6 +122,17 @@ def monitor(game_id: int,
                 game_cfg=game_config,
                 debug=debug,
         )
+    elif node_type == LstmNodeGene:
+        from population.utils.visualizing.monitor_genome_single_lstm import main as lstm_monitor
+        lstm_monitor(
+                population=population,
+                game_id=game_id,
+                genome=genome,
+                game_cfg=game_config,
+                debug=debug,
+        )
+    else:
+        raise Exception(f"Not able to monitor the genome of config:\n{genome}")
 
 
 def gru_analysis(population: Population,
@@ -350,9 +362,9 @@ if __name__ == '__main__':
     parser.add_argument('--trace_fit', type=bool, default=False)
     parser.add_argument('--evaluate', type=bool, default=False)
     parser.add_argument('--genome', type=bool, default=False)
-    parser.add_argument('--monitor', type=bool, default=False)
+    parser.add_argument('--monitor', type=bool, default=True)
     parser.add_argument('--gru_analysis', type=bool, default=False)
-    parser.add_argument('--live', type=bool, default=True)
+    parser.add_argument('--live', type=bool, default=False)
     
     # Extra arguments
     parser.add_argument('--iterations', type=int, default=50)
@@ -375,7 +387,7 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='NEAT-GRU/v3',
+            name='NEAT-SRU/v10',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment1',
             folder_name=get_folder(args.experiment),

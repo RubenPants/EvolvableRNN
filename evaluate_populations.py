@@ -248,7 +248,7 @@ def plot_result(d: dict, ylabel: str, title: str, save_path: str):
     
     # Create the plot
     plt.figure(figsize=(12, 2.5))
-    plt.boxplot(data, labels=[str(k) for k in keys], whis=[0, 100])
+    plt.boxplot(data, labels=[str(k) if k % 20 == 0 else '' for k in keys], whis=[0, 100])
     # plt.title(title)  TODO: Title needed?
     plt.xticks(rotation=90)
     plt.xlabel("generations")
@@ -362,6 +362,7 @@ def compute_complexity(folder: str,
         path_eval = get_subfolder(f"{path}{pop}/", 'evaluation')
         complexity = Counter()
         genes = Counter()
+        genes_detailed = dict()
         for v in range(1, max_v + 1):
             population = Population(
                     name=f'{pop}/v{v}',
@@ -372,11 +373,17 @@ def compute_complexity(folder: str,
             if population.generation != gen: population.load(gen=gen)
             s = population.best_genome.size()
             complexity[str(s)] += 1
-            genes[str(s[0] + s[1])] += 1
+            c = str(s[0] + s[1])
+            genes[c] += 1
+            if c in genes_detailed:
+                genes_detailed[c].append(v)
+            else:
+                genes_detailed[c] = [v]
         
         # Store results at populations themselves
         update_dict(f'{path_eval}complexity_topology', complexity, overwrite=True)
         update_dict(f'{path_eval}complexity_genes', genes, overwrite=True)
+        update_dict(f'{path_eval}complexity_genes_detailed', genes_detailed, overwrite=True)
         
         # Update global dictionary
         keys = list(genes.keys())
@@ -385,7 +392,7 @@ def compute_complexity(folder: str,
             del genes[k]
         genes_dict[pop] = list(sorted(genes.items()))
     
-    plt.figure(figsize=(10, 3))
+    plt.figure(figsize=(10, 2.5))
     max_x = max([max([a for a, _ in genes_dict[pop]]) for pop in populations])
     min_x = min([min([a for a, _ in genes_dict[pop]]) for pop in populations])
     for idx, pop in enumerate(populations):
@@ -405,14 +412,17 @@ def compute_complexity(folder: str,
     plt.xlim(min_x - .5, max_x + .5)
     plt.xticks([i for i in range(min_x, max_x + 1)])
     leg = plt.legend(loc='upper center',
-                     bbox_to_anchor=(0.5, 1.135),
+                     bbox_to_anchor=(0.5, 1.18),
                      fancybox=True,
                      fontsize=10,
                      ncol=len(populations))
     for line in leg.get_lines():
-        line.set_linewidth(4.0)
+        line.set_linewidthset_linewidth(4.0)
     plt.grid(axis='y')
-    plt.savefig(f"population_backup/storage/{folder}/images/complexity.png")
+    plt.tight_layout()
+    plt.xlabel("complexity expressed in #genes")
+    plt.ylabel("#elites")
+    plt.savefig(f"population_backup/storage/{folder}/images/complexity.png", bbox_inches='tight', pad_inches=0.02)
     # plt.show()
     plt.close()
 
@@ -454,15 +464,15 @@ def correctness_check(folder: str,
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate_gen', type=int, default=0)
-    parser.add_argument('--evaluate_pop', type=int, default=0)
+    parser.add_argument('--evaluate_pop', type=int, default=1)
     parser.add_argument('--combine_pop', type=int, default=0)  # Goes over all the populations
     parser.add_argument('--evaluate_training', type=int, default=0)
     parser.add_argument('--plot_distribution', type=int, default=0)  # Goes over all the populations
-    parser.add_argument('--compute_topology', type=int, default=1)  # Goes over all the populations
+    parser.add_argument('--compute_topology', type=int, default=0)  # Goes over all the populations
     parser.add_argument('--test_correctness', type=int, default=0)
     parser.add_argument('--experiment', type=int, default=3)
     parser.add_argument('--folder', type=str, default=None)
-    parser.add_argument('--folder_pop', type=str, default='NEAT')
+    parser.add_argument('--folder_pop', type=str, default='NEAT-SRU')
     parser.add_argument('--max_gen', type=int, default=1000)
     parser.add_argument('--max_v', type=int, default=30)
     parser.add_argument('--unused_cpu', type=int, default=2)
@@ -503,7 +513,7 @@ if __name__ == '__main__':
         combine_all_populations(
                 folder=f,
                 max_v=args.max_v,
-                neat=True,
+                neat=False,
                 neat_gru=True,
                 neat_lstm=False,
                 neat_sru=True,
@@ -520,7 +530,7 @@ if __name__ == '__main__':
     
     if bool(args.plot_distribution):
         plot_distribution(folder=f,
-                          neat=True,
+                          neat=False,
                           neat_gru=True,
                           neat_lstm=False,
                           neat_sru=True,
@@ -529,7 +539,7 @@ if __name__ == '__main__':
     
     if bool(args.compute_topology):
         compute_complexity(folder=f,
-                           neat=True,
+                           neat=False,
                            neat_gru=True,
                            neat_lstm=False,
                            neat_sru=True,

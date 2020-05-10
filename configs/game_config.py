@@ -18,7 +18,7 @@ class GameConfig(BaseConfig):
         self.duration: int = 60
         # Number of frames each second  [def=10]
         self.fps: int = 10
-        # Pixel-to-meters: number of pixels that represent one meter  [def=50]
+        # Pixel-to-meters: number of pixels that represent one meter  [def=35]
         self.p2m: int = 35
         # Target is reached when within this range, expressed in meters  [def=.5]
         self.target_reached: float = .5
