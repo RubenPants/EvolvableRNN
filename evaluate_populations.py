@@ -11,6 +11,7 @@ from glob import glob
 
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 import seaborn as sns
 from tqdm import tqdm
 
@@ -425,6 +426,56 @@ def compute_complexity(folder: str,
     plt.savefig(f"population_backup/storage/{folder}/images/complexity.png", bbox_inches='tight', pad_inches=0.02)
     # plt.show()
     plt.close()
+    
+    # Also create a violin plot of the distribution if only two populations
+    if len(populations) == 2:
+        max_x = 0
+        min_x = float('inf')
+        df = pd.DataFrame()
+        palette = []
+        for idx, pop in enumerate(populations):
+            values = []
+            for a, b in genes_dict[pop]:
+                for _ in range(b):
+                    values.append(a)
+            
+            # Remove outliers
+            values = sorted(values)
+            q1 = min(values[int(round(1 / 4 * len(values)))], values[int(round(3 / 4 * len(values)))])
+            q3 = max(values[int(round(1 / 4 * len(values)))], values[int(round(3 / 4 * len(values)))])
+            iqr = q3 - q1
+            
+            for i in range(len(values) - 1, -1, -1):
+                if (values[i] < (q1 - 1.5 * iqr)) or (values[i] > (q3 + 1.5 * iqr)): del values[i]
+            if min(values) < min_x: min_x = min(values)
+            if max(values) > max_x: max_x = max(values)
+            df = df.append(pd.DataFrame({'complexity': values, 'y': 'ignore', 'pop': pop}))
+            palette.append(COLORS[pop])
+        
+        # Create the plot
+        plt.figure(figsize=(10, 2.5))
+        sns.violinplot(data=df,
+                       x="complexity", y="y", hue="pop",
+                       palette=palette, split=True,
+                       inner="quartile")
+        plt.xlim(min_x - .5, max_x + .5)
+        plt.xticks([i for i in range(min_x, max_x + 1)])
+        plt.xlabel("complexity expressed in #genes")
+        plt.yticks([])
+        plt.ylabel('elite genome density')
+        leg = plt.legend(loc='upper center',
+                         bbox_to_anchor=(0.5, 1.25),
+                         fancybox=True,
+                         fontsize=10,
+                         ncol=len(populations))
+        for line in leg.get_lines():
+            line.set_linewidthset_linewidth(4.0)
+        plt.tight_layout()
+        plt.savefig(f"population_backup/storage/{folder}/images/complexity_violin.png",
+                    bbox_inches='tight',
+                    pad_inches=0.02)
+        plt.show()
+        plt.close()
 
 
 def correctness_check(folder: str,
@@ -464,11 +515,11 @@ def correctness_check(folder: str,
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate_gen', type=int, default=0)
-    parser.add_argument('--evaluate_pop', type=int, default=1)
+    parser.add_argument('--evaluate_pop', type=int, default=0)
     parser.add_argument('--combine_pop', type=int, default=0)  # Goes over all the populations
     parser.add_argument('--evaluate_training', type=int, default=0)
     parser.add_argument('--plot_distribution', type=int, default=0)  # Goes over all the populations
-    parser.add_argument('--compute_topology', type=int, default=0)  # Goes over all the populations
+    parser.add_argument('--compute_topology', type=int, default=1)  # Goes over all the populations
     parser.add_argument('--test_correctness', type=int, default=0)
     parser.add_argument('--experiment', type=int, default=3)
     parser.add_argument('--folder', type=str, default=None)

@@ -29,7 +29,7 @@ from utils.dictionary import *
 from utils.myutils import get_subfolder
 
 # Minimal ratio of evaluation games finished before added to the CSV
-MIN_FINISHED = 0.8  # Finish 15/18 or more
+MIN_FINISHED = 1  # Finish 15/18 or more
 
 
 # --------------------------------------------------> MAIN METHODS <-------------------------------------------------- #
@@ -282,11 +282,18 @@ def get_csv_path(topology_id: int, use_backup: bool, batch_size: int):
     path = f"{path}{csv_name}.csv"
     with open(path, 'w', newline='') as f:
         writer = csv.writer(f)
-        writer.writerow(['bias0', 'bias1', 'bias2',
-                         'weight_xr', 'weight_xz', 'weight_xh',
-                         'weight_hr', 'weight_hz', 'weight_hh',
-                         'conn1', 'conn2',
-                         'finished'])
+        # Construct the CSV's head, all genomes have the full GRU-parameter suite
+        head = ['bias_r', 'bias_z', 'bias_h',
+                'weight_xr', 'weight_xz', 'weight_xh',
+                'weight_hr', 'weight_hz', 'weight_hh']
+        if topology_id in [1]:
+            head += ['conn1', 'conn2']
+        elif topology_id in [2]:
+            head += ['bias_rw', 'conn2']
+        elif topology_id in [3]:
+            head += ['bias_rw', 'conn0', 'conn1', 'conn2']
+        head += ['fitness']
+        writer.writerow(head)
         return path, csv_name, 0
 
 
@@ -314,7 +321,7 @@ if __name__ == '__main__':
     parser.add_argument('--save_population', type=bool, default=True)  # Save the final population after finishing
     parser.add_argument('--visualize', type=bool, default=True)  # Visualize the current results
     parser.add_argument('--test', type=bool, default=False)  # Visualize the current results
-    parser.add_argument('--use_backup', type=bool, default=False)  # Use the backup-data
+    parser.add_argument('--use_backup', type=bool, default=True)  # Use the backup-data
     args = parser.parse_args()
     
     # Run the program
