@@ -10,7 +10,6 @@ import os
 import shutil
 import time
 from collections import Counter
-from glob import glob
 
 import matplotlib.pyplot as plt
 from numpy import mean
@@ -182,15 +181,13 @@ def main(topology_id: int,
             shutil.rmtree(path)
 
 
-def visualize_bar(topology_id: int, csv_id: int = None, use_backup: bool = False):
+def visualize_bar(topology_id: int, use_backup: bool = False):
     """Visualize a bar-plot of how many genomes obtained which fitness score"""
     fitness = []
     path_shared = get_subfolder(f"population{'_backup' if use_backup else ''}/storage/", "experiment6")
     path_data = get_subfolder(path_shared, "data_neat")
     path_images = get_subfolder(path_shared, 'images_neat')
-    if csv_id is None: csv_id = len(glob(f"{path_data}*.csv")) - 1
-    if csv_id < 0: raise Exception("No data yet created!")
-    name = f"topology_{topology_id}_{csv_id}"
+    name = f"topology_{topology_id}"
     csv_name = f"{path_data}{name}.csv"
     
     # Read in the scores
@@ -268,44 +265,41 @@ def get_csv_path(topology_id: int, use_backup: bool, batch_size: int):
     """Get the genome-key based on CSV-file's length."""
     path = get_subfolder(f"population{'_backup' if use_backup else ''}/storage/", "experiment6")
     path = get_subfolder(path, "data_neat")
-    n_files = len(glob(f"{path}*.csv"))
-    if n_files > 0:
-        csv_name = f"topology_{topology_id}_{n_files - 1}"
-        path_temp = f"{path}{csv_name}.csv"
-        
-        # If CSV exists, check if not yet full
-        if os.path.exists(path_temp):
-            with open(path_temp, 'r') as f:
-                rows = sum(1 for _ in f) - 1  # Do not count header
-                if rows < batch_size: return path_temp, csv_name, rows
+    csv_name = f"topology_{topology_id}"
+    path = f"{path}{csv_name}.csv"
+    
+    # If CSV exists, check if not yet full
+    if os.path.exists(path):
+        with open(path, 'r') as f:
+            rows = sum(1 for _ in f) - 1  # Do not count header
+            if rows < batch_size: return path, csv_name, rows
     
     # CSV does not yet exist, or is already full, create new CSV
-    csv_name = f"topology_{topology_id}_{n_files}"
-    path = f"{path}{csv_name}.csv"
-    with open(path, 'w', newline='') as f:
-        writer = csv.writer(f)
-        # Construct the CSV's head
-        head = []
-        if topology_id in [1, 2, 3]:  # GRU populations
-            head += ['bias_r', 'bias_z', 'bias_h',
-                     'weight_xr', 'weight_xz', 'weight_xh',
-                     'weight_hr', 'weight_hz', 'weight_hh']
-        elif topology_id in [22, 33]:  # SRU populations
-            head += ['bias_h', 'weight_xh', 'weight_hh']
-        else:
-            raise Exception(f"Topology ID '{topology_id}' not supported!")
-        
-        if topology_id in [1]:
-            head += ['conn1', 'conn2']
-        elif topology_id in [2, 22]:
-            head += ['bias_rw', 'conn2']
-        elif topology_id in [3, 33]:
-            head += ['bias_rw', 'conn0', 'conn1', 'conn2']
-        else:
-            raise Exception(f"Topology ID '{topology_id}' not supported!")
-        head += ['fitness']
-        writer.writerow(head)
-        return path, csv_name, 0
+    else:
+        with open(path, 'w', newline='') as f:
+            writer = csv.writer(f)
+            # Construct the CSV's head
+            head = []
+            if topology_id in [1, 2, 3]:  # GRU populations
+                head += ['bias_r', 'bias_z', 'bias_h',
+                         'weight_xr', 'weight_xz', 'weight_xh',
+                         'weight_hr', 'weight_hz', 'weight_hh']
+            elif topology_id in [22, 33]:  # SRU populations
+                head += ['bias_h', 'weight_xh', 'weight_hh']
+            else:
+                raise Exception(f"Topology ID '{topology_id}' not supported!")
+            
+            if topology_id in [1]:
+                head += ['conn1', 'conn2']
+            elif topology_id in [2, 22]:
+                head += ['bias_rw', 'conn2']
+            elif topology_id in [3, 33]:
+                head += ['bias_rw', 'conn0', 'conn1', 'conn2']
+            else:
+                raise Exception(f"Topology ID '{topology_id}' not supported!")
+            head += ['fitness']
+            writer.writerow(head)
+            return path, csv_name, 0
 
 
 def execution_test():
