@@ -6,7 +6,6 @@ in the genome.
 """
 import argparse
 import os
-import warnings
 from math import cos, sin
 
 import matplotlib.pyplot as plt
@@ -27,8 +26,8 @@ from utils.myutils import get_subfolder
 
 # Parameters
 TIME_SERIES_WIDTH = 8
-TIME_SERIES_HEIGHT = 2
-CORRECTION = 1.06
+TIME_SERIES_HEIGHT = 1.5
+CORRECTION = 1
 
 
 def main(population: Population, game_id: int, genome: Genome = None, game_cfg: Config = None, debug: bool = False):
@@ -219,6 +218,7 @@ def visualize_actuation(actuation_list: list, target_found: list, game_cfg: Game
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Actuation force - Normalized")
+    plt.xlim(0)
     # plt.ylabel("Normalized force")
     # plt.xlabel("Simulation time (s)")
     plt.tight_layout()
@@ -238,6 +238,7 @@ def visualize_distance(distance_list: list, target_found: list, game_cfg: GameCo
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Distance to target - Normalized")
+    plt.xlim(0)
     # plt.ylabel("Normalized distance")
     # plt.xlabel("Simulation time (s)")
     plt.tight_layout()
@@ -263,6 +264,7 @@ def visualize_hidden_states(hidden_state: list,
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Hidden state")
+    plt.xlim(0)
     # plt.ylabel("LSTM output value")
     # plt.xlabel("Simulation time (s)")
     plt.tight_layout()
@@ -288,6 +290,7 @@ def visualize_candidate_hidden_state(c_hidden_state: list,
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Candidate memory state")
+    plt.xlim(0)
     # plt.ylabel("LSTM output value")
     # plt.xlabel("Simulation time (s)")
     plt.tight_layout()
@@ -307,6 +310,7 @@ def visualize_forget_gate(forget_gate: list, target_found: list, game_cfg: GameC
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Forget gate")
+    plt.xlim(0)
     # plt.ylabel("Gate value")
     # plt.xlabel("Simulation time (s)")
     plt.tight_layout()
@@ -326,6 +330,7 @@ def visualize_output_gate(output_gate: list, target_found: list, game_cfg: GameC
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Output gate")
+    plt.xlim(0)
     # plt.ylabel("Gate value")
     # plt.xlabel("Simulation time (s)")
     plt.tight_layout()
@@ -403,26 +408,21 @@ def merge(title: str, path: str):
     trace = plt.imread(f'{path}trace.png')
     
     # Make sure width of all images is the same
-    min_width = min([im.shape[1] for im in images])
     for i in range(len(images)):
-        while images[i].shape[1] > min_width:
+        while images[i].shape[1] > 774:
             images[i] = images[i][:, :-1, :]
+        while images[i].shape[1] < 774:
+            images[i] = np.concatenate((images[i], np.ones((images[i].shape[0], 1, images[i].shape[2]))), axis=1)
     
     # Concatenate the images, time_series vertical, and trace on the right
-    try:
-        images.append(plt.imread('population/utils/visualizing/images/time774.png'))
-        time_series = np.concatenate(images, axis=0)
-        result = np.concatenate([time_series, trace], axis=1)
-    except ValueError:
-        try:
-            images.pop(-1)
-            images.append(plt.imread('population/utils/visualizing/images/time773.png'))
-            time_series = np.concatenate(images, axis=0)
-            result = np.concatenate([time_series, trace], axis=1)
-        except ValueError as e:
-            warnings.warn(f"Failed to monitor genome ({title}), silently terminating\n"
-                          f"Received error: {e}")
-            return
+    images.append(plt.imread('population/utils/visualizing/images/time774.png'))
+    time_series = np.concatenate(images, axis=0)
+    height = time_series.shape[0]
+    while trace.shape[0] > height:
+        trace = trace[:-1, :, :]
+    while trace.shape[0] < height:
+        trace = np.concatenate((trace, np.ones((1, trace.shape[1], trace.shape[2]))), axis=0)
+    result = np.concatenate([time_series, trace], axis=1)
     
     # Create the figure
     plt.figure(figsize=(TIME_SERIES_WIDTH + 6 * TIME_SERIES_HEIGHT, 6 * TIME_SERIES_HEIGHT + 0.5))
