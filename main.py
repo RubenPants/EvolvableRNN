@@ -362,7 +362,7 @@ if __name__ == '__main__':
     parser.add_argument('--trace_fit', type=bool, default=False)
     parser.add_argument('--evaluate', type=bool, default=False)
     parser.add_argument('--genome', type=bool, default=True)
-    parser.add_argument('--monitor', type=bool, default=False)
+    parser.add_argument('--monitor', type=bool, default=True)
     parser.add_argument('--gru_analysis', type=bool, default=False)
     parser.add_argument('--live', type=bool, default=False)
     
@@ -387,14 +387,14 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='NEAT-SRU/v11',
+            name='topology_4_1',
+            # name='NEAT-SRU/v1',
             # name=get_name(cfg=config, version=args.version),
-            # folder_name='experiment1',
-            folder_name=get_folder(args.experiment),
+            folder_name='experiment6',
+            # folder_name=get_folder(args.experiment),
             config=config,
             use_backup=args.use_backup,
     )
-    print(pop.best_genome)
     
     game_ids_train, game_ids_eval = get_game_ids(experiment_id=args.experiment)
     
@@ -470,7 +470,7 @@ if __name__ == '__main__':
         
         if args.genome:
             visualize_genome(
-                    debug=False,
+                    debug=True,
                     genome=chosen_genome if chosen_genome else pop.best_genome,
                     population=pop,
             )
