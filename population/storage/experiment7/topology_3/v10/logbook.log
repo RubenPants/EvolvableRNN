@@ -1,0 +1,3491 @@
+Population 'topology_3/v10' saved! Current generation: 0
+Genetic distance:
+	- Maximum: 5.14634
+	- Mean: 2.64307
+	- Minimum: 0.00000
+	- Standard deviation: 1.04185
+Most complex genome '1' of size (1, 3) belongs to specie '1' with distance to representative of 0
+
+
+
+===> RUNNING EXPERIMENT 7 <===
+
+
+********** Running generation 0 **********
+
+Full population's fitness overview:
+	-       best fitness: 0.51875
+	-       mean fitness: 0.04945
+	-      worst fitness: 0.00000
+	- standard deviation: 0.07225
+Best genome overview:
+	- fitness: 0.51875
+	- size (hid, conn): (1, 3)
+	- genome id: 410
+	- belongs to specie: 8
+Genetic distance:
+	- Maximum: 2.62541
+	- Mean: 1.32955
+	- Minimum: 0.00000
+	- Standard deviation: 0.46102
+Most complex genome '410' of size (1, 3) belongs to specie '1' with distance to representative of 0.677
+
+Population 'topology_3/v10' with 567 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1        0      38     0.01254    0.00039     0       (1, 3)   
+	   2        0     170     0.44823    0.01401     0       (1, 3)   
+	   3        0      83     0.15510    0.00485     0       (1, 3)   
+	   4        0      58     0.00282    0.00009     0       (1, 3)   
+	   5        0      32     0.00554    0.00017     0       (1, 3)   
+	   6        0      34     0.00510    0.00016     0       (1, 3)   
+	   7        0      55     0.00654    0.00020     0       (1, 3)   
+	   8        0      31     0.51875    0.00262     0       (1, 3)   
+	   9        0      26     0.34152    0.00208     0       (1, 3)   
+	   10       0      9      0.19587    0.00311     0       (1, 3)   
+	   11       0      31     0.33449    0.00418     0       (1, 3)   
+
+Generation time: 56.055 sec
+
+********** Running generation 1 **********
+
+Full population's fitness overview:
+	-       best fitness: 0.97333
+	-       mean fitness: 0.19736
+	-      worst fitness: 0.00000
+	- standard deviation: 0.18591
+Best genome overview:
+	- fitness: 0.97333
+	- size (hid, conn): (1, 3)
+	- genome id: 605
+	- belongs to specie: 2
+Genetic distance:
+	- Maximum: 2.48932
+	- Mean: 1.28823
+	- Minimum: 0.00000
+	- Standard deviation: 0.41821
+Most complex genome '605' of size (1, 3) belongs to specie '2' with distance to representative of 0.015
+
+Population 'topology_3/v10' with 514 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1        1      55     0.56759    0.01494     0       (1, 3)   
+	   2        1      67     0.97333    0.00573     0       (1, 3)   
+	   3        1      28     0.32807    0.00395     0       (1, 3)   
+	   4        1      37     0.35813    0.00617     0       (1, 3)   
+	   5        1      44     0.39659    0.01239     0       (1, 3)   
+	   6        1      44     0.38105    0.01121     0       (1, 3)   
+	   7        1      37     0.38353    0.00697     0       (1, 3)   
+	   8        1      57     0.37836    0.01182     1       (1, 3)   
+	   9        1      80     0.84552    0.02642     0       (1, 3)   
+	   10       1      15     0.33443    0.01045     0       (1, 3)   
+	   11       1      50     0.55665    0.01740     0       (1, 3)   
+
+Generation time: 61.877 sec  (58.966 average)
+
+********** Running generation 2 **********
+
+Full population's fitness overview:
+	-       best fitness: 1.35268
+	-       mean fitness: 0.19330
+	-      worst fitness: 0.00000
+	- standard deviation: 0.19422
+Best genome overview:
+	- fitness: 1.35268
+	- size (hid, conn): (1, 3)
+	- genome id: 1087
+	- belongs to specie: 2
+Genetic distance:
+	- Maximum: 2.38331
+	- Mean: 1.27394
+	- Minimum: 0.00000
+	- Standard deviation: 0.39510
+Most complex genome '1087' of size (1, 3) belongs to specie '2' with distance to representative of 0.031
+
+Population 'topology_3/v10' with 516 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1        2      42     0.51407    0.00935     1       (1, 3)   
+	   2        2      82     1.35268    0.02019     0       (1, 3)   
+	   3        2      64     0.61121    0.01910     0       (1, 3)   
+	   4        2      49     0.45050    0.01218     0       (1, 3)   
+	   5        2      53     0.60629    0.01378     0       (1, 3)   
+	   6        2      33     0.33583    0.00763     1       (1, 3)   
+	   7        2      35     0.32818    0.00887     1       (1, 3)   
+	   8        2      39     0.50000    0.00877     2       (1, 3)   
+	   9        2      36     0.59091    0.00739     1       (1, 3)   
+	   10       2      36     0.08072    0.00252     1       (1, 3)   
+	   11       2      47     0.45003    0.00900     1       (1, 3)   
+
+Generation time: 56.162 sec  (58.031 average)
+
+********** Running generation 3 **********
+
+Full population's fitness overview:
+	-       best fitness: 1.56121
+	-       mean fitness: 0.23135
+	-      worst fitness: 0.00000
+	- standard deviation: 0.24644
+Best genome overview:
+	- fitness: 1.56121
+	- size (hid, conn): (1, 3)
+	- genome id: 1623
+	- belongs to specie: 2
+Genetic distance:
+	- Maximum: 2.41537
+	- Mean: 1.21888
+	- Minimum: 0.00000
+	- Standard deviation: 0.39315
+Most complex genome '1623' of size (1, 3) belongs to specie '2' with distance to representative of 0.104
+
+Population 'topology_3/v10' with 512 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1        3      43     0.50000    0.01190     2       (1, 3)   
+	   2        3      80     1.56121    0.01904     0       (1, 3)   
+	   3        3      37     0.24702    0.00386     1       (1, 3)   
+	   4        3      33     0.36887    0.00753     1       (1, 3)   
+	   5        3      47     0.63268    0.01194     0       (1, 3)   
+	   6        3      51     0.24723    0.00749     2       (1, 3)   
+	   7        3      12     0.24112    0.00689     2       (1, 3)   
+	   8        3      36     0.33317    0.00854     3       (1, 3)   
+	   9        3      82     0.74908    0.02081     2       (1, 3)   
+	   10       3      29     0.31141    0.00865     2       (1, 3)   
+	   11       3      62     0.69221    0.01473     0       (1, 3)   
+
+Generation time: 56.704 sec  (57.699 average)
+
+********** Running generation 4 **********
+
+Full population's fitness overview:
+	-       best fitness: 1.87278
+	-       mean fitness: 0.35977
+	-      worst fitness: 0.00000
+	- standard deviation: 0.35123
+Best genome overview:
+	- fitness: 1.87278
+	- size (hid, conn): (1, 3)
+	- genome id: 2062
+	- belongs to specie: 2
+Genetic distance:
+	- Maximum: 2.38120
+	- Mean: 1.22393
+	- Minimum: 0.00000
+	- Standard deviation: 0.40145
+Most complex genome '2062' of size (1, 3) belongs to specie '2' with distance to representative of 0.063
+
+Population 'topology_3/v10' with 516 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1        4      46     0.67985    0.01581     0       (1, 3)   
+	   2        4      71     1.87278    0.02341     0       (1, 3)   
+	   3        4      45     0.60502    0.01635     2       (1, 3)   
+	   4        4      56     0.61963    0.01878     0       (1, 3)   
+	   5        4      42     0.68277    0.01453     0       (1, 3)   
+	   6        4      38     0.60492    0.01186     0       (1, 3)   
+	   7        4      30     0.36750    0.01148     3       (1, 3)   
+	   8        4      46     0.64610    0.01795     0       (1, 3)   
+	   9        4      44     1.00470    0.01225     0       (1, 3)   
+	   10       4      28     0.25454    0.00795     3       (1, 3)   
+	   11       4      70     1.31433    0.02120     0       (1, 3)   
+
+Generation time: 56.101 sec  (57.380 average)
+
+********** Running generation 5 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.00756
+	-       mean fitness: 0.31940
+	-      worst fitness: 0.00000
+	- standard deviation: 0.31471
+Best genome overview:
+	- fitness: 2.00756
+	- size (hid, conn): (1, 3)
+	- genome id: 2551
+	- belongs to specie: 2
+Genetic distance:
+	- Maximum: 2.38316
+	- Mean: 1.20020
+	- Minimum: 0.00000
+	- Standard deviation: 0.41156
+Most complex genome '2551' of size (1, 3) belongs to specie '2' with distance to representative of 0.098
+
+Population 'topology_3/v10' with 515 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1        5      53     0.77031    0.01675     0       (1, 3)   
+	   2        5      83     2.00756    0.02828     0       (1, 3)   
+	   3        5      4      0.58038    0.01290     3       (1, 3)   
+	   4        5      41     0.37588    0.00671     1       (1, 3)   
+	   5        5      51     0.78263    0.01863     0       (1, 3)   
+	   6        5      2      0.52141    0.01372     1       (1, 3)   
+	   7        5      92     0.30737    0.00961     4       (1, 3)   
+	   8        5      40     0.30955    0.00673     1       (1, 3)   
+	   9        5      68     1.15616    0.02628     0       (1, 3)   
+	   10       5      7      0.31522    0.00985     4       (1, 3)   
+	   11       5      74     0.96795    0.01383     1       (1, 3)   
+
+Generation time: 56.863 sec  (57.294 average)
+
+********** Running generation 6 **********
+
+Full population's fitness overview:
+	-       best fitness: 1.75136
+	-       mean fitness: 0.31487
+	-      worst fitness: 0.00000
+	- standard deviation: 0.32260
+Best genome overview:
+	- fitness: 1.75136
+	- size (hid, conn): (1, 3)
+	- genome id: 2993
+	- belongs to specie: 2
+Genetic distance:
+	- Maximum: 2.34503
+	- Mean: 1.15253
+	- Minimum: 0.00000
+	- Standard deviation: 0.44269
+Most complex genome '2993' of size (1, 3) belongs to specie '2' with distance to representative of 0.06
+
+Population 'topology_3/v10' with 519 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1        6      60     0.80451    0.01518     0       (1, 3)   
+	   2        6      79     1.75136    0.02110     1       (1, 3)   
+	   3        6      61     0.49308    0.01541     4       (1, 3)   
+	   4        6      30     0.41275    0.01007     2       (1, 3)   
+	   5        6      36     0.34522    0.00677     1       (1, 3)   
+	   6        6      26     0.15684    0.00490     2       (1, 3)   
+	   7        6      49     0.63140    0.00686     0       (1, 3)   
+	   8        6      26     0.48151    0.01204     2       (1, 3)   
+	   9        6      61     1.07225    0.01577     1       (1, 3)   
+	   10       6      28     0.32363    0.01011     5       (1, 3)   
+	   11       6      63     0.85979    0.01162     2       (1, 3)   
+
+Generation time: 56.973 sec  (57.248 average)
+
+********** Running generation 7 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.09464
+	-       mean fitness: 0.34151
+	-      worst fitness: 0.00000
+	- standard deviation: 0.39177
+Best genome overview:
+	- fitness: 2.09464
+	- size (hid, conn): (1, 3)
+	- genome id: 3512
+	- belongs to specie: 2
+Genetic distance:
+	- Maximum: 2.30703
+	- Mean: 1.17118
+	- Minimum: 0.00000
+	- Standard deviation: 0.44087
+Most complex genome '3512' of size (1, 3) belongs to specie '2' with distance to representative of 0.106
+
+Population 'topology_3/v10' with 515 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1        7      40     0.48251    0.00804     1       (1, 3)   
+	   2        7      83     2.09464    0.02651     0       (1, 3)   
+	   3        7      54     0.50538    0.00828     5       (1, 3)   
+	   4        7      47     0.50817    0.01588     3       (1, 3)   
+	   5        7      46     0.57453    0.01596     2       (1, 3)   
+	   6        7      21     0.32273    0.01009     3       (1, 3)   
+	   7        7      46     0.43240    0.00882     1       (1, 3)   
+	   8        7      24     0.54996    0.01719     3       (1, 3)   
+	   9        7      60     1.21776    0.01996     0       (1, 3)   
+	   10       7      33     0.32977    0.01031     6       (1, 3)   
+	   11       7      61     1.19769    0.01901     3       (1, 3)   
+
+Generation time: 57.318 sec  (57.257 average)
+
+********** Running generation 8 **********
+
+Full population's fitness overview:
+	-       best fitness: 1.89057
+	-       mean fitness: 0.36513
+	-      worst fitness: 0.00000
+	- standard deviation: 0.38893
+Best genome overview:
+	- fitness: 1.89057
+	- size (hid, conn): (1, 3)
+	- genome id: 2551
+	- belongs to specie: 2
+Genetic distance:
+	- Maximum: 2.51550
+	- Mean: 1.16649
+	- Minimum: 0.00000
+	- Standard deviation: 0.43020
+Most complex genome '2551' of size (1, 3) belongs to specie '2' with distance to representative of 0.128
+
+Population 'topology_3/v10' with 513 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1        8      61     0.74656    0.01866     2       (1, 3)   
+	   2        8      78     1.89057    0.02278     1       (1, 3)   
+	   3        8      67     0.66031    0.01223     0       (1, 3)   
+	   4        8      45     0.60556    0.01288     4       (1, 3)   
+	   5        8      31     0.39474    0.00858     3       (1, 3)   
+	   6        8      21     0.43274    0.01352     4       (1, 3)   
+	   7        8      64     0.58462    0.01271     2       (1, 3)   
+	   8        8      5      0.50587    0.01581     4       (1, 3)   
+	   9        8      47     0.83513    0.01392     1       (1, 3)   
+	   10       8      41     0.31472    0.00954     7       (1, 3)   
+	   11       8      53     0.95169    0.01560     4       (1, 3)   
+
+Generation time: 56.629 sec  (57.187 average)
+
+********** Running generation 9 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.05011
+	-       mean fitness: 0.29851
+	-      worst fitness: 0.00000
+	- standard deviation: 0.36413
+Best genome overview:
+	- fitness: 2.05011
+	- size (hid, conn): (1, 3)
+	- genome id: 4442
+	- belongs to specie: 2
+Genetic distance:
+	- Maximum: 2.39727
+	- Mean: 1.16700
+	- Minimum: 0.00000
+	- Standard deviation: 0.45457
+Most complex genome '4442' of size (1, 3) belongs to specie '2' with distance to representative of 0.035
+
+Population 'topology_3/v10' with 517 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1        9      39     0.52710    0.00864     3       (1, 3)   
+	   2        9      94     2.05011    0.02628     2       (1, 3)   
+	   3        9      42     0.39926    0.00596     1       (1, 3)   
+	   4        9      35     0.35969    0.00799     5       (1, 3)   
+	   5        9      39     0.43944    0.01373     4       (1, 3)   
+	   6        9      29     0.50869    0.01590     5       (1, 3)   
+	   7        9      37     0.54916    0.00858     3       (1, 3)   
+	   8        9      28     0.21720    0.00679     5       (1, 3)   
+	   9        9      75     1.13254    0.02410     2       (1, 3)   
+	   10       9      43     0.21294    0.00519     8       (1, 3)   
+	   11       9      56     0.88126    0.01663     5       (1, 3)   
+
+Generation time: 56.506 sec  (57.119 average)
+Population 'topology_3/v10' saved! Current generation: 10
+
+********** Running generation 10 **********
+
+Full population's fitness overview:
+	-       best fitness: 1.59595
+	-       mean fitness: 0.38954
+	-      worst fitness: 0.00000
+	- standard deviation: 0.35639
+Best genome overview:
+	- fitness: 1.59595
+	- size (hid, conn): (1, 3)
+	- genome id: 4442
+	- belongs to specie: 2
+Genetic distance:
+	- Maximum: 2.43907
+	- Mean: 1.17975
+	- Minimum: 0.00000
+	- Standard deviation: 0.45482
+Most complex genome '4442' of size (1, 3) belongs to specie '2' with distance to representative of 0.04
+
+Population 'topology_3/v10' with 513 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       10      53     0.75056    0.01925     4       (1, 3)   
+	   2       10      71     1.59595    0.01698     3       (1, 3)   
+	   3       10      48     0.72038    0.01715     0       (1, 3)   
+	   4       10      59     0.74493    0.02128     0       (1, 3)   
+	   5       10      59     0.82539    0.02116     0       (1, 3)   
+	   6       10      26     0.47742    0.01492     6       (1, 3)   
+	   7       10      40     0.55084    0.01489     4       (1, 3)   
+	   8       10      29     0.19535    0.00610     6       (1, 3)   
+	   9       10      55     1.28865    0.01718     0       (1, 3)   
+	   10      10      36     0.38106    0.00886     0       (1, 3)   
+	   11      10      37     0.62096    0.01109     6       (1, 3)   
+
+Generation time: 57.362 sec  (57.250 average)
+
+********** Running generation 11 **********
+
+Full population's fitness overview:
+	-       best fitness: 1.72141
+	-       mean fitness: 0.41421
+	-      worst fitness: 0.00000
+	- standard deviation: 0.33434
+Best genome overview:
+	- fitness: 1.72141
+	- size (hid, conn): (1, 3)
+	- genome id: 5346
+	- belongs to specie: 2
+Genetic distance:
+	- Maximum: 2.24413
+	- Mean: 1.14097
+	- Minimum: 0.00000
+	- Standard deviation: 0.43233
+Most complex genome '5346' of size (1, 3) belongs to specie '2' with distance to representative of 0
+
+Population 'topology_3/v10' with 515 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       11      40     0.71174    0.01343     5       (1, 3)   
+	   2       11     106     1.72141    0.02425     4       (1, 3)   
+	   3       11      39     0.60970    0.01270     1       (1, 3)   
+	   4       11      43     0.80265    0.01360     0       (1, 3)   
+	   5       11      46     0.62068    0.01052     1       (1, 3)   
+	   6       11      31     0.75143    0.02348     0       (1, 3)   
+	   7       11      42     0.82331    0.02058     0       (1, 3)   
+	   8       11      29     0.26581    0.00831     7       (1, 3)   
+	   9       11      56     1.19084    0.02165     1       (1, 3)   
+	   10      11      18     0.45012    0.01250     0       (1, 3)   
+	   11      11      65     1.00421    0.02714     7       (1, 3)   
+
+Generation time: 56.818 sec  (56.744 average)
+
+********** Running generation 12 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.23213
+	-       mean fitness: 0.47511
+	-      worst fitness: 0.00000
+	- standard deviation: 0.47387
+Best genome overview:
+	- fitness: 2.23213
+	- size (hid, conn): (1, 3)
+	- genome id: 5808
+	- belongs to specie: 2
+Genetic distance:
+	- Maximum: 2.41423
+	- Mean: 1.12496
+	- Minimum: 0.00000
+	- Standard deviation: 0.45597
+Most complex genome '5808' of size (1, 3) belongs to specie '2' with distance to representative of 0.001
+
+Population 'topology_3/v10' with 516 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       12      39     0.65065    0.01627     6       (1, 3)   
+	   2       12      74     2.23213    0.02106     0       (1, 3)   
+	   3       12      49     0.83197    0.02133     0       (1, 3)   
+	   4       12      48     0.83723    0.01947     0       (1, 3)   
+	   5       12      56     0.97108    0.02111     0       (1, 3)   
+	   6       12      27     0.55765    0.01743     1       (1, 3)   
+	   7       12      32     0.61867    0.01473     1       (1, 3)   
+	   8       12      31     0.31939    0.00998     8       (1, 3)   
+	   9       12      75     1.86494    0.03330     0       (1, 3)   
+	   10      12      30     0.33943    0.01061     1       (1, 3)   
+	   11      12      55     1.43784    0.02212     0       (1, 3)   
+
+Generation time: 56.690 sec  (56.796 average)
+
+********** Running generation 13 **********
+
+Full population's fitness overview:
+	-       best fitness: 1.74661
+	-       mean fitness: 0.37140
+	-      worst fitness: 0.00000
+	- standard deviation: 0.40602
+Best genome overview:
+	- fitness: 1.74661
+	- size (hid, conn): (1, 3)
+	- genome id: 6277
+	- belongs to specie: 2
+Genetic distance:
+	- Maximum: 2.30434
+	- Mean: 1.10514
+	- Minimum: 0.00000
+	- Standard deviation: 0.44109
+Most complex genome '6277' of size (1, 3) belongs to specie '2' with distance to representative of 0.08
+
+Population 'topology_3/v10' with 519 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       13      60     0.86331    0.02214     0       (1, 3)   
+	   2       13      74     1.74661    0.02360     1       (1, 3)   
+	   3       13      34     0.46007    0.00939     1       (1, 3)   
+	   4       13      33     0.49530    0.01032     1       (1, 3)   
+	   5       13      46     0.87052    0.01555     1       (1, 3)   
+	   6       13      35     0.32019    0.01001     2       (1, 3)   
+	   7       13      52     0.63494    0.01984     2       (1, 3)   
+	   8       13      32     0.20907    0.00653     9       (1, 3)   
+	   9       13      60     1.49318    0.01991     1       (1, 3)   
+	   10      13      25     0.20743    0.00648     2       (1, 3)   
+	   11      13      68     1.36289    0.02478     1       (1, 3)   
+
+Generation time: 57.278 sec  (56.854 average)
+
+********** Running generation 14 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.47357
+	-       mean fitness: 0.42540
+	-      worst fitness: 0.00000
+	- standard deviation: 0.50616
+Best genome overview:
+	- fitness: 2.47357
+	- size (hid, conn): (1, 3)
+	- genome id: 6874
+	- belongs to specie: 11
+Genetic distance:
+	- Maximum: 2.37915
+	- Mean: 1.11756
+	- Minimum: 0.00000
+	- Standard deviation: 0.44718
+Most complex genome '6874' of size (1, 3) belongs to specie '11' with distance to representative of 0.159
+
+Population 'topology_3/v10' with 519 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       14      46     1.08470    0.01808     0       (1, 3)   
+	   2       14      68     1.99720    0.02699     2       (1, 3)   
+	   3       14      32     0.21763    0.00640     2       (1, 3)   
+	   4       14      37     0.57310    0.01737     2       (1, 3)   
+	   5       14      53     1.13164    0.02460     0       (1, 3)   
+	   6       14      34     0.55224    0.01578     3       (1, 3)   
+	   7       14      36     0.75381    0.01450     3       (1, 3)   
+	   8       14      33     0.32299    0.01009     10      (1, 3)   
+	   9       14      73     2.11173    0.03520     0       (1, 3)   
+	   10      14      28     0.13778    0.00431     3       (1, 3)   
+	   11      14      79     2.47357    0.03638     0       (1, 3)   
+
+Generation time: 57.310 sec  (56.975 average)
+
+********** Running generation 15 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.04487
+	-       mean fitness: 0.34311
+	-      worst fitness: 0.00000
+	- standard deviation: 0.37128
+Best genome overview:
+	- fitness: 2.04487
+	- size (hid, conn): (1, 3)
+	- genome id: 7232
+	- belongs to specie: 11
+Genetic distance:
+	- Maximum: 2.38105
+	- Mean: 1.14349
+	- Minimum: 0.00000
+	- Standard deviation: 0.44536
+Most complex genome '7232' of size (1, 3) belongs to specie '11' with distance to representative of 0.132
+
+Population 'topology_3/v10' with 512 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       15      37     0.48464    0.01054     1       (1, 3)   
+	   2       15      74     1.80221    0.02650     3       (1, 3)   
+	   3       15      47     0.57526    0.01798     3       (1, 3)   
+	   4       15      53     0.78766    0.02129     3       (1, 3)   
+	   5       15      38     0.72723    0.01372     1       (1, 3)   
+	   6       15      34     0.50323    0.01480     4       (1, 3)   
+	   7       15      36     0.43767    0.01216     4       (1, 3)   
+	   8       15      40     0.52335    0.01586     11      (1, 3)   
+	   9       15      49     1.18112    0.01618     1       (1, 3)   
+	   10      15      34     0.49044    0.01533     0       (1, 3)   
+	   11      15      70     2.04487    0.02588     1       (1, 3)   
+
+Generation time: 57.070 sec  (56.995 average)
+
+********** Running generation 16 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.27263
+	-       mean fitness: 0.47494
+	-      worst fitness: 0.00000
+	- standard deviation: 0.51159
+Best genome overview:
+	- fitness: 2.27263
+	- size (hid, conn): (1, 3)
+	- genome id: 7232
+	- belongs to specie: 11
+Genetic distance:
+	- Maximum: 2.32787
+	- Mean: 1.13967
+	- Minimum: 0.00000
+	- Standard deviation: 0.46259
+Most complex genome '7232' of size (1, 3) belongs to specie '11' with distance to representative of 0.127
+
+Population 'topology_3/v10' with 514 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       16      38     0.64626    0.01747     2       (1, 3)   
+	   2       16      65     2.06181    0.02786     4       (1, 3)   
+	   3       16      42     0.85053    0.01810     0       (1, 3)   
+	   4       16      41     0.89039    0.01680     0       (1, 3)   
+	   5       16      67     1.28950    0.03393     0       (1, 3)   
+	   6       16      29     0.44592    0.01312     5       (1, 3)   
+	   7       16      43     0.73204    0.02033     5       (1, 3)   
+	   8       16      34     0.24305    0.00608     12      (1, 3)   
+	   9       16      52     1.19870    0.02446     2       (1, 3)   
+	   10      16      32     0.26862    0.00790     1       (1, 3)   
+	   11      16      71     2.27263    0.03247     2       (1, 3)   
+
+Generation time: 56.186 sec  (56.917 average)
+
+********** Running generation 17 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.17341
+	-       mean fitness: 0.42546
+	-      worst fitness: 0.00000
+	- standard deviation: 0.45080
+Best genome overview:
+	- fitness: 2.17341
+	- size (hid, conn): (1, 3)
+	- genome id: 8181
+	- belongs to specie: 2
+Genetic distance:
+	- Maximum: 2.30435
+	- Mean: 1.13611
+	- Minimum: 0.00000
+	- Standard deviation: 0.44903
+Most complex genome '8181' of size (1, 3) belongs to specie '2' with distance to representative of 0.024
+
+Population 'topology_3/v10' with 512 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       17      45     0.71564    0.01883     3       (1, 3)   
+	   2       17      77     2.17341    0.03344     5       (1, 3)   
+	   3       17      37     0.55769    0.01328     1       (1, 3)   
+	   4       17      42     0.66792    0.01629     1       (1, 3)   
+	   5       17      52     1.48756    0.02220     0       (1, 3)   
+	   6       17      14     0.36650    0.01145     6       (1, 3)   
+	   7       17      35     0.58115    0.01352     6       (1, 3)   
+	   8       17      34     0.52686    0.01550     13      (1, 3)   
+	   9       17      58     1.35032    0.02597     3       (1, 3)   
+	   10      17      48     0.48359    0.01511     2       (1, 3)   
+	   11      17      70     2.02599    0.02854     3       (1, 3)   
+
+Generation time: 56.641 sec  (56.849 average)
+
+********** Running generation 18 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.38985
+	-       mean fitness: 0.49637
+	-      worst fitness: 0.00000
+	- standard deviation: 0.57784
+Best genome overview:
+	- fitness: 2.38985
+	- size (hid, conn): (1, 3)
+	- genome id: 8679
+	- belongs to specie: 11
+Genetic distance:
+	- Maximum: 2.22874
+	- Mean: 1.13261
+	- Minimum: 0.00000
+	- Standard deviation: 0.44715
+Most complex genome '8679' of size (1, 3) belongs to specie '11' with distance to representative of 0.055
+
+Population 'topology_3/v10' with 519 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       18      40     0.71395    0.01587     4       (1, 3)   
+	   2       18      63     2.08616    0.02709     6       (1, 3)   
+	   3       18      38     0.58479    0.01581     2       (1, 3)   
+	   4       18      36     0.41390    0.00985     2       (1, 3)   
+	   5       18      84     2.26483    0.04355     0       (1, 3)   
+	   6       18      57     0.40055    0.01252     7       (1, 3)   
+	   7       18      32     0.50356    0.01439     7       (1, 3)   
+	   8       18      32     0.25918    0.00762     14      (1, 3)   
+	   9       18      60     1.76919    0.03050     4       (1, 3)   
+	   10      18      3      0.21877    0.00456     3       (1, 3)   
+	   11      18      74     2.38985    0.03414     4       (1, 3)   
+
+Generation time: 56.840 sec  (56.870 average)
+
+********** Running generation 19 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.15448
+	-       mean fitness: 0.53600
+	-      worst fitness: 0.00000
+	- standard deviation: 0.54112
+Best genome overview:
+	- fitness: 2.15448
+	- size (hid, conn): (1, 3)
+	- genome id: 9053
+	- belongs to specie: 11
+Genetic distance:
+	- Maximum: 2.29940
+	- Mean: 1.12176
+	- Minimum: 0.00000
+	- Standard deviation: 0.42527
+Most complex genome '9053' of size (1, 3) belongs to specie '11' with distance to representative of 0.015
+
+Population 'topology_3/v10' with 517 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       19      42     0.68195    0.01705     5       (1, 3)   
+	   2       19      72     2.01094    0.03192     7       (1, 3)   
+	   3       19      34     0.46870    0.01233     3       (1, 3)   
+	   4       19      47     0.78403    0.02178     3       (1, 3)   
+	   5       19      54     1.83967    0.02190     1       (1, 3)   
+	   6       19      47     0.67209    0.01179     8       (1, 3)   
+	   7       19      44     0.70872    0.02215     8       (1, 3)   
+	   8       19      35     0.50219    0.01569     15      (1, 3)   
+	   9       19      59     1.72297    0.02872     5       (1, 3)   
+	   10      19      16     0.23348    0.00730     4       (1, 3)   
+	   11      19      67     2.15448    0.02911     5       (1, 3)   
+
+Generation time: 57.519 sec  (56.971 average)
+Population 'topology_3/v10' saved! Current generation: 20
+
+********** Running generation 20 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.07106
+	-       mean fitness: 0.60486
+	-      worst fitness: 0.00000
+	- standard deviation: 0.53033
+Best genome overview:
+	- fitness: 2.07106
+	- size (hid, conn): (1, 3)
+	- genome id: 9635
+	- belongs to specie: 5
+Genetic distance:
+	- Maximum: 2.22264
+	- Mean: 1.10663
+	- Minimum: 0.00000
+	- Standard deviation: 0.42291
+Most complex genome '9635' of size (1, 3) belongs to specie '5' with distance to representative of 0.189
+
+Population 'topology_3/v10' with 513 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       20      35     0.67464    0.01606     6       (1, 3)   
+	   2       20      68     2.03984    0.02833     8       (1, 3)   
+	   3       20      49     0.99029    0.02913     0       (1, 3)   
+	   4       20      39     1.00096    0.02130     0       (1, 3)   
+	   5       20      63     2.07106    0.03835     2       (1, 3)   
+	   6       20      10     0.87581    0.01863     0       (1, 3)   
+	   7       20      33     0.70445    0.01601     9       (1, 3)   
+	   8       20      27     0.61150    0.01747     16      (1, 3)   
+	   9       20      56     1.77936    0.03016     6       (1, 3)   
+	   10      20      76     1.20064    0.03752     0       (1, 3)   
+	   11      20      57     2.04049    0.03046     6       (1, 3)   
+
+Generation time: 57.013 sec  (56.936 average)
+
+********** Running generation 21 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.39560
+	-       mean fitness: 0.56287
+	-      worst fitness: 0.00000
+	- standard deviation: 0.59397
+Best genome overview:
+	- fitness: 2.39560
+	- size (hid, conn): (1, 3)
+	- genome id: 10051
+	- belongs to specie: 11
+Genetic distance:
+	- Maximum: 2.23926
+	- Mean: 1.09906
+	- Minimum: 0.00000
+	- Standard deviation: 0.42433
+Most complex genome '10051' of size (1, 3) belongs to specie '11' with distance to representative of 0.036
+
+Population 'topology_3/v10' with 520 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       21      35     0.65623    0.01875     7       (1, 3)   
+	   2       21      73     2.37995    0.03500     0       (1, 3)   
+	   3       21      35     0.71849    0.01466     1       (1, 3)   
+	   4       21      38     0.70613    0.01811     1       (1, 3)   
+	   5       21      67     2.23433    0.03547     3       (1, 3)   
+	   6       21      29     0.23232    0.00726     1       (1, 3)   
+	   7       21      34     0.58010    0.01758     10      (1, 3)   
+	   8       21      31     0.36716    0.01147     17      (1, 3)   
+	   9       21      63     1.80957    0.03231     7       (1, 3)   
+	   10      21      39     1.30015    0.01711     0       (1, 3)   
+	   11      21      76     2.39560    0.04203     7       (1, 3)   
+
+Generation time: 56.941 sec  (56.949 average)
+
+********** Running generation 22 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.91510
+	-       mean fitness: 0.63755
+	-      worst fitness: 0.00000
+	- standard deviation: 0.71934
+Best genome overview:
+	- fitness: 2.91510
+	- size (hid, conn): (1, 3)
+	- genome id: 9597
+	- belongs to specie: 2
+Genetic distance:
+	- Maximum: 2.40039
+	- Mean: 1.08120
+	- Minimum: 0.00000
+	- Standard deviation: 0.42544
+Most complex genome '9597' of size (1, 3) belongs to specie '2' with distance to representative of 0.07
+
+Population 'topology_3/v10' with 514 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       22      37     0.71184    0.02034     8       (1, 3)   
+	   2       22      72     2.91510    0.03993     0       (1, 3)   
+	   3       22      33     0.43410    0.01240     2       (1, 3)   
+	   4       22      33     0.56685    0.01492     2       (1, 3)   
+	   5       22      69     2.76295    0.04124     0       (1, 3)   
+	   6       22      62     0.44501    0.01391     2       (1, 3)   
+	   7       22      49     1.01561    0.02987     0       (1, 3)   
+	   8       22      33     0.58212    0.01819     18      (1, 3)   
+	   9       22      56     1.95487    0.03103     8       (1, 3)   
+	   10      22      3      0.75965    0.01948     1       (1, 3)   
+	   11      22      67     2.77306    0.03649     0       (1, 3)   
+
+Generation time: 57.692 sec  (57.049 average)
+
+********** Running generation 23 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.49344
+	-       mean fitness: 0.63034
+	-      worst fitness: 0.00000
+	- standard deviation: 0.69330
+Best genome overview:
+	- fitness: 2.49344
+	- size (hid, conn): (1, 3)
+	- genome id: 10915
+	- belongs to specie: 2
+Genetic distance:
+	- Maximum: 2.34184
+	- Mean: 1.09708
+	- Minimum: 0.00000
+	- Standard deviation: 0.43808
+Most complex genome '10915' of size (1, 3) belongs to specie '2' with distance to representative of 0.007
+
+Population 'topology_3/v10' with 518 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       23      37     0.72569    0.01961     9       (1, 3)   
+	   2       23      65     2.49344    0.03463     1       (1, 3)   
+	   3       23      36     0.65870    0.01996     3       (1, 3)   
+	   4       23      43     0.81890    0.02482     3       (1, 3)   
+	   5       23      65     2.44452    0.03543     1       (1, 3)   
+	   6       23      45     1.29206    0.02084     0       (1, 3)   
+	   7       23      35     0.68893    0.01406     1       (1, 3)   
+	   8       23      39     0.70570    0.02138     0       (1, 3)   
+	   9       23      59     1.91069    0.03412     9       (1, 3)   
+	   10      23      29     0.10095    0.00315     2       (1, 3)   
+	   11      23      65     2.20628    0.03293     1       (1, 3)   
+
+Generation time: 58.820 sec  (57.203 average)
+
+********** Running generation 24 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.38081
+	-       mean fitness: 0.56792
+	-      worst fitness: 0.00000
+	- standard deviation: 0.60577
+Best genome overview:
+	- fitness: 2.38081
+	- size (hid, conn): (1, 3)
+	- genome id: 11470
+	- belongs to specie: 5
+Genetic distance:
+	- Maximum: 2.18770
+	- Mean: 1.07696
+	- Minimum: 0.00000
+	- Standard deviation: 0.42229
+Most complex genome '11470' of size (1, 3) belongs to specie '5' with distance to representative of 0.036
+
+Population 'topology_3/v10' with 516 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       24      47     1.02028    0.02758     10      (1, 3)   
+	   2       24      59     2.22832    0.03428     2       (1, 3)   
+	   3       24      32     0.64785    0.01800     4       (1, 3)   
+	   4       24      31     0.88117    0.02049     4       (1, 3)   
+	   5       24      61     2.38081    0.03663     2       (1, 3)   
+	   6       24      61     1.66477    0.03699     0       (1, 3)   
+	   7       24      52     1.16834    0.03338     0       (1, 3)   
+	   8       24      33     0.48677    0.01248     1       (1, 3)   
+	   9       24      53     1.88825    0.03200     10      (1, 3)   
+	   10      24      29     0.20784    0.00649     3       (1, 3)   
+	   11      24      58     2.30742    0.03550     2       (1, 3)   
+
+Generation time: 57.021 sec  (57.174 average)
+
+********** Running generation 25 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.81381
+	-       mean fitness: 0.61842
+	-      worst fitness: 0.00000
+	- standard deviation: 0.72892
+Best genome overview:
+	- fitness: 2.81381
+	- size (hid, conn): (1, 3)
+	- genome id: 11855
+	- belongs to specie: 5
+Genetic distance:
+	- Maximum: 2.19457
+	- Mean: 1.07876
+	- Minimum: 0.00000
+	- Standard deviation: 0.42982
+Most complex genome '11855' of size (1, 3) belongs to specie '5' with distance to representative of 0.018
+
+Population 'topology_3/v10' with 516 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       25      39     1.14905    0.02445     0       (1, 3)   
+	   2       25      65     2.54477    0.04313     3       (1, 3)   
+	   3       25      32     0.49863    0.01558     5       (1, 3)   
+	   4       25      43     0.88702    0.02772     5       (1, 3)   
+	   5       25      70     2.81381    0.04613     0       (1, 3)   
+	   6       25      47     1.50000    0.02459     1       (1, 3)   
+	   7       25      34     0.93194    0.01792     1       (1, 3)   
+	   8       25      31     0.63515    0.01925     2       (1, 3)   
+	   9       25      64     2.15820    0.04072     0       (1, 3)   
+	   10      25      28     0.15050    0.00470     4       (1, 3)   
+	   11      25      63     2.37377    0.04093     3       (1, 3)   
+
+Generation time: 57.256 sec  (57.193 average)
+
+********** Running generation 26 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.10682
+	-       mean fitness: 0.48563
+	-      worst fitness: 0.00000
+	- standard deviation: 0.48971
+Best genome overview:
+	- fitness: 2.10682
+	- size (hid, conn): (1, 3)
+	- genome id: 12443
+	- belongs to specie: 11
+Genetic distance:
+	- Maximum: 2.22334
+	- Mean: 1.06589
+	- Minimum: 0.00000
+	- Standard deviation: 0.42883
+Most complex genome '12443' of size (1, 3) belongs to specie '11' with distance to representative of 0.018
+
+Population 'topology_3/v10' with 514 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       26      48     0.94447    0.02422     1       (1, 3)   
+	   2       26      63     2.00626    0.03087     4       (1, 3)   
+	   3       26      38     0.63566    0.01986     6       (1, 3)   
+	   4       26      31     0.50566    0.01176     6       (1, 3)   
+	   5       26      62     2.09860    0.02998     1       (1, 3)   
+	   6       26      57     1.36928    0.02913     2       (1, 3)   
+	   7       26      46     0.82546    0.02428     2       (1, 3)   
+	   8       26      33     0.52522    0.01641     3       (1, 3)   
+	   9       26      41     1.05656    0.01651     1       (1, 3)   
+	   10      26      29     0.24591    0.00768     5       (1, 3)   
+	   11      26      66     2.10682    0.03344     4       (1, 3)   
+
+Generation time: 56.921 sec  (57.267 average)
+
+********** Running generation 27 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.65958
+	-       mean fitness: 0.67023
+	-      worst fitness: 0.00000
+	- standard deviation: 0.68192
+Best genome overview:
+	- fitness: 2.65958
+	- size (hid, conn): (1, 3)
+	- genome id: 11084
+	- belongs to specie: 5
+Genetic distance:
+	- Maximum: 2.29850
+	- Mean: 1.05573
+	- Minimum: 0.00000
+	- Standard deviation: 0.42765
+Most complex genome '11084' of size (1, 3) belongs to specie '5' with distance to representative of 0
+
+Population 'topology_3/v10' with 514 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       27      59     1.58210    0.03296     0       (1, 3)   
+	   2       27      57     2.21964    0.03523     5       (1, 3)   
+	   3       27      32     0.71187    0.01873     7       (1, 3)   
+	   4       27      33     0.68076    0.02127     7       (1, 3)   
+	   5       27      68     2.65958    0.04290     2       (1, 3)   
+	   6       27      39     1.25810    0.02207     3       (1, 3)   
+	   7       27      43     1.22582    0.02665     0       (1, 3)   
+	   8       27      32     0.60478    0.01833     4       (1, 3)   
+	   9       27      65     2.05828    0.05020     2       (1, 3)   
+	   10      27      31     0.15197    0.00475     6       (1, 3)   
+	   11      27      55     2.20198    0.03336     5       (1, 3)   
+
+Generation time: 56.813 sec  (57.284 average)
+
+********** Running generation 28 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.00695
+	-       mean fitness: 0.86951
+	-      worst fitness: 0.00000
+	- standard deviation: 0.85697
+Best genome overview:
+	- fitness: 3.00695
+	- size (hid, conn): (1, 3)
+	- genome id: 13343
+	- belongs to specie: 2
+Genetic distance:
+	- Maximum: 2.20520
+	- Mean: 1.07514
+	- Minimum: 0.00000
+	- Standard deviation: 0.43208
+Most complex genome '13343' of size (1, 3) belongs to specie '2' with distance to representative of 0.042
+
+Population 'topology_3/v10' with 514 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       28      41     1.68275    0.02852     0       (1, 3)   
+	   2       28      63     3.00695    0.05275     0       (1, 3)   
+	   3       28      32     0.69253    0.02164     8       (1, 3)   
+	   4       28      49     1.41093    0.04276     0       (1, 3)   
+	   5       28      59     2.99669    0.04407     0       (1, 3)   
+	   6       28      53     1.75347    0.04496     0       (1, 3)   
+	   7       28      48     1.61325    0.03752     0       (1, 3)   
+	   8       28      31     0.74054    0.02314     0       (1, 3)   
+	   9       28      51     2.37285    0.03651     0       (1, 3)   
+	   10      28      29     0.57757    0.01805     7       (1, 3)   
+	   11      28      58     2.59464    0.04718     6       (1, 3)   
+
+Generation time: 56.931 sec  (57.293 average)
+
+********** Running generation 29 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.36991
+	-       mean fitness: 0.67821
+	-      worst fitness: 0.00000
+	- standard deviation: 0.65693
+Best genome overview:
+	- fitness: 2.36991
+	- size (hid, conn): (1, 3)
+	- genome id: 13823
+	- belongs to specie: 11
+Genetic distance:
+	- Maximum: 2.31524
+	- Mean: 1.05885
+	- Minimum: 0.00000
+	- Standard deviation: 0.42880
+Most complex genome '13823' of size (1, 3) belongs to specie '11' with distance to representative of 0.031
+
+Population 'topology_3/v10' with 514 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       29      51     1.53018    0.03732     1       (1, 3)   
+	   2       29      56     2.33963    0.03714     1       (1, 3)   
+	   3       29      31     0.70428    0.02201     9       (1, 3)   
+	   4       29      47     1.57156    0.03207     0       (1, 3)   
+	   5       29      60     2.30279    0.03903     1       (1, 3)   
+	   6       29      44     1.50140    0.02833     1       (1, 3)   
+	   7       29      50     1.54873    0.03227     1       (1, 3)   
+	   8       29      32     0.50228    0.01570     1       (1, 3)   
+	   9       29      56     1.94104    0.03806     1       (1, 3)   
+	   10      29      28     0.44604    0.01394     8       (1, 3)   
+	   11      29      59     2.36991    0.04086     7       (1, 3)   
+
+Generation time: 56.603 sec  (57.201 average)
+Population 'topology_3/v10' saved! Current generation: 30
+
+********** Running generation 30 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.38487
+	-       mean fitness: 0.66801
+	-      worst fitness: 0.00000
+	- standard deviation: 0.66964
+Best genome overview:
+	- fitness: 2.38487
+	- size (hid, conn): (1, 3)
+	- genome id: 14296
+	- belongs to specie: 5
+Genetic distance:
+	- Maximum: 2.11285
+	- Mean: 1.05340
+	- Minimum: 0.00000
+	- Standard deviation: 0.42618
+Most complex genome '14296' of size (1, 3) belongs to specie '5' with distance to representative of 0.028
+
+Population 'topology_3/v10' with 517 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       30      53     1.37476    0.02696     2       (1, 3)   
+	   2       30      56     1.98531    0.03545     2       (1, 3)   
+	   3       30      33     0.50195    0.01569     10      (1, 3)   
+	   4       30      40     1.32386    0.02817     1       (1, 3)   
+	   5       30      62     2.38487    0.03975     2       (1, 3)   
+	   6       30      47     1.30002    0.02955     2       (1, 3)   
+	   7       30      49     1.53001    0.03060     2       (1, 3)   
+	   8       30      32     0.61631    0.01926     2       (1, 3)   
+	   9       30      58     2.10001    0.03750     2       (1, 3)   
+	   10      30      30     0.16150    0.00505     9       (1, 3)   
+	   11      30      57     2.09831    0.03556     8       (1, 3)   
+
+Generation time: 56.925 sec  (57.192 average)
+
+********** Running generation 31 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.53256
+	-       mean fitness: 0.64389
+	-      worst fitness: 0.00000
+	- standard deviation: 0.59668
+Best genome overview:
+	- fitness: 2.53256
+	- size (hid, conn): (1, 3)
+	- genome id: 14628
+	- belongs to specie: 5
+Genetic distance:
+	- Maximum: 2.11746
+	- Mean: 1.06097
+	- Minimum: 0.00000
+	- Standard deviation: 0.43580
+Most complex genome '14628' of size (1, 3) belongs to specie '5' with distance to representative of 0.027
+
+Population 'topology_3/v10' with 514 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       31      47     1.27247    0.02401     3       (1, 3)   
+	   2       31      60     2.00125    0.03574     3       (1, 3)   
+	   3       31      32     0.52468    0.01590     11      (1, 3)   
+	   4       31      54     1.33422    0.03336     2       (1, 3)   
+	   5       31      68     2.53256    0.04085     3       (1, 3)   
+	   6       31      45     1.23559    0.02629     3       (1, 3)   
+	   7       31      45     1.22233    0.02495     3       (1, 3)   
+	   8       31      34     0.61272    0.01915     3       (1, 3)   
+	   9       31      43     1.42155    0.02451     3       (1, 3)   
+	   10      31      29     0.37941    0.01186     10      (1, 3)   
+	   11      31      57     1.95839    0.03436     9       (1, 3)   
+
+Generation time: 57.173 sec  (57.215 average)
+
+********** Running generation 32 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.54576
+	-       mean fitness: 0.74076
+	-      worst fitness: 0.00000
+	- standard deviation: 0.67442
+Best genome overview:
+	- fitness: 2.54576
+	- size (hid, conn): (1, 3)
+	- genome id: 15145
+	- belongs to specie: 5
+Genetic distance:
+	- Maximum: 2.05147
+	- Mean: 1.06349
+	- Minimum: 0.00000
+	- Standard deviation: 0.43132
+Most complex genome '15145' of size (1, 3) belongs to specie '5' with distance to representative of 0.031
+
+Population 'topology_3/v10' with 513 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       32      50     1.47768    0.03144     4       (1, 3)   
+	   2       32      56     2.18987    0.03650     4       (1, 3)   
+	   3       32      33     0.73573    0.02299     12      (1, 3)   
+	   4       32      37     1.17189    0.02170     3       (1, 3)   
+	   5       32      60     2.54576    0.03744     4       (1, 3)   
+	   6       32      42     1.25415    0.02787     4       (1, 3)   
+	   7       32      65     1.88573    0.04191     0       (1, 3)   
+	   8       32      38     0.87744    0.02581     0       (1, 3)   
+	   9       32      46     1.38611    0.03224     4       (1, 3)   
+	   10      32      28     0.36602    0.01144     11      (1, 3)   
+	   11      32      58     2.20878    0.03875     10      (1, 3)   
+
+Generation time: 56.905 sec  (57.137 average)
+
+********** Running generation 33 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.19665
+	-       mean fitness: 0.77690
+	-      worst fitness: 0.00000
+	- standard deviation: 0.83846
+Best genome overview:
+	- fitness: 3.19665
+	- size (hid, conn): (1, 3)
+	- genome id: 15680
+	- belongs to specie: 2
+Genetic distance:
+	- Maximum: 2.12323
+	- Mean: 1.07062
+	- Minimum: 0.00000
+	- Standard deviation: 0.43386
+Most complex genome '15680' of size (1, 3) belongs to specie '2' with distance to representative of 0.038
+
+Population 'topology_3/v10' with 518 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       33      46     1.87912    0.03758     0       (1, 3)   
+	   2       33      64     3.19665    0.05708     0       (1, 3)   
+	   3       33      34     0.51328    0.01555     13      (1, 3)   
+	   4       33      70     2.44349    0.06604     0       (1, 3)   
+	   5       33      55     2.92349    0.04872     5       (1, 3)   
+	   6       33      39     1.39782    0.03328     5       (1, 3)   
+	   7       33      36     1.04278    0.01604     1       (1, 3)   
+	   8       33      33     0.91828    0.02417     0       (1, 3)   
+	   9       33      55     2.34855    0.05106     5       (1, 3)   
+	   10      33      31     0.20503    0.00641     12      (1, 3)   
+	   11      33      55     2.68517    0.04630     11      (1, 3)   
+
+Generation time: 56.517 sec  (56.906 average)
+
+********** Running generation 34 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.44921
+	-       mean fitness: 0.58393
+	-      worst fitness: 0.00000
+	- standard deviation: 0.59892
+Best genome overview:
+	- fitness: 2.44921
+	- size (hid, conn): (1, 3)
+	- genome id: 16112
+	- belongs to specie: 5
+Genetic distance:
+	- Maximum: 2.08159
+	- Mean: 1.05244
+	- Minimum: 0.00000
+	- Standard deviation: 0.42892
+Most complex genome '16112' of size (1, 3) belongs to specie '5' with distance to representative of 0.04
+
+Population 'topology_3/v10' with 518 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       34      52     1.51540    0.03294     1       (1, 3)   
+	   2       34      53     1.95323    0.03052     1       (1, 3)   
+	   3       34      33     0.31473    0.00926     14      (1, 3)   
+	   4       34      37     1.25857    0.01798     1       (1, 3)   
+	   5       34      65     2.44921    0.04453     6       (1, 3)   
+	   6       34      50     1.26765    0.03250     6       (1, 3)   
+	   7       34      52     1.32096    0.03669     2       (1, 3)   
+	   8       34      32     0.53199    0.01612     1       (1, 3)   
+	   9       34      53     1.88646    0.03430     6       (1, 3)   
+	   10      34      32     0.26295    0.00822     13      (1, 3)   
+	   11      34      59     2.11863    0.03852     12      (1, 3)   
+
+Generation time: 57.397 sec  (56.944 average)
+
+********** Running generation 35 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.31154
+	-       mean fitness: 0.80391
+	-      worst fitness: 0.00000
+	- standard deviation: 0.83724
+Best genome overview:
+	- fitness: 3.31154
+	- size (hid, conn): (1, 3)
+	- genome id: 16540
+	- belongs to specie: 5
+Genetic distance:
+	- Maximum: 2.08633
+	- Mean: 1.05282
+	- Minimum: 0.00000
+	- Standard deviation: 0.43074
+Most complex genome '16540' of size (1, 3) belongs to specie '5' with distance to representative of 0.025
+
+Population 'topology_3/v10' with 512 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       35      36     1.26106    0.02425     2       (1, 3)   
+	   2       35      62     2.82071    0.05322     2       (1, 3)   
+	   3       35      35     0.92602    0.02806     15      (1, 3)   
+	   4       35      61     2.08933    0.05647     2       (1, 3)   
+	   5       35      59     3.31154    0.05095     0       (1, 3)   
+	   6       35      45     1.96295    0.03926     0       (1, 3)   
+	   7       35      37     1.27941    0.02460     3       (1, 3)   
+	   8       35      32     0.87326    0.02729     2       (1, 3)   
+	   9       35      57     2.64267    0.04986     0       (1, 3)   
+	   10      35      31     0.36202    0.01131     14      (1, 3)   
+	   11      35      57     2.82263    0.04784     0       (1, 3)   
+
+Generation time: 57.314 sec  (56.950 average)
+
+********** Running generation 36 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.24844
+	-       mean fitness: 0.68523
+	-      worst fitness: 0.00000
+	- standard deviation: 0.69965
+Best genome overview:
+	- fitness: 2.24844
+	- size (hid, conn): (1, 3)
+	- genome id: 16652
+	- belongs to specie: 2
+Genetic distance:
+	- Maximum: 2.10016
+	- Mean: 1.04292
+	- Minimum: 0.00000
+	- Standard deviation: 0.43003
+Most complex genome '16652' of size (1, 3) belongs to specie '2' with distance to representative of 0.061
+
+Population 'topology_3/v10' with 514 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       36      59     1.48355    0.04121     3       (1, 3)   
+	   2       36      57     2.24844    0.03627     3       (1, 3)   
+	   3       36      30     0.49026    0.01401     16      (1, 3)   
+	   4       36      43     1.64308    0.02694     3       (1, 3)   
+	   5       36      55     2.24256    0.03801     1       (1, 3)   
+	   6       36      51     1.61440    0.03588     1       (1, 3)   
+	   7       36      46     1.26840    0.03428     4       (1, 3)   
+	   8       36      34     0.78952    0.02467     3       (1, 3)   
+	   9       36      53     2.03406    0.03569     1       (1, 3)   
+	   10      36      30     0.47567    0.01486     15      (1, 3)   
+	   11      36      56     2.19341    0.03848     1       (1, 3)   
+
+Generation time: 56.601 sec  (56.918 average)
+
+********** Running generation 37 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.48226
+	-       mean fitness: 0.67882
+	-      worst fitness: 0.00000
+	- standard deviation: 0.65159
+Best genome overview:
+	- fitness: 2.48226
+	- size (hid, conn): (1, 3)
+	- genome id: 16112
+	- belongs to specie: 5
+Genetic distance:
+	- Maximum: 2.08449
+	- Mean: 1.04984
+	- Minimum: 0.00000
+	- Standard deviation: 0.43562
+Most complex genome '16112' of size (1, 3) belongs to specie '5' with distance to representative of 0.035
+
+Population 'topology_3/v10' with 513 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       37      43     1.47951    0.02508     4       (1, 3)   
+	   2       37      52     1.92308    0.03374     4       (1, 3)   
+	   3       37      37     0.80308    0.02510     17      (1, 3)   
+	   4       37      46     1.32235    0.03075     4       (1, 3)   
+	   5       37      66     2.48226    0.04513     2       (1, 3)   
+	   6       37      47     1.53050    0.03001     2       (1, 3)   
+	   7       37      52     1.61730    0.03516     5       (1, 3)   
+	   8       37      36     0.81607    0.02400     4       (1, 3)   
+	   9       37      47     1.63181    0.03079     2       (1, 3)   
+	   10      37      32     0.31532    0.00985     16      (1, 3)   
+	   11      37      55     2.00254    0.03576     2       (1, 3)   
+
+Generation time: 56.561 sec  (56.893 average)
+
+********** Running generation 38 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.59034
+	-       mean fitness: 0.80636
+	-      worst fitness: 0.00000
+	- standard deviation: 0.74109
+Best genome overview:
+	- fitness: 2.59034
+	- size (hid, conn): (1, 3)
+	- genome id: 17931
+	- belongs to specie: 5
+Genetic distance:
+	- Maximum: 1.98397
+	- Mean: 1.04866
+	- Minimum: 0.00000
+	- Standard deviation: 0.43366
+Most complex genome '17931' of size (1, 3) belongs to specie '5' with distance to representative of 0.035
+
+Population 'topology_3/v10' with 512 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       38      46     1.50014    0.03489     5       (1, 3)   
+	   2       38      51     2.04307    0.03929     5       (1, 3)   
+	   3       38      37     0.99463    0.02688     0       (1, 3)   
+	   4       38      50     1.82652    0.03971     5       (1, 3)   
+	   5       38      52     2.59034    0.03925     3       (1, 3)   
+	   6       38      61     2.34328    0.04986     0       (1, 3)   
+	   7       38      48     1.86114    0.03579     6       (1, 3)   
+	   8       38      32     0.64569    0.01794     5       (1, 3)   
+	   9       38      54     2.01446    0.04286     3       (1, 3)   
+	   10      38      30     0.54033    0.01689     17      (1, 3)   
+	   11      38      51     2.11688    0.03849     3       (1, 3)   
+
+Generation time: 56.617 sec  (56.861 average)
+
+********** Running generation 39 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.07318
+	-       mean fitness: 0.84071
+	-      worst fitness: 0.00000
+	- standard deviation: 0.76770
+Best genome overview:
+	- fitness: 3.07318
+	- size (hid, conn): (1, 3)
+	- genome id: 18365
+	- belongs to specie: 5
+Genetic distance:
+	- Maximum: 2.03065
+	- Mean: 1.03474
+	- Minimum: 0.00000
+	- Standard deviation: 0.41519
+Most complex genome '18365' of size (1, 3) belongs to specie '5' with distance to representative of 0.013
+
+Population 'topology_3/v10' with 513 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       39      44     1.65580    0.03600     6       (1, 3)   
+	   2       39      62     2.71791    0.05329     6       (1, 3)   
+	   3       39      32     0.70351    0.01901     1       (1, 3)   
+	   4       39      50     2.11227    0.04225     6       (1, 3)   
+	   5       39      67     3.07318    0.05910     4       (1, 3)   
+	   6       39      38     1.65353    0.02711     1       (1, 3)   
+	   7       39      40     1.51710    0.03161     7       (1, 3)   
+	   8       39      33     0.52730    0.01648     6       (1, 3)   
+	   9       39      38     1.56030    0.02889     4       (1, 3)   
+	   10      39      51     1.70782    0.05337     0       (1, 3)   
+	   11      39      58     2.50742    0.04917     4       (1, 3)   
+
+Generation time: 56.906 sec  (56.892 average)
+Population 'topology_3/v10' saved! Current generation: 40
+
+********** Running generation 40 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.01626
+	-       mean fitness: 0.72711
+	-      worst fitness: 0.00000
+	- standard deviation: 0.73171
+Best genome overview:
+	- fitness: 3.01626
+	- size (hid, conn): (1, 3)
+	- genome id: 18831
+	- belongs to specie: 5
+Genetic distance:
+	- Maximum: 2.03715
+	- Mean: 1.02786
+	- Minimum: 0.00000
+	- Standard deviation: 0.42417
+Most complex genome '18831' of size (1, 3) belongs to specie '5' with distance to representative of 0.032
+
+Population 'topology_3/v10' with 513 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       40      44     1.39482    0.03170     7       (1, 3)   
+	   2       40      57     2.68348    0.04328     7       (1, 3)   
+	   3       40      31     0.73445    0.02295     2       (1, 3)   
+	   4       40      41     1.52917    0.03058     7       (1, 3)   
+	   5       40      61     3.01626    0.04502     5       (1, 3)   
+	   6       40      46     1.41219    0.03716     2       (1, 3)   
+	   7       40      51     1.54151    0.03854     8       (1, 3)   
+	   8       40      33     0.61198    0.01854     7       (1, 3)   
+	   9       40      51     1.56628    0.04122     5       (1, 3)   
+	   10      40      44     2.01495    0.03951     0       (1, 3)   
+	   11      40      54     2.47879    0.04274     5       (1, 3)   
+
+Generation time: 56.385 sec  (56.838 average)
+
+********** Running generation 41 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.92562
+	-       mean fitness: 0.70915
+	-      worst fitness: 0.00000
+	- standard deviation: 0.65860
+Best genome overview:
+	- fitness: 2.92562
+	- size (hid, conn): (1, 3)
+	- genome id: 19333
+	- belongs to specie: 5
+Genetic distance:
+	- Maximum: 2.05121
+	- Mean: 1.00529
+	- Minimum: 0.00000
+	- Standard deviation: 0.40460
+Most complex genome '19333' of size (1, 3) belongs to specie '5' with distance to representative of 0.025
+
+Population 'topology_3/v10' with 513 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       41      45     1.38932    0.03158     8       (1, 3)   
+	   2       41      58     2.41769    0.04242     8       (1, 3)   
+	   3       41      32     0.60138    0.01879     3       (1, 3)   
+	   4       41      48     1.48289    0.03617     8       (1, 3)   
+	   5       41      64     2.92562    0.04796     6       (1, 3)   
+	   6       41      49     1.65660    0.03601     3       (1, 3)   
+	   7       41      42     1.52510    0.02990     9       (1, 3)   
+	   8       41      33     0.61176    0.01854     8       (1, 3)   
+	   9       41      38     1.31680    0.02582     6       (1, 3)   
+	   10      41      49     1.65612    0.03764     1       (1, 3)   
+	   11      41      55     2.17033    0.04019     6       (1, 3)   
+
+Generation time: 56.785 sec  (56.799 average)
+
+********** Running generation 42 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.44434
+	-       mean fitness: 0.73072
+	-      worst fitness: 0.00000
+	- standard deviation: 0.64667
+Best genome overview:
+	- fitness: 2.44434
+	- size (hid, conn): (1, 3)
+	- genome id: 19781
+	- belongs to specie: 5
+Genetic distance:
+	- Maximum: 2.02598
+	- Mean: 1.01376
+	- Minimum: 0.00000
+	- Standard deviation: 0.41561
+Most complex genome '19781' of size (1, 3) belongs to specie '5' with distance to representative of 0.018
+
+Population 'topology_3/v10' with 511 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       42      44     1.17094    0.02602     9       (1, 3)   
+	   2       42      50     1.96023    0.03380     9       (1, 3)   
+	   3       42      39     0.91927    0.02873     4       (1, 3)   
+	   4       42      46     1.55163    0.03233     9       (1, 3)   
+	   5       42      56     2.44434    0.03819     7       (1, 3)   
+	   6       42      46     1.56774    0.03199     4       (1, 3)   
+	   7       42      44     1.35479    0.03226     10      (1, 3)   
+	   8       42      34     0.74854    0.02268     9       (1, 3)   
+	   9       42      44     1.30092    0.03423     7       (1, 3)   
+	   10      42      54     2.06069    0.04205     0       (1, 3)   
+	   11      42      54     2.09566    0.03810     7       (1, 3)   
+
+Generation time: 56.828 sec  (56.791 average)
+
+********** Running generation 43 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.17728
+	-       mean fitness: 0.91292
+	-      worst fitness: 0.00000
+	- standard deviation: 0.83838
+Best genome overview:
+	- fitness: 3.17728
+	- size (hid, conn): (1, 3)
+	- genome id: 19333
+	- belongs to specie: 5
+Genetic distance:
+	- Maximum: 1.95814
+	- Mean: 1.00648
+	- Minimum: 0.00000
+	- Standard deviation: 0.41664
+Most complex genome '19333' of size (1, 3) belongs to specie '5' with distance to representative of 0.023
+
+Population 'topology_3/v10' with 512 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       43      41     1.58964    0.03613     10      (1, 3)   
+	   2       43      56     2.75043    0.05501     10      (1, 3)   
+	   3       43      32     0.81536    0.02091     5       (1, 3)   
+	   4       43      47     2.06603    0.04491     10      (1, 3)   
+	   5       43      60     3.17728    0.05674     8       (1, 3)   
+	   6       43      34     1.31548    0.02860     5       (1, 3)   
+	   7       43      43     1.79881    0.04088     11      (1, 3)   
+	   8       43      33     0.96144    0.02828     0       (1, 3)   
+	   9       43      58     2.61273    0.05938     8       (1, 3)   
+	   10      43      55     2.78066    0.05149     0       (1, 3)   
+	   11      43      53     2.66881    0.04942     8       (1, 3)   
+
+Generation time: 56.094 sec  (56.749 average)
+
+********** Running generation 44 **********
+
+Full population's fitness overview:
+	-       best fitness: 1.73879
+	-       mean fitness: 0.64174
+	-      worst fitness: 0.00000
+	- standard deviation: 0.50218
+Best genome overview:
+	- fitness: 1.73879
+	- size (hid, conn): (1, 3)
+	- genome id: 20736
+	- belongs to specie: 10
+Genetic distance:
+	- Maximum: 1.97798
+	- Mean: 1.00317
+	- Minimum: 0.00000
+	- Standard deviation: 0.41882
+Most complex genome '20736' of size (1, 3) belongs to specie '10' with distance to representative of 0.066
+
+Population 'topology_3/v10' with 511 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       44      47     1.13700    0.02773     11      (1, 3)   
+	   2       44      48     1.50000    0.02679     11      (1, 3)   
+	   3       44      34     0.66442    0.02076     6       (1, 3)   
+	   4       44      48     1.34849    0.02869     11      (1, 3)   
+	   5       44      50     1.70655    0.02844     9       (1, 3)   
+	   6       44      54     1.22120    0.03592     6       (1, 3)   
+	   7       44      44     1.14188    0.02656     12      (1, 3)   
+	   8       44      39     0.76041    0.02304     1       (1, 3)   
+	   9       44      41     1.28347    0.02213     9       (1, 3)   
+	   10      44      52     1.73879    0.03161     1       (1, 3)   
+	   11      44      54     1.68928    0.03187     9       (1, 3)   
+
+Generation time: 56.453 sec  (56.655 average)
+
+********** Running generation 45 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.40523
+	-       mean fitness: 0.99523
+	-      worst fitness: 0.00000
+	- standard deviation: 0.92144
+Best genome overview:
+	- fitness: 3.40523
+	- size (hid, conn): (1, 3)
+	- genome id: 21143
+	- belongs to specie: 10
+Genetic distance:
+	- Maximum: 2.02596
+	- Mean: 0.98532
+	- Minimum: 0.00000
+	- Standard deviation: 0.41296
+Most complex genome '21143' of size (1, 3) belongs to specie '10' with distance to representative of 0.032
+
+Population 'topology_3/v10' with 513 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       45      38     1.70919    0.03637     12      (1, 3)   
+	   2       45      57     2.90268    0.06047     12      (1, 3)   
+	   3       45      32     0.86045    0.02531     7       (1, 3)   
+	   4       45      45     2.14040    0.04459     12      (1, 3)   
+	   5       45      58     3.01403    0.06028     10      (1, 3)   
+	   6       45      35     1.44137    0.02669     7       (1, 3)   
+	   7       45      44     1.98001    0.04500     0       (1, 3)   
+	   8       45      33     0.62884    0.01612     2       (1, 3)   
+	   9       45      57     2.53478    0.06182     10      (1, 3)   
+	   10      45      61     3.40523    0.06549     0       (1, 3)   
+	   11      45      53     2.87436    0.05323     0       (1, 3)   
+
+Generation time: 56.823 sec  (56.605 average)
+
+********** Running generation 46 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.51445
+	-       mean fitness: 1.05510
+	-      worst fitness: 0.00000
+	- standard deviation: 0.98039
+Best genome overview:
+	- fitness: 3.51445
+	- size (hid, conn): (1, 3)
+	- genome id: 21602
+	- belongs to specie: 10
+Genetic distance:
+	- Maximum: 2.17491
+	- Mean: 0.98543
+	- Minimum: 0.00000
+	- Standard deviation: 0.40902
+Most complex genome '21602' of size (1, 3) belongs to specie '10' with distance to representative of 0.039
+
+Population 'topology_3/v10' with 513 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       46      48     1.92699    0.05071     0       (1, 3)   
+	   2       46      51     2.91275    0.05110     13      (1, 3)   
+	   3       46      31     1.01949    0.03186     0       (1, 3)   
+	   4       46      48     2.26391    0.05031     13      (1, 3)   
+	   5       46      52     3.05529    0.05268     11      (1, 3)   
+	   6       46      43     1.62827    0.04652     8       (1, 3)   
+	   7       46      45     2.07577    0.04718     0       (1, 3)   
+	   8       46      33     0.79499    0.02409     3       (1, 3)   
+	   9       46      53     3.08771    0.05417     0       (1, 3)   
+	   10      46      56     3.51445    0.05761     0       (1, 3)   
+	   11      46      53     2.90642    0.05484     0       (1, 3)   
+
+Generation time: 56.420 sec  (56.587 average)
+
+********** Running generation 47 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.45928
+	-       mean fitness: 1.04057
+	-      worst fitness: 0.00000
+	- standard deviation: 0.87801
+Best genome overview:
+	- fitness: 3.45928
+	- size (hid, conn): (1, 3)
+	- genome id: 22081
+	- belongs to specie: 10
+Genetic distance:
+	- Maximum: 1.93664
+	- Mean: 0.98188
+	- Minimum: 0.00000
+	- Standard deviation: 0.40747
+Most complex genome '22081' of size (1, 3) belongs to specie '10' with distance to representative of 0.037
+
+Population 'topology_3/v10' with 512 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       47      41     1.52795    0.03183     1       (1, 3)   
+	   2       47      51     2.58598    0.05071     14      (1, 3)   
+	   3       47      39     1.27779    0.03993     0       (1, 3)   
+	   4       47      48     2.23795    0.04662     14      (1, 3)   
+	   5       47      57     3.06896    0.05902     12      (1, 3)   
+	   6       47      56     2.52544    0.05873     0       (1, 3)   
+	   7       47      42     1.90789    0.04240     1       (1, 3)   
+	   8       47      33     0.78516    0.02379     4       (1, 3)   
+	   9       47      42     2.21930    0.04187     1       (1, 3)   
+	   10      47      57     3.45928    0.06177     1       (1, 3)   
+	   11      47      46     2.38385    0.04498     1       (1, 3)   
+
+Generation time: 56.575 sec  (56.589 average)
+
+********** Running generation 48 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.78797
+	-       mean fitness: 0.94043
+	-      worst fitness: 0.00000
+	- standard deviation: 0.93805
+Best genome overview:
+	- fitness: 3.78797
+	- size (hid, conn): (1, 3)
+	- genome id: 22081
+	- belongs to specie: 10
+Genetic distance:
+	- Maximum: 2.09395
+	- Mean: 0.98967
+	- Minimum: 0.00000
+	- Standard deviation: 0.40742
+Most complex genome '22550' of size (1, 3) belongs to specie '10' with distance to representative of 0.051
+
+Population 'topology_3/v10' with 513 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       48      41     1.53058    0.03733     2       (1, 3)   
+	   2       48      51     2.51870    0.04939     15      (1, 3)   
+	   3       48      33     0.90076    0.02310     1       (1, 3)   
+	   4       48      45     2.03429    0.04238     15      (1, 3)   
+	   5       48      53     3.01773    0.05294     13      (1, 3)   
+	   6       48      36     1.45558    0.02599     1       (1, 3)   
+	   7       48      48     2.00427    0.04772     2       (1, 3)   
+	   8       48      32     0.63573    0.01926     5       (1, 3)   
+	   9       48      53     2.22999    0.05309     2       (1, 3)   
+	   10      48      65     3.78797    0.06646     0       (1, 3)   
+	   11      48      56     2.53543    0.05512     2       (1, 3)   
+
+Generation time: 56.730 sec  (56.600 average)
+
+********** Running generation 49 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.20019
+	-       mean fitness: 0.95843
+	-      worst fitness: 0.00000
+	- standard deviation: 0.88450
+Best genome overview:
+	- fitness: 3.20019
+	- size (hid, conn): (1, 3)
+	- genome id: 23031
+	- belongs to specie: 10
+Genetic distance:
+	- Maximum: 2.10275
+	- Mean: 0.98612
+	- Minimum: 0.00000
+	- Standard deviation: 0.40849
+Most complex genome '23031' of size (1, 3) belongs to specie '10' with distance to representative of 0.036
+
+Population 'topology_3/v10' with 513 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       49      43     1.36901    0.03339     3       (1, 3)   
+	   2       49      44     1.95803    0.03839     16      (1, 3)   
+	   3       49      32     0.60968    0.01848     2       (1, 3)   
+	   4       49      52     2.16878    0.04820     16      (1, 3)   
+	   5       49      59     2.83747    0.05354     14      (1, 3)   
+	   6       49      45     1.45558    0.04043     2       (1, 3)   
+	   7       49      51     2.40979    0.05020     0       (1, 3)   
+	   8       49      32     0.82748    0.02586     6       (1, 3)   
+	   9       49      52     2.63390    0.04970     3       (1, 3)   
+	   10      49      55     3.20019    0.04923     1       (1, 3)   
+	   11      49      48     2.32443    0.04151     3       (1, 3)   
+
+Generation time: 56.676 sec  (56.577 average)
+Population 'topology_3/v10' saved! Current generation: 50
+
+********** Running generation 50 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.90272
+	-       mean fitness: 0.97447
+	-      worst fitness: 0.00000
+	- standard deviation: 0.96987
+Best genome overview:
+	- fitness: 3.90272
+	- size (hid, conn): (1, 3)
+	- genome id: 23488
+	- belongs to specie: 10
+Genetic distance:
+	- Maximum: 2.04763
+	- Mean: 0.98935
+	- Minimum: 0.00000
+	- Standard deviation: 0.40782
+Most complex genome '23488' of size (1, 3) belongs to specie '10' with distance to representative of 0.047
+
+Population 'topology_3/v10' with 513 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       50      42     1.52228    0.03540     4       (1, 3)   
+	   2       50      55     2.46406    0.05600     17      (1, 3)   
+	   3       50      35     0.96856    0.03027     3       (1, 3)   
+	   4       50      47     2.29802    0.04419     17      (1, 3)   
+	   5       50      53     2.90166    0.04918     15      (1, 3)   
+	   6       50      35     1.36006    0.03022     3       (1, 3)   
+	   7       50      53     2.81226    0.05514     0       (1, 3)   
+	   8       50      30     0.90008    0.02813     7       (1, 3)   
+	   9       50      40     1.83225    0.03524     4       (1, 3)   
+	   10      50      67     3.90272    0.07096     0       (1, 3)   
+	   11      50      56     2.65758    0.05537     4       (1, 3)   
+
+Generation time: 56.711 sec  (56.609 average)
+
+********** Running generation 51 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.66686
+	-       mean fitness: 0.89169
+	-      worst fitness: 0.00000
+	- standard deviation: 0.85084
+Best genome overview:
+	- fitness: 2.66686
+	- size (hid, conn): (1, 3)
+	- genome id: 22622
+	- belongs to specie: 5
+Genetic distance:
+	- Maximum: 2.02285
+	- Mean: 0.99812
+	- Minimum: 0.00000
+	- Standard deviation: 0.41343
+Most complex genome '22622' of size (1, 3) belongs to specie '5' with distance to representative of 0.019
+
+Population 'topology_3/v10' with 514 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       51      51     1.97511    0.04703     0       (1, 3)   
+	   2       51      45     2.20252    0.04005     18      (1, 3)   
+	   3       51      31     0.66118    0.01889     4       (1, 3)   
+	   4       51      52     2.20271    0.04687     18      (1, 3)   
+	   5       51      56     2.66686    0.05032     16      (1, 3)   
+	   6       51      54     1.87367    0.05353     4       (1, 3)   
+	   7       51      48     2.31469    0.04367     1       (1, 3)   
+	   8       51      33     0.40037    0.01251     8       (1, 3)   
+	   9       51      51     1.95158    0.04879     5       (1, 3)   
+	   10      51      43     2.37443    0.03544     1       (1, 3)   
+	   11      51      50     2.47264    0.04415     5       (1, 3)   
+
+Generation time: 56.884 sec  (56.619 average)
+
+********** Running generation 52 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.33138
+	-       mean fitness: 0.83670
+	-      worst fitness: 0.00000
+	- standard deviation: 0.87963
+Best genome overview:
+	- fitness: 3.33138
+	- size (hid, conn): (1, 3)
+	- genome id: 23488
+	- belongs to specie: 10
+Genetic distance:
+	- Maximum: 2.06361
+	- Mean: 0.97407
+	- Minimum: 0.00000
+	- Standard deviation: 0.41389
+Most complex genome '23488' of size (1, 3) belongs to specie '10' with distance to representative of 0.017
+
+Population 'topology_3/v10' with 515 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       52      45     1.95580    0.03835     1       (1, 3)   
+	   2       52      50     2.03455    0.04521     19      (1, 3)   
+	   3       52      32     0.57861    0.01808     5       (1, 3)   
+	   4       52      42     1.81666    0.03494     19      (1, 3)   
+	   5       52      54     2.62555    0.04688     17      (1, 3)   
+	   6       52      35     1.20000    0.02222     5       (1, 3)   
+	   7       52      56     2.53268    0.05276     2       (1, 3)   
+	   8       52      32     0.59309    0.01797     9       (1, 3)   
+	   9       52      43     1.80594    0.03541     6       (1, 3)   
+	   10      52      79     3.33138    0.07747     2       (1, 3)   
+	   11      52      47     2.02319    0.04046     6       (1, 3)   
+
+Generation time: 56.546 sec  (56.591 average)
+
+********** Running generation 53 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.56091
+	-       mean fitness: 1.19355
+	-      worst fitness: 0.00000
+	- standard deviation: 1.06971
+Best genome overview:
+	- fitness: 3.56091
+	- size (hid, conn): (1, 3)
+	- genome id: 24918
+	- belongs to specie: 10
+Genetic distance:
+	- Maximum: 2.12895
+	- Mean: 0.96507
+	- Minimum: 0.00000
+	- Standard deviation: 0.40624
+Most complex genome '24918' of size (1, 3) belongs to specie '10' with distance to representative of 0.017
+
+Population 'topology_3/v10' with 512 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       53      47     2.06604    0.04591     0       (1, 3)   
+	   2       53      52     2.83984    0.05680     20      (1, 3)   
+	   3       53      36     1.30951    0.04092     0       (1, 3)   
+	   4       53      51     2.46372    0.05866     0       (1, 3)   
+	   5       53      53     3.10532    0.05751     18      (1, 3)   
+	   6       53      42     1.67516    0.04786     6       (1, 3)   
+	   7       53      51     3.07744    0.05495     0       (1, 3)   
+	   8       53      32     0.58505    0.01828     10      (1, 3)   
+	   9       53      51     2.58496    0.06012     7       (1, 3)   
+	   10      53      47     3.56091    0.04507     3       (1, 3)   
+	   11      53      50     2.62875    0.05593     7       (1, 3)   
+
+Generation time: 56.676 sec  (56.649 average)
+
+********** Running generation 54 **********
+
+Full population's fitness overview:
+	-       best fitness: 2.98646
+	-       mean fitness: 0.77320
+	-      worst fitness: 0.00000
+	- standard deviation: 0.80974
+Best genome overview:
+	- fitness: 2.98646
+	- size (hid, conn): (1, 3)
+	- genome id: 25374
+	- belongs to specie: 10
+Genetic distance:
+	- Maximum: 1.99070
+	- Mean: 0.97262
+	- Minimum: 0.00000
+	- Standard deviation: 0.41212
+Most complex genome '25374' of size (1, 3) belongs to specie '10' with distance to representative of 0.018
+
+Population 'topology_3/v10' with 513 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       54      56     2.36589    0.05034     0       (1, 3)   
+	   2       54      47     2.11519    0.04068     21      (1, 3)   
+	   3       54      33     0.81691    0.02269     1       (1, 3)   
+	   4       54      38     1.58943    0.03117     1       (1, 3)   
+	   5       54      53     2.51356    0.04743     19      (1, 3)   
+	   6       54      34     1.18199    0.02814     7       (1, 3)   
+	   7       54      59     2.78004    0.05451     1       (1, 3)   
+	   8       54      33     0.54879    0.01715     11      (1, 3)   
+	   9       54      41     1.81949    0.03568     8       (1, 3)   
+	   10      54      67     2.98646    0.06354     4       (1, 3)   
+	   11      54      52     2.32685    0.04654     8       (1, 3)   
+
+Generation time: 56.524 sec  (56.656 average)
+
+********** Running generation 55 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.57241
+	-       mean fitness: 1.03534
+	-      worst fitness: 0.00000
+	- standard deviation: 0.95407
+Best genome overview:
+	- fitness: 3.57241
+	- size (hid, conn): (1, 3)
+	- genome id: 25853
+	- belongs to specie: 10
+Genetic distance:
+	- Maximum: 2.01678
+	- Mean: 0.97377
+	- Minimum: 0.00000
+	- Standard deviation: 0.41730
+Most complex genome '25853' of size (1, 3) belongs to specie '10' with distance to representative of 0.018
+
+Population 'topology_3/v10' with 514 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       55      43     2.03357    0.03631     1       (1, 3)   
+	   2       55      51     2.29126    0.04875     22      (1, 3)   
+	   3       55      32     0.77657    0.02353     2       (1, 3)   
+	   4       55      48     1.81204    0.04769     2       (1, 3)   
+	   5       55      56     2.85342    0.05384     20      (1, 3)   
+	   6       55      39     1.30000    0.03824     8       (1, 3)   
+	   7       55      59     3.28925    0.05575     0       (1, 3)   
+	   8       55      33     0.60314    0.01828     12      (1, 3)   
+	   9       55      49     2.03753    0.04970     9       (1, 3)   
+	   10      55      57     3.57241    0.05332     5       (1, 3)   
+	   11      55      47     2.24643    0.04320     9       (1, 3)   
+
+Generation time: 56.624 sec  (56.636 average)
+
+********** Running generation 56 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.65989
+	-       mean fitness: 1.27899
+	-      worst fitness: 0.00000
+	- standard deviation: 1.26734
+Best genome overview:
+	- fitness: 4.65989
+	- size (hid, conn): (1, 3)
+	- genome id: 26312
+	- belongs to specie: 10
+Genetic distance:
+	- Maximum: 2.05523
+	- Mean: 0.95435
+	- Minimum: 0.00000
+	- Standard deviation: 0.39704
+Most complex genome '26312' of size (1, 3) belongs to specie '10' with distance to representative of 0.036
+
+Population 'topology_3/v10' with 514 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       56      48     2.50595    0.05828     0       (1, 3)   
+	   2       56      49     3.05159    0.05984     23      (1, 3)   
+	   3       56      34     0.99953    0.03124     3       (1, 3)   
+	   4       56      44     2.60114    0.05419     0       (1, 3)   
+	   5       56      51     3.53147    0.06306     0       (1, 3)   
+	   6       56      45     2.27500    0.05833     9       (1, 3)   
+	   7       56      55     4.15479    0.07042     0       (1, 3)   
+	   8       56      34     0.60014    0.01819     13      (1, 3)   
+	   9       56      46     2.89890    0.05916     10      (1, 3)   
+	   10      56      63     4.65989    0.08175     0       (1, 3)   
+	   11      56      45     2.61173    0.05557     10      (1, 3)   
+
+Generation time: 56.500 sec  (56.645 average)
+
+********** Running generation 57 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.56866
+	-       mean fitness: 1.31442
+	-      worst fitness: 0.00000
+	- standard deviation: 1.33329
+Best genome overview:
+	- fitness: 4.56866
+	- size (hid, conn): (1, 3)
+	- genome id: 26778
+	- belongs to specie: 10
+Genetic distance:
+	- Maximum: 2.00921
+	- Mean: 0.96202
+	- Minimum: 0.00000
+	- Standard deviation: 0.39296
+Most complex genome '26778' of size (1, 3) belongs to specie '10' with distance to representative of 0.02
+
+Population 'topology_3/v10' with 513 members in 11 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       57      46     2.72786    0.05683     0       (1, 3)   
+	   2       57      49     2.98429    0.06090     24      (1, 3)   
+	   3       57      33     0.83248    0.02448     4       (1, 3)   
+	   4       57      52     3.05118    0.06934     0       (1, 3)   
+	   5       57      54     3.63200    0.07122     0       (1, 3)   
+	   6       57      37     2.03829    0.04530     10      (1, 3)   
+	   7       57      59     4.17064    0.07583     0       (1, 3)   
+	   8       57      31     0.73750    0.02169     14      (1, 3)   
+	   9       57      44     2.59320    0.05637     11      (1, 3)   
+	   10      57      58     4.56866    0.07252     1       (1, 3)   
+	   11      57      50     2.96949    0.06599     0       (1, 3)   
+
+Generation time: 56.696 sec  (56.657 average)
+
+********** Running generation 58 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.23361
+	-       mean fitness: 0.89422
+	-      worst fitness: 0.00000
+	- standard deviation: 0.90468
+Best genome overview:
+	- fitness: 3.23361
+	- size (hid, conn): (1, 3)
+	- genome id: 27305
+	- belongs to specie: 7
+ > Species 2 with 49 members is stagnated (fitness: 2.13512): removed!
+Genetic distance:
+	- Maximum: 2.01021
+	- Mean: 0.94068
+	- Minimum: 0.00000
+	- Standard deviation: 0.39353
+Most complex genome '27305' of size (1, 3) belongs to specie '7' with distance to representative of 0.04
+
+Population 'topology_3/v10' with 512 members in 10 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       58      50     1.73034    0.03762     1       (1, 3)   
+	   3       58      31     0.84435    0.02559     5       (1, 3)   
+	   4       58      52     2.04005    0.03923     1       (1, 3)   
+	   5       58      66     2.73058    0.05057     1       (1, 3)   
+	   6       58      36     0.99466    0.02688     11      (1, 3)   
+	   7       58      70     3.23361    0.05481     1       (1, 3)   
+	   8       58      34     0.63169    0.01974     15      (1, 3)   
+	   9       58      52     1.80370    0.04099     12      (1, 3)   
+	   10      58      67     3.23127    0.05571     2       (1, 3)   
+	   11      58      54     2.05027    0.04101     1       (1, 3)   
+
+Generation time: 56.636 sec  (56.647 average)
+
+********** Running generation 59 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.88712
+	-       mean fitness: 1.13278
+	-      worst fitness: 0.00000
+	- standard deviation: 1.08552
+Best genome overview:
+	- fitness: 3.88712
+	- size (hid, conn): (1, 3)
+	- genome id: 27702
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 1.89694
+	- Mean: 0.94614
+	- Minimum: 0.00000
+	- Standard deviation: 0.39752
+Most complex genome '27702' of size (1, 3) belongs to specie '7' with distance to representative of 0.045
+
+Population 'topology_3/v10' with 512 members in 10 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       59      52     2.30285    0.04606     2       (1, 3)   
+	   3       59      46     1.55404    0.04856     0       (1, 3)   
+	   4       59      48     2.25700    0.04340     2       (1, 3)   
+	   5       59      57     3.14295    0.04762     2       (1, 3)   
+	   6       59      54     1.91445    0.05318     12      (1, 3)   
+	   7       59      62     3.88712    0.05553     2       (1, 3)   
+	   8       59      34     1.06665    0.03137     0       (1, 3)   
+	   9       59      47     2.24557    0.04318     13      (1, 3)   
+	   10      59      59     3.50557    0.05232     3       (1, 3)   
+	   11      59      53     2.59572    0.04807     2       (1, 3)   
+
+Generation time: 56.463 sec  (56.626 average)
+Population 'topology_3/v10' saved! Current generation: 60
+
+********** Running generation 60 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.05947
+	-       mean fitness: 1.03006
+	-      worst fitness: 0.00000
+	- standard deviation: 1.09139
+Best genome overview:
+	- fitness: 4.05947
+	- size (hid, conn): (1, 3)
+	- genome id: 26840
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 2.01289
+	- Mean: 0.95528
+	- Minimum: 0.00000
+	- Standard deviation: 0.39909
+Most complex genome '26840' of size (1, 3) belongs to specie '7' with distance to representative of 0.041
+
+Population 'topology_3/v10' with 512 members in 10 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       60      54     2.49377    0.04796     3       (1, 3)   
+	   3       60      34     1.48201    0.03222     1       (1, 3)   
+	   4       60      52     2.42197    0.05046     3       (1, 3)   
+	   5       60      57     2.99026    0.05246     3       (1, 3)   
+	   6       60      37     1.61944    0.02999     13      (1, 3)   
+	   7       60      69     4.05947    0.06548     3       (1, 3)   
+	   8       60      33     0.85777    0.02523     1       (1, 3)   
+	   9       60      51     2.26535    0.04820     14      (1, 3)   
+	   10      60      68     3.88997    0.06593     4       (1, 3)   
+	   11      60      57     2.73595    0.05162     3       (1, 3)   
+
+Generation time: 56.508 sec  (56.606 average)
+
+********** Running generation 61 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.36999
+	-       mean fitness: 0.89184
+	-      worst fitness: 0.00000
+	- standard deviation: 0.88437
+Best genome overview:
+	- fitness: 3.36999
+	- size (hid, conn): (1, 3)
+	- genome id: 28645
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 1.94117
+	- Mean: 0.95740
+	- Minimum: 0.00000
+	- Standard deviation: 0.39565
+Most complex genome '28645' of size (1, 3) belongs to specie '7' with distance to representative of 0.055
+
+Population 'topology_3/v10' with 512 members in 10 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       61      58     2.25667    0.04179     4       (1, 3)   
+	   3       61      42     1.20921    0.03557     2       (1, 3)   
+	   4       61      51     1.95990    0.03769     4       (1, 3)   
+	   5       61      59     2.59291    0.04549     4       (1, 3)   
+	   6       61      47     1.39976    0.03783     14      (1, 3)   
+	   7       61      65     3.36999    0.04884     4       (1, 3)   
+	   8       61      38     1.01532    0.03077     2       (1, 3)   
+	   9       61      45     1.75073    0.03433     15      (1, 3)   
+	   10      61      57     2.85609    0.04200     5       (1, 3)   
+	   11      61      50     2.15020    0.03772     4       (1, 3)   
+
+Generation time: 56.599 sec  (56.577 average)
+
+********** Running generation 62 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.88763
+	-       mean fitness: 1.10065
+	-      worst fitness: 0.00000
+	- standard deviation: 1.07580
+Best genome overview:
+	- fitness: 3.88763
+	- size (hid, conn): (1, 3)
+	- genome id: 29072
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 1.89951
+	- Mean: 0.94019
+	- Minimum: 0.00000
+	- Standard deviation: 0.39436
+Most complex genome '29072' of size (1, 3) belongs to specie '7' with distance to representative of 0.069
+
+Population 'topology_3/v10' with 512 members in 10 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       62      50     2.34467    0.04043     5       (1, 3)   
+	   3       62      42     1.60821    0.03829     0       (1, 3)   
+	   4       62      45     1.96311    0.03849     5       (1, 3)   
+	   5       62      61     3.26725    0.05538     5       (1, 3)   
+	   6       62      38     1.51058    0.03214     15      (1, 3)   
+	   7       62      68     3.88763    0.05981     5       (1, 3)   
+	   8       62      34     0.87917    0.02314     3       (1, 3)   
+	   9       62      50     2.11829    0.04707     16      (1, 3)   
+	   10      62      70     3.83250    0.06724     6       (1, 3)   
+	   11      62      54     2.37698    0.04754     5       (1, 3)   
+
+Generation time: 56.478 sec  (56.570 average)
+
+********** Running generation 63 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.87029
+	-       mean fitness: 1.07744
+	-      worst fitness: 0.00000
+	- standard deviation: 1.06552
+Best genome overview:
+	- fitness: 3.87029
+	- size (hid, conn): (1, 3)
+	- genome id: 26840
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 1.89633
+	- Mean: 0.93128
+	- Minimum: 0.00000
+	- Standard deviation: 0.38928
+Most complex genome '26840' of size (1, 3) belongs to specie '7' with distance to representative of 0.014
+
+Population 'topology_3/v10' with 512 members in 10 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       63      51     2.07545    0.04151     6       (1, 3)   
+	   3       63      34     1.15307    0.02745     1       (1, 3)   
+	   4       63      56     2.27650    0.05059     6       (1, 3)   
+	   5       63      59     3.08493    0.05057     6       (1, 3)   
+	   6       63      48     1.65865    0.04365     16      (1, 3)   
+	   7       63      67     3.87029    0.05692     6       (1, 3)   
+	   8       63      32     0.87698    0.02579     4       (1, 3)   
+	   9       63      52     2.33548    0.04671     17      (1, 3)   
+	   10      63      59     3.40342    0.04862     7       (1, 3)   
+	   11      63      54     2.48178    0.04596     6       (1, 3)   
+
+Generation time: 56.418 sec  (56.544 average)
+
+********** Running generation 64 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.91818
+	-       mean fitness: 1.08087
+	-      worst fitness: 0.00000
+	- standard deviation: 1.12918
+Best genome overview:
+	- fitness: 3.91818
+	- size (hid, conn): (1, 3)
+	- genome id: 30074
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 1.87931
+	- Mean: 0.88067
+	- Minimum: 0.00000
+	- Standard deviation: 0.37889
+Most complex genome '30074' of size (1, 3) belongs to specie '7' with distance to representative of 0.08
+
+Population 'topology_3/v10' with 513 members in 10 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       64      61     2.70949    0.05313     7       (1, 3)   
+	   3       64      40     1.20396    0.03541     2       (1, 3)   
+	   4       64      51     2.40842    0.04301     7       (1, 3)   
+	   5       64      60     3.12857    0.05303     7       (1, 3)   
+	   6       64      39     1.54497    0.03219     17      (1, 3)   
+	   7       64      68     3.91818    0.05848     7       (1, 3)   
+	   8       64      31     0.48483    0.01515     5       (1, 3)   
+	   9       64      48     2.22862    0.04286     18      (1, 3)   
+	   10      64      66     3.45029    0.05848     8       (1, 3)   
+	   11      64      49     2.15598    0.03993     7       (1, 3)   
+
+Generation time: 56.483 sec  (56.540 average)
+
+********** Running generation 65 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.45038
+	-       mean fitness: 1.14530
+	-      worst fitness: 0.00000
+	- standard deviation: 1.26503
+Best genome overview:
+	- fitness: 4.45038
+	- size (hid, conn): (1, 3)
+	- genome id: 30520
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 1.75167
+	- Mean: 0.90460
+	- Minimum: 0.00000
+	- Standard deviation: 0.38616
+Most complex genome '30520' of size (1, 3) belongs to specie '7' with distance to representative of 0.015
+
+Population 'topology_3/v10' with 512 members in 10 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       65      51     2.56068    0.04198     8       (1, 3)   
+	   3       65      35     1.30508    0.03263     3       (1, 3)   
+	   4       65      53     2.75983    0.05411     8       (1, 3)   
+	   5       65      60     3.61644    0.06027     8       (1, 3)   
+	   6       65      49     1.93166    0.04953     18      (1, 3)   
+	   7       65      63     4.45038    0.06545     0       (1, 3)   
+	   8       65      30     0.68992    0.02156     6       (1, 3)   
+	   9       65      52     2.69825    0.05621     19      (1, 3)   
+	   10      65      62     4.17369    0.06324     9       (1, 3)   
+	   11      65      57     2.95697    0.06035     8       (1, 3)   
+
+Generation time: 56.550 sec  (56.533 average)
+
+********** Running generation 66 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.00112
+	-       mean fitness: 1.20702
+	-      worst fitness: 0.00000
+	- standard deviation: 1.16819
+Best genome overview:
+	- fitness: 4.00112
+	- size (hid, conn): (1, 3)
+	- genome id: 30964
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 2.02066
+	- Mean: 0.91060
+	- Minimum: 0.00000
+	- Standard deviation: 0.39782
+Most complex genome '30964' of size (1, 3) belongs to specie '7' with distance to representative of 0.063
+
+Population 'topology_3/v10' with 512 members in 10 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       66      55     2.37571    0.04658     9       (1, 3)   
+	   3       66      39     1.26786    0.03622     4       (1, 3)   
+	   4       66      57     2.77370    0.05233     9       (1, 3)   
+	   5       66      62     3.33116    0.05552     9       (1, 3)   
+	   6       66      35     1.40629    0.02870     19      (1, 3)   
+	   7       66      68     4.00112    0.06351     1       (1, 3)   
+	   8       66      33     0.89210    0.02788     7       (1, 3)   
+	   9       66      51     2.39390    0.04604     20      (1, 3)   
+	   10      66      65     3.77750    0.06093     10      (1, 3)   
+	   11      66      47     2.29825    0.04032     9       (1, 3)   
+
+Generation time: 56.598 sec  (56.543 average)
+
+********** Running generation 67 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.61795
+	-       mean fitness: 1.18021
+	-      worst fitness: 0.00000
+	- standard deviation: 1.07951
+Best genome overview:
+	- fitness: 3.61795
+	- size (hid, conn): (1, 3)
+	- genome id: 31507
+	- belongs to specie: 10
+Genetic distance:
+	- Maximum: 1.84157
+	- Mean: 0.90388
+	- Minimum: 0.00000
+	- Standard deviation: 0.38503
+Most complex genome '31507' of size (1, 3) belongs to specie '10' with distance to representative of 0.135
+
+Population 'topology_3/v10' with 512 members in 10 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       67      54     2.41543    0.04392     10      (1, 3)   
+	   3       67      47     1.60213    0.04108     5       (1, 3)   
+	   4       67      48     2.26890    0.03981     10      (1, 3)   
+	   5       67      56     2.95010    0.04758     10      (1, 3)   
+	   6       67      43     1.36859    0.03910     20      (1, 3)   
+	   7       67      61     3.50000    0.05147     2       (1, 3)   
+	   8       67      33     0.73192    0.02218     8       (1, 3)   
+	   9       67      53     2.48386    0.04870     21      (1, 3)   
+	   10      67      62     3.61795    0.05566     11      (1, 3)   
+	   11      67      55     2.35265    0.05006     10      (1, 3)   
+
+Generation time: 57.115 sec  (56.585 average)
+
+********** Running generation 68 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.08588
+	-       mean fitness: 1.20372
+	-      worst fitness: 0.00000
+	- standard deviation: 1.21179
+Best genome overview:
+	- fitness: 4.08588
+	- size (hid, conn): (1, 3)
+	- genome id: 30590
+	- belongs to specie: 10
+Genetic distance:
+	- Maximum: 1.85668
+	- Mean: 0.90199
+	- Minimum: 0.00000
+	- Standard deviation: 0.38924
+Most complex genome '30590' of size (1, 3) belongs to specie '10' with distance to representative of 0.072
+
+Population 'topology_3/v10' with 512 members in 10 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       68      58     2.85660    0.05290     0       (1, 3)   
+	   3       68      35     1.40000    0.02979     6       (1, 3)   
+	   4       68      58     2.80057    0.05835     11      (1, 3)   
+	   5       68      60     3.33356    0.05953     11      (1, 3)   
+	   6       68      37     1.51543    0.03524     21      (1, 3)   
+	   7       68      65     3.95188    0.06478     3       (1, 3)   
+	   8       68      36     0.84443    0.02559     9       (1, 3)   
+	   9       68      52     2.73076    0.05152     22      (1, 3)   
+	   10      68      64     4.08588    0.06590     12      (1, 3)   
+	   11      68      47     2.39548    0.04355     11      (1, 3)   
+
+Generation time: 56.219 sec  (56.543 average)
+
+********** Running generation 69 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.32070
+	-       mean fitness: 1.19173
+	-      worst fitness: 0.00000
+	- standard deviation: 1.23803
+Best genome overview:
+	- fitness: 4.32070
+	- size (hid, conn): (1, 3)
+	- genome id: 32446
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 1.96821
+	- Mean: 0.91458
+	- Minimum: 0.00000
+	- Standard deviation: 0.38950
+Most complex genome '32446' of size (1, 3) belongs to specie '7' with distance to representative of 0.048
+
+Population 'topology_3/v10' with 513 members in 10 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       69      48     2.49160    0.04296     1       (1, 3)   
+	   3       69      43     1.49519    0.04272     7       (1, 3)   
+	   4       69      51     2.63231    0.04538     12      (1, 3)   
+	   5       69      60     3.38124    0.05635     12      (1, 3)   
+	   6       69      38     1.31265    0.03548     22      (1, 3)   
+	   7       69      68     4.32070    0.06647     4       (1, 3)   
+	   8       69      33     0.99402    0.02761     10      (1, 3)   
+	   9       69      51     2.55458    0.04913     23      (1, 3)   
+	   10      69      65     3.92212    0.06128     13      (1, 3)   
+	   11      69      56     2.58970    0.05510     12      (1, 3)   
+
+Generation time: 56.527 sec  (56.549 average)
+Population 'topology_3/v10' saved! Current generation: 70
+
+********** Running generation 70 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.08686
+	-       mean fitness: 1.09277
+	-      worst fitness: 0.00000
+	- standard deviation: 1.14954
+Best genome overview:
+	- fitness: 4.08686
+	- size (hid, conn): (1, 3)
+	- genome id: 32906
+	- belongs to specie: 10
+Genetic distance:
+	- Maximum: 1.93178
+	- Mean: 0.90793
+	- Minimum: 0.00000
+	- Standard deviation: 0.38621
+Most complex genome '32906' of size (1, 3) belongs to specie '10' with distance to representative of 0.069
+
+Population 'topology_3/v10' with 513 members in 10 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       70      62     2.61366    0.05445     2       (1, 3)   
+	   3       70      35     1.26112    0.02933     8       (1, 3)   
+	   4       70      47     2.08885    0.04096     13      (1, 3)   
+	   5       70      63     3.38581    0.05643     13      (1, 3)   
+	   6       70      43     1.45182    0.03821     23      (1, 3)   
+	   7       70      65     3.99655    0.05877     5       (1, 3)   
+	   8       70      34     0.50000    0.01515     11      (1, 3)   
+	   9       70      46     2.14203    0.04200     24      (1, 3)   
+	   10      70      67     4.08686    0.06287     14      (1, 3)   
+	   11      70      51     2.48084    0.04430     13      (1, 3)   
+
+Generation time: 56.794 sec  (56.578 average)
+
+********** Running generation 71 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.92306
+	-       mean fitness: 1.01008
+	-      worst fitness: 0.00000
+	- standard deviation: 1.09626
+Best genome overview:
+	- fitness: 3.92306
+	- size (hid, conn): (1, 3)
+	- genome id: 33380
+	- belongs to specie: 7
+ > Species 9 with 46 members is stagnated (fitness: 1.29394): removed!
+Genetic distance:
+	- Maximum: 2.14741
+	- Mean: 0.85183
+	- Minimum: 0.00000
+	- Standard deviation: 0.37329
+Most complex genome '33380' of size (1, 3) belongs to specie '7' with distance to representative of 0.002
+
+Population 'topology_3/v10' with 513 members in 9 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       71      58     2.54697    0.04108     3       (1, 3)   
+	   3       71      60     1.74893    0.04997     0       (1, 3)   
+	   4       71      60     2.31396    0.04923     14      (1, 3)   
+	   5       71      58     2.87635    0.04566     14      (1, 3)   
+	   6       71      45     1.36699    0.03179     24      (1, 3)   
+	   7       71      71     3.92306    0.06035     6       (1, 3)   
+	   8       71      35     0.55928    0.01645     12      (1, 3)   
+	   10      71      64     3.50159    0.05226     15      (1, 3)   
+	   11      71      62     2.48835    0.04879     14      (1, 3)   
+
+Generation time: 56.642 sec  (56.582 average)
+
+********** Running generation 72 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.92284
+	-       mean fitness: 1.11604
+	-      worst fitness: 0.00000
+	- standard deviation: 1.17953
+Best genome overview:
+	- fitness: 3.92284
+	- size (hid, conn): (1, 3)
+	- genome id: 33804
+	- belongs to specie: 7
+ > Species 6 with 45 members is stagnated (fitness: 1.57362): removed!
+Genetic distance:
+	- Maximum: 1.85509
+	- Mean: 0.79974
+	- Minimum: 0.00000
+	- Standard deviation: 0.36946
+Most complex genome '33804' of size (1, 3) belongs to specie '7' with distance to representative of 0.046
+
+Population 'topology_3/v10' with 512 members in 8 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       72      70     2.90806    0.05014     0       (1, 3)   
+	   3       72      49     1.87821    0.03130     0       (1, 3)   
+	   4       72      61     2.52457    0.04208     15      (1, 3)   
+	   5       72      76     3.21617    0.05545     15      (1, 3)   
+	   7       72      79     3.92284    0.05525     7       (1, 3)   
+	   8       72      33     0.50419    0.01441     13      (1, 3)   
+	   10      72      82     3.79035    0.05922     16      (1, 3)   
+	   11      72      62     2.65273    0.04279     15      (1, 3)   
+
+Generation time: 56.504 sec  (56.585 average)
+
+********** Running generation 73 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.47967
+	-       mean fitness: 1.22268
+	-      worst fitness: 0.00000
+	- standard deviation: 1.34015
+Best genome overview:
+	- fitness: 4.47967
+	- size (hid, conn): (1, 3)
+	- genome id: 34324
+	- belongs to specie: 10
+Genetic distance:
+	- Maximum: 1.87604
+	- Mean: 0.81650
+	- Minimum: 0.00000
+	- Standard deviation: 0.36997
+Most complex genome '34324' of size (1, 3) belongs to specie '10' with distance to representative of 0.122
+
+Population 'topology_3/v10' with 511 members in 8 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       73      68     2.89659    0.04138     1       (1, 3)   
+	   3       73      53     1.75683    0.03585     1       (1, 3)   
+	   4       73      60     2.31429    0.03794     16      (1, 3)   
+	   5       73      69     3.27454    0.04309     16      (1, 3)   
+	   7       73      82     4.29034    0.05431     8       (1, 3)   
+	   8       73      34     0.64381    0.01951     14      (1, 3)   
+	   10      73      79     4.47967    0.05463     17      (1, 3)   
+	   11      73      66     2.64212    0.04261     16      (1, 3)   
+
+Generation time: 56.597 sec  (56.603 average)
+
+********** Running generation 74 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.85219
+	-       mean fitness: 1.36579
+	-      worst fitness: 0.00000
+	- standard deviation: 1.41998
+Best genome overview:
+	- fitness: 4.85219
+	- size (hid, conn): (1, 3)
+	- genome id: 34808
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 2.00328
+	- Mean: 0.81978
+	- Minimum: 0.00000
+	- Standard deviation: 0.38278
+Most complex genome '34808' of size (1, 3) belongs to specie '7' with distance to representative of 0.049
+
+Population 'topology_3/v10' with 512 members in 8 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       74      59     2.84582    0.04185     2       (1, 3)   
+	   3       74      57     2.32983    0.04396     0       (1, 3)   
+	   4       74      60     2.63050    0.04384     17      (1, 3)   
+	   5       74      70     3.56180    0.05162     17      (1, 3)   
+	   7       74      81     4.85219    0.05917     0       (1, 3)   
+	   8       74      53     1.41328    0.04157     0       (1, 3)   
+	   10      74      78     4.55101    0.05761     18      (1, 3)   
+	   11      74      54     2.47650    0.03752     17      (1, 3)   
+
+Generation time: 56.390 sec  (56.594 average)
+
+********** Running generation 75 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.52259
+	-       mean fitness: 1.00335
+	-      worst fitness: 0.00000
+	- standard deviation: 1.00723
+Best genome overview:
+	- fitness: 3.52259
+	- size (hid, conn): (1, 3)
+	- genome id: 35209
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 1.79663
+	- Mean: 0.81594
+	- Minimum: 0.00000
+	- Standard deviation: 0.37497
+Most complex genome '35209' of size (1, 3) belongs to specie '7' with distance to representative of 0.047
+
+Population 'topology_3/v10' with 512 members in 8 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       75      73     2.30694    0.03910     3       (1, 3)   
+	   3       75      57     1.68515    0.02956     1       (1, 3)   
+	   4       75      52     1.57634    0.02627     18      (1, 3)   
+	   5       75      67     2.46400    0.03520     18      (1, 3)   
+	   7       75      82     3.52259    0.04349     1       (1, 3)   
+	   8       75      36     0.70417    0.01329     1       (1, 3)   
+	   10      75      77     3.28608    0.04213     19      (1, 3)   
+	   11      75      68     2.01618    0.03734     18      (1, 3)   
+
+Generation time: 56.089 sec  (56.548 average)
+
+********** Running generation 76 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.24383
+	-       mean fitness: 1.18024
+	-      worst fitness: 0.00000
+	- standard deviation: 1.15039
+Best genome overview:
+	- fitness: 4.24383
+	- size (hid, conn): (1, 3)
+	- genome id: 34808
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 1.80546
+	- Mean: 0.81137
+	- Minimum: 0.00000
+	- Standard deviation: 0.38468
+Most complex genome '35708' of size (1, 3) belongs to specie '7' with distance to representative of 0.056
+
+Population 'topology_3/v10' with 512 members in 8 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       76      58     2.24583    0.03076     4       (1, 3)   
+	   3       76      53     1.70492    0.02991     2       (1, 3)   
+	   4       76      58     1.77519    0.03414     19      (1, 3)   
+	   5       76      77     3.10333    0.04632     19      (1, 3)   
+	   7       76      86     4.24383    0.05175     2       (1, 3)   
+	   8       76      35     0.65337    0.01815     2       (1, 3)   
+	   10      76      82     3.77339    0.04901     20      (1, 3)   
+	   11      76      63     2.42356    0.03564     19      (1, 3)   
+
+Generation time: 56.157 sec  (56.503 average)
+
+********** Running generation 77 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.87631
+	-       mean fitness: 1.23103
+	-      worst fitness: 0.00000
+	- standard deviation: 1.18406
+Best genome overview:
+	- fitness: 3.87631
+	- size (hid, conn): (1, 3)
+	- genome id: 35708
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 1.73360
+	- Mean: 0.81759
+	- Minimum: 0.00000
+	- Standard deviation: 0.38452
+Most complex genome '35708' of size (1, 3) belongs to specie '7' with distance to representative of 0.065
+
+Population 'topology_3/v10' with 512 members in 8 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       77      71     2.57920    0.04447     5       (1, 3)   
+	   3       77      64     2.13837    0.04035     3       (1, 3)   
+	   4       77      61     2.16646    0.03735     20      (1, 3)   
+	   5       77      67     2.98046    0.03871     20      (1, 3)   
+	   7       77      76     3.87631    0.04507     3       (1, 3)   
+	   8       77      36     0.74404    0.02126     3       (1, 3)   
+	   10      77      74     3.74757    0.04570     21      (1, 3)   
+	   11      77      63     2.29927    0.03650     20      (1, 3)   
+
+Generation time: 56.194 sec  (56.411 average)
+
+********** Running generation 78 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.15384
+	-       mean fitness: 1.21637
+	-      worst fitness: 0.00000
+	- standard deviation: 1.13041
+Best genome overview:
+	- fitness: 4.15384
+	- size (hid, conn): (1, 3)
+	- genome id: 36713
+	- belongs to specie: 10
+Genetic distance:
+	- Maximum: 1.83189
+	- Mean: 0.82086
+	- Minimum: 0.00000
+	- Standard deviation: 0.38296
+Most complex genome '36713' of size (1, 3) belongs to specie '10' with distance to representative of 0.095
+
+Population 'topology_3/v10' with 513 members in 8 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       78      60     2.47699    0.03489     6       (1, 3)   
+	   3       78      51     2.01541    0.03149     4       (1, 3)   
+	   4       78      59     2.27562    0.03731     21      (1, 3)   
+	   5       78      74     3.31499    0.04948     21      (1, 3)   
+	   7       78      77     3.95082    0.05198     4       (1, 3)   
+	   8       78      41     0.80757    0.02243     4       (1, 3)   
+	   10      78      82     4.15384    0.05613     22      (1, 3)   
+	   11      78      69     2.86313    0.04545     21      (1, 3)   
+
+Generation time: 55.954 sec  (56.385 average)
+
+********** Running generation 79 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.91371
+	-       mean fitness: 1.06015
+	-      worst fitness: 0.00000
+	- standard deviation: 1.10113
+Best genome overview:
+	- fitness: 3.91371
+	- size (hid, conn): (1, 3)
+	- genome id: 37185
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 2.06703
+	- Mean: 0.83610
+	- Minimum: 0.00000
+	- Standard deviation: 0.38769
+Most complex genome '37185' of size (1, 3) belongs to specie '7' with distance to representative of 0.041
+
+Population 'topology_3/v10' with 513 members in 8 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       79      63     2.06562    0.03443     7       (1, 3)   
+	   3       79      63     1.81567    0.03560     5       (1, 3)   
+	   4       79      64     2.15252    0.03648     22      (1, 3)   
+	   5       79      71     2.94934    0.03986     22      (1, 3)   
+	   7       79      86     3.91371    0.05083     5       (1, 3)   
+	   8       79      34     0.74157    0.01809     5       (1, 3)   
+	   10      79      72     3.37673    0.04118     23      (1, 3)   
+	   11      79      60     2.22870    0.03230     22      (1, 3)   
+
+Generation time: 56.599 sec  (56.392 average)
+Population 'topology_3/v10' saved! Current generation: 80
+
+********** Running generation 80 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.73946
+	-       mean fitness: 0.96410
+	-      worst fitness: 0.00000
+	- standard deviation: 0.99084
+Best genome overview:
+	- fitness: 3.73946
+	- size (hid, conn): (1, 3)
+	- genome id: 37640
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 1.73387
+	- Mean: 0.80930
+	- Minimum: 0.00000
+	- Standard deviation: 0.37725
+Most complex genome '37640' of size (1, 3) belongs to specie '7' with distance to representative of 0.099
+
+Population 'topology_3/v10' with 512 members in 8 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       80      69     2.25892    0.03586     8       (1, 3)   
+	   3       80      55     1.78949    0.02840     6       (1, 3)   
+	   4       80      54     1.78347    0.02787     23      (1, 3)   
+	   5       80      66     2.47271    0.03483     23      (1, 3)   
+	   7       80      80     3.73946    0.04348     6       (1, 3)   
+	   8       80      45     0.82711    0.02433     6       (1, 3)   
+	   10      80      80     3.31067    0.04598     24      (1, 3)   
+	   11      80      63     2.03999    0.03400     23      (1, 3)   
+
+Generation time: 56.599 sec  (56.372 average)
+
+********** Running generation 81 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.32408
+	-       mean fitness: 1.09937
+	-      worst fitness: 0.00000
+	- standard deviation: 1.24940
+Best genome overview:
+	- fitness: 4.32408
+	- size (hid, conn): (1, 3)
+	- genome id: 38084
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 1.87701
+	- Mean: 0.79552
+	- Minimum: 0.00000
+	- Standard deviation: 0.38423
+Most complex genome '38084' of size (1, 3) belongs to specie '7' with distance to representative of 0.105
+
+Population 'topology_3/v10' with 512 members in 8 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       81      63     2.81178    0.04075     9       (1, 3)   
+	   3       81      58     2.13223    0.03877     7       (1, 3)   
+	   4       81      63     2.27660    0.04216     24      (1, 3)   
+	   5       81      68     3.00626    0.04555     24      (1, 3)   
+	   7       81      83     4.32408    0.05405     7       (1, 3)   
+	   8       81      35     0.81262    0.01806     7       (1, 3)   
+	   10      81      77     3.91701    0.04896     25      (1, 3)   
+	   11      81      65     2.62761    0.04171     24      (1, 3)   
+
+Generation time: 56.163 sec  (56.325 average)
+
+********** Running generation 82 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.52106
+	-       mean fitness: 1.39927
+	-      worst fitness: 0.00000
+	- standard deviation: 1.44641
+Best genome overview:
+	- fitness: 4.52106
+	- size (hid, conn): (1, 3)
+	- genome id: 38564
+	- belongs to specie: 7
+ > Species 5 with 68 members is stagnated (fitness: 3.41138): removed!
+ > Species 11 with 65 members is stagnated (fitness: 2.79558): removed!
+ > Species 4 with 63 members is stagnated (fitness: 2.31748): removed!
+Genetic distance:
+	- Maximum: 1.77284
+	- Mean: 0.61964
+	- Minimum: 0.00000
+	- Standard deviation: 0.32239
+Most complex genome '38564' of size (1, 3) belongs to specie '7' with distance to representative of 0.139
+
+Population 'topology_3/v10' with 512 members in 5 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       82     110     2.87555    0.04564     10      (1, 3)   
+	   3       82     102     2.51339    0.04333     0       (1, 3)   
+	   7       82     123     4.52106    0.05447     8       (1, 3)   
+	   8       82      49     0.67437    0.01927     8       (1, 3)   
+	   10      82     128     4.39801    0.05712     26      (1, 3)   
+
+Generation time: 55.537 sec  (56.228 average)
+
+********** Running generation 83 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.30772
+	-       mean fitness: 1.19713
+	-      worst fitness: 0.00000
+	- standard deviation: 1.33001
+Best genome overview:
+	- fitness: 4.30772
+	- size (hid, conn): (1, 3)
+	- genome id: 39073
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 1.72655
+	- Mean: 0.68407
+	- Minimum: 0.00000
+	- Standard deviation: 0.35072
+Most complex genome '39073' of size (1, 3) belongs to specie '7' with distance to representative of 0.137
+
+Population 'topology_3/v10' with 513 members in 5 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       83     112     2.87668    0.02615     11      (1, 3)   
+	   3       83      82     1.90426    0.01867     1       (1, 3)   
+	   7       83     139     4.30772    0.03502     9       (1, 3)   
+	   8       83      56     0.71436    0.01458     9       (1, 3)   
+	   10      83     124     3.89050    0.03039     27      (1, 3)   
+
+Generation time: 55.837 sec  (56.152 average)
+
+********** Running generation 84 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.30014
+	-       mean fitness: 1.34154
+	-      worst fitness: 0.00000
+	- standard deviation: 1.44553
+Best genome overview:
+	- fitness: 4.30014
+	- size (hid, conn): (1, 3)
+	- genome id: 39555
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 1.86686
+	- Mean: 0.67674
+	- Minimum: 0.00000
+	- Standard deviation: 0.35038
+Most complex genome '39555' of size (1, 3) belongs to specie '7' with distance to representative of 0.097
+
+Population 'topology_3/v10' with 512 members in 6 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       84     108     3.07234    0.02743     0       (1, 3)   
+	   3       84     104     2.29803    0.02802     2       (1, 3)   
+	   7       84     122     4.30014    0.03094     10      (1, 3)   
+	   8       84      53     0.73869    0.01319     10      (1, 3)   
+	   10      84     123     4.00566    0.03230     28      (1, 3)   
+	   12       0      2        --         --        0       (1, 3)   
+
+Generation time: 56.447 sec  (56.158 average)
+
+********** Running generation 85 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.35738
+	-       mean fitness: 1.36452
+	-      worst fitness: 0.00000
+	- standard deviation: 1.38751
+Best genome overview:
+	- fitness: 4.35738
+	- size (hid, conn): (1, 3)
+	- genome id: 40048
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 2.18552
+	- Mean: 0.86526
+	- Minimum: 0.00000
+	- Standard deviation: 0.49973
+Most complex genome '40048' of size (1, 3) belongs to specie '7' with distance to representative of 0.052
+
+Population 'topology_3/v10' with 519 members in 6 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       85     112     3.28523    0.03042     0       (1, 3)   
+	   3       85      86     2.33680    0.02247     3       (1, 3)   
+	   7       85     128     4.35738    0.03572     11      (1, 3)   
+	   8       85      38     0.60602    0.01143     11      (1, 3)   
+	   10      85     116     4.00492    0.03256     29      (1, 3)   
+	   12       1      39     0.14945    0.00467     0       (1, 3)   
+
+Generation time: 55.886 sec  (56.137 average)
+
+********** Running generation 86 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.54091
+	-       mean fitness: 1.20473
+	-      worst fitness: 0.00000
+	- standard deviation: 1.39979
+Best genome overview:
+	- fitness: 4.54091
+	- size (hid, conn): (1, 3)
+	- genome id: 40607
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 2.19869
+	- Mean: 0.86688
+	- Minimum: 0.00000
+	- Standard deviation: 0.51408
+Most complex genome '40607' of size (1, 3) belongs to specie '7' with distance to representative of 0.056
+
+Population 'topology_3/v10' with 510 members in 6 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       86      85     2.54157    0.02269     1       (1, 3)   
+	   3       86      84     2.08156    0.02420     4       (1, 3)   
+	   7       86     122     4.54091    0.03548     12      (1, 3)   
+	   8       86      70     0.70274    0.01849     12      (1, 3)   
+	   10      86     125     4.28758    0.03696     30      (1, 3)   
+	   12       2      24     0.25250    0.00647     0       (1, 3)   
+
+Generation time: 59.872 sec  (56.509 average)
+
+********** Running generation 87 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.38759
+	-       mean fitness: 1.11397
+	-      worst fitness: 0.00000
+	- standard deviation: 1.33796
+Best genome overview:
+	- fitness: 4.38759
+	- size (hid, conn): (1, 3)
+	- genome id: 40607
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 2.24655
+	- Mean: 0.81629
+	- Minimum: 0.00000
+	- Standard deviation: 0.48417
+Most complex genome '40607' of size (1, 3) belongs to specie '7' with distance to representative of 0.056
+
+Population 'topology_3/v10' with 511 members in 6 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       87     106     2.69478    0.03170     2       (1, 3)   
+	   3       87      81     1.93549    0.02304     5       (1, 3)   
+	   7       87     125     4.38759    0.03596     13      (1, 3)   
+	   8       87      37     0.73112    0.01044     13      (1, 3)   
+	   10      87     114     4.03997    0.03232     31      (1, 3)   
+	   12       3      48     0.41823    0.01307     0       (1, 3)   
+
+Generation time: 56.046 sec  (56.494 average)
+
+********** Running generation 88 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.03429
+	-       mean fitness: 1.20701
+	-      worst fitness: 0.00000
+	- standard deviation: 1.21459
+Best genome overview:
+	- fitness: 4.03429
+	- size (hid, conn): (1, 3)
+	- genome id: 41555
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 2.04672
+	- Mean: 0.78877
+	- Minimum: 0.00000
+	- Standard deviation: 0.45495
+Most complex genome '41555' of size (1, 3) belongs to specie '7' with distance to representative of 0.058
+
+Population 'topology_3/v10' with 512 members in 6 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       88      87     2.36730    0.02233     3       (1, 3)   
+	   3       88      74     1.64290    0.02028     6       (1, 3)   
+	   7       88     116     4.03429    0.03227     14      (1, 3)   
+	   8       88      67     0.76604    0.02070     14      (1, 3)   
+	   10      88     110     3.78074    0.03316     32      (1, 3)   
+	   12       4      58     0.81364    0.01695     0       (1, 3)   
+
+Generation time: 56.187 sec  (56.517 average)
+
+********** Running generation 89 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.45163
+	-       mean fitness: 1.14517
+	-      worst fitness: 0.00000
+	- standard deviation: 1.37777
+Best genome overview:
+	- fitness: 4.45163
+	- size (hid, conn): (1, 3)
+	- genome id: 42006
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 1.96804
+	- Mean: 0.77339
+	- Minimum: 0.00000
+	- Standard deviation: 0.44722
+Most complex genome '42006' of size (1, 3) belongs to specie '7' with distance to representative of 0.022
+
+Population 'topology_3/v10' with 512 members in 6 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       89      83     2.04673    0.02353     4       (1, 3)   
+	   3       89      94     2.17825    0.02944     7       (1, 3)   
+	   7       89     126     4.45163    0.03838     15      (1, 3)   
+	   8       89      47     0.78386    0.01170     15      (1, 3)   
+	   10      89     124     4.24221    0.03857     33      (1, 3)   
+	   12       5      38     0.35774    0.00617     1       (1, 3)   
+
+Generation time: 56.001 sec  (56.458 average)
+Population 'topology_3/v10' saved! Current generation: 90
+
+********** Running generation 90 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.84069
+	-       mean fitness: 1.28083
+	-      worst fitness: 0.00000
+	- standard deviation: 1.50324
+Best genome overview:
+	- fitness: 4.84069
+	- size (hid, conn): (1, 3)
+	- genome id: 42463
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 2.05266
+	- Mean: 0.75829
+	- Minimum: 0.00000
+	- Standard deviation: 0.43989
+Most complex genome '42463' of size (1, 3) belongs to specie '7' with distance to representative of 0.017
+
+Population 'topology_3/v10' with 513 members in 6 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       90     108     2.89852    0.03492     5       (1, 3)   
+	   3       90      86     2.45708    0.02614     8       (1, 3)   
+	   7       90     122     4.84069    0.03842     16      (1, 3)   
+	   8       90      48     0.67466    0.01435     16      (1, 3)   
+	   10      90     115     4.50150    0.03630     34      (1, 3)   
+	   12       6      34     0.28046    0.00738     2       (1, 3)   
+
+Generation time: 56.039 sec  (56.402 average)
+
+********** Running generation 91 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.95873
+	-       mean fitness: 1.20315
+	-      worst fitness: 0.00000
+	- standard deviation: 1.31834
+Best genome overview:
+	- fitness: 3.95873
+	- size (hid, conn): (1, 3)
+	- genome id: 43018
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 2.15437
+	- Mean: 0.76838
+	- Minimum: 0.00000
+	- Standard deviation: 0.42671
+Most complex genome '43018' of size (1, 3) belongs to specie '7' with distance to representative of 0.014
+
+Population 'topology_3/v10' with 513 members in 6 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       91      97     2.68238    0.02484     6       (1, 3)   
+	   3       91      94     2.24551    0.02611     9       (1, 3)   
+	   7       91     120     3.95873    0.03245     17      (1, 3)   
+	   8       91      43     0.51696    0.01077     17      (1, 3)   
+	   10      91     121     3.77268    0.03281     35      (1, 3)   
+	   12       7      38     0.37496    0.01103     3       (1, 3)   
+
+Generation time: 56.452 sec  (56.430 average)
+
+********** Running generation 92 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.51787
+	-       mean fitness: 1.17577
+	-      worst fitness: 0.00000
+	- standard deviation: 1.39340
+Best genome overview:
+	- fitness: 4.51787
+	- size (hid, conn): (1, 3)
+	- genome id: 43519
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 1.86071
+	- Mean: 0.77582
+	- Minimum: 0.00000
+	- Standard deviation: 0.42275
+Most complex genome '43519' of size (1, 3) belongs to specie '7' with distance to representative of 0.014
+
+Population 'topology_3/v10' with 513 members in 6 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       92      91     2.62294    0.02704     7       (1, 3)   
+	   3       92      69     1.93063    0.02054     10      (1, 3)   
+	   7       92     118     4.51787    0.03765     18      (1, 3)   
+	   8       92      52     0.63942    0.01487     18      (1, 3)   
+	   10      92     111     4.30071    0.03554     36      (1, 3)   
+	   12       8      72     1.00890    0.02655     0       (1, 3)   
+
+Generation time: 56.244 sec  (56.501 average)
+
+********** Running generation 93 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.57431
+	-       mean fitness: 1.26064
+	-      worst fitness: 0.00000
+	- standard deviation: 1.40219
+Best genome overview:
+	- fitness: 4.57431
+	- size (hid, conn): (1, 3)
+	- genome id: 44065
+	- belongs to specie: 10
+Genetic distance:
+	- Maximum: 2.05153
+	- Mean: 0.77154
+	- Minimum: 0.00000
+	- Standard deviation: 0.42302
+Most complex genome '44065' of size (1, 3) belongs to specie '10' with distance to representative of 0.088
+
+Population 'topology_3/v10' with 511 members in 6 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       93      93     2.79920    0.03076     8       (1, 3)   
+	   3       93      84     2.07565    0.03008     11      (1, 3)   
+	   7       93     112     4.40793    0.03736     19      (1, 3)   
+	   8       93      59     1.07895    0.02075     19      (1, 3)   
+	   10      93     118     4.57431    0.04121     37      (1, 3)   
+	   12       9      45     0.87086    0.01210     1       (1, 3)   
+
+Generation time: 55.862 sec  (56.504 average)
+
+********** Running generation 94 **********
+
+Full population's fitness overview:
+	-       best fitness: 3.96019
+	-       mean fitness: 1.12830
+	-      worst fitness: 0.00000
+	- standard deviation: 1.23310
+Best genome overview:
+	- fitness: 3.96019
+	- size (hid, conn): (1, 3)
+	- genome id: 42176
+	- belongs to specie: 10
+Genetic distance:
+	- Maximum: 2.00083
+	- Mean: 0.78549
+	- Minimum: 0.00000
+	- Standard deviation: 0.42871
+Most complex genome '42176' of size (1, 3) belongs to specie '10' with distance to representative of 0.047
+
+Population 'topology_3/v10' with 511 members in 6 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       94      96     2.37958    0.02559     9       (1, 3)   
+	   3       94      74     1.59940    0.01904     12      (1, 3)   
+	   7       94     124     3.94173    0.03519     20      (1, 3)   
+	   8       94      42     0.61804    0.01048     20      (1, 3)   
+	   10      94     121     3.96019    0.03356     38      (1, 3)   
+	   12      10      54     0.74527    0.01656     2       (1, 3)   
+
+Generation time: 56.104 sec  (56.469 average)
+
+********** Running generation 95 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.28136
+	-       mean fitness: 1.12779
+	-      worst fitness: 0.00000
+	- standard deviation: 1.29666
+Best genome overview:
+	- fitness: 4.28136
+	- size (hid, conn): (1, 3)
+	- genome id: 45103
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 1.97580
+	- Mean: 0.74842
+	- Minimum: 0.00000
+	- Standard deviation: 0.39052
+Most complex genome '45103' of size (1, 3) belongs to specie '7' with distance to representative of 0.012
+
+Population 'topology_3/v10' with 511 members in 6 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       95      95     2.49986    0.02604     10      (1, 3)   
+	   3       95      84     1.90942    0.02580     13      (1, 3)   
+	   7       95     123     4.28136    0.03453     21      (1, 3)   
+	   8       95      57     0.70591    0.01681     21      (1, 3)   
+	   10      95     108     3.76599    0.03112     39      (1, 3)   
+	   12      11      44     0.64869    0.01201     3       (1, 3)   
+
+Generation time: 56.122 sec  (56.493 average)
+
+********** Running generation 96 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.55675
+	-       mean fitness: 1.20486
+	-      worst fitness: 0.00000
+	- standard deviation: 1.39909
+Best genome overview:
+	- fitness: 4.55675
+	- size (hid, conn): (1, 3)
+	- genome id: 45404
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 1.67001
+	- Mean: 0.73967
+	- Minimum: 0.00000
+	- Standard deviation: 0.36073
+Most complex genome '45404' of size (1, 3) belongs to specie '7' with distance to representative of 0
+
+Population 'topology_3/v10' with 511 members in 6 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       96      84     2.41878    0.02546     11      (1, 3)   
+	   3       96      76     1.96434    0.02339     14      (1, 3)   
+	   7       96     119     4.55675    0.03705     22      (1, 3)   
+	   8       96      53     0.80934    0.01420     22      (1, 3)   
+	   10      96     122     4.52103    0.04186     40      (1, 3)   
+	   12      12      57     0.89604    0.02036     4       (1, 3)   
+
+Generation time: 56.281 sec  (56.134 average)
+
+********** Running generation 97 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.69800
+	-       mean fitness: 1.28028
+	-      worst fitness: 0.00000
+	- standard deviation: 1.52048
+Best genome overview:
+	- fitness: 4.69800
+	- size (hid, conn): (1, 3)
+	- genome id: 45888
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 1.67717
+	- Mean: 0.73573
+	- Minimum: 0.00000
+	- Standard deviation: 0.36123
+Most complex genome '45888' of size (1, 3) belongs to specie '7' with distance to representative of 0.019
+
+Population 'topology_3/v10' with 511 members in 6 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       97     106     3.03960    0.03619     12      (1, 3)   
+	   3       97      90     2.42278    0.03188     15      (1, 3)   
+	   7       97     117     4.69800    0.03948     23      (1, 3)   
+	   8       97      48     0.66165    0.01248     23      (1, 3)   
+	   10      97     111     4.45385    0.03651     41      (1, 3)   
+	   12      13      39     0.62174    0.01091     5       (1, 3)   
+
+Generation time: 56.056 sec  (56.135 average)
+
+********** Running generation 98 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.56114
+	-       mean fitness: 1.18863
+	-      worst fitness: 0.00000
+	- standard deviation: 1.39355
+Best genome overview:
+	- fitness: 4.56114
+	- size (hid, conn): (1, 3)
+	- genome id: 44609
+	- belongs to specie: 7
+Genetic distance:
+	- Maximum: 1.76876
+	- Mean: 0.73095
+	- Minimum: 0.00000
+	- Standard deviation: 0.36211
+Most complex genome '46436' of size (1, 3) belongs to specie '7' with distance to representative of 0.027
+
+Population 'topology_3/v10' with 512 members in 6 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       98      74     2.28390    0.02155     13      (1, 3)   
+	   3       98      80     2.30682    0.02563     16      (1, 3)   
+	   7       98     117     4.56114    0.03898     24      (1, 3)   
+	   8       98      51     0.75170    0.01566     24      (1, 3)   
+	   10      98     114     4.23656    0.03817     42      (1, 3)   
+	   12      14      76     1.10753    0.02840     0       (1, 3)   
+
+Generation time: 55.671 sec  (56.083 average)
+
+********** Running generation 99 **********
+
+Full population's fitness overview:
+	-       best fitness: 4.84172
+	-       mean fitness: 1.26078
+	-      worst fitness: 0.00000
+	- standard deviation: 1.51987
+Best genome overview:
+	- fitness: 4.84172
+	- size (hid, conn): (1, 3)
+	- genome id: 46883
+	- belongs to specie: 7
+ > Species 8 with 51 members is stagnated (fitness: 0.69003): removed!
+Genetic distance:
+	- Maximum: 1.57353
+	- Mean: 0.64375
+	- Minimum: 0.00000
+	- Standard deviation: 0.36295
+Most complex genome '46883' of size (1, 3) belongs to specie '7' with distance to representative of 0.022
+
+Population 'topology_3/v10' with 511 members in 5 species:
+	 specie    age    size    fitness    adj fit    stag    repr size 
+	========  =====  ======  =========  =========  ======  ===========
+	   1       99      98     2.32113    0.03137     14      (1, 3)   
+	   3       99      92     2.35625    0.02945     17      (1, 3)   
+	   7       99     127     4.84172    0.04138     25      (1, 3)   
+	   10      99     121     4.54976    0.03991     43      (1, 3)   
+	   12      15      73     1.65523    0.02178     0       (1, 3)   
+
+Generation time: 56.085 sec  (56.092 average)
+Population 'topology_3/v10' saved! Current generation: 100
