@@ -10,7 +10,6 @@ import os
 import sys
 import time
 from collections import Counter
-from glob import glob
 from random import random
 
 import matplotlib.pyplot as plt
@@ -81,15 +80,13 @@ def train(topology_id: int, batch_size: int = 1000, unused_cpu: int = 2, use_bac
         raise KeyboardInterrupt
 
 
-def visualize_bar(topology_id: int, csv_id: int = None, rounding: int = 2, use_backup: bool = False):
+def visualize_bar(topology_id: int, rounding: int = 2, use_backup: bool = False):
     """Visualize a bar-plot of how many genomes obtained which fitness score"""
     fitness = []
     path_shared = get_subfolder(f"population{'_backup' if use_backup else ''}/storage/", "experiment6")
     path_data = get_subfolder(path_shared, "data")
     path_images = get_subfolder(path_shared, 'images')
-    if csv_id is None: csv_id = len(glob(f"{path_data}*.csv")) - 1
-    if csv_id < 0: raise Exception("No data yet created!")
-    name = f"topology_{topology_id}_{csv_id}"
+    name = f"topology_{topology_id}"
     csv_name = f"{path_data}{name}.csv"
     
     # Read in the scores
@@ -121,10 +118,6 @@ def visualize_bar(topology_id: int, csv_id: int = None, rounding: int = 2, use_b
     plt.savefig(f"{path_images}{name}.png")
     # plt.show()
     plt.close()
-
-
-def visualize_tsne():  # TODO
-    pass
 
 
 # -------------------------------------------------> HELPER METHODS <------------------------------------------------- #
@@ -182,8 +175,7 @@ def get_initial_keys(topology_id: int, use_backup: bool):
     """Get the genome-key based on CSV-file's length."""
     path = get_subfolder(f"population{'_backup' if use_backup else ''}/storage/", "experiment6")
     path = get_subfolder(path, "data")
-    n_files = len(glob(f"{path}*.csv"))
-    csv_name = f"topology_{topology_id}_{n_files}"
+    csv_name = f"topology_{topology_id}"
     path = f"{path}{csv_name}.csv"
     
     # CSV exists, count number of rows
