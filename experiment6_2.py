@@ -23,13 +23,12 @@ from configs.evaluation_config import EvaluationConfig
 from experiment6 import enforce_topology, get_genome, get_genome_parameters, get_multi_env
 from main import get_folder, get_game_ids
 from population.population import Population
-from population.utils.gene_util.gru import GruNodeGene
 from population.utils.population_util.fitness_functions import calc_pop_fitness
 from utils.dictionary import *
 from utils.myutils import get_subfolder
 
 # Minimal ratio of evaluation games finished before added to the CSV
-MIN_FINISHED = 0.8  # Finish 15/18 or more
+MIN_FINISHED = 1  # Finish 15/18 or more
 
 
 # --------------------------------------------------> MAIN METHODS <-------------------------------------------------- #
@@ -257,7 +256,7 @@ def get_config():
     cfg.population.compatibility_thr = .5  # Keep threshold low to enforce new species to be discovered
     cfg.population.specie_elitism = 0  # Do not keep any specie after it stagnated
     cfg.population.specie_stagnation = 10  # Keep a relative low stagnation threshold to make room for new species
-    cfg.population.parent_selection = .05  # Low parent selection since large number of species used
+    cfg.population.parent_selection = .1  # Low parent selection since large number of species used  TODO: Changed
     cfg.update()
     return cfg
 
@@ -282,11 +281,23 @@ def get_csv_path(topology_id: int, use_backup: bool, batch_size: int):
     path = f"{path}{csv_name}.csv"
     with open(path, 'w', newline='') as f:
         writer = csv.writer(f)
-        writer.writerow(['bias0', 'bias1', 'bias2',
-                         'weight_xr', 'weight_xz', 'weight_xh',
-                         'weight_hr', 'weight_hz', 'weight_hh',
-                         'conn1', 'conn2',
-                         'finished'])
+        # Construct the CSV's head
+        head = []
+        if topology_id in [1, 2, 3]:  # GRU populations
+            head += ['bias_r', 'bias_z', 'bias_h',
+                     'weight_xr', 'weight_xz', 'weight_xh',
+                     'weight_hr', 'weight_hz', 'weight_hh']
+        elif topology_id in [4]:  # SRU populations
+            head += ['bias_h', 'weight_xh', 'weight_hh']
+        
+        if topology_id in [1]:
+            head += ['conn1', 'conn2']
+        elif topology_id in [2]:
+            head += ['bias_rw', 'conn2']
+        elif topology_id in [3, 4]:
+            head += ['bias_rw', 'conn0', 'conn1', 'conn2']
+        head += ['fitness']
+        writer.writerow(head)
         return path, csv_name, 0
 
 
@@ -301,7 +312,7 @@ def execution_test():
     assert g.nodes[0].bias == 2
     assert g.nodes[1].bias == 0
     assert g.connections[(-1, 2)].weight == 1
-    assert type(g.nodes[2]) == GruNodeGene
+    # assert type(g.nodes[2]) == GruNodeGene
 
 
 if __name__ == '__main__':
@@ -314,7 +325,7 @@ if __name__ == '__main__':
     parser.add_argument('--save_population', type=bool, default=True)  # Save the final population after finishing
     parser.add_argument('--visualize', type=bool, default=True)  # Visualize the current results
     parser.add_argument('--test', type=bool, default=False)  # Visualize the current results
-    parser.add_argument('--use_backup', type=bool, default=False)  # Use the backup-data
+    parser.add_argument('--use_backup', type=bool, default=True)  # Use the backup-data
     args = parser.parse_args()
     
     # Run the program
