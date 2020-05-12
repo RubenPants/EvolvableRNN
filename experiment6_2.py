@@ -29,7 +29,7 @@ from utils.myutils import get_subfolder
 
 # Minimal ratio of evaluation games finished before added to the CSV
 # MIN_FINISHED = 0.8  # Finish 15/18 or more
-MIN_FINISHED = 0.2  # Finish 4/18 or more  TODO: SRU (topology4) is incapable, lower threshold!
+MIN_FINISHED = 0.2  # Finish 4/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
 
 
 # --------------------------------------------------> MAIN METHODS <-------------------------------------------------- #
@@ -290,16 +290,16 @@ def get_csv_path(topology_id: int, use_backup: bool, batch_size: int):
             head += ['bias_r', 'bias_z', 'bias_h',
                      'weight_xr', 'weight_xz', 'weight_xh',
                      'weight_hr', 'weight_hz', 'weight_hh']
-        elif topology_id in [4]:  # SRU populations
+        elif topology_id in [22, 33]:  # SRU populations
             head += ['bias_h', 'weight_xh', 'weight_hh']
         else:
             raise Exception(f"Topology ID '{topology_id}' not supported!")
         
         if topology_id in [1]:
             head += ['conn1', 'conn2']
-        elif topology_id in [2]:
+        elif topology_id in [2, 22]:
             head += ['bias_rw', 'conn2']
-        elif topology_id in [3, 4]:
+        elif topology_id in [3, 33]:
             head += ['bias_rw', 'conn0', 'conn1', 'conn2']
         else:
             raise Exception(f"Topology ID '{topology_id}' not supported!")
