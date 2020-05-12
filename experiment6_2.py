@@ -258,7 +258,7 @@ def get_config():
     cfg.population.compatibility_thr = .5  # Keep threshold low to enforce new species to be discovered
     cfg.population.specie_elitism = 0  # Do not keep any specie after it stagnated
     cfg.population.specie_stagnation = 10  # Keep a relative low stagnation threshold to make room for new species
-    cfg.population.parent_selection = .1  # Low parent selection since large number of species used  TODO: Changed
+    cfg.population.parent_selection = .1  # Low parent selection since large number of species used
     cfg.update()
     return cfg
 
@@ -290,14 +290,17 @@ def get_csv_path(topology_id: int, use_backup: bool, batch_size: int):
                      'weight_xr', 'weight_xz', 'weight_xh',
                      'weight_hr', 'weight_hz', 'weight_hh']
         elif topology_id in [4]:  # SRU populations
-            head += ['bias_h', 'weight_xh', 'weight_hh']
+            head += ['bias_2_h', 'weight_2_xh', 'weight_2_hh',
+                     'bias_3_h', 'weight_3_xh', 'weight_3_hh']
         
         if topology_id in [1]:
             head += ['conn1', 'conn2']
         elif topology_id in [2]:
             head += ['bias_rw', 'conn2']
-        elif topology_id in [3, 4]:
+        elif topology_id in [3]:
             head += ['bias_rw', 'conn0', 'conn1', 'conn2']
+        elif topology_id in [4]:
+            head += ['bias_rw', 'conn0', 'conn1', 'conn2', 'conn3']
         head += ['fitness']
         writer.writerow(head)
         return path, csv_name, 0
@@ -327,7 +330,7 @@ if __name__ == '__main__':
     parser.add_argument('--save_population', type=bool, default=True)  # Save the final population after finishing
     parser.add_argument('--visualize', type=bool, default=True)  # Visualize the current results
     parser.add_argument('--test', type=bool, default=False)  # Visualize the current results
-    parser.add_argument('--use_backup', type=bool, default=False)  # Use the backup-data
+    parser.add_argument('--use_backup', type=bool, default=True)  # Use the backup-data
     args = parser.parse_args()
     
     # Run the program

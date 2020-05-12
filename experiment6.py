@@ -151,9 +151,15 @@ def get_genome_parameters(g, topology_id: int):
     elif topology_id in [2]:
         result += [g.nodes[1].bias]
         result += [g.connections[(-1, 1)].weight]
-    if topology_id in [3]:
+    elif topology_id in [3]:
         result += [g.nodes[1].bias]
         result += [g.connections[(-1, 2)].weight, g.connections[(2, 1)].weight, g.connections[(-1, 1)].weight]
+    elif topology_id in [4]:
+        result += [g.nodes[1].bias]
+        result += [g.connections[(-1, 2)].weight, g.connections[(2,3)].weight, g.connections[(3,1)].weight,
+                   g.connections[(-1, 1)].weight]
+    else:
+        raise Exception(f"Topology of ID {topology_id} not supported!")
     result += [g.fitness]
     return result
 
@@ -203,6 +209,10 @@ def get_initial_keys(topology_id: int, use_backup: bool):
                 head += ['bias_rw', 'conn2']
             elif topology_id in [3]:
                 head += ['bias_rw', 'conn0', 'conn1', 'conn2']
+            elif topology_id in [4]:
+                head += ['bias_rw', 'conn0', 'conn1', 'conn2', 'conn3']
+            else:
+                raise Exception(f"Topology ID {topology_id} not supported!")
             head += ['fitness']
             writer.writerow(head)
             return 1, path
@@ -429,7 +439,10 @@ def get_topology4(gid: int, cfg: Config):
     Create a uniformly and randomly sampled genome of fixed topology:
     Sigmoid with bias 1.5 --> Actuation default of 95,3%
       (key=0, bias=1.5)      (key=1, bias=?)
-                     ____ /   /
+                            __/  /
+                           /    /
+                        SRU    /
+                     __ /     /
                    /         /
                 SRU         /
                 |     _____/
@@ -455,11 +468,16 @@ def get_topology4(gid: int, cfg: Config):
     genome.nodes[1].bias = random() * bias_range + cfg.genome.bias_min_value  # Uniformly sampled bias
     genome.nodes[2] = SimpleRnnNodeGene(key=2, cfg=cfg.genome, input_keys=[-1], input_keys_full=[-1])  # Hidden node
     genome.nodes[2].bias = 0  # Bias is irrelevant for GRU-node
+    genome.nodes[3] = SimpleRnnNodeGene(key=2, cfg=cfg.genome, input_keys=[2], input_keys_full=[2])  # Hidden node
+    genome.nodes[3].bias = 0  # Bias is irrelevant for GRU-node
     
     # Uniformly sample the genome's GRU-component
     genome.nodes[2].bias_h = rand_arr((1,)) * bias_range + cfg.genome.bias_min_value
     genome.nodes[2].weight_xh_full = rand_arr((1, 1)) * rnn_range + cfg.genome.weight_min_value
     genome.nodes[2].weight_hh = rand_arr((1, 1)) * rnn_range + cfg.genome.weight_min_value
+    genome.nodes[3].bias_h = rand_arr((1,)) * bias_range + cfg.genome.bias_min_value
+    genome.nodes[3].weight_xh_full = rand_arr((1, 1)) * rnn_range + cfg.genome.weight_min_value
+    genome.nodes[3].weight_hh = rand_arr((1, 1)) * rnn_range + cfg.genome.weight_min_value
     
     # Create the connections
     genome.connections = dict()
@@ -470,8 +488,14 @@ def get_topology4(gid: int, cfg: Config):
     genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
     genome.connections[key].enabled = True
     
-    # gru2output - Uniformly sampled
-    key = (2, 1)
+    # gru2gru - Uniformly sampled
+    key = (2, 3)
+    genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
+    genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
+    genome.connections[key].enabled = True
+    
+    # gru2out - Uniformly sampled
+    key = (3, 1)
     genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
     genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
     genome.connections[key].enabled = True
