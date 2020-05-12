@@ -150,3 +150,6 @@ cache_populations/**/
 
 # Ignore backup files
 *backup/
+
+# Ignore runs (TensorBoard Projector)
+runs/
