@@ -151,13 +151,9 @@ def get_genome_parameters(g, topology_id: int):
     elif topology_id in [2]:
         result += [g.nodes[1].bias]
         result += [g.connections[(-1, 1)].weight]
-    elif topology_id in [3]:
+    elif topology_id in [3, 4]:
         result += [g.nodes[1].bias]
         result += [g.connections[(-1, 2)].weight, g.connections[(2, 1)].weight, g.connections[(-1, 1)].weight]
-    elif topology_id in [4]:
-        result += [g.nodes[1].bias]
-        result += [g.connections[(-1, 2)].weight, g.connections[(2,3)].weight, g.connections[(3,1)].weight,
-                   g.connections[(-1, 1)].weight]
     else:
         raise Exception(f"Topology of ID {topology_id} not supported!")
     result += [g.fitness]
@@ -207,10 +203,8 @@ def get_initial_keys(topology_id: int, use_backup: bool):
                 head += ['conn1', 'conn2']
             elif topology_id in [2]:
                 head += ['bias_rw', 'conn2']
-            elif topology_id in [3]:
+            elif topology_id in [3, 4]:
                 head += ['bias_rw', 'conn0', 'conn1', 'conn2']
-            elif topology_id in [4]:
-                head += ['bias_rw', 'conn0', 'conn1', 'conn2', 'conn3']
             else:
                 raise Exception(f"Topology ID {topology_id} not supported!")
             head += ['fitness']
@@ -376,11 +370,11 @@ def get_topology3(gid: int, cfg: Config):
     """
     Create a uniformly and randomly sampled genome of fixed topology:
     Sigmoid with bias 1.5 --> Actuation default of 95,3%
-      (key=0, bias=1.5)      (key=1, bias=?)
-                     ____ /   /
-                   /         /
-                GRU         /
-                |     _____/
+      (key=0, bias=1.5)   (key=1, bias=?)
+                      ____ /  /
+                    /        /
+                 GRU        /
+                 |    _____/
                 |   /
               (key=-1)
     """
@@ -438,14 +432,11 @@ def get_topology4(gid: int, cfg: Config):
     """
     Create a uniformly and randomly sampled genome of fixed topology:
     Sigmoid with bias 1.5 --> Actuation default of 95,3%
-      (key=0, bias=1.5)      (key=1, bias=?)
-                            __/  /
-                           /    /
-                        SRU    /
-                     __ /     /
-                   /         /
-                SRU         /
-                |     _____/
+      (key=0, bias=1.5) (key=1, bias=?)
+                      __ /   /
+                    /       /
+                 SRU       /
+                 |   _____/
                 |   /
               (key=-1)
     """
