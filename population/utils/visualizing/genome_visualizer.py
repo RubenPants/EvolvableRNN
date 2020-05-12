@@ -125,7 +125,7 @@ def draw_net(config: GenomeConfig, genome: Genome, debug=False, filename=None, v
                 name = 'SRU'
             else:
                 raise Exception(f"Type of hidden node not supported: {genome.nodes[key]}")
-        name += f' - {idx + 1}'
+        if not debug: name += f' - {idx + 1}'
         node_names.update({key: name})
         dot.node(
                 name,
