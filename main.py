@@ -356,7 +356,7 @@ if __name__ == '__main__':
     
     # Main methods
     parser.add_argument('--train', type=bool, default=False)
-    parser.add_argument('--train_overview', type=bool, default=False)
+    parser.add_argument('--train_overview', type=bool, default=True)
     parser.add_argument('--blueprint', type=bool, default=False)
     parser.add_argument('--trace', type=bool, default=False)  # Keep it False
     parser.add_argument('--trace_fit', type=bool, default=False)
@@ -368,12 +368,12 @@ if __name__ == '__main__':
     
     # Extra arguments
     parser.add_argument('--iterations', type=int, default=50)
-    parser.add_argument('--experiment', type=int, default=3)
+    parser.add_argument('--experiment', type=int, default=7)
     parser.add_argument('--unused_cpu', type=int, default=2)
     parser.add_argument('--version', type=int, default=0)
     parser.add_argument('--debug', type=bool, default=False)
     parser.add_argument('--duration', type=int, default=60)
-    parser.add_argument('--use_backup', type=bool, default=True)
+    parser.add_argument('--use_backup', type=bool, default=False)
     args = parser.parse_args()
     
     # Load in current config-file
@@ -387,14 +387,13 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='NEAT-SRU/v11',
+            name='connection/v1',
             # name=get_name(cfg=config, version=args.version),
-            # folder_name='experiment1',
+            # folder_name='experiment6',
             folder_name=get_folder(args.experiment),
-            config=config,
+            # config=config,  # Commented to prevent new populations from creating (if type in other fields)
             use_backup=args.use_backup,
     )
-    print(pop.best_genome)
     
     game_ids_train, game_ids_eval = get_game_ids(experiment_id=args.experiment)
     
@@ -470,7 +469,7 @@ if __name__ == '__main__':
         
         if args.genome:
             visualize_genome(
-                    debug=False,
+                    debug=True,
                     genome=chosen_genome if chosen_genome else pop.best_genome,
                     population=pop,
             )
