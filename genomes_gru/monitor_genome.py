@@ -55,7 +55,7 @@ def main(genome: Genome, gid: int, duration: int = 60, debug: bool = False):
     actuation.append([0, 0])
     distance.append(state[0])
     position.append(game.player.pos.get_tuple())
-    ht, ht_tilde, rt, zt = get_gru_states(gru=net.rnn_array[0], x=np.asarray([state]))  # TODO: Has updated!
+    ht, ht_tilde, rt, zt = get_gru_states(net=net, x=np.asarray([state]))  # TODO: Has updated!
     Ht.append(ht)
     Ht_tilde.append(ht_tilde)
     Rt.append(rt)
@@ -102,7 +102,7 @@ def main(genome: Genome, gid: int, duration: int = 60, debug: bool = False):
         actuation.append(action[0])
         distance.append(state[0])
         position.append(game.player.pos.get_tuple())
-        ht, ht_tilde, rt, zt = get_gru_states(gru=net.rnn_array[0], x=np.asarray([state]))
+        ht, ht_tilde, rt, zt = get_gru_states(net=net, x=np.asarray([state]))
         Ht.append(ht)
         Ht_tilde.append(ht_tilde)
         Rt.append(rt)
