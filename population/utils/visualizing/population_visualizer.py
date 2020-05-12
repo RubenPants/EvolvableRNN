@@ -65,25 +65,51 @@ def create_traces(traces: dict, games: list, gen: int, save_path: str, save_name
     :param save_name: Name of saved file
     """
     genome_keys = list(traces.keys())
+    
     for i, g in enumerate(games):
         # Get the game's blueprint
-        g.get_blueprint()
+        plt.figure(figsize=(2, 2))
+        # g.get_blueprint(ax=plt.gca(), annotate=False)
+        x_min, x_max = min(g.x_axis / 2, g.target.x), max(g.x_axis / 2, g.target.x)
+        y_min, y_max = min(g.y_axis / 2, g.target.y), max(g.y_axis / 2, g.target.y)
+        
+        # Add green dotted circle around targets
+        c = plt.Circle((g.target.x, g.target.y), 0.5, color='g', linestyle=':', linewidth=1.5, fill=False)
+        plt.gca().add_artist(c)
         
         # Append the traces agent by agent
         for gk in genome_keys:
             # Get the trace of the genome for the requested game
             x_pos, y_pos = zip(*traces[gk][i])
+            x_min, x_max = min(x_min, min(x_pos)), max(x_max, max(x_pos))
+            y_min, y_max = min(y_min, min(y_pos)), max(y_max, max(y_pos))
             
             # Plot the trace (gradient)
+            plt.plot([10], [10], marker='o', markersize=5, color=(1, 0, 0))
             for p in range(0, len(x_pos) - 1):
                 plt.plot((x_pos[p], x_pos[p + 1]), (y_pos[p], y_pos[p + 1]), color=(1, p / len(x_pos), 0))
+
+        # Replace ticks by stripes
+        plt.xticks([i for i in range(g.x_axis + 1)])
+        plt.yticks([i for i in range(g.y_axis + 1)])
+        plt.setp(plt.gca().get_xticklabels(), visible=False)
+        plt.setp(plt.gca().get_yticklabels(), visible=False)
+        
+        # Constraint the plot's boundaries
+        x_center = (x_max - x_min) / 2 + x_min
+        y_center = (y_max - y_min) / 2 + y_min
+        r = max((x_max - x_min) / 2 + .5, (y_max - y_min) / 2 + .5)
+        plt.xlim(x_center - r, x_center + r)
+        plt.ylim(y_center - r, y_center + r)
         
         # Add title
-        plt.title(f"Traces - Game {g.id:05d} - Generation {gen:05d}")
+        # plt.title(f"Game {g.id:05d}")
         
         # Save figure
+        plt.tight_layout()
         game_path = get_subfolder(save_path, 'game{id:05d}'.format(id=g.id))
-        plt.savefig(f'{game_path}{save_name}_gen{gen:05d}')
+        # plt.savefig(f'{game_path}{save_name}_gen{gen:05d}', bbox_inches='tight', pad_inches=0.02)
+        plt.savefig(f'game{i + 1}', bbox_inches='tight', pad_inches=0.02)  # Places in main folder
         plt.close()
 
 

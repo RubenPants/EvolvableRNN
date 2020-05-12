@@ -154,5 +154,5 @@ cache_populations/**/
 # Ignore runs (TensorBoard Projector)
 runs/
 
-# Ignore the delete_me folder
+# Ignore the delete_me folder (used to store intermediate images)
 delete_me/
