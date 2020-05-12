@@ -121,7 +121,7 @@ class Genome(object):
         for cid, cg in self.connections.items():
             mut_enabled = cg.mutate(config)
             if mut_enabled is not None:
-                if mut_enabled and not creates_cycle(list(iterkeys(self.get_used_connections())), cid):
+                if mut_enabled and not creates_cycle(list(iterkeys(self.connections.items())), cid):
                     self.enable_connection(config=config, key=cid)
                 else:
                     self.disable_connection(key=cid)
@@ -226,7 +226,8 @@ class Genome(object):
         
         # Check if the new connection would create a cycle, discard if so
         key = (in_node, out_node)
-        if creates_cycle(list(iterkeys(self.get_used_connections())), key):
+        recurrent = (config.rnn_prob_gru + config.rnn_prob_lstm + config.rnn_prob_simple_rnn) > 0
+        if (not recurrent) and creates_cycle(list(iterkeys(self.connections.items())), key):
             return
         
         # Don't duplicate connections

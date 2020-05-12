@@ -20,7 +20,7 @@ def visualize_function(f, name: str, save: bool = True):
         y.append(f(i / 100))
     
     # Plot the distance function
-    plt.figure(figsize=(8,2.2))
+    plt.figure(figsize=(5, 2.5))
     plt.axvline(color='k')
     plt.axhline(color='k')
     plt.plot(x, y, linewidth=4)
@@ -31,7 +31,7 @@ def visualize_function(f, name: str, save: bool = True):
     plt.ylabel("Output-value")
     plt.tight_layout()
     plt.grid(axis='both')
-    if save: plt.savefig(f'population/utils/visualizing/images/{name}.png')
+    if save: plt.savefig(f'population/utils/visualizing/images/{name}.png', bbox_inches='tight', pad_inches=0.02)
     # plt.show()
     plt.close()
 
