@@ -6,7 +6,6 @@ in the genome.
 """
 import argparse
 import os
-import warnings
 from math import cos, sin
 
 import matplotlib.pyplot as plt
@@ -27,8 +26,8 @@ from utils.myutils import get_subfolder
 
 # Parameters
 TIME_SERIES_WIDTH = 8
-TIME_SERIES_HEIGHT = 2
-CORRECTION = 1.06
+TIME_SERIES_HEIGHT = 1.5
+CORRECTION = 0.3
 
 
 def main(population: Population,
@@ -159,10 +158,6 @@ def main(population: Population,
                        target_found=target_found,
                        game_cfg=game_cfg.game,
                        save_path=f"{path}distance.png")
-    visualize_delta_distance(delta_distance,
-                             target_found=target_found,
-                             game_cfg=game_cfg.game,
-                             save_path=f"{path}delta_distance.png")
     visualize_hidden_state(Ht,
                            target_found=target_found,
                            game_cfg=game_cfg.game,
@@ -190,6 +185,7 @@ def visualize_actuation(actuation_list: list, target_found: list, game_cfg: Game
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Actuation force - Normalized")
+    plt.xlim(0)
     # plt.ylabel("Normalized force")
     # plt.xlabel("Simulation time (s)")
     plt.tight_layout()
@@ -209,29 +205,8 @@ def visualize_distance(distance_list: list, target_found: list, game_cfg: GameCo
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Distance to target - Normalized")
+    plt.xlim(0)
     # plt.ylabel("Normalized distance")
-    # plt.xlabel("Simulation time (s)")
-    plt.tight_layout()
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
-    plt.close()
-
-
-def visualize_delta_distance(delta_distance_list: list, target_found: list, game_cfg: GameConfig, save_path: str):
-    """Create a graph of the delta distance over time"""
-    delta_distance_list[0] = delta_distance_list[1]  # Ignore zero-delta at start
-    time = [i / game_cfg.fps for i in range(len(delta_distance_list))]
-    max_abs = sorted([abs(d) for d in delta_distance_list])[-10]
-    
-    # Create the graph
-    ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT)).gca()
-    plt.plot(time, delta_distance_list)
-    for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
-    plt.grid()
-    ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
-    plt.ylim([-max_abs * 1.1, max_abs * 1.1])
-    ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
-    plt.title("Delta distance to target - Normalized")
-    # plt.ylabel("Normalized delta distance")
     # plt.xlabel("Simulation time (s)")
     plt.tight_layout()
     plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
@@ -250,6 +225,7 @@ def visualize_hidden_state(hidden_state: list, target_found: list, game_cfg: Gam
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Hidden state")
+    plt.xlim(0)
     # plt.ylabel("SRU output value")
     # plt.xlabel("Simulation time (s)")
     plt.tight_layout()
@@ -259,7 +235,7 @@ def visualize_hidden_state(hidden_state: list, target_found: list, game_cfg: Gam
 
 def visualize_position(position_list: list, game: Game, save_path: str):
     """Create a trace-graph."""
-    plt.figure(figsize=(TIME_SERIES_HEIGHT * 6 - CORRECTION, TIME_SERIES_HEIGHT * 6 - CORRECTION)).gca()
+    plt.figure(figsize=(TIME_SERIES_HEIGHT * 3 - CORRECTION, TIME_SERIES_HEIGHT * 3 - CORRECTION)).gca()
     x_min, x_max = game.x_axis / 2, game.x_axis / 2
     y_min, y_max = game.y_axis / 2, game.y_axis / 2
     
@@ -268,11 +244,11 @@ def visualize_position(position_list: list, game: Game, save_path: str):
         t = game.spawn_function.locations[i]
         
         # Plot the targets
-        plt.plot(t[0], t[1], 'go')
-        plt.annotate(str(i + 1), xy=(t[0] + 0.1, t[1] + 0.1))
+        plt.plot(t[0], t[1], 'go', markersize=3)
+        plt.annotate(str(i + 1), xy=(t[0] + 0.3, t[1] + 0.3))
         
         # Add green dotted circle around targets
-        c = plt.Circle((t[0], t[1]), 0.5, color='g', linestyle=':', linewidth=2, fill=False)
+        c = plt.Circle((t[0], t[1]), 0.5, color='g', linestyle=':', linewidth=1, fill=False)
         plt.gca().add_artist(c)
         
         # Update the boundaries
@@ -300,7 +276,7 @@ def visualize_position(position_list: list, game: Game, save_path: str):
             plt.annotate(
                     str(int(p / game.game_config.fps)),
                     xy=(x_pos[p], y_pos[p]),
-                    xytext=(x_pos[p] + offset[0] * 10, y_pos[p] + offset[1] * 10),
+                    xytext=(x_pos[p] + offset[0] * 30, y_pos[p] + offset[1] * 30),
                     ha="center", va="center",
                     arrowprops=dict(arrowstyle="->", connectionstyle="arc,rad=0."),
             )
@@ -322,34 +298,28 @@ def visualize_position(position_list: list, game: Game, save_path: str):
 def merge(title: str, path: str):  # TODO
     """Merge each of the previously created images together"""
     # Load in all the images to merge
-    images = [plt.imread('population/utils/visualizing/images/white.png')]
-    image_names = ['actuation', 'distance', 'delta_distance', 'hidden_state']
-    images += [plt.imread(f'{path}{n}.png') for n in image_names]
+    # images = [plt.imread('population/utils/visualizing/images/white.png')]
+    image_names = ['actuation', 'distance', 'hidden_state']
+    images = [plt.imread(f'{path}{n}.png') for n in image_names]
     trace = plt.imread(f'{path}trace.png')
     
     # Make sure width of all images is the same
-    min_width = min([im.shape[1] for im in images])
     for i in range(len(images)):
-        while images[i].shape[1] > min_width:
+        while images[i].shape[1] > 774:
             images[i] = images[i][:, :-1, :]
+        while images[i].shape[1] < 774:
+            images[i] = np.concatenate((images[i], np.ones((images[i].shape[0], 1, images[i].shape[2]))), axis=1)
     
     # Concatenate the images, time_series vertical, and trace on the right
-    try:
-        images += [plt.imread('population/utils/visualizing/images/time774.png')]
-        images += [plt.imread('population/utils/visualizing/images/white.png')]
-        time_series = np.concatenate(images, axis=0)
-        result = np.concatenate([time_series, trace], axis=1)
-    except ValueError:
-        try:
-            images.pop(-1)
-            images += [plt.imread('population/utils/visualizing/images/time773.png')]
-            images += [plt.imread('population/utils/visualizing/images/white.png')]
-            time_series = np.concatenate(images, axis=0)
-            result = np.concatenate([time_series, trace], axis=1)
-        except ValueError as e:
-            warnings.warn(f"Failed to monitor genome ({title}), silently terminating\n"
-                          f"Received error: {e}")
-            return
+    images.append(plt.imread('population/utils/visualizing/images/time774.png'))
+    # images.append(plt.imread('population/utils/visualizing/images/white.png'))
+    time_series = np.concatenate(images, axis=0)
+    height = time_series.shape[0]
+    while trace.shape[0] > height:
+        trace = trace[:-1, :, :]
+    while trace.shape[0] < height:
+        trace = np.concatenate((trace, np.ones((1, trace.shape[1], trace.shape[2]))), axis=0)
+    result = np.concatenate([time_series, trace], axis=1)
     
     # Create the figure
     plt.figure(figsize=(TIME_SERIES_WIDTH + 6 * TIME_SERIES_HEIGHT, 6 * TIME_SERIES_HEIGHT + 0.5))
