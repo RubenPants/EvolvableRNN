@@ -28,7 +28,7 @@ from utils.dictionary import *
 from utils.myutils import get_subfolder
 
 # Minimal ratio of evaluation games finished before added to the CSV
-MIN_FINISHED = 1  # Finish 15/18 or more
+MIN_FINISHED = 0.8  # Finish 15/18 or more
 
 
 # --------------------------------------------------> MAIN METHODS <-------------------------------------------------- #
@@ -325,7 +325,7 @@ if __name__ == '__main__':
     parser.add_argument('--save_population', type=bool, default=True)  # Save the final population after finishing
     parser.add_argument('--visualize', type=bool, default=True)  # Visualize the current results
     parser.add_argument('--test', type=bool, default=False)  # Visualize the current results
-    parser.add_argument('--use_backup', type=bool, default=True)  # Use the backup-data
+    parser.add_argument('--use_backup', type=bool, default=False)  # Use the backup-data
     args = parser.parse_args()
     
     # Run the program
