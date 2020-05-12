@@ -141,13 +141,15 @@ def main(topology_id: int,
                     fitness_cfg=cfg.evaluation,
                     game_obs=return_dict,
             )
-            best_finish = 0
+            best = None
             for i, genome in genomes:
                 genome.fitness = finished[i]
-                if finished[i] > best_finish: best_finish = finished[i]
+                if best is None or finished[i] > best.fitness: best = genome
             
             # Give evaluation overview of population
-            pop.log(f"Best evaluation finish ratio: {round(best_finish, 2)}")
+            pop.log(f"Best evaluation finish ratio: {round(best.fitness, 2)}")
+            best_str = str(best).replace("\n", "\n\t")
+            pop.log(f"Best genome: \n\t{best_str}")
             sids = list(iterkeys(pop.species.species))
             sids.sort()
             msg = f"\nPopulation '{name}' has {len(pop.species.species):d} species:" \
