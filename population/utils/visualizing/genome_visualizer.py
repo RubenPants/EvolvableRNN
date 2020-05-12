@@ -83,18 +83,18 @@ def draw_net(config: GenomeConfig, genome: Genome, debug=False, filename=None, v
                 style='filled',
                 shape='box',
                 fillcolor=node_colors.get(key, '#bdc5ff'),
-                pos=f"{(num_inputs - 5) * 10 + index * 100}, "
+                pos=f"{-50 + index * 100}, "
                 # f"{200 + (50 if debug else 20)}!",  # TODO
                     f"{200 + len(used_hid_nodes) * (50 if debug else 20)}!",
         )
     
     # Visualize hidden nodes
-    for key in sorted(used_hid_nodes):
+    for idx, key in enumerate(sorted(used_hid_nodes)):
         # Find color for the nodes
         if type(genome.nodes[key]) == SimpleNodeGene:
             fillcolor = 'white'  # Plain white hidden nodes if simple hidden node
         elif type(genome.nodes[key]) == LstmNodeGene:
-            fillcolor = '#b8ffcd'  # Light green hidden node if LSTM
+            fillcolor = '#ffb8f4'  # Barbie-pink hidden node if LSTM
         elif type(genome.nodes[key]) == GruNodeGene:
             fillcolor = '#f5c484'  # Fancy orange hidden nodes if GRU
         elif type(genome.nodes[key]) == GruNoResetNodeGene:
@@ -102,7 +102,7 @@ def draw_net(config: GenomeConfig, genome: Genome, debug=False, filename=None, v
         elif type(genome.nodes[key]) == GruNoUpdateNodeGene:
             fillcolor = '#96fffd'  # Light blue hidden nodes if GRU-No-Update
         elif type(genome.nodes[key]) == SimpleRnnNodeGene:
-            fillcolor = '#ffb8f4'  # Barbie-pink for the SimpleRNN
+            fillcolor = '#a4ebb9'  # Light green for the SimpleRNN
         else:
             raise Exception(f"Type of hidden node not supported: {genome.nodes[key]}")
         
@@ -125,14 +125,15 @@ def draw_net(config: GenomeConfig, genome: Genome, debug=False, filename=None, v
                 name = 'SRU'
             else:
                 raise Exception(f"Type of hidden node not supported: {genome.nodes[key]}")
+        if not debug: name += f' - {idx + 1}'
         node_names.update({key: name})
         dot.node(
                 name,
                 style='filled',
                 shape='box',
                 fillcolor=node_colors.get(key, fillcolor),
-                # pos=f"{-120 + key * 20}, "
-                #     f"{110}!",  # TODO
+                pos=f"{-70 + (1 - idx) * 140}, "
+                    f"{120}!",  # TODO
         )
     
     # Add inputs to used_nodes (i.e. all inputs will always be visualized, even if they aren't used!)

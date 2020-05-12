@@ -1,7 +1,7 @@
 """
-monitor_genome_simple_gru.py
+monitor_genome_simple_lstm.py
 
-Monitor a single genome during its run on a single game. This monitoring focuses on the GRU-cell that must be present
+Monitor a single genome during its run on a single game. This monitoring focuses on the LSTM-cell that must be present
 in the genome.
 """
 import argparse
@@ -17,7 +17,7 @@ from configs.game_config import GameConfig
 from environment.game import Game, get_game
 from main import get_game_ids
 from population.population import Population
-from population.utils.gene_util.gru import GruNodeGene
+from population.utils.gene_util.lstm import LstmNodeGene
 from population.utils.genome import Genome
 from population.utils.network_util.activations import sigmoid
 from population.utils.network_util.feed_forward_net import make_net
@@ -27,15 +27,15 @@ from utils.myutils import get_subfolder
 # Parameters
 TIME_SERIES_WIDTH = 8
 TIME_SERIES_HEIGHT = 1.5
-CORRECTION = 1.05
+CORRECTION = 1
 
 
 def main(population: Population, game_id: int, genome: Genome = None, game_cfg: Config = None, debug: bool = False):
     """
     Monitor the genome on the following elements:
         * Position
-        * Reset gate (Rt) and Update gate (Zt)
-        * Hidden state of GRU (Ht)
+        * Forget gate (Ft), Input gate (It), and Output gate (Ot)
+        * Hidden state (Ht) and memory state (Ct) of LSTM, as well as the candidate memory state (Ct_tilde)
         * Actuation of both wheels
         * Distance
     """
@@ -43,8 +43,8 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
     if not genome: genome = population.best_genome
     if not game_cfg: game_cfg = pop.config
     
-    # Check if valid genome (contains at least one hidden GRU, first GRU is monitored)
-    assert len([n for n in genome.get_used_nodes().values() if type(n) == GruNodeGene]) >= 1
+    # Check if valid genome (contains at least one hidden LSTM, first LSTM is monitored)
+    assert len([n for n in genome.get_used_nodes().values() if type(n) == LstmNodeGene]) >= 1
     
     # Get the game
     game = get_game(game_id, cfg=game_cfg, noise=False)
@@ -63,9 +63,11 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
     distance = []
     position = []
     Ht = []
-    Ht_tilde = []
-    Rt = []
-    Zt = []
+    Ct = []
+    Ct_tilde = []
+    Ft = []
+    It = []
+    Ot = []
     target_found = []
     score = 0
     
@@ -73,21 +75,25 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
     actuation.append([0, 0])
     distance.append(state[0])
     position.append(game.player.pos.get_tuple())
-    ht, ht_tilde, rt, zt = get_gru_states(net=net, x=np.asarray([state]))
+    ht, ct, ct_tilde, ft, it, ot = get_lstm_states(net=net, x=np.asarray([state]))
     Ht.append(ht)
-    Ht_tilde.append(ht_tilde)
-    Rt.append(rt)
-    Zt.append(zt)
+    Ct.append(ct)
+    Ct_tilde.append(ct_tilde)
+    Ft.append(ft)
+    It.append(it)
+    Ot.append(ot)
     if debug:
         print(f"Step: {step_num}")
         print(f"\t> Actuation: {(round(actuation[-1][0], 5), round(actuation[-1][1], 5))!r}")
         print(f"\t> Distance: {round(distance[-1], 5)}")
         print(f"\t> Position: {(round(position[-1][0], 2), round(position[-1][1], 2))!r}")
-        print(f"\t> GRU states: "
+        print(f"\t> LSTM states: "
               f"\t\tHt={round(Ht[-1], 5)}"
-              f"\t\tHt_tilde={round(Ht_tilde[-1], 5)}"
-              f"\t\tRt={round(Rt[-1], 5)}"
-              f"\t\tZt={round(Zt[-1], 5)}")
+              f"\t\tCt={round(Ct[-1], 5)}"
+              f"\t\tCt_tilde={round(Ct_tilde[-1], 5)}"
+              f"\t\tFt={round(Ft[-1], 5)}"
+              f"\t\tIt={round(It[-1], 5)}"
+              f"\t\tOt={round(Ot[-1], 5)}")
     
     # Start monitoring
     while True:
@@ -120,21 +126,25 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
         actuation.append(action[0])
         distance.append(state[0])
         position.append(game.player.pos.get_tuple())
-        ht, ht_tilde, rt, zt = get_gru_states(net=net, x=np.asarray([state]))
+        ht, ct, ct_tilde, ft, it, ot = get_lstm_states(net=net, x=np.asarray([state]))
         Ht.append(ht)
-        Ht_tilde.append(ht_tilde)
-        Rt.append(rt)
-        Zt.append(zt)
+        Ct.append(ct)
+        Ct_tilde.append(ct_tilde)
+        Ft.append(ft)
+        It.append(it)
+        Ot.append(ot)
         if debug:
             print(f"Step: {step_num}")
             print(f"\t> Actuation: {(round(actuation[-1][0], 5), round(actuation[-1][1], 5))!r}")
             print(f"\t> Distance: {round(distance[-1], 5)}")
             print(f"\t> Position: {(round(position[-1][0], 2), round(position[-1][1], 2))!r}")
-            print(f"\t> GRU states: "
+            print(f"\t> LSTM states: "
                   f"\t\tHt={round(Ht[-1], 5)}"
-                  f"\t\tHt_tilde={round(Ht_tilde[-1], 5)}"
-                  f"\t\tRt={round(Rt[-1], 5)}"
-                  f"\t\tZt={round(Zt[-1], 5)}")
+                  f"\t\tCt={round(Ct[-1], 5)}"
+                  f"\t\tCt_tilde={round(Ct_tilde[-1], 5)}"
+                  f"\t\tFt={round(Ft[-1], 5)}"
+                  f"\t\tIt={round(It[-1], 5)}"
+                  f"\t\tOt={round(Ot[-1], 5)}")
     
     # Visualize the monitored values
     path = get_subfolder(f"population{'_backup' if population.use_backup else ''}/"
@@ -152,39 +162,43 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
                        target_found=target_found,
                        game_cfg=game_cfg.game,
                        save_path=f"{path}distance.png")
-    visualize_hidden_state(Ht,
-                           target_found=target_found,
-                           game_cfg=game_cfg.game,
-                           save_path=f"{path}hidden_state.png")
-    visualize_candidate_hidden_state(Ht_tilde,
+    visualize_hidden_states(Ht,
+                            Ct,
+                            target_found=target_found,
+                            game_cfg=game_cfg.game,
+                            save_path=f"{path}hidden_state.png")
+    visualize_candidate_hidden_state(Ct_tilde,
+                                     It,
                                      target_found=target_found,
                                      game_cfg=game_cfg.game,
-                                     save_path=f"{path}candidate_hidden_state.png")
-    visualize_reset_gate(Rt,
-                         target_found=target_found,
-                         game_cfg=game_cfg.game,
-                         save_path=f"{path}reset_gate.png")
-    visualize_update_gate(Zt,
+                                     save_path=f"{path}candidate_memory_state.png")
+    visualize_forget_gate(Ft,
                           target_found=target_found,
                           game_cfg=game_cfg.game,
-                          save_path=f"{path}update_gate.png")
+                          save_path=f"{path}forget_gate.png")
+    visualize_output_gate(Ot,
+                          target_found=target_found,
+                          game_cfg=game_cfg.game,
+                          save_path=f"{path}output_gate.png")
     visualize_position(position,
                        game=game,
                        save_path=f"{path}trace.png")
     merge(f"Monitored genome={genome.key} on game={game.id}", path=path)
 
 
-def get_gru_states(net, x):
-    gru = net.rnn_array[0]
+def get_lstm_states(net, x):
+    lstm = net.rnn_array[0]
     inp = np.concatenate((net.in2hid[net.rnn_idx[0]] * x, net.hid2hid[net.rnn_idx[0]] * net.hidden_act),
                          axis=1)[net.rnn_map[0]].reshape(net.bs, net.rnn_array[0].input_size)
-    W_xh = np.matmul(inp, gru.weight_xh.transpose())
-    W_hh = np.matmul(gru.hx, gru.weight_hh.transpose())
-    R_t = sigmoid(W_xh[:, 0:1] + W_hh[:, 0:1] + gru.bias[0:1])
-    Z_t = sigmoid(W_xh[:, 1:2] + W_hh[:, 1:2] + gru.bias[1:2])
-    H_t_tilde = np.tanh(W_xh[:, 2:3] + R_t * W_hh[:, 2:3] + gru.bias[2:3])
-    H_t = (1 - Z_t) * H_t_tilde + Z_t * gru.hx
-    return H_t[0, 0], H_t_tilde[0, 0], R_t[0, 0], Z_t[0, 0]
+    xh = np.matmul(inp, lstm.weight_xh.transpose())
+    hh = np.matmul(lstm.hx, lstm.weight_hh.transpose())
+    F_t = sigmoid(xh[:, 0:1] + hh[:, 0:1] + lstm.bias[0:1])
+    I_t = sigmoid(xh[:, 1:2] + hh[:, 1:2] + lstm.bias[1:2])
+    O_t = sigmoid(xh[:, 2:3] + hh[:, 2:3] + lstm.bias[2:3])
+    C_tilde = np.tanh(xh[:, 3:4] + hh[:, 3:4] + lstm.bias[3:4])  # Reducing 1 extra variable
+    C_t = F_t * lstm.c + I_t * C_tilde
+    H_t = O_t * np.tanh(C_t)
+    return H_t[0, 0], C_t[0, 0], C_tilde[0, 0], F_t[0, 0], I_t[0, 0], O_t[0, 0]
 
 
 def visualize_actuation(actuation_list: list, target_found: list, game_cfg: GameConfig, save_path: str):
@@ -232,58 +246,70 @@ def visualize_distance(distance_list: list, target_found: list, game_cfg: GameCo
     plt.close()
 
 
-def visualize_hidden_state(hidden_state: list, target_found: list, game_cfg: GameConfig, save_path: str):
+def visualize_hidden_states(hidden_state: list,
+                            memory_state: list,
+                            target_found: list,
+                            game_cfg: GameConfig,
+                            save_path: str):
     """Create a graph of the hidden stat's value over time"""
     time = [i / game_cfg.fps for i in range(len(hidden_state))]
     
     # Create the graph
     ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT)).gca()
-    plt.plot(time, hidden_state)
+    plt.plot(time, hidden_state, label="hidden")
+    plt.plot(time, memory_state, label="memory")
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
+    plt.legend()
     plt.grid()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Hidden state")
     plt.xlim(0)
-    # plt.ylabel("GRU output value")
+    # plt.ylabel("LSTM output value")
     # plt.xlabel("Simulation time (s)")
     plt.tight_layout()
     plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
     plt.close()
 
 
-def visualize_candidate_hidden_state(c_hidden_state: list, target_found: list, game_cfg: GameConfig, save_path: str):
+def visualize_candidate_hidden_state(c_hidden_state: list,
+                                     input_gate: list,
+                                     target_found: list,
+                                     game_cfg: GameConfig,
+                                     save_path: str):
     """Create a graph of the hidden stat's value over time"""
     time = [i / game_cfg.fps for i in range(len(c_hidden_state))]
     
     # Create the graph
     ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT)).gca()
-    plt.plot(time, c_hidden_state)
+    plt.plot(time, input_gate, label='input gate')
+    plt.plot(time, c_hidden_state, label='candidate')
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
+    plt.legend()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
-    plt.title("Candidate hidden state")
+    plt.title("Candidate memory state")
     plt.xlim(0)
-    # plt.ylabel("GRU output value")
+    # plt.ylabel("LSTM output value")
     # plt.xlabel("Simulation time (s)")
     plt.tight_layout()
     plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
     plt.close()
 
 
-def visualize_reset_gate(reset_gate: list, target_found: list, game_cfg: GameConfig, save_path: str):
-    """Create a graph of the reset gate's value over time"""
-    time = [i / game_cfg.fps for i in range(len(reset_gate))]
+def visualize_forget_gate(forget_gate: list, target_found: list, game_cfg: GameConfig, save_path: str):
+    """Create a graph of the forget gate's value over time"""
+    time = [i / game_cfg.fps for i in range(len(forget_gate))]
     
     # Create the graph
     ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT)).gca()
-    plt.plot(time, reset_gate)
+    plt.plot(time, forget_gate)
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
-    plt.title("Reset gate")
+    plt.title("Forget gate")
     plt.xlim(0)
     # plt.ylabel("Gate value")
     # plt.xlabel("Simulation time (s)")
@@ -292,18 +318,18 @@ def visualize_reset_gate(reset_gate: list, target_found: list, game_cfg: GameCon
     plt.close()
 
 
-def visualize_update_gate(update_gate: list, target_found: list, game_cfg: GameConfig, save_path: str):
-    """Create a graph of the update gate's value over time"""
-    time = [i / game_cfg.fps for i in range(len(update_gate))]
+def visualize_output_gate(output_gate: list, target_found: list, game_cfg: GameConfig, save_path: str):
+    """Create a graph of the output gate's value over time"""
+    time = [i / game_cfg.fps for i in range(len(output_gate))]
     
     # Create the graph
     ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT)).gca()
-    plt.plot(time, update_gate)
+    plt.plot(time, output_gate)
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
-    plt.title("Update gate")
+    plt.title("Output gate")
     plt.xlim(0)
     # plt.ylabel("Gate value")
     # plt.xlabel("Simulation time (s)")
@@ -377,7 +403,7 @@ def visualize_position(position_list: list, game: Game, save_path: str):
 def merge(title: str, path: str):
     """Merge each of the previously created images together"""
     # Load in all the images to merge
-    image_names = ['actuation', 'distance', 'hidden_state', 'candidate_hidden_state', 'reset_gate', 'update_gate']
+    image_names = ['actuation', 'distance', 'hidden_state', 'candidate_memory_state', 'forget_gate', 'output_gate']
     images = [plt.imread(f'{path}{n}.png') for n in image_names]
     trace = plt.imread(f'{path}trace.png')
     
@@ -423,7 +449,7 @@ if __name__ == '__main__':
     config = Config()
     pop = Population(
             name='test',
-            # name='NEAT-GRU/v1',
+            # name='NEAT-LSTM/v1',
             folder_name='test',
             # folder_name=get_folder(args.experiment),
             config=config,
