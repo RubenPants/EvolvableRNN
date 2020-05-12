@@ -28,7 +28,8 @@ from utils.dictionary import *
 from utils.myutils import get_subfolder
 
 # Minimal ratio of evaluation games finished before added to the CSV
-MIN_FINISHED = 0.8  # Finish 15/18 or more
+# MIN_FINISHED = 0.8  # Finish 15/18 or more
+MIN_FINISHED = 0.3  # Finish 6/18 or more  TODO: SRU (topology4) is incapable, lower threshold!
 
 
 # --------------------------------------------------> MAIN METHODS <-------------------------------------------------- #
@@ -290,17 +291,18 @@ def get_csv_path(topology_id: int, use_backup: bool, batch_size: int):
                      'weight_xr', 'weight_xz', 'weight_xh',
                      'weight_hr', 'weight_hz', 'weight_hh']
         elif topology_id in [4]:  # SRU populations
-            head += ['bias_2_h', 'weight_2_xh', 'weight_2_hh',
-                     'bias_3_h', 'weight_3_xh', 'weight_3_hh']
+            head += ['bias_h', 'weight_xh', 'weight_hh']
+        else:
+            raise Exception(f"Topology ID '{topology_id}' not supported!")
         
         if topology_id in [1]:
             head += ['conn1', 'conn2']
         elif topology_id in [2]:
             head += ['bias_rw', 'conn2']
-        elif topology_id in [3]:
+        elif topology_id in [3, 4]:
             head += ['bias_rw', 'conn0', 'conn1', 'conn2']
-        elif topology_id in [4]:
-            head += ['bias_rw', 'conn0', 'conn1', 'conn2', 'conn3']
+        else:
+            raise Exception(f"Topology ID '{topology_id}' not supported!")
         head += ['fitness']
         writer.writerow(head)
         return path, csv_name, 0
