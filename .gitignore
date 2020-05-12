@@ -153,3 +153,6 @@ cache_populations/**/
 
 # Ignore runs (TensorBoard Projector)
 runs/
+
+# Ignore the delete_me folder
+delete_me/
