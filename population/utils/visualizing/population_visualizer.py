@@ -108,8 +108,8 @@ def create_traces(traces: dict, games: list, gen: int, save_path: str, save_name
         # Save figure
         plt.tight_layout()
         game_path = get_subfolder(save_path, 'game{id:05d}'.format(id=g.id))
-        # plt.savefig(f'{game_path}{save_name}_gen{gen:05d}', bbox_inches='tight', pad_inches=0.02)
-        plt.savefig(f'game{i + 1}', bbox_inches='tight', pad_inches=0.02)  # Places in main folder
+        plt.savefig(f'{game_path}{save_name}_gen{gen:05d}', bbox_inches='tight', pad_inches=0.02)
+        # plt.savefig(f'game{i + 1}', bbox_inches='tight', pad_inches=0.02)  # Places in main folder
         plt.close()
 
 
