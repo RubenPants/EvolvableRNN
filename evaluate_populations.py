@@ -516,10 +516,10 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate_gen', type=int, default=0)
     parser.add_argument('--evaluate_pop', type=int, default=0)
-    parser.add_argument('--combine_pop', type=int, default=0)  # Goes over all the populations
+    parser.add_argument('--combine_pop', type=int, default=0)  # Goes over all the populations types
     parser.add_argument('--evaluate_training', type=int, default=0)
-    parser.add_argument('--plot_distribution', type=int, default=0)  # Goes over all the populations
-    parser.add_argument('--compute_topology', type=int, default=1)  # Goes over all the populations
+    parser.add_argument('--plot_distribution', type=int, default=0)  # Goes over all the populations types
+    parser.add_argument('--compute_topology', type=int, default=0)  # Goes over all the populations types
     parser.add_argument('--test_correctness', type=int, default=0)
     parser.add_argument('--experiment', type=int, default=3)
     parser.add_argument('--folder', type=str, default=None)
