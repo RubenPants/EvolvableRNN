@@ -26,7 +26,7 @@ class RnnNodeGene(BaseGene):
         
         # Initialize gene attributes
         self.bias = 0  # Needed for feed-forward-network
-        self.bias_h = rnn.init(cfg, hid_dim=hid_dim)
+        self.bias_h = rnn.init(cfg, hid_dim=hid_dim, bias=True)
         self.hid_dim = hid_dim  # The hidden dimension of the network (number of hidden gates)
         self.input_keys: list = sorted(input_keys) if input_keys else []
         self.input_keys_full: list = sorted(input_keys_full) if input_keys_full else []

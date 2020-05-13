@@ -9,6 +9,7 @@ import sys
 from graphviz import Digraph
 
 from configs.genome_config import GenomeConfig
+from population.utils.gene_util.fixed_rnn import FixedRnnNodeGene
 from population.utils.gene_util.gru import GruNodeGene
 from population.utils.gene_util.gru_no_reset import GruNoResetNodeGene
 from population.utils.gene_util.gru_no_update import GruNoUpdateNodeGene
@@ -103,6 +104,8 @@ def draw_net(config: GenomeConfig, genome: Genome, debug=False, filename=None, v
             fillcolor = '#96fffd'  # Light blue hidden nodes if GRU-No-Update
         elif type(genome.nodes[key]) == SimpleRnnNodeGene:
             fillcolor = '#a4ebb9'  # Light green for the SimpleRNN
+        elif type(genome.nodes[key]) == FixedRnnNodeGene:
+            fillcolor = '#ff8585'  # Soft red for the fixed node
         else:
             raise Exception(f"Type of hidden node not supported: {genome.nodes[key]}")
         
