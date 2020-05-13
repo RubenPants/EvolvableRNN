@@ -41360,3 +41360,22 @@ Population 'topology_3_0' has 15 species:
 ===> Selective genome creation at 10.584%, storing in csv 'topology_3_0.csv' (13h-26m-52s) <===
 
 ===> Training <===
+
+Population 'topology_3' loaded successfully! Current generation: 2043
+Population 'topology_3' saved! Current generation: 2043
+Genetic distance:
+	- Maximum: 5.02227
+	- Mean: 3.07268
+	- Minimum: 0.00000
+	- Standard deviation: 0.86286
+Most complex genome '1' of size (1, 3) belongs to specie '1' with distance to representative of 0
+
+
+
+===> RUNNING EXPERIMENT 6 <===
+
+
+
+===> Selective genome creation at 10.584%, storing in csv 'topology_3.csv' (13h-32m-06s) <===
+
+===> Training <===
