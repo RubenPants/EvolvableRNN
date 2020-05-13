@@ -10,7 +10,6 @@ import os
 import shutil
 import time
 from collections import Counter
-from glob import glob
 
 import matplotlib.pyplot as plt
 from numpy import mean
@@ -28,7 +27,9 @@ from utils.dictionary import *
 from utils.myutils import get_subfolder
 
 # Minimal ratio of evaluation games finished before added to the CSV
-MIN_FINISHED = 0.8  # Finish 15/18 or more
+# MIN_FINISHED = 0.8  # Finish 15/18 or more
+# MIN_FINISHED = 0.2  # Finish 4/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
+MIN_FINISHED = 0.25  # Finish 5/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
 
 
 # --------------------------------------------------> MAIN METHODS <-------------------------------------------------- #
@@ -72,6 +73,7 @@ def main(topology_id: int,
     eval_env.set_games(games_eval, noise=False)
     
     # Keep training and evolving the network until the complete CSV is filled
+    last_saved = pop.generation
     try:
         while added < batch_size:
             t = time.localtime()
@@ -123,7 +125,9 @@ def main(topology_id: int,
                     enforce_topology(g, topology_id=topology_id)
             
             # Save the population after training
-            pop.save()
+            if pop.generation - last_saved >= 100:
+                pop.save()
+                last_saved = pop.generation
             
             # Evaluate the current population as was done in experiment6
             pop.log("\n===> EVALUATING <===")
@@ -176,20 +180,19 @@ def main(topology_id: int,
                         added += 1
     finally:
         # Remove the dummy population if it exists
+        pop.save()
         path = f"population{'_backup' if use_backup else ''}/storage/{pop.folder_name}/dummy/"
         if os.path.exists(path):
             shutil.rmtree(path)
 
 
-def visualize_bar(topology_id: int, csv_id: int = None, use_backup: bool = False):
+def visualize_bar(topology_id: int, use_backup: bool = False):
     """Visualize a bar-plot of how many genomes obtained which fitness score"""
     fitness = []
     path_shared = get_subfolder(f"population{'_backup' if use_backup else ''}/storage/", "experiment6")
     path_data = get_subfolder(path_shared, "data_neat")
     path_images = get_subfolder(path_shared, 'images_neat')
-    if csv_id is None: csv_id = len(glob(f"{path_data}*.csv")) - 1
-    if csv_id < 0: raise Exception("No data yet created!")
-    name = f"topology_{topology_id}_{csv_id}"
+    name = f"topology_{topology_id}"
     csv_name = f"{path_data}{name}.csv"
     
     # Read in the scores
@@ -267,43 +270,41 @@ def get_csv_path(topology_id: int, use_backup: bool, batch_size: int):
     """Get the genome-key based on CSV-file's length."""
     path = get_subfolder(f"population{'_backup' if use_backup else ''}/storage/", "experiment6")
     path = get_subfolder(path, "data_neat")
-    n_files = len(glob(f"{path}*.csv"))
-    if n_files > 0:
-        csv_name = f"topology_{topology_id}_{n_files - 1}"
-        path_temp = f"{path}{csv_name}.csv"
-        
-        # If CSV exists, check if not yet full
-        if os.path.exists(path_temp):
-            with open(path_temp, 'r') as f:
-                rows = sum(1 for _ in f) - 1  # Do not count header
-                if rows < batch_size: return path_temp, csv_name, rows
+    csv_name = f"topology_{topology_id}"
+    path = f"{path}{csv_name}.csv"
+    
+    # If CSV exists, check if not yet full
+    if os.path.exists(path):
+        with open(path, 'r') as f:
+            rows = sum(1 for _ in f) - 1  # Do not count header
+            if rows < batch_size: return path, csv_name, rows
     
     # CSV does not yet exist, or is already full, create new CSV
-    csv_name = f"topology_{topology_id}_{n_files}"
-    path = f"{path}{csv_name}.csv"
-    with open(path, 'w', newline='') as f:
-        writer = csv.writer(f)
-        # Construct the CSV's head
-        head = []
-        if topology_id in [1, 2, 3]:  # GRU populations
-            head += ['bias_r', 'bias_z', 'bias_h',
-                     'weight_xr', 'weight_xz', 'weight_xh',
-                     'weight_hr', 'weight_hz', 'weight_hh']
-        elif topology_id in [4]:  # SRU populations
-            head += ['bias_2_h', 'weight_2_xh', 'weight_2_hh',
-                     'bias_3_h', 'weight_3_xh', 'weight_3_hh']
-        
-        if topology_id in [1]:
-            head += ['conn1', 'conn2']
-        elif topology_id in [2]:
-            head += ['bias_rw', 'conn2']
-        elif topology_id in [3]:
-            head += ['bias_rw', 'conn0', 'conn1', 'conn2']
-        elif topology_id in [4]:
-            head += ['bias_rw', 'conn0', 'conn1', 'conn2', 'conn3']
-        head += ['fitness']
-        writer.writerow(head)
-        return path, csv_name, 0
+    else:
+        with open(path, 'w', newline='') as f:
+            writer = csv.writer(f)
+            # Construct the CSV's head
+            head = []
+            if topology_id in [1, 2, 3]:  # GRU populations
+                head += ['bias_r', 'bias_z', 'bias_h',
+                         'weight_xr', 'weight_xz', 'weight_xh',
+                         'weight_hr', 'weight_hz', 'weight_hh']
+            elif topology_id in [22, 33]:  # SRU populations
+                head += ['bias_h', 'weight_xh', 'weight_hh']
+            else:
+                raise Exception(f"Topology ID '{topology_id}' not supported!")
+            
+            if topology_id in [1]:
+                head += ['conn1', 'conn2']
+            elif topology_id in [2, 22]:
+                head += ['bias_rw', 'conn2']
+            elif topology_id in [3, 33]:
+                head += ['bias_rw', 'conn0', 'conn1', 'conn2']
+            else:
+                raise Exception(f"Topology ID '{topology_id}' not supported!")
+            head += ['fitness']
+            writer.writerow(head)
+            return path, csv_name, 0
 
 
 def execution_test():
@@ -330,7 +331,7 @@ if __name__ == '__main__':
     parser.add_argument('--save_population', type=bool, default=True)  # Save the final population after finishing
     parser.add_argument('--visualize', type=bool, default=True)  # Visualize the current results
     parser.add_argument('--test', type=bool, default=False)  # Visualize the current results
-    parser.add_argument('--use_backup', type=bool, default=True)  # Use the backup-data
+    parser.add_argument('--use_backup', type=bool, default=False)  # Use the backup-data
     args = parser.parse_args()
     
     # Run the program
