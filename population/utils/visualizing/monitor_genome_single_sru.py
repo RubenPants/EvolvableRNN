@@ -17,6 +17,7 @@ from configs.game_config import GameConfig
 from environment.game import Game, get_game
 from main import get_game_ids
 from population.population import Population
+from population.utils.gene_util.fixed_rnn import FixedRnnNodeGene
 from population.utils.gene_util.simple_rnn import SimpleRnnNodeGene
 from population.utils.genome import Genome
 from population.utils.network_util.feed_forward_net import make_net
@@ -48,8 +49,10 @@ def main(population: Population,
     if not genome: genome = population.best_genome
     if not game_cfg: game_cfg = pop.config
     
-    # Check if valid genome (contains at least one hidden SRU, first SRU is monitored)
-    assert len([n for n in genome.get_used_nodes().values() if type(n) == SimpleRnnNodeGene]) >= 1
+    # Check if valid genome (contains at least one hidden SRU, first SRU is monitored) - also possible for fixed RNNs
+    a = len([n for n in genome.get_used_nodes().values() if type(n) == SimpleRnnNodeGene]) >= 1
+    b = len([n for n in genome.get_used_nodes().values() if type(n) == FixedRnnNodeGene]) >= 1
+    assert a or b
     
     # Get the game
     game = get_game(game_id, cfg=game_cfg, noise=False)
@@ -324,7 +327,7 @@ def merge(title: str, path: str):  # TODO
     # Create the figure
     plt.figure(figsize=(TIME_SERIES_WIDTH + 6 * TIME_SERIES_HEIGHT, 6 * TIME_SERIES_HEIGHT + 0.5))
     plt.axis('off')
-    plt.title(title, fontsize=24, fontweight='bold')
+    # plt.title(title, fontsize=24, fontweight='bold')
     plt.imshow(result)
     plt.tight_layout()
     plt.savefig(f"{path[:-1]}.png", bbox_inches='tight', pad_inches=0)

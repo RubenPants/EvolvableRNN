@@ -9,6 +9,7 @@ from copy import deepcopy
 
 from config import Config
 from population.population import Population
+from population.utils.gene_util.fixed_rnn import FixedRnnNodeGene
 from population.utils.gene_util.gru import GruNodeGene
 from population.utils.gene_util.lstm import LstmNodeGene
 from population.utils.gene_util.output_node import OutputNodeGene
@@ -112,7 +113,7 @@ def monitor(game_id: int,
                 game_cfg=game_config,
                 debug=debug,
         )
-    elif node_type == SimpleRnnNodeGene:
+    elif node_type == SimpleRnnNodeGene or node_type == FixedRnnNodeGene:
         from population.utils.visualizing.monitor_genome_single_sru import main as sru_monitor
         sru_monitor(
                 average=2,
@@ -359,10 +360,10 @@ if __name__ == '__main__':
     parser.add_argument('--train_overview', type=bool, default=False)
     parser.add_argument('--blueprint', type=bool, default=False)
     parser.add_argument('--trace', type=bool, default=False)  # Keep it False
-    parser.add_argument('--trace_fit', type=bool, default=True)
+    parser.add_argument('--trace_fit', type=bool, default=False)
     parser.add_argument('--evaluate', type=bool, default=False)
     parser.add_argument('--genome', type=bool, default=False)
-    parser.add_argument('--monitor', type=bool, default=False)
+    parser.add_argument('--monitor', type=bool, default=True)
     parser.add_argument('--gru_analysis', type=bool, default=False)
     parser.add_argument('--live', type=bool, default=False)
     
@@ -373,7 +374,7 @@ if __name__ == '__main__':
     parser.add_argument('--version', type=int, default=0)
     parser.add_argument('--debug', type=bool, default=False)
     parser.add_argument('--duration', type=int, default=60)
-    parser.add_argument('--use_backup', type=bool, default=True)
+    parser.add_argument('--use_backup', type=bool, default=False)
     args = parser.parse_args()
     
     # Load in current config-file
@@ -387,7 +388,7 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='topology_2',
+            name='topology_222',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment6',
             folder_name=get_folder(args.experiment),
@@ -450,13 +451,14 @@ if __name__ == '__main__':
             )
         
         if args.monitor:
-            monitor(
-                    debug=args.debug,
-                    duration=args.duration,
-                    game_id=game_ids_eval[0],
-                    genome=chosen_genome,
-                    population=pop,
-            )
+            for k in range(18):  # TODO: Remove for-loop
+                monitor(
+                        debug=args.debug,
+                        duration=args.duration,
+                        game_id=game_ids_eval[k],
+                        genome=chosen_genome,
+                        population=pop,
+                )
         
         if args.evaluate:
             evaluate(
@@ -485,8 +487,8 @@ if __name__ == '__main__':
         if args.live:
             live(
                     debug=args.debug,
-                    # game_id=game_ids_eval[0],
-                    game_id=30001,
+                    game_id=game_ids_eval[0],
+                    # game_id=30001,
                     duration=args.duration,
                     genome=chosen_genome if chosen_genome else pop.best_genome,
                     population=pop,

@@ -401,7 +401,7 @@ def merge(title: str, path: str):
     # Create the figure
     plt.figure(figsize=(TIME_SERIES_WIDTH + 6 * TIME_SERIES_HEIGHT, 6 * TIME_SERIES_HEIGHT + 0.5))
     plt.axis('off')
-    plt.title(title, fontsize=24, fontweight='bold')
+    # plt.title(title, fontsize=24, fontweight='bold')
     plt.imshow(result)
     plt.tight_layout()
     plt.savefig(f"{path[:-1]}.png", bbox_inches='tight', pad_inches=0)
