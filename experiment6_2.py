@@ -28,8 +28,8 @@ from utils.myutils import get_subfolder
 
 # Minimal ratio of evaluation games finished before added to the CSV
 # MIN_FINISHED = 0.8  # Finish 15/18 or more
-# MIN_FINISHED = 0.2  # Finish 4/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
-MIN_FINISHED = 0.25  # Finish 5/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
+MIN_FINISHED = 0.2  # Finish 4/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
+# MIN_FINISHED = 0.25  # Finish 5/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
 
 
 # --------------------------------------------------> MAIN METHODS <-------------------------------------------------- #
