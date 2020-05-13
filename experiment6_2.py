@@ -28,7 +28,8 @@ from utils.myutils import get_subfolder
 
 # Minimal ratio of evaluation games finished before added to the CSV
 # MIN_FINISHED = 0.8  # Finish 15/18 or more
-MIN_FINISHED = 0.2  # Finish 4/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
+# MIN_FINISHED = 0.2  # Finish 4/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
+MIN_FINISHED = 0.25  # Finish 5/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
 
 
 # --------------------------------------------------> MAIN METHODS <-------------------------------------------------- #
@@ -72,6 +73,7 @@ def main(topology_id: int,
     eval_env.set_games(games_eval, noise=False)
     
     # Keep training and evolving the network until the complete CSV is filled
+    last_saved = pop.generation
     try:
         while added < batch_size:
             t = time.localtime()
@@ -123,7 +125,9 @@ def main(topology_id: int,
                     enforce_topology(g, topology_id=topology_id)
             
             # Save the population after training
-            pop.save()
+            if pop.generation - last_saved >= 100:
+                pop.save()
+                last_saved = pop.generation
             
             # Evaluate the current population as was done in experiment6
             pop.log("\n===> EVALUATING <===")
@@ -176,6 +180,7 @@ def main(topology_id: int,
                         added += 1
     finally:
         # Remove the dummy population if it exists
+        pop.save()
         path = f"population{'_backup' if use_backup else ''}/storage/{pop.folder_name}/dummy/"
         if os.path.exists(path):
             shutil.rmtree(path)
@@ -326,7 +331,7 @@ if __name__ == '__main__':
     parser.add_argument('--save_population', type=bool, default=True)  # Save the final population after finishing
     parser.add_argument('--visualize', type=bool, default=True)  # Visualize the current results
     parser.add_argument('--test', type=bool, default=False)  # Visualize the current results
-    parser.add_argument('--use_backup', type=bool, default=True)  # Use the backup-data
+    parser.add_argument('--use_backup', type=bool, default=False)  # Use the backup-data
     args = parser.parse_args()
     
     # Run the program
