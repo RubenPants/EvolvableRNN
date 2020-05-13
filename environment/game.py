@@ -235,7 +235,7 @@ class Game:
         except FileNotFoundError:
             return False
     
-    def get_blueprint(self, ax=None, show_player: bool = False):
+    def get_blueprint(self, ax=None, show_player: bool = False, annotate: bool = True):
         """The blueprint map of the board (matplotlib Figure)."""
         if not ax: fig, ax = plt.subplots()
         
@@ -250,10 +250,10 @@ class Game:
         
         # Add all possible targets to map
         if "locations" in self.spawn_function.__slots__:
-            annotate = type(self.spawn_function.locations) == list  # Check if annotations needed
             for i, t in enumerate(self.spawn_function.locations):
                 plt.plot(t[0], t[1], 'go')
-                if annotate: plt.annotate(str(i + 1), xy=(t[0] + 0.1, t[1] + 0.1))
+                if annotate and type(self.spawn_function.locations) == list:
+                    plt.annotate(str(i + 1), xy=(t[0] + 0.1, t[1] + 0.1))
         
         # Add player to map if requested
         if show_player:

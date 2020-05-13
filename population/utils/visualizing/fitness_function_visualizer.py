@@ -30,7 +30,7 @@ def distance(save: bool = True):
         x.append(i / 100)
         y.append(get_score(i / 100))
     
-    plt.figure(figsize=(7, 3))
+    plt.figure(figsize=(5, 2))
     
     # Plot the distance function
     plt.plot(x, y, color=COLORS[D_NEAT], label='distance-based score')
@@ -40,7 +40,9 @@ def distance(save: bool = True):
     plt.title('Fitness in function of distance to target')
     plt.xlabel("Distance to target")
     plt.xticks([i * 2 for i in range(round(diagonal / 2) + 1)])
+    plt.xlim(0, 10)
     plt.ylabel("Fitness")
+    plt.ylim(0)
     leg = plt.legend()
     for line in leg.get_lines():
         line.set_linewidth(4.0)
