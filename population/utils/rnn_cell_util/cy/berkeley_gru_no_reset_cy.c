@@ -2356,7 +2356,7 @@ static PyObject *__pyx_pf_10population_5utils_13rnn_cell_util_2cy_24berkeley_gru
  *         xh = np.matmul(x, self.weight_xh.transpose())
  *         hh = np.matmul(self.hx, self.weight_hh.transpose())             # <<<<<<<<<<<<<<
  *         Z_t = sigmoid_cy(xh[:, 0:1] + hh[:, 0:1] + self.bias[0:1])
- *         self.hx = (1 - Z_t) * np.tanh(xh[:, 1:2] + self.bias[1:2]) + Z_t * self.hx
+ *         self.hx = (1 - Z_t) * np.tanh(xh[:, 1:2] + hh[:, 0:1] + self.bias[1:2]) + Z_t * self.hx
  */
   __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
@@ -2434,7 +2434,7 @@ static PyObject *__pyx_pf_10population_5utils_13rnn_cell_util_2cy_24berkeley_gru
  *         xh = np.matmul(x, self.weight_xh.transpose())
  *         hh = np.matmul(self.hx, self.weight_hh.transpose())
  *         Z_t = sigmoid_cy(xh[:, 0:1] + hh[:, 0:1] + self.bias[0:1])             # <<<<<<<<<<<<<<
- *         self.hx = (1 - Z_t) * np.tanh(xh[:, 1:2] + self.bias[1:2]) + Z_t * self.hx
+ *         self.hx = (1 - Z_t) * np.tanh(xh[:, 1:2] + hh[:, 0:1] + self.bias[1:2]) + Z_t * self.hx
  *         return self.hx
  */
   __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_sigmoid_cy); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
@@ -2476,7 +2476,7 @@ static PyObject *__pyx_pf_10population_5utils_13rnn_cell_util_2cy_24berkeley_gru
   /* "population/utils/rnn_cell_util/cy/berkeley_gru_no_reset_cy.pyx":48
  *         hh = np.matmul(self.hx, self.weight_hh.transpose())
  *         Z_t = sigmoid_cy(xh[:, 0:1] + hh[:, 0:1] + self.bias[0:1])
- *         self.hx = (1 - Z_t) * np.tanh(xh[:, 1:2] + self.bias[1:2]) + Z_t * self.hx             # <<<<<<<<<<<<<<
+ *         self.hx = (1 - Z_t) * np.tanh(xh[:, 1:2] + hh[:, 0:1] + self.bias[1:2]) + Z_t * self.hx             # <<<<<<<<<<<<<<
  *         return self.hx
  */
   __pyx_t_7 = PyNumber_Subtract(__pyx_int_1, ((PyObject *)__pyx_v_Z_t)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 48, __pyx_L1_error)
@@ -2488,11 +2488,17 @@ static PyObject *__pyx_pf_10population_5utils_13rnn_cell_util_2cy_24berkeley_gru
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_4 = __Pyx_PyObject_GetItem(__pyx_v_xh, __pyx_tuple__5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_6 = __Pyx_PyObject_GetSlice(((PyObject *)__pyx_v_self->bias), 1, 2, NULL, NULL, &__pyx_slice__4, 1, 1, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetItem(__pyx_v_hh, __pyx_tuple__3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_9 = PyNumber_Add(__pyx_t_4, __pyx_t_6); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_6 = __Pyx_PyObject_GetSlice(((PyObject *)__pyx_v_self->bias), 1, 2, NULL, NULL, &__pyx_slice__4, 1, 1, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_4 = PyNumber_Add(__pyx_t_9, __pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_5))) {
@@ -2504,9 +2510,9 @@ static PyObject *__pyx_pf_10population_5utils_13rnn_cell_util_2cy_24berkeley_gru
       __Pyx_DECREF_SET(__pyx_t_5, function);
     }
   }
-  __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_6, __pyx_t_9) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_9);
+  __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_6, __pyx_t_4) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_4);
   __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -2529,7 +2535,7 @@ static PyObject *__pyx_pf_10population_5utils_13rnn_cell_util_2cy_24berkeley_gru
 
   /* "population/utils/rnn_cell_util/cy/berkeley_gru_no_reset_cy.pyx":49
  *         Z_t = sigmoid_cy(xh[:, 0:1] + hh[:, 0:1] + self.bias[0:1])
- *         self.hx = (1 - Z_t) * np.tanh(xh[:, 1:2] + self.bias[1:2]) + Z_t * self.hx
+ *         self.hx = (1 - Z_t) * np.tanh(xh[:, 1:2] + hh[:, 0:1] + self.bias[1:2]) + Z_t * self.hx
  *         return self.hx             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
@@ -6647,7 +6653,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         xh = np.matmul(x, self.weight_xh.transpose())
  *         hh = np.matmul(self.hx, self.weight_hh.transpose())
  *         Z_t = sigmoid_cy(xh[:, 0:1] + hh[:, 0:1] + self.bias[0:1])             # <<<<<<<<<<<<<<
- *         self.hx = (1 - Z_t) * np.tanh(xh[:, 1:2] + self.bias[1:2]) + Z_t * self.hx
+ *         self.hx = (1 - Z_t) * np.tanh(xh[:, 1:2] + hh[:, 0:1] + self.bias[1:2]) + Z_t * self.hx
  *         return self.hx
  */
   __pyx_slice_ = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice_)) __PYX_ERR(0, 47, __pyx_L1_error)
@@ -6663,7 +6669,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   /* "population/utils/rnn_cell_util/cy/berkeley_gru_no_reset_cy.pyx":48
  *         hh = np.matmul(self.hx, self.weight_hh.transpose())
  *         Z_t = sigmoid_cy(xh[:, 0:1] + hh[:, 0:1] + self.bias[0:1])
- *         self.hx = (1 - Z_t) * np.tanh(xh[:, 1:2] + self.bias[1:2]) + Z_t * self.hx             # <<<<<<<<<<<<<<
+ *         self.hx = (1 - Z_t) * np.tanh(xh[:, 1:2] + hh[:, 0:1] + self.bias[1:2]) + Z_t * self.hx             # <<<<<<<<<<<<<<
  *         return self.hx
  */
   __pyx_slice__4 = PySlice_New(__pyx_int_1, __pyx_int_2, Py_None); if (unlikely(!__pyx_slice__4)) __PYX_ERR(0, 48, __pyx_L1_error)

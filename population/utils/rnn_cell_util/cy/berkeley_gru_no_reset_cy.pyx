@@ -45,5 +45,5 @@ cdef class GRUCellNoResetCy:
         xh = np.matmul(x, self.weight_xh.transpose())
         hh = np.matmul(self.hx, self.weight_hh.transpose())
         Z_t = sigmoid_cy(xh[:, 0:1] + hh[:, 0:1] + self.bias[0:1])
-        self.hx = (1 - Z_t) * np.tanh(xh[:, 1:2] + self.bias[1:2]) + Z_t * self.hx
+        self.hx = (1 - Z_t) * np.tanh(xh[:, 1:2] + hh[:, 0:1] + self.bias[1:2]) + Z_t * self.hx
         return self.hx
