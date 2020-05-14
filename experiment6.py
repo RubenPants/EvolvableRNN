@@ -148,7 +148,7 @@ def get_genome_parameters(g, topology_id: int):
     elif topology_id in [2, 22, 222]:
         result += [g.nodes[1].bias]
         result += [g.connections[(-1, 1)].weight]
-    elif topology_id in [3, 33, 333]:
+    elif topology_id in [3, 30, 33]:
         result += [g.nodes[1].bias]
         result += [g.connections[(-1, 2)].weight, g.connections[(2, 1)].weight, g.connections[(-1, 1)].weight]
     else:
@@ -192,7 +192,7 @@ def get_initial_keys(topology_id: int, use_backup: bool):
         with open(path, 'w', newline='') as f:
             writer = csv.writer(f)
             # Construct the CSV's head, all genomes have the full GRU-parameter suite
-            if topology_id in [222, 333]:
+            if topology_id in [222]:
                 head = ['delay', 'scale']
             else:
                 head = ['bias_r', 'bias_z', 'bias_h',
@@ -203,7 +203,7 @@ def get_initial_keys(topology_id: int, use_backup: bool):
                 head += ['conn1', 'conn2']
             elif topology_id in [2, 22, 222]:
                 head += ['bias_rw', 'conn2']
-            elif topology_id in [3, 33, 333]:
+            elif topology_id in [3, 30, 33]:
                 head += ['bias_rw', 'conn0', 'conn1', 'conn2']
             else:
                 raise Exception(f"Topology ID {topology_id} not supported!")
@@ -224,7 +224,7 @@ def get_genome(topology_id: int, g_id: int, cfg: Config):
         topology = get_topology22
     elif topology_id == 222:
         topology = get_topology222
-    elif topology_id == 3:
+    elif topology_id in [3, 30]:
         topology = get_topology3
     elif topology_id == 33:
         topology = get_topology33
@@ -237,16 +237,10 @@ def enforce_topology(g: Genome, topology_id: int):
     """Enforce the genome to the requested topology. It is assumed that topology hasn't changed."""
     if topology_id == 1:
         enforce_topology1(g)
-    elif topology_id == 2:
+    elif topology_id in [2, 22, 222]:
         enforce_topology2(g)
-    elif topology_id == 22:
-        enforce_topology22(g)
-    elif topology_id == 222:
-        enforce_topology222(g)
-    elif topology_id == 3:
+    elif topology_id in [3, 30, 33]:
         enforce_topology3(g)
-    elif topology_id == 33:
-        enforce_topology33(g)
     else:
         raise Exception(f"Topology ID '{topology_id}' not supported")
 
@@ -630,21 +624,9 @@ def enforce_topology2(g: Genome):
     g.connections[(2, 1)].weight = 3  # Enforce capabilities of full spectrum
 
 
-def enforce_topology22(g: Genome):
-    enforce_topology2(g)
-
-
-def enforce_topology222(g: Genome):
-    enforce_topology2(g)
-
-
 def enforce_topology3(g: Genome):
     """Enforce the fixed parameters of topology3. It is assumed that topology hasn't changed."""
     g.nodes[0].bias = 1.5  # Drive with 0.953 actuation by default
-
-
-def enforce_topology33(g: Genome):
-    enforce_topology3(g)
 
 
 if __name__ == '__main__':
