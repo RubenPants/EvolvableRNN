@@ -279,7 +279,7 @@ def visualize_position(position_list: list, game: Game, save_path: str):
             plt.annotate(
                     str(int(p / game.game_config.fps)),
                     xy=(x_pos[p], y_pos[p]),
-                    xytext=(x_pos[p] + offset[0] * 30, y_pos[p] + offset[1] * 30),
+                    xytext=(x_pos[p] + offset[0] * 20, y_pos[p] + offset[1] * 20),
                     ha="center", va="center",
                     arrowprops=dict(arrowstyle="->", connectionstyle="arc,rad=0."),
             )
