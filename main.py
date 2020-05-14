@@ -397,6 +397,9 @@ if __name__ == '__main__':
             # config=config,  # Commented to prevent new populations from creating (if type in other fields)
             use_backup=args.use_backup,
     )
+    print(pop.best_genome)
+    print(pop.best_genome.nodes[2])
+    raise Exception
     
     game_ids_train, game_ids_eval = get_game_ids(experiment_id=args.experiment)
     
