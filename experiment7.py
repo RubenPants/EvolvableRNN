@@ -41,7 +41,7 @@ def main(pop_name: str,
     # Check if valid population name
     if pop_name not in SUPPORTED: raise Exception(f"Population '{pop_name}' not supported!")
     # Create the population
-    cfg = get_config()
+    cfg = get_config(pop_name)
     folder = get_folder(experiment_id=7)
     pop = Population(
             name=f'{pop_name}/v{version}',
@@ -177,20 +177,21 @@ def get_topology(pop_name, gid: int, cfg: Config):
     genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
     genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
     genome.connections[key].enabled = True
-    if pop_name in [P_CONN]: genome.connections[key].weight = abs(genome.connections[key].weight)
     
     # gru2output - Uniformly sampled on the positive spectrum
     key = (2, 1)
     genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
     genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
     genome.connections[key].enabled = True
-    if pop_name in [P_CONN]: genome.connections[key].weight = abs(genome.connections[key].weight)
     
     # input2output - Uniformly sampled
     key = (-1, 1)
     genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
     genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
     genome.connections[key].enabled = True
+    
+    # Enforce the topology constraints
+    enforce_topology(pop_name=pop_name, genome=genome)
     
     genome.update_rnn_nodes(config=cfg.genome)
     return genome
@@ -200,11 +201,16 @@ def enforce_topology(pop_name, genome: Genome):
     """Enforce the fixed parameters of topology2. It is assumed that topology hasn't changed."""
     genome.nodes[0].bias = 1.5  # Drive with 0.953 actuation by default
     if pop_name in [P_CONN]:
+        # print(f"Before: {genome.nodes[2].weight_xh_full[2, 0]}", end='')
+        genome.nodes[2].weight_xh_full[2, 0] = abs(genome.nodes[2].weight_xh_full[2, 0])
+        # print(f" - after: {genome.nodes[2].weight_xh_full[2, 0]}")
         for key in [(-1, 2), (2, 1)]:
+            # print(f"Before: {genome.connections[key].weight}", end='')
             genome.connections[key].weight = abs(genome.connections[key].weight)
+            # print(f" - after: {genome.connections[key].weight}")
 
 
-def get_config():
+def get_config(name):
     cfg = Config()
     cfg.bot.angular_dir = []
     cfg.bot.delta_dist_enabled = False
@@ -217,7 +223,12 @@ def get_config():
     cfg.genome.conn_disable_prob = 0  # No topology mutations allowed
     cfg.genome.enabled_mutate_rate = 0  # No topology mutations allowed
     cfg.population.pop_size = 512
-    cfg.population.compatibility_thr = 1  # Keep threshold low to enforce new species to be discovered
+    if name == P_DEFAULT:
+        cfg.population.compatibility_thr = 1  # Keep threshold low to enforce new species to be discovered
+    elif name == P_CONN:
+        cfg.population.compatibility_thr = 0.8  # Keep threshold low to enforce new species to be discovered
+    else:
+        raise Exception(f"Population '{name}' not supported")
     cfg.update()
     return cfg
 
