@@ -226,7 +226,7 @@ def get_config(name):
     if name == P_DEFAULT:
         cfg.population.compatibility_thr = 1  # Keep threshold low to enforce new species to be discovered
     elif name == P_CONN:
-        cfg.population.compatibility_thr = 0.8  # Keep threshold low to enforce new species to be discovered
+        cfg.population.compatibility_thr = 0.9  # Keep threshold low to enforce new species to be discovered
     else:
         raise Exception(f"Population '{name}' not supported")
     cfg.update()
@@ -237,7 +237,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--pop_name', type=str)  # ID of the used topology
     parser.add_argument('--version', type=int, default=1)  # Version of the population
-    parser.add_argument('--iterations', type=int, default=0)  # Number of training iterations
+    parser.add_argument('--iterations', type=int, default=1)  # Number of training iterations
     parser.add_argument('--batch', type=int, default=10)  # Hops of saving during training
     parser.add_argument('--unused_cpu', type=int, default=2)  # Number of CPU cores not used during evaluation
     parser.add_argument('--use_backup', type=bool, default=False)  # Use the backup-data
@@ -245,7 +245,8 @@ if __name__ == '__main__':
     
     # Run the program
     main(
-            pop_name=args.pop_name,
+            # pop_name=args.pop_name,  # TODO
+            pop_name=P_CONN,
             version=args.version,
             iterations=args.iterations,
             batch=args.batch,
