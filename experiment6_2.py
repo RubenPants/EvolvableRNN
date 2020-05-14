@@ -27,7 +27,8 @@ from utils.dictionary import *
 from utils.myutils import get_subfolder
 
 # Minimal ratio of evaluation games finished before added to the CSV
-MIN_FINISHED = 0.8  # Finish 15/18 or more
+# MIN_FINISHED = 0.8  # Finish 15/18 or more
+MIN_FINISHED = 0  # Finish 0/18 or more  # TODO: For the X0 variants (full search space)
 # MIN_FINISHED = 0.2  # Finish 4/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
 # MIN_FINISHED = 0.25  # Finish 5/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
 
@@ -286,13 +287,13 @@ def get_csv_path(topology_id: int, use_backup: bool, batch_size: int):
             writer = csv.writer(f)
             # Construct the CSV's head
             head = []
-            if topology_id in [1, 2, 3]:  # GRU populations
+            if topology_id in [1, 2, 3, 30]:  # GRU populations
                 head += ['bias_r', 'bias_z', 'bias_h',
                          'weight_xr', 'weight_xz', 'weight_xh',
                          'weight_hr', 'weight_hz', 'weight_hh']
             elif topology_id in [22, 33]:  # SRU populations
                 head += ['bias_h', 'weight_xh', 'weight_hh']
-            elif topology_id in [222, 333]:
+            elif topology_id in [222]:
                 head += ['delay', 'scale']
             else:
                 raise Exception(f"Topology ID '{topology_id}' not supported!")
@@ -301,7 +302,7 @@ def get_csv_path(topology_id: int, use_backup: bool, batch_size: int):
                 head += ['conn1', 'conn2']
             elif topology_id in [2, 22, 222]:
                 head += ['bias_rw', 'conn2']
-            elif topology_id in [3, 33, 333]:
+            elif topology_id in [3, 30, 33]:
                 head += ['bias_rw', 'conn0', 'conn1', 'conn2']
             else:
                 raise Exception(f"Topology ID '{topology_id}' not supported!")
