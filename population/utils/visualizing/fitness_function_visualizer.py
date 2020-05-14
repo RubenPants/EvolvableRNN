@@ -34,7 +34,7 @@ def distance(save: bool = True):
     
     # Plot the distance function
     plt.plot(x, y, color=COLORS[D_NEAT], label='distance-based score')
-    plt.axvspan(0, cfg.target_reached, alpha=0.5, color='green', label='target reached')
+    plt.axvspan(0, cfg.target_reached, color='#97e08d', label='target reached')
     
     # Beautify the plot
     plt.title('Fitness in function of distance to target')
@@ -50,6 +50,10 @@ def distance(save: bool = True):
     plt.grid()
     if save:
         plt.savefig('population/utils/visualizing/images/distance_fitness.png', bbox_inches='tight', pad_inches=0.02)
+        plt.savefig('population/utils/visualizing/images/distance_fitness.eps',
+                    format='eps',
+                    bbox_inches='tight',
+                    pad_inches=0.02)
     plt.show()
     plt.close()
 

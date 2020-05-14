@@ -32,6 +32,10 @@ def visualize_function(f, name: str, save: bool = True):
     plt.tight_layout()
     plt.grid(axis='both')
     if save: plt.savefig(f'population/utils/visualizing/images/{name}.png', bbox_inches='tight', pad_inches=0.02)
+    if save: plt.savefig(f'population/utils/visualizing/images/{name}.eps',
+                         format='eps',
+                         bbox_inches='tight',
+                         pad_inches=0.02)
     # plt.show()
     plt.close()
 
