@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Default parameters
-batch=100000;  # Number of training-iterations each loop
+batch=300000;  # Number of training-iterations each loop
 cpu=1;  # Number of unused CPUs
 
 # Run the program
