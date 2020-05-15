@@ -3292,3 +3292,34 @@ Genetic distance:
 Most complex genome '80646' of size (1, 3) belongs to specie '80' with distance to representative of 0.034
 
 ===> EVALUATING <===
+Best evaluation finish ratio: 1.0
+Best genome: 
+	Key: 81084
+	Fitness: 1.0
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=0.87)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-4.65, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 9 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   80      30      78       1.00       3   
+	   86      19     111       0.22       1   
+	   89       9      56       0.22       1   
+	   90       8      52       0.22       1   
+	   91       6      7        0.17       2   
+	   92       6      67       0.28       1   
+	   93       5      54       0.22       1   
+	   94       4      51       0.28       1   
+	   95       2      37       0.22       1   
+
+
+===> Selective genome creation at 82.3%, storing in csv 'topology_2222.csv' (10h-45m-20s) <===
+
+===> Training <===
