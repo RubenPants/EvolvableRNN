@@ -184,6 +184,7 @@ def combine_all_populations(folder: str,
         plt.grid()
         plt.tight_layout()
         plt.savefig(f"{path_images}comb_{option}.png", bbox_inches='tight', pad_inches=0.02)
+        plt.savefig(f"{path_images}comb_{option}.eps", format="eps", bbox_inches='tight', pad_inches=0.02)
         # plt.show()
         plt.close()
 
@@ -332,6 +333,7 @@ def plot_distribution(folder: str,
             line.set_linewidth(4.0)
         plt.tight_layout()
         plt.savefig(f"{path_images}dist_{option}.png", bbox_inches='tight', pad_inches=0.02)
+        plt.savefig(f"{path_images}dist_{option}.eps", format='eps', bbox_inches='tight', pad_inches=0.02)
         # plt.show()
         plt.close()
 
@@ -424,6 +426,10 @@ def compute_complexity(folder: str,
     plt.xlabel("complexity expressed in #genes")
     plt.ylabel("#elites")
     plt.savefig(f"population_backup/storage/{folder}/images/complexity.png", bbox_inches='tight', pad_inches=0.02)
+    plt.savefig(f"population_backup/storage/{folder}/images/complexity.eps",
+                format='eps',
+                bbox_inches='tight',
+                pad_inches=0.02)
     # plt.show()
     plt.close()
     
@@ -472,6 +478,10 @@ def compute_complexity(folder: str,
             line.set_linewidthset_linewidth(4.0)
         plt.tight_layout()
         plt.savefig(f"population_backup/storage/{folder}/images/complexity_violin.png",
+                    bbox_inches='tight',
+                    pad_inches=0.02)
+        plt.savefig(f"population_backup/storage/{folder}/images/complexity_violin.eps",
+                    format='eps',
                     bbox_inches='tight',
                     pad_inches=0.02)
         plt.show()
@@ -524,7 +534,7 @@ if __name__ == '__main__':
     parser.add_argument('--experiment', type=int, default=3)
     parser.add_argument('--folder', type=str, default=None)
     parser.add_argument('--folder_pop', type=str, default='NEAT-SRU')
-    parser.add_argument('--max_gen', type=int, default=1000)
+    parser.add_argument('--max_gen', type=int, default=100)
     parser.add_argument('--max_v', type=int, default=30)
     parser.add_argument('--unused_cpu', type=int, default=2)
     args = parser.parse_args()

@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Default parameters
-pop_name=connection;  # Topology-ID
+pop_name=gru_nr;  # Topology-ID
 iter=100;  # Number of training-iterations each loop
 cpu=1;  # Number of unused CPUs
 push=10;  # After how many version git should push
 
 # Run the program
-for v in {11..20}
+for v in {21..30}
 do
   python3 experiment7.py --pop_name=$pop_name --version=$v --iterations=$iter --unused_cpu=$cpu;
 
