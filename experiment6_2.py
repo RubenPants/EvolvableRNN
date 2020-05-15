@@ -59,13 +59,11 @@ def main(topology_id: int,
     )
     
     # Replace the population's initial population with the requested topologies genomes
-    if pop.generation == 0:
-        for g_id in pop.population.keys():
-            pop.population[g_id] = get_genome(topology_id, g_id=g_id, cfg=cfg)
-        pop.species.speciate(config=pop.config,
-                             population=pop.population,
-                             generation=pop.generation,
-                             logger=pop.log)
+    for g_id in pop.population.keys(): pop.population[g_id] = get_genome(topology_id, g_id=g_id, cfg=cfg)
+    pop.species.speciate(config=pop.config,
+		             population=pop.population,
+		             generation=pop.generation,
+		             logger=pop.log)
     
     # Set games and environment used for training and evaluation
     pop.log(f"\n\n\n===> RUNNING EXPERIMENT 6 <===\n")
