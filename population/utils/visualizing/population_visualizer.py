@@ -88,7 +88,7 @@ def create_traces(traces: dict, games: list, gen: int, save_path: str, save_name
             plt.plot([10], [10], marker='o', markersize=5, color=(1, 0, 0))
             for p in range(0, len(x_pos) - 1):
                 plt.plot((x_pos[p], x_pos[p + 1]), (y_pos[p], y_pos[p + 1]), color=(1, p / len(x_pos), 0))
-
+        
         # Replace ticks by stripes
         plt.xticks([i for i in range(g.x_axis + 1)])
         plt.yticks([i for i in range(g.y_axis + 1)])
@@ -107,9 +107,10 @@ def create_traces(traces: dict, games: list, gen: int, save_path: str, save_name
         
         # Save figure
         plt.tight_layout()
-        game_path = get_subfolder(save_path, 'game{id:05d}'.format(id=g.id))
         # Default option
-        # plt.savefig(f'{game_path}{save_name}_gen{gen:05d}', bbox_inches='tight', pad_inches=0.02)
+        # plt.savefig(f'{get_subfolder(save_path, "game{id:05d}".format(id=g.id))}{save_name}_gen{gen:05d}',
+        #             bbox_inches='tight',
+        #             pad_inches=0.02)
         # Places in delete_me folder
         plt.savefig(f'delete_me/game{g.id}.png', bbox_inches='tight', pad_inches=0.02)
         plt.savefig(f'delete_me/game{g.id}.eps', format='eps', bbox_inches='tight', pad_inches=0.02)
