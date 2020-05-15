@@ -223,23 +223,25 @@ def trace_most_fit(population: Population,
                    ):
     """Create a trace evaluation for the given genome on the provided games."""
     from environment.env_visualizing import VisualizingEnv
-    
+
     game_config = deepcopy(population.config)
     if duration > 0: game_config.game.duration = duration
     
     population.log("\n===> CREATING GENOME TRACE <===\n")
     population.log(f"Creating traces for games: {games}")
-    
+
     visualizer = VisualizingEnv(
             game_config=game_config,
             games=games,
             unused_cpu=unused_cpu,
     )
-    visualizer.trace_genomes(
-            pop=population,
-            given_genome=genome,
-            parallel=not debug,
-    )
+    for g in games:  # TODO: Bug in warm-up of network if multiple games evaluated
+        visualizer.set_games([g])
+        visualizer.trace_genomes(
+                pop=population,
+                given_genome=genome,
+                parallel=not debug,
+        )
 
 
 def train(population: Population,
@@ -362,14 +364,14 @@ if __name__ == '__main__':
     parser.add_argument('--trace', type=bool, default=False)  # Keep it False
     parser.add_argument('--trace_fit', type=bool, default=False)
     parser.add_argument('--evaluate', type=bool, default=False)
-    parser.add_argument('--genome', type=bool, default=True)
-    parser.add_argument('--monitor', type=bool, default=False)
+    parser.add_argument('--genome', type=bool, default=False)
+    parser.add_argument('--monitor', type=bool, default=True)
     parser.add_argument('--gru_analysis', type=bool, default=False)
     parser.add_argument('--live', type=bool, default=False)
     
     # Extra arguments
     parser.add_argument('--iterations', type=int, default=50)
-    parser.add_argument('--experiment', type=int, default=7)
+    parser.add_argument('--experiment', type=int, default=6)
     parser.add_argument('--unused_cpu', type=int, default=2)
     parser.add_argument('--version', type=int, default=0)
     parser.add_argument('--debug', type=bool, default=False)
@@ -388,13 +390,16 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='connection/v4',
+            name='topology_2',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment6',
             folder_name=get_folder(args.experiment),
             # config=config,  # Commented to prevent new populations from creating (if type in other fields)
             use_backup=args.use_backup,
     )
+    print(pop.best_genome)
+    print(pop.best_genome.nodes[2])
+    raise Exception
     
     game_ids_train, game_ids_eval = get_game_ids(experiment_id=args.experiment)
     
