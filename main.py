@@ -11,6 +11,7 @@ from config import Config
 from population.population import Population
 from population.utils.gene_util.fixed_rnn import FixedRnnNodeGene
 from population.utils.gene_util.gru import GruNodeGene
+from population.utils.gene_util.gru_no_reset import GruNoResetNodeGene
 from population.utils.gene_util.lstm import LstmNodeGene
 from population.utils.gene_util.output_node import OutputNodeGene
 from population.utils.gene_util.simple_node import SimpleNodeGene
@@ -107,6 +108,15 @@ def monitor(game_id: int,
     if node_type == GruNodeGene:
         from population.utils.visualizing.monitor_genome_single_gru import main as gru_monitor
         gru_monitor(
+                population=population,
+                game_id=game_id,
+                genome=genome,
+                game_cfg=game_config,
+                debug=debug,
+        )
+    elif node_type == GruNoResetNodeGene:
+        from population.utils.visualizing.monitor_genome_single_gru_nr import main as gru_nr_monitor
+        gru_nr_monitor(
                 population=population,
                 game_id=game_id,
                 genome=genome,
@@ -390,16 +400,13 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='topology_2',
+            name='topology_2222',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment6',
             folder_name=get_folder(args.experiment),
             # config=config,  # Commented to prevent new populations from creating (if type in other fields)
             use_backup=args.use_backup,
     )
-    print(pop.best_genome)
-    print(pop.best_genome.nodes[2])
-    raise Exception
     
     game_ids_train, game_ids_eval = get_game_ids(experiment_id=args.experiment)
     
