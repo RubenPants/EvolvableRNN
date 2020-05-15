@@ -29,7 +29,8 @@ from utils.dictionary import *
 P_DEFAULT = 'default'
 P_CONN = 'connection'
 P_GRU_NR = 'gru_nr'
-SUPPORTED = [P_DEFAULT, P_CONN, P_GRU_NR]
+P_GRU_NR_CONN = 'gru_nr_connection'
+SUPPORTED = [P_DEFAULT, P_CONN, P_GRU_NR, P_GRU_NR_CONN]
 
 
 # --------------------------------------------------> MAIN METHODS <-------------------------------------------------- #
@@ -165,7 +166,7 @@ def get_topology(pop_name, gid: int, cfg: Config):
     genome.nodes[1].bias = random() * bias_range + cfg.genome.bias_min_value  # Uniformly sampled bias
     
     # Setup the recurrent unit
-    if pop_name in [P_GRU_NR]:
+    if pop_name in [P_GRU_NR, P_GRU_NR_CONN]:
         genome.nodes[2] = GruNoResetNodeGene(key=2, cfg=cfg.genome, input_keys=[-1], input_keys_full=[-1])  # Hidden
         genome.nodes[2].bias_h = rand_arr((2,)) * bias_range + cfg.genome.bias_min_value
         genome.nodes[2].weight_xh_full = rand_arr((2, 1)) * rnn_range + cfg.genome.weight_min_value
@@ -183,13 +184,19 @@ def get_topology(pop_name, gid: int, cfg: Config):
     # input2gru - Uniformly sampled on the positive spectrum
     key = (-1, 2)
     genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
-    genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
+    if pop_name in [P_CONN, P_GRU_NR_CONN]:
+        genome.connections[key].weight = 6  # Maximize connection, GRU can always lower values flowing through
+    else:
+        genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
     genome.connections[key].enabled = True
     
     # gru2output - Uniformly sampled on the positive spectrum
     key = (2, 1)
     genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
-    genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
+    if pop_name in [P_CONN, P_GRU_NR_CONN]:
+        genome.connections[key].weight = 6  # Maximize connection, GRU can always lower values flowing through
+    else:
+        genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
     genome.connections[key].enabled = True
     
     # input2output - Uniformly sampled
@@ -206,16 +213,17 @@ def get_topology(pop_name, gid: int, cfg: Config):
 
 
 def enforce_topology(pop_name, genome: Genome):
-    """Enforce the fixed parameters of topology2. It is assumed that topology hasn't changed."""
+    """
+    Enforce the fixed parameters of topology2. It is assumed that topology hasn't changed.
+    
+    Ideology: The GRU can always scale the input and outputs itself, so making its corresponding connections a single
+        value doesn't change much as long as it doesn't take away its capabilities (i.e. maximize, scaling down is
+        always possible!)
+    """
     genome.nodes[0].bias = 1.5  # Drive with 0.953 actuation by default
-    if pop_name in [P_CONN]:
-        # print(f"Before: {genome.nodes[2].weight_xh_full[2, 0]}", end='')
-        genome.nodes[2].weight_xh_full[2, 0] = abs(genome.nodes[2].weight_xh_full[2, 0])
-        # print(f" - after: {genome.nodes[2].weight_xh_full[2, 0]}")
+    if pop_name in [P_CONN, P_GRU_NR_CONN]:
         for key in [(-1, 2), (2, 1)]:
-            # print(f"Before: {genome.connections[key].weight}", end='')
-            genome.connections[key].weight = abs(genome.connections[key].weight)
-            # print(f" - after: {genome.connections[key].weight}")
+            genome.connections[key].weight = 6
 
 
 def get_config(name):
@@ -233,7 +241,7 @@ def get_config(name):
     cfg.population.pop_size = 512
     if name in [P_DEFAULT, P_GRU_NR]:
         cfg.population.compatibility_thr = 1  # Keep threshold low to enforce new species to be discovered
-    elif name == P_CONN:
+    elif name in [P_CONN, P_GRU_NR_CONN]:
         cfg.population.compatibility_thr = 0.9  # Keep threshold low to enforce new species to be discovered
     else:
         raise Exception(f"Population '{name}' not supported")
@@ -253,8 +261,7 @@ if __name__ == '__main__':
     
     # Run the program
     main(
-            # pop_name=args.pop_name,  # TODO
-            pop_name=P_GRU_NR,
+            pop_name=args.pop_name,
             version=args.version,
             iterations=args.iterations,
             batch=args.batch,
