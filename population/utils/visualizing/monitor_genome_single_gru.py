@@ -27,7 +27,7 @@ from utils.myutils import get_subfolder
 # Parameters
 TIME_SERIES_WIDTH = 8
 TIME_SERIES_HEIGHT = 1.5
-CORRECTION = 1.05
+CORRECTION = 1
 
 
 def main(population: Population, game_id: int, genome: Genome = None, game_cfg: Config = None, debug: bool = False):
@@ -314,7 +314,7 @@ def visualize_update_gate(update_gate: list, target_found: list, game_cfg: GameC
 
 def visualize_position(position_list: list, game: Game, save_path: str):
     """Create a trace-graph."""
-    plt.figure(figsize=(TIME_SERIES_HEIGHT * 6 - CORRECTION, TIME_SERIES_HEIGHT * 6 - CORRECTION)).gca()
+    plt.figure(figsize=(TIME_SERIES_HEIGHT * 4 - CORRECTION, TIME_SERIES_HEIGHT * 4 - CORRECTION)).gca()
     x_min, x_max = game.x_axis / 2, game.x_axis / 2
     y_min, y_max = game.y_axis / 2, game.y_axis / 2
     
@@ -355,7 +355,7 @@ def visualize_position(position_list: list, game: Game, save_path: str):
             plt.annotate(
                     str(int(p / game.game_config.fps)),
                     xy=(x_pos[p], y_pos[p]),
-                    xytext=(x_pos[p] + offset[0] * 10, y_pos[p] + offset[1] * 10),
+                    xytext=(x_pos[p] + offset[0] * 20, y_pos[p] + offset[1] * 20),
                     ha="center", va="center",
                     arrowprops=dict(arrowstyle="->", connectionstyle="arc,rad=0."),
             )
@@ -393,15 +393,24 @@ def merge(title: str, path: str):
     time_series = np.concatenate(images, axis=0)
     height = time_series.shape[0]
     while trace.shape[0] > height:
-        trace = trace[:-1, :, :]
+        if trace.shape[0] == height + 1:
+            trace = trace[:-1, :, :]
+        else:  # Symmetric prune
+            trace = trace[1:-1, :, :]
     while trace.shape[0] < height:
-        trace = np.concatenate((trace, np.ones((1, trace.shape[1], trace.shape[2]))), axis=0)
+        if trace.shape[0] == height - 1:
+            trace = np.concatenate((trace,
+                                    np.ones((1, trace.shape[1], trace.shape[2]))), axis=0)
+        else:  # Symmetric addition
+            trace = np.concatenate((np.ones((1, trace.shape[1], trace.shape[2])),
+                                    trace,
+                                    np.ones((1, trace.shape[1], trace.shape[2]))), axis=0)
     result = np.concatenate([time_series, trace], axis=1)
     
     # Create the figure
     plt.figure(figsize=(TIME_SERIES_WIDTH + 6 * TIME_SERIES_HEIGHT, 6 * TIME_SERIES_HEIGHT + 0.5))
     plt.axis('off')
-    plt.title(title, fontsize=24, fontweight='bold')
+    # plt.title(title, fontsize=24, fontweight='bold')
     plt.imshow(result)
     plt.tight_layout()
     plt.savefig(f"{path[:-1]}.png", bbox_inches='tight', pad_inches=0)

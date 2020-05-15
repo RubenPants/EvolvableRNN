@@ -293,6 +293,7 @@ def visualize_score(pop: Population, pop_cache: Population, genome: Genome, d: i
     path = get_subfolder(path, 'images')
     path = get_subfolder(path, 'gru_analysis')
     plt.savefig(f"{path}{genome.key}.png")
+    plt.savefig(f"{path}{genome.key}.eps", format="eps")
     plt.close()
     
     # Create overview

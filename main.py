@@ -9,6 +9,7 @@ from copy import deepcopy
 
 from config import Config
 from population.population import Population
+from population.utils.gene_util.fixed_rnn import FixedRnnNodeGene
 from population.utils.gene_util.gru import GruNodeGene
 from population.utils.gene_util.lstm import LstmNodeGene
 from population.utils.gene_util.output_node import OutputNodeGene
@@ -112,7 +113,7 @@ def monitor(game_id: int,
                 game_cfg=game_config,
                 debug=debug,
         )
-    elif node_type == SimpleRnnNodeGene:
+    elif node_type == SimpleRnnNodeGene or node_type == FixedRnnNodeGene:
         from population.utils.visualizing.monitor_genome_single_sru import main as sru_monitor
         sru_monitor(
                 average=2,
@@ -222,23 +223,25 @@ def trace_most_fit(population: Population,
                    ):
     """Create a trace evaluation for the given genome on the provided games."""
     from environment.env_visualizing import VisualizingEnv
-    
+
     game_config = deepcopy(population.config)
     if duration > 0: game_config.game.duration = duration
     
     population.log("\n===> CREATING GENOME TRACE <===\n")
     population.log(f"Creating traces for games: {games}")
-    
+
     visualizer = VisualizingEnv(
             game_config=game_config,
             games=games,
             unused_cpu=unused_cpu,
     )
-    visualizer.trace_genomes(
-            pop=population,
-            given_genome=genome,
-            parallel=not debug,
-    )
+    for g in games:  # TODO: Bug in warm-up of network if multiple games evaluated
+        visualizer.set_games([g])
+        visualizer.trace_genomes(
+                pop=population,
+                given_genome=genome,
+                parallel=not debug,
+        )
 
 
 def train(population: Population,
@@ -359,10 +362,10 @@ if __name__ == '__main__':
     parser.add_argument('--train_overview', type=bool, default=False)
     parser.add_argument('--blueprint', type=bool, default=False)
     parser.add_argument('--trace', type=bool, default=False)  # Keep it False
-    parser.add_argument('--trace_fit', type=bool, default=True)
+    parser.add_argument('--trace_fit', type=bool, default=False)
     parser.add_argument('--evaluate', type=bool, default=False)
     parser.add_argument('--genome', type=bool, default=False)
-    parser.add_argument('--monitor', type=bool, default=False)
+    parser.add_argument('--monitor', type=bool, default=True)
     parser.add_argument('--gru_analysis', type=bool, default=False)
     parser.add_argument('--live', type=bool, default=False)
     
@@ -394,6 +397,9 @@ if __name__ == '__main__':
             # config=config,  # Commented to prevent new populations from creating (if type in other fields)
             use_backup=args.use_backup,
     )
+    print(pop.best_genome)
+    print(pop.best_genome.nodes[2])
+    raise Exception
     
     game_ids_train, game_ids_eval = get_game_ids(experiment_id=args.experiment)
     
@@ -450,13 +456,14 @@ if __name__ == '__main__':
             )
         
         if args.monitor:
-            monitor(
-                    debug=args.debug,
-                    duration=args.duration,
-                    game_id=game_ids_eval[0],
-                    genome=chosen_genome,
-                    population=pop,
-            )
+            for k in range(18):  # TODO: Remove for-loop
+                monitor(
+                        debug=args.debug,
+                        duration=args.duration,
+                        game_id=game_ids_eval[k],
+                        genome=chosen_genome,
+                        population=pop,
+                )
         
         if args.evaluate:
             evaluate(
@@ -485,8 +492,8 @@ if __name__ == '__main__':
         if args.live:
             live(
                     debug=args.debug,
-                    # game_id=game_ids_eval[0],
-                    game_id=30001,
+                    game_id=game_ids_eval[0],
+                    # game_id=30001,
                     duration=args.duration,
                     genome=chosen_genome if chosen_genome else pop.best_genome,
                     population=pop,
