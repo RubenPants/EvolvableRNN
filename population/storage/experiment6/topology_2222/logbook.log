@@ -1,0 +1,3294 @@
+Population 'topology_2222' saved! Current generation: 0
+Genetic distance:
+	- Maximum: 5.21255
+	- Mean: 3.16182
+	- Minimum: 0.00000
+	- Standard deviation: 0.88002
+Most complex genome '1' of size (1, 3) belongs to specie '1' with distance to representative of 0
+
+
+
+===> RUNNING EXPERIMENT 6 <===
+
+
+
+===> Selective genome creation at -0.1%, storing in csv 'topology_2222.csv' (10h-02m-54s) <===
+
+===> Training <===
+Best training fitness: 0.25620326827118733
+Genetic distance:
+	- Maximum: 1.96669
+	- Mean: 0.74984
+	- Minimum: 0.00000
+	- Standard deviation: 0.29583
+Most complex genome '464' of size (1, 3) belongs to specie '3' with distance to representative of 0.449
+Best training fitness: 0.33079075309256273
+Genetic distance:
+	- Maximum: 1.95331
+	- Mean: 0.77355
+	- Minimum: 0.00000
+	- Standard deviation: 0.26789
+Most complex genome '595' of size (1, 3) belongs to specie '10' with distance to representative of 0.415
+Best training fitness: 0.31592414630282856
+Genetic distance:
+	- Maximum: 1.94863
+	- Mean: 0.76989
+	- Minimum: 0.00000
+	- Standard deviation: 0.25892
+Most complex genome '1468' of size (1, 3) belongs to specie '8' with distance to representative of 0.397
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.22
+Best genome: 
+	Key: 1667
+	Fitness: 0.2222222222222222
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=1.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-3.66, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 15 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   1        3      27        --        1   
+	   2        3      29       0.11       1   
+	   3        3      42       0.22       1   
+	   4        3      40       0.22       1   
+	   5        3      26       0.22       2   
+	   6        3      34       0.11       1   
+	   7        3      30       0.22       1   
+	   8        3      42       0.11       1   
+	   9        3      32       0.17       2   
+	   10       3      43       0.22       2   
+	   11       3      34       0.22       1   
+	   12       3      36       0.06       1   
+	   13       3      31       0.17       1   
+	   14       3      38       0.17       2   
+	   15       3      37       0.22       2   
+
+
+===> Selective genome creation at -0.1%, storing in csv 'topology_2222.csv' (10h-03m-38s) <===
+
+===> Training <===
+Best training fitness: 0.2958656158502867
+Genetic distance:
+	- Maximum: 1.77165
+	- Mean: 0.76495
+	- Minimum: 0.00000
+	- Standard deviation: 0.25471
+Most complex genome '1751' of size (1, 3) belongs to specie '11' with distance to representative of 0.416
+Best training fitness: 0.33263510117181355
+Genetic distance:
+	- Maximum: 1.82552
+	- Mean: 0.76207
+	- Minimum: 0.00000
+	- Standard deviation: 0.25509
+Most complex genome '2466' of size (1, 3) belongs to specie '8' with distance to representative of 0.353
+Best training fitness: 0.2983587898560205
+Genetic distance:
+	- Maximum: 1.95615
+	- Mean: 0.74568
+	- Minimum: 0.00000
+	- Standard deviation: 0.26426
+Most complex genome '2717' of size (1, 3) belongs to specie '1' with distance to representative of 0.346
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.22
+Best genome: 
+	Key: 1244
+	Fitness: 0.2222222222222222
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=3.0)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=4.02, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 15 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   1        6      79       0.22       4   
+	   2        6      57       0.11       1   
+	   3        6      1        0.17       2   
+	   4        6      87       0.22       2   
+	   5        6      52       0.17       1   
+	   6        6      41       0.22       1   
+	   7        6      19       0.22       1   
+	   8        6      4        0.11       2   
+	   9        6      5        0.17       2   
+	   10       6      39       0.22       5   
+	   11       6      31       0.17       3   
+	   12       6      57       0.22       2   
+	   13       6      6        0.06       2   
+	   14       6      29       0.22       5   
+	   15       6      11       0.22       2   
+
+
+===> Selective genome creation at -0.1%, storing in csv 'topology_2222.csv' (10h-04m-21s) <===
+
+===> Training <===
+Best training fitness: 0.36072008739640593
+Genetic distance:
+	- Maximum: 1.90837
+	- Mean: 0.74264
+	- Minimum: 0.00000
+	- Standard deviation: 0.26985
+Most complex genome '3308' of size (1, 3) belongs to specie '1' with distance to representative of 0.068
+Best training fitness: 0.3614821962857167
+Genetic distance:
+	- Maximum: 1.85683
+	- Mean: 0.73925
+	- Minimum: 0.00000
+	- Standard deviation: 0.28815
+Most complex genome '3548' of size (1, 3) belongs to specie '4' with distance to representative of 0.296
+Best training fitness: 0.6806207192212259
+Genetic distance:
+	- Maximum: 1.80630
+	- Mean: 0.73209
+	- Minimum: 0.00000
+	- Standard deviation: 0.28626
+Most complex genome '4006' of size (1, 3) belongs to specie '4' with distance to representative of 0.291
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.67
+Best genome: 
+	Key: 4440
+	Fitness: 0.6666666666666666
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=2.33)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-4.53, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 15 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   1        9      48       0.22       1   
+	   2        9      39       0.22       4   
+	   3        9      28       0.22       5   
+	   4        9      56       0.67       1   
+	   5        9      33       0.22       2   
+	   6        9      43       0.22       4   
+	   7        9      17       0.17       4   
+	   8        9      30       0.22       5   
+	   9        9      40       0.17       5   
+	   10       9      26       0.22       8   
+	   11       9      40       0.17       3   
+	   12       9      32       0.22       5   
+	   13       9      42       0.17       1   
+	   14       9      32       0.22       3   
+	   15       9      33       0.22       5   
+
+
+===> Selective genome creation at -0.1%, storing in csv 'topology_2222.csv' (10h-05m-05s) <===
+
+===> Training <===
+Best training fitness: 0.7609206580152771
+Genetic distance:
+	- Maximum: 1.81310
+	- Mean: 0.73569
+	- Minimum: 0.00000
+	- Standard deviation: 0.28618
+Most complex genome '4440' of size (1, 3) belongs to specie '4' with distance to representative of 0.316
+Best training fitness: 0.6753570211113356
+Genetic distance:
+	- Maximum: 1.85704
+	- Mean: 0.73732
+	- Minimum: 0.00000
+	- Standard deviation: 0.28156
+Most complex genome '4902' of size (1, 3) belongs to specie '3' with distance to representative of 0.302
+Best training fitness: 0.7167085494773572
+ > Species 10 with 12 members is stagnated (fitness: 0.17817): removed!
+Genetic distance:
+	- Maximum: 1.99045
+	- Mean: 0.75935
+	- Minimum: 0.00000
+	- Standard deviation: 0.31835
+Most complex genome '5401' of size (1, 3) belongs to specie '4' with distance to representative of 0.3
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.89
+Best genome: 
+	Key: 5401
+	Fitness: 0.8888888888888888
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=2.23)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-4.36, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 15 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   1       12      50       0.22       4   
+	   2       12      39       0.22       3   
+	   3       12      52       0.89       1   
+	   4       12      76       0.89       3   
+	   5       12      1        0.11       5   
+	   6       12      34       0.22       3   
+	   7       12      60       0.22       3   
+	   8       12      36       0.22       3   
+	   9       12      36       0.22       8   
+	   11      12      35       0.83       1   
+	   12      12      29       0.22       8   
+	   13      12      31       0.17       2   
+	   14      12      29       0.22       6   
+	   15      12      28       0.22       8   
+	   16       1      3        0.78       1   
+
+
+===> Selective genome creation at 2.9000000000000004%, storing in csv 'topology_2222.csv' (10h-05m-48s) <===
+
+===> Training <===
+Best training fitness: 0.8487333333333333
+Genetic distance:
+	- Maximum: 1.75106
+	- Mean: 0.72237
+	- Minimum: 0.00000
+	- Standard deviation: 0.30448
+Most complex genome '5850' of size (1, 3) belongs to specie '16' with distance to representative of 0.069
+Best training fitness: 0.7688367314095192
+Genetic distance:
+	- Maximum: 2.15571
+	- Mean: 0.70520
+	- Minimum: 0.00000
+	- Standard deviation: 0.29131
+Most complex genome '6347' of size (1, 3) belongs to specie '16' with distance to representative of 0.076
+Best training fitness: 0.8702666666666667
+ > Species 9 with 32 members is stagnated (fitness: 0.27718): removed!
+ > Species 12 with 33 members is stagnated (fitness: 0.27663): removed!
+ > Species 15 with 31 members is stagnated (fitness: 0.27662): removed!
+Genetic distance:
+	- Maximum: 2.11943
+	- Mean: 0.68033
+	- Minimum: 0.00000
+	- Standard deviation: 0.32177
+Most complex genome '5850' of size (1, 3) belongs to specie '16' with distance to representative of 0.069
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.89
+Best genome: 
+	Key: 5850
+	Fitness: 0.8888888888888888
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=2.23)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-4.36, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 13 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   1       15      41       0.22       7   
+	   2       15      57       0.33       1   
+	   3       15      35       0.17       3   
+	   4       15      1        0.11       3   
+	   5       15      1        0.11       8   
+	   6       15      44       0.22       6   
+	   7       15      65       0.22       6   
+	   8       15      56       0.22       6   
+	   11      15      29       0.17       3   
+	   13      15      50       0.22       1   
+	   14      15      54       0.22       9   
+	   16       4      91       0.89       1   
+	   17       1      1        0.06       1   
+
+
+===> Selective genome creation at 6.0%, storing in csv 'topology_2222.csv' (10h-06m-32s) <===
+
+===> Training <===
+Best training fitness: 0.7691248882821129
+Genetic distance:
+	- Maximum: 1.88478
+	- Mean: 0.72160
+	- Minimum: 0.00000
+	- Standard deviation: 0.33742
+Most complex genome '5413' of size (1, 3) belongs to specie '16' with distance to representative of 0.221
+Best training fitness: 0.87181011471575
+Genetic distance:
+	- Maximum: 1.80785
+	- Mean: 0.68398
+	- Minimum: 0.00000
+	- Standard deviation: 0.31557
+Most complex genome '7795' of size (1, 3) belongs to specie '16' with distance to representative of 0.057
+Best training fitness: 0.8385688607834881
+ > Species 5 with 1 members is stagnated (fitness: 0.19282): removed!
+Genetic distance:
+	- Maximum: 1.67907
+	- Mean: 0.67386
+	- Minimum: 0.00000
+	- Standard deviation: 0.31694
+Most complex genome '8233' of size (1, 3) belongs to specie '16' with distance to representative of 0.023
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.94
+Best genome: 
+	Key: 8716
+	Fitness: 0.9444444444444444
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=2.23)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-4.36, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 13 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   1       18      52       0.22       1   
+	   2       18      42       0.28       2   
+	   3       18      23       0.11       6   
+	   4       18      1        0.11       6   
+	   6       18      42       0.22       9   
+	   7       18      37       0.22       9   
+	   8       18      50       0.39       1   
+	   11      18      35       0.17       6   
+	   13      18      40       0.22       4   
+	   14      18      28       0.22       2   
+	   16       7     127       0.94       2   
+	   17       4      6        0.17       2   
+	   18       3      38       0.22       1   
+
+
+===> Selective genome creation at 7.5%, storing in csv 'topology_2222.csv' (10h-07m-15s) <===
+
+===> Training <===
+Best training fitness: 0.798321796442542
+Genetic distance:
+	- Maximum: 1.79310
+	- Mean: 0.66239
+	- Minimum: 0.00000
+	- Standard deviation: 0.30095
+Most complex genome '7795' of size (1, 3) belongs to specie '16' with distance to representative of 0
+Best training fitness: 0.8902333333333334
+ > Species 6 with 36 members is stagnated (fitness: 0.20033): removed!
+ > Species 7 with 37 members is stagnated (fitness: 0.1537): removed!
+Genetic distance:
+	- Maximum: 1.77062
+	- Mean: 0.61309
+	- Minimum: 0.00000
+	- Standard deviation: 0.29625
+Most complex genome '9181' of size (1, 3) belongs to specie '16' with distance to representative of 0.003
+Best training fitness: 0.8729763667683621
+Genetic distance:
+	- Maximum: 1.81584
+	- Mean: 0.62699
+	- Minimum: 0.00000
+	- Standard deviation: 0.30087
+Most complex genome '9694' of size (1, 3) belongs to specie '16' with distance to representative of 0.0
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.89
+Best genome: 
+	Key: 8233
+	Fitness: 0.8888888888888888
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=2.23)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-4.36, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 12 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   1       21      45       0.22       4   
+	   2       21      63       0.22       1   
+	   3       21      31       0.22       9   
+	   4       21      1        0.11       9   
+	   8       21      74       0.39       4   
+	   11      21      34       0.28       9   
+	   13      21      48       0.22       7   
+	   14      21      39       0.22       5   
+	   16      10      75       0.89       2   
+	   17       7      47       0.17       1   
+	   18       6      54       0.22       1   
+	   19       1      6        0.22       1   
+
+
+===> Selective genome creation at 7.8%, storing in csv 'topology_2222.csv' (10h-07m-56s) <===
+
+===> Training <===
+Best training fitness: 0.8653000000000001
+Genetic distance:
+	- Maximum: 1.61172
+	- Mean: 0.60004
+	- Minimum: 0.00000
+	- Standard deviation: 0.28784
+Most complex genome '8233' of size (1, 3) belongs to specie '16' with distance to representative of 0.023
+Best training fitness: 0.8700666666666667
+ > Species 3 with 17 members is stagnated (fitness: 0.40573): removed!
+ > Species 11 with 53 members is stagnated (fitness: 0.24216): removed!
+ > Species 4 with 1 members is stagnated (fitness: 0.14081): removed!
+Genetic distance:
+	- Maximum: 1.51111
+	- Mean: 0.60848
+	- Minimum: 0.00000
+	- Standard deviation: 0.28201
+Most complex genome '9181' of size (1, 3) belongs to specie '16' with distance to representative of 0.003
+Best training fitness: 0.7976648445740204
+Genetic distance:
+	- Maximum: 1.89512
+	- Mean: 0.62445
+	- Minimum: 0.00000
+	- Standard deviation: 0.30692
+Most complex genome '11060' of size (1, 3) belongs to specie '16' with distance to representative of 0.005
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.94
+Best genome: 
+	Key: 11060
+	Fitness: 0.9444444444444444
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=2.23)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-4.56, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 12 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   1       24      53       0.22       7   
+	   2       24      50       0.22       4   
+	   8       24      70       0.83       1   
+	   13      24      37       0.22       2   
+	   14      24      41       0.22       8   
+	   16      13      73       0.94       5   
+	   17      10      35       0.22       2   
+	   18       9      72       0.22       1   
+	   19       4      51       0.22       2   
+	   20       2      34       0.22       1   
+	   21       1      1         --        1   
+	   22       1      2        0.22       1   
+
+
+===> Selective genome creation at 8.799999999999999%, storing in csv 'topology_2222.csv' (10h-08m-37s) <===
+
+===> Training <===
+Best training fitness: 0.8457210637753985
+Genetic distance:
+	- Maximum: 1.75695
+	- Mean: 0.61723
+	- Minimum: 0.00000
+	- Standard deviation: 0.28598
+Most complex genome '11579' of size (1, 3) belongs to specie '16' with distance to representative of 0.007
+Best training fitness: 0.8307984322093708
+Genetic distance:
+	- Maximum: 1.63866
+	- Mean: 0.61512
+	- Minimum: 0.00000
+	- Standard deviation: 0.28544
+Most complex genome '12027' of size (1, 3) belongs to specie '16' with distance to representative of 0.002
+Best training fitness: 0.8920666666666668
+ > Species 14 with 30 members is stagnated (fitness: 0.20671): removed!
+Genetic distance:
+	- Maximum: 1.68974
+	- Mean: 0.58748
+	- Minimum: 0.00000
+	- Standard deviation: 0.29171
+Most complex genome '12475' of size (1, 3) belongs to specie '16' with distance to representative of 0.004
+
+===> EVALUATING <===
+Best evaluation finish ratio: 1.0
+Best genome: 
+	Key: 13027
+	Fitness: 1.0
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=1.74)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-2.68, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 11 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   1       27      47       0.22       2   
+	   2       27      57       0.33       7   
+	   8       27      75       1.00       1   
+	   13      27      36       0.28       5   
+	   16      16      80       0.94       1   
+	   17      13      48       0.22       1   
+	   18      12      32       0.17       4   
+	   19       7      42       0.22       2   
+	   20       5      33       0.22       3   
+	   21       4      38       0.06       1   
+	   22       4      28       0.22       3   
+
+
+===> Selective genome creation at 15.2%, storing in csv 'topology_2222.csv' (10h-09m-19s) <===
+
+===> Training <===
+Best training fitness: 0.8714333333333334
+Genetic distance:
+	- Maximum: 1.57279
+	- Mean: 0.59676
+	- Minimum: 0.00000
+	- Standard deviation: 0.29784
+Most complex genome '11579' of size (1, 3) belongs to specie '16' with distance to representative of 0.005
+Best training fitness: 0.8694996873480865
+Genetic distance:
+	- Maximum: 1.79874
+	- Mean: 0.58386
+	- Minimum: 0.00000
+	- Standard deviation: 0.29626
+Most complex genome '13414' of size (1, 3) belongs to specie '16' with distance to representative of 0.007
+Best training fitness: 0.8239200661403723
+Genetic distance:
+	- Maximum: 1.87181
+	- Mean: 0.58815
+	- Minimum: 0.00000
+	- Standard deviation: 0.29516
+Most complex genome '13888' of size (1, 3) belongs to specie '16' with distance to representative of 0.014
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.94
+Best genome: 
+	Key: 14393
+	Fitness: 0.9444444444444444
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=2.23)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-4.56, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 11 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   1       30      58       0.33       5   
+	   2       30      73       0.67       3   
+	   8       30      67       0.94       4   
+	   13      30      36       0.28       8   
+	   16      19      72       0.94       4   
+	   17      16      30       0.22       4   
+	   18      15      32       0.22       7   
+	   19      10      43       0.28       5   
+	   20       8      32       0.22       3   
+	   21       7      44       0.17       2   
+	   22       7      29       0.22       2   
+
+
+===> Selective genome creation at 18.7%, storing in csv 'topology_2222.csv' (10h-10m-00s) <===
+
+===> Training <===
+Best training fitness: 0.8661666666666668
+Genetic distance:
+	- Maximum: 1.68025
+	- Mean: 0.56447
+	- Minimum: 0.00000
+	- Standard deviation: 0.28557
+Most complex genome '14389' of size (1, 3) belongs to specie '16' with distance to representative of 0.003
+Best training fitness: 0.8269978545077038
+Genetic distance:
+	- Maximum: 1.67551
+	- Mean: 0.57550
+	- Minimum: 0.00000
+	- Standard deviation: 0.29017
+Most complex genome '12527' of size (1, 3) belongs to specie '8' with distance to representative of 0.016
+Best training fitness: 0.8678000000000001
+ > Species 13 with 39 members is stagnated (fitness: 0.34101): removed!
+Genetic distance:
+	- Maximum: 1.65705
+	- Mean: 0.60453
+	- Minimum: 0.00000
+	- Standard deviation: 0.30275
+Most complex genome '15311' of size (1, 3) belongs to specie '8' with distance to representative of 0.007
+
+===> EVALUATING <===
+Best evaluation finish ratio: 1.0
+Best genome: 
+	Key: 15757
+	Fitness: 1.0
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=1.74)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-2.68, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 10 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   1       33      36       0.22       8   
+	   2       33      70       0.67       6   
+	   8       33      79       1.00       7   
+	   16      22      85       0.94       7   
+	   17      19      37       0.22       7   
+	   18      18      34       0.22       10  
+	   19      13      46       0.22       8   
+	   20      11      48       0.22       6   
+	   21      10      40       0.17       5   
+	   22      10      37       0.22       5   
+
+
+===> Selective genome creation at 22.3%, storing in csv 'topology_2222.csv' (10h-10m-42s) <===
+
+===> Training <===
+Best training fitness: 0.8181050672799322
+ > Species 18 with 34 members is stagnated (fitness: 0.33627): removed!
+Genetic distance:
+	- Maximum: 1.81848
+	- Mean: 0.62666
+	- Minimum: 0.00000
+	- Standard deviation: 0.31280
+Most complex genome '15865' of size (1, 3) belongs to specie '16' with distance to representative of 0.003
+Best training fitness: 0.8564308696844828
+Genetic distance:
+	- Maximum: 1.61888
+	- Mean: 0.58596
+	- Minimum: 0.00000
+	- Standard deviation: 0.29822
+Most complex genome '16219' of size (1, 3) belongs to specie '16' with distance to representative of 0.015
+Best training fitness: 0.8362115304125899
+ > Species 19 with 43 members is stagnated (fitness: 0.48253): removed!
+ > Species 1 with 46 members is stagnated (fitness: 0.32812): removed!
+Genetic distance:
+	- Maximum: 1.60260
+	- Mean: 0.57475
+	- Minimum: 0.00000
+	- Standard deviation: 0.29107
+Most complex genome '16687' of size (1, 3) belongs to specie '16' with distance to representative of 0.006
+
+===> EVALUATING <===
+Best evaluation finish ratio: 1.0
+Best genome: 
+	Key: 16315
+	Fitness: 1.0
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=1.74)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-2.68, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 10 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   2       36      76       0.67       3   
+	   8       36      77       1.00       10  
+	   16      25      87       0.94       10  
+	   17      22      41       0.22       10  
+	   20      14      33       0.22       9   
+	   21      13      69       0.22       1   
+	   22      13      58       0.28       1   
+	   23       3      37       0.17       1   
+	   24       3      34       0.22       1   
+	   25       1      1         --        1   
+
+
+===> Selective genome creation at 26.3%, storing in csv 'topology_2222.csv' (10h-11m-22s) <===
+
+===> Training <===
+Best training fitness: 0.8711831424569502
+ > Species 16 with 87 members is stagnated (fitness: 0.87118): removed!
+ > Species 8 with 77 members is stagnated (fitness: 0.81808): removed!
+Genetic distance:
+	- Maximum: 1.69739
+	- Mean: 0.61411
+	- Minimum: 0.00000
+	- Standard deviation: 0.29268
+Most complex genome '17426' of size (1, 3) belongs to specie '2' with distance to representative of 0.094
+Best training fitness: 0.686225899443295
+ > Species 20 with 79 members is stagnated (fitness: 0.27463): removed!
+Genetic distance:
+	- Maximum: 1.56913
+	- Mean: 0.55867
+	- Minimum: 0.00000
+	- Standard deviation: 0.25372
+Most complex genome '17677' of size (1, 3) belongs to specie '2' with distance to representative of 0.06
+Best training fitness: 0.7240034684806818
+Genetic distance:
+	- Maximum: 1.62480
+	- Mean: 0.57528
+	- Minimum: 0.00000
+	- Standard deviation: 0.23614
+Most complex genome '18147' of size (1, 3) belongs to specie '2' with distance to representative of 0.081
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.72
+Best genome: 
+	Key: 18644
+	Fitness: 0.7222222222222222
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-2.32, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 10 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   2       39      75       0.72       1   
+	   17      25      52       0.22       3   
+	   21      16      39       0.22       4   
+	   22      16      75       0.28       1   
+	   23       6      45       0.17       3   
+	   24       6      48       0.22       1   
+	   25       4      97       0.22       2   
+	   26       3      37       0.22       1   
+	   27       3      50       0.17       1   
+	   28       2      1         --        1   
+
+
+===> Selective genome creation at 26.3%, storing in csv 'topology_2222.csv' (10h-12m-03s) <===
+
+===> Training <===
+Best training fitness: 0.6912931697509315
+Genetic distance:
+	- Maximum: 1.81343
+	- Mean: 0.60228
+	- Minimum: 0.00000
+	- Standard deviation: 0.30095
+Most complex genome '18650' of size (1, 3) belongs to specie '2' with distance to representative of 0.086
+Best training fitness: 0.8192554763890996
+Genetic distance:
+	- Maximum: 1.39265
+	- Mean: 0.52816
+	- Minimum: 0.00000
+	- Standard deviation: 0.25255
+Most complex genome '19177' of size (1, 3) belongs to specie '29' with distance to representative of 0.015
+Best training fitness: 0.6793973052791695
+Genetic distance:
+	- Maximum: 1.86997
+	- Mean: 0.57717
+	- Minimum: 0.00000
+	- Standard deviation: 0.29911
+Most complex genome '19648' of size (1, 3) belongs to specie '29' with distance to representative of 0.003
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.72
+Best genome: 
+	Key: 20087
+	Fitness: 0.7222222222222222
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-1.87, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 13 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   2       42      66       0.67       2   
+	   17      28      50       0.22       6   
+	   21      19      32       0.17       3   
+	   22      19      54       0.17       4   
+	   23       9      24       0.17       3   
+	   24       9      28       0.22       4   
+	   25       7      92       0.22       3   
+	   26       6      28       0.22       2   
+	   27       6      13        --        3   
+	   28       5      57       0.17       1   
+	   29       3      61       0.72       2   
+	   30       3      16       0.17       1   
+	   31       1      2         --        1   
+
+
+===> Selective genome creation at 26.3%, storing in csv 'topology_2222.csv' (10h-12m-45s) <===
+
+===> Training <===
+Best training fitness: 0.7674703493821186
+Genetic distance:
+	- Maximum: 1.69792
+	- Mean: 0.53911
+	- Minimum: 0.00000
+	- Standard deviation: 0.23412
+Most complex genome '20100' of size (1, 3) belongs to specie '29' with distance to representative of 0.009
+Best training fitness: 0.7894286080865316
+Genetic distance:
+	- Maximum: 1.34334
+	- Mean: 0.53389
+	- Minimum: 0.00000
+	- Standard deviation: 0.23677
+Most complex genome '20553' of size (1, 3) belongs to specie '29' with distance to representative of 0.003
+Best training fitness: 0.7130537996023882
+Genetic distance:
+	- Maximum: 1.76858
+	- Mean: 0.51163
+	- Minimum: 0.00000
+	- Standard deviation: 0.22872
+Most complex genome '21052' of size (1, 3) belongs to specie '29' with distance to representative of 0.003
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.83
+Best genome: 
+	Key: 20553
+	Fitness: 0.8333333333333334
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-1.87, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 13 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   2       45      47       0.67       5   
+	   17      31      30       0.22       9   
+	   21      22      31       0.17       6   
+	   22      22      43       0.28       7   
+	   23      12      29       0.22       2   
+	   24      12      43       0.06       1   
+	   25      10      45       0.22       6   
+	   26       9      53       0.17       1   
+	   27       9      34       0.06       6   
+	   28       8      33       0.17       4   
+	   29       6      60       0.83       2   
+	   30       6      30       0.22       2   
+	   31       4      49       0.22       1   
+
+
+===> Selective genome creation at 26.400000000000002%, storing in csv 'topology_2222.csv' (10h-13m-28s) <===
+
+===> Training <===
+Best training fitness: 0.8153176652444412
+Genetic distance:
+	- Maximum: 1.50954
+	- Mean: 0.51670
+	- Minimum: 0.00000
+	- Standard deviation: 0.23434
+Most complex genome '19133' of size (1, 3) belongs to specie '29' with distance to representative of 0
+Best training fitness: 0.740146118802487
+ > Species 17 with 33 members is stagnated (fitness: 0.20052): removed!
+Genetic distance:
+	- Maximum: 1.41129
+	- Mean: 0.47962
+	- Minimum: 0.00000
+	- Standard deviation: 0.20924
+Most complex genome '21989' of size (1, 3) belongs to specie '29' with distance to representative of 0.001
+Best training fitness: 0.7443347058521634
+Genetic distance:
+	- Maximum: 1.52537
+	- Mean: 0.47663
+	- Minimum: 0.00000
+	- Standard deviation: 0.21081
+Most complex genome '22427' of size (1, 3) belongs to specie '29' with distance to representative of 0.001
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.83
+Best genome: 
+	Key: 20553
+	Fitness: 0.8333333333333334
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-1.87, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 12 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   2       48      59       0.72       8   
+	   21      25      21       0.11       9   
+	   22      25      55       0.28       3   
+	   23      15      60       0.22       1   
+	   24      15      30       0.17       3   
+	   25      13      32       0.22       3   
+	   26      12      40       0.22       3   
+	   27      12      52       0.17       3   
+	   28      11      38       0.22       7   
+	   29       9      63       0.83       3   
+	   30       9      33       0.22       3   
+	   31       7      32       0.22       3   
+
+
+===> Selective genome creation at 26.5%, storing in csv 'topology_2222.csv' (10h-14m-11s) <===
+
+===> Training <===
+Best training fitness: 0.7871108246863673
+Genetic distance:
+	- Maximum: 1.32525
+	- Mean: 0.46750
+	- Minimum: 0.00000
+	- Standard deviation: 0.21500
+Most complex genome '20553' of size (1, 3) belongs to specie '29' with distance to representative of 0.003
+Best training fitness: 0.6871519194570863
+ > Species 21 with 39 members is stagnated (fitness: 0.24447): removed!
+Genetic distance:
+	- Maximum: 1.50990
+	- Mean: 0.48976
+	- Minimum: 0.00000
+	- Standard deviation: 0.22210
+Most complex genome '21052' of size (1, 3) belongs to specie '29' with distance to representative of 0.003
+Best training fitness: 0.7454025378928014
+ > Species 2 with 73 members is stagnated (fitness: 0.5871): removed!
+Genetic distance:
+	- Maximum: 1.32398
+	- Mean: 0.46877
+	- Minimum: 0.00000
+	- Standard deviation: 0.20234
+Most complex genome '23838' of size (1, 3) belongs to specie '29' with distance to representative of 0.004
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.83
+Best genome: 
+	Key: 20553
+	Fitness: 0.8333333333333334
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-1.87, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 11 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   22      28      47       0.28       6   
+	   23      18      45       0.22       4   
+	   24      18      38       0.17       6   
+	   25      16      51       0.28       6   
+	   26      15      49       0.22       6   
+	   27      15      53       0.22       6   
+	   28      14      47       0.22       10  
+	   29      12      59       0.83       6   
+	   30      12      78       0.17       6   
+	   31      10      10       0.17       6   
+	   32       2      41       0.22       1   
+
+
+===> Selective genome creation at 26.6%, storing in csv 'topology_2222.csv' (10h-14m-54s) <===
+
+===> Training <===
+Best training fitness: 0.6534387364710723
+ > Species 28 with 47 members is stagnated (fitness: 0.15906): removed!
+Genetic distance:
+	- Maximum: 1.31153
+	- Mean: 0.47713
+	- Minimum: 0.00000
+	- Standard deviation: 0.21391
+Most complex genome '21989' of size (1, 3) belongs to specie '29' with distance to representative of 0.002
+Best training fitness: 0.7483714119979601
+Genetic distance:
+	- Maximum: 1.37106
+	- Mean: 0.48078
+	- Minimum: 0.00000
+	- Standard deviation: 0.22143
+Most complex genome '24735' of size (1, 3) belongs to specie '29' with distance to representative of 0.003
+Best training fitness: 0.6513000263455273
+Genetic distance:
+	- Maximum: 1.30559
+	- Mean: 0.47095
+	- Minimum: 0.00000
+	- Standard deviation: 0.20930
+Most complex genome '25183' of size (1, 3) belongs to specie '29' with distance to representative of 0.007
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.83
+Best genome: 
+	Key: 25678
+	Fitness: 0.8333333333333334
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-1.87, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 11 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   22      31      58       0.28       9   
+	   23      21      58       0.33       7   
+	   24      21      37       0.22       9   
+	   25      19      48       0.22       9   
+	   26      18      45       0.22       9   
+	   27      18      43       0.22       9   
+	   29      15      76       0.83       9   
+	   30      15      41       0.22       9   
+	   31      13      37       0.22       9   
+	   32       5      41       0.22       2   
+	   33       2      34       0.11       1   
+
+
+===> Selective genome creation at 26.700000000000003%, storing in csv 'topology_2222.csv' (10h-15m-38s) <===
+
+===> Training <===
+Best training fitness: 0.7247418060664467
+Genetic distance:
+	- Maximum: 1.26731
+	- Mean: 0.48107
+	- Minimum: 0.00000
+	- Standard deviation: 0.21203
+Most complex genome '25653' of size (1, 3) belongs to specie '29' with distance to representative of 0.005
+Best training fitness: 0.8207037073073744
+ > Species 22 with 43 members is stagnated (fitness: 0.40619): removed!
+ > Species 24 with 40 members is stagnated (fitness: 0.37323): removed!
+ > Species 27 with 43 members is stagnated (fitness: 0.25841): removed!
+ > Species 30 with 40 members is stagnated (fitness: 0.25668): removed!
+ > Species 26 with 54 members is stagnated (fitness: 0.23987): removed!
+ > Species 25 with 41 members is stagnated (fitness: 0.22379): removed!
+ > Species 31 with 51 members is stagnated (fitness: 0.22065): removed!
+Genetic distance:
+	- Maximum: 1.74256
+	- Mean: 0.51467
+	- Minimum: 0.00000
+	- Standard deviation: 0.30460
+Most complex genome '26155' of size (1, 3) belongs to specie '29' with distance to representative of 0.002
+Best training fitness: 0.7154611901410532
+Genetic distance:
+	- Maximum: 1.70811
+	- Mean: 0.52344
+	- Minimum: 0.00000
+	- Standard deviation: 0.30286
+Most complex genome '26753' of size (1, 3) belongs to specie '29' with distance to representative of 0.027
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.83
+Best genome: 
+	Key: 27074
+	Fitness: 0.8333333333333334
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-1.87, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 10 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   23      24      34       0.28       10  
+	   29      18      99       0.83       2   
+	   32       8      73       0.22       1   
+	   33       5      10       0.22       1   
+	   34       2      33       0.22       1   
+	   35       2     136       0.22       1   
+	   36       2      38       0.22       1   
+	   37       2      9        0.22       1   
+	   38       2      98       0.28       1   
+	   39       1      2        0.17       1   
+
+
+===> Selective genome creation at 27.500000000000004%, storing in csv 'topology_2222.csv' (10h-16m-21s) <===
+
+===> Training <===
+Best training fitness: 0.7596665206881451
+ > Species 23 with 34 members is stagnated (fitness: 0.24013): removed!
+Genetic distance:
+	- Maximum: 1.49660
+	- Mean: 0.49428
+	- Minimum: 0.00000
+	- Standard deviation: 0.27960
+Most complex genome '27082' of size (1, 3) belongs to specie '29' with distance to representative of 0.003
+Best training fitness: 0.6703826640102658
+Genetic distance:
+	- Maximum: 1.52676
+	- Mean: 0.50544
+	- Minimum: 0.00000
+	- Standard deviation: 0.25861
+Most complex genome '27675' of size (1, 3) belongs to specie '29' with distance to representative of 0.007
+Best training fitness: 0.7567718047345807
+Genetic distance:
+	- Maximum: 1.88942
+	- Mean: 0.53170
+	- Minimum: 0.00000
+	- Standard deviation: 0.30377
+Most complex genome '28223' of size (1, 3) belongs to specie '40' with distance to representative of 0.005
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.83
+Best genome: 
+	Key: 28658
+	Fitness: 0.8333333333333334
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-1.87, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 11 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   29      21      73       0.83       5   
+	   32      11      56       0.22       4   
+	   33       8      1        0.06       4   
+	   34       5      50       0.17       1   
+	   35       5      71       0.22       1   
+	   36       5      42       0.22       1   
+	   37       5      56       0.22       1   
+	   38       5      51       0.28       1   
+	   39       4      36       0.22       1   
+	   40       3      81       0.50       1   
+	   41       1      4        0.22       1   
+
+
+===> Selective genome creation at 27.700000000000003%, storing in csv 'topology_2222.csv' (10h-17m-07s) <===
+
+===> Training <===
+Best training fitness: 0.7973955638591949
+Genetic distance:
+	- Maximum: 1.76735
+	- Mean: 0.51048
+	- Minimum: 0.00000
+	- Standard deviation: 0.28213
+Most complex genome '28574' of size (1, 3) belongs to specie '40' with distance to representative of 0.014
+Best training fitness: 0.7812166896351711
+Genetic distance:
+	- Maximum: 1.62838
+	- Mean: 0.50167
+	- Minimum: 0.00000
+	- Standard deviation: 0.25855
+Most complex genome '29073' of size (1, 3) belongs to specie '40' with distance to representative of 0.013
+Best training fitness: 0.7806720064210847
+Genetic distance:
+	- Maximum: 1.80099
+	- Mean: 0.52246
+	- Minimum: 0.00000
+	- Standard deviation: 0.27543
+Most complex genome '29590' of size (1, 3) belongs to specie '29' with distance to representative of 0.005
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.83
+Best genome: 
+	Key: 28676
+	Fitness: 0.8333333333333334
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-1.87, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 13 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   29      24      67       0.83       8   
+	   32      14      49       0.22       7   
+	   33      11      1        0.06       7   
+	   34       8      42       0.17       2   
+	   35       8      78       0.17       1   
+	   36       8      36       0.17       1   
+	   37       8      9        0.22       4   
+	   38       8      21       0.22       4   
+	   39       7      46       0.22       1   
+	   40       6      63       0.56       3   
+	   41       4      74       0.28       2   
+	   42       3      40       0.28       1   
+	   43       1      1        0.22       1   
+
+
+===> Selective genome creation at 27.900000000000002%, storing in csv 'topology_2222.csv' (10h-17m-54s) <===
+
+===> Training <===
+Best training fitness: 0.7640359761790385
+Genetic distance:
+	- Maximum: 1.97013
+	- Mean: 0.55098
+	- Minimum: 0.00000
+	- Standard deviation: 0.29588
+Most complex genome '30063' of size (1, 3) belongs to specie '40' with distance to representative of 0.032
+Best training fitness: 0.7254552197619434
+Genetic distance:
+	- Maximum: 1.43688
+	- Mean: 0.51083
+	- Minimum: 0.00000
+	- Standard deviation: 0.24749
+Most complex genome '30577' of size (1, 3) belongs to specie '29' with distance to representative of 0.007
+Best training fitness: 0.8366891380357776
+Genetic distance:
+	- Maximum: 1.60215
+	- Mean: 0.52832
+	- Minimum: 0.00000
+	- Standard deviation: 0.26129
+Most complex genome '30959' of size (1, 3) belongs to specie '29' with distance to representative of 0.035
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.83
+Best genome: 
+	Key: 31453
+	Fitness: 0.8333333333333334
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-1.87, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 14 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   29      27      58       0.83       1   
+	   32      17      36       0.22       10  
+	   33      14      1        0.06       10  
+	   34      11      41       0.17       3   
+	   35      11      63       0.22       4   
+	   36      11      39       0.17       4   
+	   37      11      28       0.22       7   
+	   38      11      26       0.22       7   
+	   39      10      39       0.22       3   
+	   40       9      66       0.67       1   
+	   41       7      33       0.22       5   
+	   42       6      45       0.28       4   
+	   43       4      30       0.22       3   
+	   44       3      35       0.22       1   
+
+
+===> Selective genome creation at 28.000000000000004%, storing in csv 'topology_2222.csv' (10h-18m-40s) <===
+
+===> Training <===
+Best training fitness: 0.7629261644867865
+ > Species 32 with 36 members is stagnated (fitness: 0.11589): removed!
+ > Species 33 with 1 members is stagnated (fitness: 0.0326): removed!
+Genetic distance:
+	- Maximum: 1.70106
+	- Mean: 0.51846
+	- Minimum: 0.00000
+	- Standard deviation: 0.25273
+Most complex genome '31484' of size (1, 3) belongs to specie '29' with distance to representative of 0.007
+Best training fitness: 0.7810212515208381
+Genetic distance:
+	- Maximum: 1.38702
+	- Mean: 0.52476
+	- Minimum: 0.00000
+	- Standard deviation: 0.24969
+Most complex genome '31950' of size (1, 3) belongs to specie '29' with distance to representative of 0.003
+Best training fitness: 0.7252776424841834
+Genetic distance:
+	- Maximum: 1.55481
+	- Mean: 0.53318
+	- Minimum: 0.00000
+	- Standard deviation: 0.23927
+Most complex genome '32482' of size (1, 3) belongs to specie '40' with distance to representative of 0.01
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.72
+Best genome: 
+	Key: 30959
+	Fitness: 0.7222222222222222
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-2.16, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 13 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   29      30      60       0.72       4   
+	   34      14      91       0.28       1   
+	   35      14      36       0.22       3   
+	   36      14      31       0.22       7   
+	   37      14      7        0.22       10  
+	   38      14      15       0.22       10  
+	   39      13      47       0.22       6   
+	   40      12      64       0.61       4   
+	   41      10      42       0.22       8   
+	   42       9      32       0.33       7   
+	   43       7      65       0.22       2   
+	   44       6      17       0.22       1   
+	   45       3      31       0.22       2   
+
+
+===> Selective genome creation at 28.000000000000004%, storing in csv 'topology_2222.csv' (10h-19m-26s) <===
+
+===> Training <===
+Best training fitness: 0.803586521013119
+ > Species 37 with 7 members is stagnated (fitness: 0.06062): removed!
+ > Species 38 with 15 members is stagnated (fitness: 0.05965): removed!
+Genetic distance:
+	- Maximum: 1.53733
+	- Mean: 0.50218
+	- Minimum: 0.00000
+	- Standard deviation: 0.22908
+Most complex genome '32886' of size (1, 3) belongs to specie '40' with distance to representative of 0.026
+Best training fitness: 0.8418030986051696
+Genetic distance:
+	- Maximum: 1.50082
+	- Mean: 0.50719
+	- Minimum: 0.00000
+	- Standard deviation: 0.21569
+Most complex genome '30959' of size (1, 3) belongs to specie '29' with distance to representative of 0.038
+Best training fitness: 0.6858481590252692
+ > Species 41 with 46 members is stagnated (fitness: 0.33601): removed!
+Genetic distance:
+	- Maximum: 1.43346
+	- Mean: 0.49996
+	- Minimum: 0.00000
+	- Standard deviation: 0.21434
+Most complex genome '31484' of size (1, 3) belongs to specie '29' with distance to representative of 0.007
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.72
+Best genome: 
+	Key: 30959
+	Fitness: 0.7222222222222222
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-2.16, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 11 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   29      33      67       0.72       2   
+	   34      17      10       0.22       4   
+	   35      17      52       0.22       6   
+	   36      17      40       0.22       10  
+	   39      16      45       0.22       2   
+	   40      15      67       0.67       7   
+	   42      12      55       0.39       1   
+	   43      10      29       0.22       2   
+	   44       9      81       0.28       4   
+	   45       6      34       0.22       2   
+	   46       2      39       0.22       1   
+
+
+===> Selective genome creation at 28.000000000000004%, storing in csv 'topology_2222.csv' (10h-20m-08s) <===
+
+===> Training <===
+Best training fitness: 0.7523745974913292
+ > Species 36 with 40 members is stagnated (fitness: 0.27769): removed!
+Genetic distance:
+	- Maximum: 1.34671
+	- Mean: 0.51474
+	- Minimum: 0.00000
+	- Standard deviation: 0.22639
+Most complex genome '32946' of size (1, 3) belongs to specie '29' with distance to representative of 0.007
+Best training fitness: 0.72771523791147
+Genetic distance:
+	- Maximum: 1.57116
+	- Mean: 0.52932
+	- Minimum: 0.00000
+	- Standard deviation: 0.24411
+Most complex genome '34788' of size (1, 3) belongs to specie '29' with distance to representative of 0.046
+Best training fitness: 0.7655528103749936
+Genetic distance:
+	- Maximum: 1.45381
+	- Mean: 0.53637
+	- Minimum: 0.00000
+	- Standard deviation: 0.24113
+Most complex genome '30959' of size (1, 3) belongs to specie '29' with distance to representative of 0.042
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.72
+Best genome: 
+	Key: 30959
+	Fitness: 0.7222222222222222
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-2.16, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 10 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   29      36      79       0.72       5   
+	   34      20      44       0.11       7   
+	   35      20      55       0.22       9   
+	   39      19      50       0.22       5   
+	   40      18      68       0.61       10  
+	   42      15      64       0.33       1   
+	   43      13      39       0.22       5   
+	   44      12      49       0.22       7   
+	   45       9      38       0.22       5   
+	   46       5      28       0.22       3   
+
+
+===> Selective genome creation at 28.000000000000004%, storing in csv 'topology_2222.csv' (10h-20m-56s) <===
+
+===> Training <===
+Best training fitness: 0.7189162094658245
+ > Species 40 with 68 members is stagnated (fitness: 0.69335): removed!
+Genetic distance:
+	- Maximum: 1.96670
+	- Mean: 0.56021
+	- Minimum: 0.00000
+	- Standard deviation: 0.28096
+Most complex genome '31484' of size (1, 3) belongs to specie '29' with distance to representative of 0
+Best training fitness: 0.7033522984455678
+ > Species 35 with 36 members is stagnated (fitness: 0.28812): removed!
+Genetic distance:
+	- Maximum: 1.47313
+	- Mean: 0.52859
+	- Minimum: 0.00000
+	- Standard deviation: 0.22517
+Most complex genome '34788' of size (1, 3) belongs to specie '29' with distance to representative of 0.046
+Best training fitness: 0.6905070086890426
+Genetic distance:
+	- Maximum: 1.59262
+	- Mean: 0.54315
+	- Minimum: 0.00000
+	- Standard deviation: 0.23256
+Most complex genome '36641' of size (1, 3) belongs to specie '29' with distance to representative of 0.009
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.72
+Best genome: 
+	Key: 34788
+	Fitness: 0.7222222222222222
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-2.16, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 11 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   29      39      79       0.72       8   
+	   34      23      69       0.22       10  
+	   39      22      43       0.22       3   
+	   42      18      45       0.33       4   
+	   43      16      10       0.28       3   
+	   44      15      43       0.22       3   
+	   45      12      31       0.22       3   
+	   46       8      29       0.22       2   
+	   47       3     124       0.67       1   
+	   48       3      47       0.22       1   
+	   49       1      1        0.06       1   
+
+
+===> Selective genome creation at 28.000000000000004%, storing in csv 'topology_2222.csv' (10h-21m-38s) <===
+
+===> Training <===
+Best training fitness: 0.699143908637563
+ > Species 34 with 69 members is stagnated (fitness: 0.27399): removed!
+Genetic distance:
+	- Maximum: 1.35079
+	- Mean: 0.47283
+	- Minimum: 0.00000
+	- Standard deviation: 0.19834
+Most complex genome '37211' of size (1, 3) belongs to specie '47' with distance to representative of 0.047
+Best training fitness: 0.6329419929248431
+Genetic distance:
+	- Maximum: 1.36999
+	- Mean: 0.47956
+	- Minimum: 0.00000
+	- Standard deviation: 0.20089
+Most complex genome '37667' of size (1, 3) belongs to specie '29' with distance to representative of 0.028
+Best training fitness: 0.8148786515584167
+ > Species 29 with 84 members is stagnated (fitness: 0.69083): removed!
+Genetic distance:
+	- Maximum: 1.34751
+	- Mean: 0.47603
+	- Minimum: 0.00000
+	- Standard deviation: 0.21360
+Most complex genome '38194' of size (1, 3) belongs to specie '47' with distance to representative of 0.041
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.89
+Best genome: 
+	Key: 38561
+	Fitness: 0.8888888888888888
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=2.01)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-4.07, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 10 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   39      25      51       0.22       6   
+	   42      21      57       0.28       7   
+	   43      19      46       0.22       6   
+	   44      18      68       0.22       6   
+	   45      15      49       0.22       6   
+	   46      11      37       0.22       5   
+	   47       6      87       0.89       1   
+	   48       6      34       0.22       3   
+	   49       4      50       0.22       1   
+	   50       2      36       0.22       1   
+
+
+===> Selective genome creation at 28.499999999999996%, storing in csv 'topology_2222.csv' (10h-22m-24s) <===
+
+===> Training <===
+Best training fitness: 0.8092607776014672
+Genetic distance:
+	- Maximum: 1.52708
+	- Mean: 0.48539
+	- Minimum: 0.00000
+	- Standard deviation: 0.21289
+Most complex genome '38547' of size (1, 3) belongs to specie '47' with distance to representative of 0.046
+Best training fitness: 0.8735666666666667
+Genetic distance:
+	- Maximum: 1.74401
+	- Mean: 0.54474
+	- Minimum: 0.00000
+	- Standard deviation: 0.24752
+Most complex genome '39073' of size (1, 3) belongs to specie '47' with distance to representative of 0.012
+Best training fitness: 0.8334020081649726
+Genetic distance:
+	- Maximum: 1.62479
+	- Mean: 0.54372
+	- Minimum: 0.00000
+	- Standard deviation: 0.24113
+Most complex genome '39509' of size (1, 3) belongs to specie '47' with distance to representative of 0.011
+
+===> EVALUATING <===
+Best evaluation finish ratio: 1.0
+Best genome: 
+	Key: 39975
+	Fitness: 1.0
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=2.01)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-4.37, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 12 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   39      28      74       0.22       9   
+	   42      24      43       0.22       10  
+	   43      22      65       0.50       1   
+	   44      21      50       0.22       9   
+	   45      18      3        0.22       9   
+	   46      14      38       0.22       8   
+	   47       9      64       1.00       2   
+	   48       9      47       0.22       1   
+	   49       7      62       0.22       1   
+	   50       5      34       0.22       3   
+	   51       3      31       0.22       1   
+	   52       1      3         --        1   
+
+
+===> Selective genome creation at 30.599999999999998%, storing in csv 'topology_2222.csv' (10h-23m-10s) <===
+
+===> Training <===
+Best training fitness: 0.8691685552878322
+ > Species 42 with 43 members is stagnated (fitness: 0.26939): removed!
+Genetic distance:
+	- Maximum: 1.68120
+	- Mean: 0.52109
+	- Minimum: 0.00000
+	- Standard deviation: 0.24638
+Most complex genome '39509' of size (1, 3) belongs to specie '47' with distance to representative of 0.007
+Best training fitness: 0.8358741551132445
+ > Species 39 with 52 members is stagnated (fitness: 0.16944): removed!
+ > Species 44 with 24 members is stagnated (fitness: 0.04324): removed!
+ > Species 45 with 26 members is stagnated (fitness: 0.04322): removed!
+Genetic distance:
+	- Maximum: 1.69210
+	- Mean: 0.50574
+	- Minimum: 0.00000
+	- Standard deviation: 0.27006
+Most complex genome '40458' of size (1, 3) belongs to specie '47' with distance to representative of 0.026
+Best training fitness: 0.8662000000000001
+ > Species 46 with 29 members is stagnated (fitness: 0.14931): removed!
+Genetic distance:
+	- Maximum: 1.97022
+	- Mean: 0.53292
+	- Minimum: 0.00000
+	- Standard deviation: 0.30924
+Most complex genome '40961' of size (1, 3) belongs to specie '47' with distance to representative of 0.007
+
+===> EVALUATING <===
+Best evaluation finish ratio: 1.0
+Best genome: 
+	Key: 40458
+	Fitness: 1.0
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=2.01)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-4.37, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 11 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   43      25      22       0.22       2   
+	   47      12      83       1.00       5   
+	   48      12      49       0.22       4   
+	   49      10      95       0.33       4   
+	   50       8      89       0.22       6   
+	   51       6      43       0.22       4   
+	   52       4      52       0.22       1   
+	   53       3      73       0.50       1   
+	   54       2      2         --        1   
+	   55       1      2        0.28       1   
+	   56       1      2        0.11       1   
+
+
+===> Selective genome creation at 33.6%, storing in csv 'topology_2222.csv' (10h-24m-07s) <===
+
+===> Training <===
+Best training fitness: 0.8502666666666666
+Genetic distance:
+	- Maximum: 1.97376
+	- Mean: 0.51513
+	- Minimum: 0.00000
+	- Standard deviation: 0.31809
+Most complex genome '41398' of size (1, 3) belongs to specie '47' with distance to representative of 0.017
+Best training fitness: 0.854128375161725
+Genetic distance:
+	- Maximum: 1.78604
+	- Mean: 0.47007
+	- Minimum: 0.00000
+	- Standard deviation: 0.25275
+Most complex genome '41872' of size (1, 3) belongs to specie '47' with distance to representative of 0.014
+Best training fitness: 0.842378162779923
+Genetic distance:
+	- Maximum: 1.60692
+	- Mean: 0.46228
+	- Minimum: 0.00000
+	- Standard deviation: 0.24096
+Most complex genome '41872' of size (1, 3) belongs to specie '47' with distance to representative of 0.014
+
+===> EVALUATING <===
+Best evaluation finish ratio: 1.0
+Best genome: 
+	Key: 41872
+	Fitness: 1.0
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=2.01)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-4.37, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 12 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   43      28      42       0.28       5   
+	   47      15      57       1.00       8   
+	   48      15      41       0.22       3   
+	   49      13      38       0.33       7   
+	   50      11      31       0.22       3   
+	   51       9      33       0.22       3   
+	   52       7      46       0.22       1   
+	   53       6      46       0.50       2   
+	   54       5      47       0.22       1   
+	   55       4      47       0.44       2   
+	   56       4      35       0.22       1   
+	   57       3      50       0.94       1   
+
+
+===> Selective genome creation at 36.9%, storing in csv 'topology_2222.csv' (10h-24m-57s) <===
+
+===> Training <===
+Best training fitness: 0.8739666666666668
+Genetic distance:
+	- Maximum: 1.67979
+	- Mean: 0.50951
+	- Minimum: 0.00000
+	- Standard deviation: 0.28135
+Most complex genome '42844' of size (1, 3) belongs to specie '47' with distance to representative of 0.019
+Best training fitness: 0.877
+Genetic distance:
+	- Maximum: 1.50111
+	- Mean: 0.52422
+	- Minimum: 0.00000
+	- Standard deviation: 0.26872
+Most complex genome '43320' of size (1, 3) belongs to specie '47' with distance to representative of 0.018
+Best training fitness: 0.8895333333333333
+Genetic distance:
+	- Maximum: 1.73769
+	- Mean: 0.52083
+	- Minimum: 0.00000
+	- Standard deviation: 0.27277
+Most complex genome '43758' of size (1, 3) belongs to specie '47' with distance to representative of 0.025
+
+===> EVALUATING <===
+Best evaluation finish ratio: 1.0
+Best genome: 
+	Key: 42844
+	Fitness: 1.0
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=2.01)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-4.37, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 13 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   43      31      46       0.28       8   
+	   47      18      55       1.00       1   
+	   48      18      35       0.22       6   
+	   49      16      21       0.33       10  
+	   50      14      34       0.22       6   
+	   51      12      29       0.22       6   
+	   52      10      31       0.22       4   
+	   53       9      54       0.56       2   
+	   54       8      32       0.17       2   
+	   55       7      38       0.44       2   
+	   56       7      30       0.22       2   
+	   57       6      82       1.00       1   
+	   58       3      39       0.22       1   
+
+
+===> Selective genome creation at 39.300000000000004%, storing in csv 'topology_2222.csv' (10h-25m-49s) <===
+
+===> Training <===
+Best training fitness: 0.8822666666666666
+ > Species 49 with 21 members is stagnated (fitness: 0.18596): removed!
+Genetic distance:
+	- Maximum: 1.59343
+	- Mean: 0.51610
+	- Minimum: 0.00000
+	- Standard deviation: 0.26943
+Most complex genome '44254' of size (1, 3) belongs to specie '47' with distance to representative of 0.019
+Best training fitness: 0.8556666666666668
+Genetic distance:
+	- Maximum: 1.46022
+	- Mean: 0.52443
+	- Minimum: 0.00000
+	- Standard deviation: 0.25976
+Most complex genome '44784' of size (1, 3) belongs to specie '57' with distance to representative of 0.006
+Best training fitness: 0.8879999999999999
+ > Species 43 with 42 members is stagnated (fitness: 0.1851): removed!
+Genetic distance:
+	- Maximum: 1.58619
+	- Mean: 0.51938
+	- Minimum: 0.00000
+	- Standard deviation: 0.25821
+Most complex genome '44254' of size (1, 3) belongs to specie '47' with distance to representative of 0.029
+
+===> EVALUATING <===
+Best evaluation finish ratio: 1.0
+Best genome: 
+	Key: 44784
+	Fitness: 1.0
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=2.01)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-4.22, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 11 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   47      21      79       1.00       4   
+	   48      21      67       0.22       9   
+	   50      17      31       0.22       9   
+	   51      15      21       0.22       9   
+	   52      13      9        0.11       2   
+	   53      12      63       0.67       2   
+	   54      11      31       0.28       2   
+	   55      10      70       0.44       5   
+	   56      10      38       0.22       2   
+	   57       9      67       1.00       1   
+	   58       6      40       0.22       2   
+
+
+===> Selective genome creation at 45.300000000000004%, storing in csv 'topology_2222.csv' (10h-26m-36s) <===
+
+===> Training <===
+Best training fitness: 0.9049000000000001
+Genetic distance:
+	- Maximum: 1.55158
+	- Mean: 0.52750
+	- Minimum: 0.00000
+	- Standard deviation: 0.26712
+Most complex genome '45619' of size (1, 3) belongs to specie '47' with distance to representative of 0.035
+Best training fitness: 0.8301458658637978
+ > Species 50 with 47 members is stagnated (fitness: 0.18853): removed!
+ > Species 48 with 40 members is stagnated (fitness: 0.15463): removed!
+ > Species 51 with 20 members is stagnated (fitness: 0.08968): removed!
+Genetic distance:
+	- Maximum: 1.33789
+	- Mean: 0.41365
+	- Minimum: 0.00000
+	- Standard deviation: 0.25585
+Most complex genome '44722' of size (1, 3) belongs to specie '57' with distance to representative of 0.026
+Best training fitness: 0.8640666666666666
+Genetic distance:
+	- Maximum: 1.48478
+	- Mean: 0.44167
+	- Minimum: 0.00000
+	- Standard deviation: 0.26691
+Most complex genome '46651' of size (1, 3) belongs to specie '57' with distance to representative of 0.026
+
+===> EVALUATING <===
+Best evaluation finish ratio: 1.0
+Best genome: 
+	Key: 44784
+	Fitness: 1.0
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=2.01)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-4.22, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 9 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   47      24      1        1.00       3   
+	   52      16      35       0.17       5   
+	   53      15      65       0.61       5   
+	   54      14      47       0.22       5   
+	   55      13      71       0.50       1   
+	   56      13      38       0.17       5   
+	   57      12     205       1.00       3   
+	   58       9      50       0.22       5   
+	   59       1      1        0.17       1   
+
+
+===> Selective genome creation at 52.800000000000004%, storing in csv 'topology_2222.csv' (10h-27m-22s) <===
+
+===> Training <===
+Best training fitness: 0.8959999999999999
+Genetic distance:
+	- Maximum: 1.46894
+	- Mean: 0.44674
+	- Minimum: 0.00000
+	- Standard deviation: 0.25288
+Most complex genome '44254' of size (1, 3) belongs to specie '57' with distance to representative of 0.036
+Best training fitness: 0.8840333333333333
+Genetic distance:
+	- Maximum: 1.49168
+	- Mean: 0.47112
+	- Minimum: 0.00000
+	- Standard deviation: 0.26337
+Most complex genome '46651' of size (1, 3) belongs to specie '57' with distance to representative of 0.026
+Best training fitness: 0.9024000000000001
+Genetic distance:
+	- Maximum: 1.46549
+	- Mean: 0.47986
+	- Minimum: 0.00000
+	- Standard deviation: 0.25591
+Most complex genome '48096' of size (1, 3) belongs to specie '57' with distance to representative of 0.058
+Population 'topology_2222' saved! Current generation: 102
+
+===> EVALUATING <===
+Best evaluation finish ratio: 1.0
+Best genome: 
+	Key: 48096
+	Fitness: 1.0
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=2.01)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-5.01, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 10 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   47      27      1        1.00       6   
+	   52      19      33       0.22       8   
+	   53      18      70       0.72       8   
+	   54      17      32       0.22       8   
+	   55      16      57       0.56       4   
+	   56      16      36       0.17       8   
+	   57      15     178       1.00       1   
+	   58      12      37       0.22       8   
+	   59       4      31       0.28       1   
+	   60       2      44       0.17       1   
+
+
+===> Selective genome creation at 59.0%, storing in csv 'topology_2222.csv' (10h-28m-03s) <===
+
+===> Training <===
+Best training fitness: 0.8042510530444519
+Genetic distance:
+	- Maximum: 1.75577
+	- Mean: 0.51510
+	- Minimum: 0.00000
+	- Standard deviation: 0.30457
+Most complex genome '48528' of size (1, 3) belongs to specie '57' with distance to representative of 0.013
+Best training fitness: 0.8575747716565576
+Genetic distance:
+	- Maximum: 1.84731
+	- Mean: 0.50744
+	- Minimum: 0.00000
+	- Standard deviation: 0.28743
+Most complex genome '48528' of size (1, 3) belongs to specie '57' with distance to representative of 0.013
+Best training fitness: 0.8232845556396136
+ > Species 53 with 51 members is stagnated (fitness: 0.59398): removed!
+Genetic distance:
+	- Maximum: 1.67164
+	- Mean: 0.53164
+	- Minimum: 0.00000
+	- Standard deviation: 0.27280
+Most complex genome '49440' of size (1, 3) belongs to specie '57' with distance to representative of 0.061
+
+===> EVALUATING <===
+Best evaluation finish ratio: 1.0
+Best genome: 
+	Key: 49440
+	Fitness: 1.0
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=2.01)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-5.01, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 11 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   47      30      1        1.00       9   
+	   52      22      51       0.22       1   
+	   54      20      49       0.28       1   
+	   55      19      45       0.56       7   
+	   56      19      25       0.11       1   
+	   57      18     123       1.00       4   
+	   58      15      55       0.22       1   
+	   59       7      52       0.22       1   
+	   60       5      37       0.17       1   
+	   61       3      36       0.22       1   
+	   62       2      44       0.17       1   
+
+
+===> Selective genome creation at 64.3%, storing in csv 'topology_2222.csv' (10h-28m-47s) <===
+
+===> Training <===
+Best training fitness: 0.8750666666666668
+Genetic distance:
+	- Maximum: 1.62525
+	- Mean: 0.53018
+	- Minimum: 0.00000
+	- Standard deviation: 0.26522
+Most complex genome '49883' of size (1, 3) belongs to specie '57' with distance to representative of 0.115
+Best training fitness: 0.8769
+ > Species 47 with 1 members is stagnated (fitness: 0.83711): removed!
+Genetic distance:
+	- Maximum: 1.88224
+	- Mean: 0.57588
+	- Minimum: 0.00000
+	- Standard deviation: 0.29300
+Most complex genome '50374' of size (1, 3) belongs to specie '57' with distance to representative of 0.063
+Best training fitness: 0.8700333333333334
+Genetic distance:
+	- Maximum: 1.77250
+	- Mean: 0.56367
+	- Minimum: 0.00000
+	- Standard deviation: 0.28219
+Most complex genome '50881' of size (1, 3) belongs to specie '57' with distance to representative of 0.046
+
+===> EVALUATING <===
+Best evaluation finish ratio: 1.0
+Best genome: 
+	Key: 50374
+	Fitness: 1.0
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=2.01)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-5.01, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 12 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   52      25      62       0.22       4   
+	   54      23      5        0.22       4   
+	   55      22      84       0.56       10  
+	   56      22      58       0.22       4   
+	   57      21      85       1.00       7   
+	   58      18      42       0.22       4   
+	   59      10      49       0.22       4   
+	   60       8      35       0.22       4   
+	   61       6      58       0.22       4   
+	   62       5      37       0.22       2   
+	   63       2      2        0.22       1   
+	   64       1      3        0.06       1   
+
+
+===> Selective genome creation at 67.5%, storing in csv 'topology_2222.csv' (10h-29m-30s) <===
+
+===> Training <===
+Best training fitness: 0.8697666666666668
+ > Species 55 with 84 members is stagnated (fitness: 0.71602): removed!
+Genetic distance:
+	- Maximum: 1.66016
+	- Mean: 0.53753
+	- Minimum: 0.00000
+	- Standard deviation: 0.26130
+Most complex genome '51315' of size (1, 3) belongs to specie '57' with distance to representative of 0.116
+Best training fitness: 0.8759333333333335
+Genetic distance:
+	- Maximum: 1.49904
+	- Mean: 0.54175
+	- Minimum: 0.00000
+	- Standard deviation: 0.26190
+Most complex genome '51853' of size (1, 3) belongs to specie '57' with distance to representative of 0.054
+Best training fitness: 0.8674666666666667
+Genetic distance:
+	- Maximum: 1.61475
+	- Mean: 0.54746
+	- Minimum: 0.00000
+	- Standard deviation: 0.26734
+Most complex genome '52251' of size (1, 3) belongs to specie '57' with distance to representative of 0.068
+
+===> EVALUATING <===
+Best evaluation finish ratio: 1.0
+Best genome: 
+	Key: 52251
+	Fitness: 1.0
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=2.01)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-5.01, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 11 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   52      28      30       0.22       7   
+	   54      26      42       0.22       7   
+	   56      25      35       0.22       7   
+	   57      24      82       1.00       10  
+	   58      21      36       0.22       7   
+	   59      13      47       0.28       7   
+	   60      11      61       0.22       7   
+	   61       9      33       0.22       7   
+	   62       8      56       0.28       2   
+	   63       5      29       0.22       2   
+	   64       4      65       0.39       1   
+
+
+===> Selective genome creation at 71.89999999999999%, storing in csv 'topology_2222.csv' (10h-30m-15s) <===
+
+===> Training <===
+Best training fitness: 0.8832000000000001
+ > Species 57 with 82 members is stagnated (fitness: 0.8832): removed!
+Genetic distance:
+	- Maximum: 1.77987
+	- Mean: 0.53022
+	- Minimum: 0.00000
+	- Standard deviation: 0.27945
+Most complex genome '52867' of size (1, 3) belongs to specie '54' with distance to representative of 0.182
+Best training fitness: 0.5554594324567154
+Genetic distance:
+	- Maximum: 2.13316
+	- Mean: 0.57695
+	- Minimum: 0.00000
+	- Standard deviation: 0.31368
+Most complex genome '53470' of size (1, 3) belongs to specie '56' with distance to representative of 0.026
+Best training fitness: 0.608045061558866
+Genetic distance:
+	- Maximum: 1.74547
+	- Mean: 0.56878
+	- Minimum: 0.00000
+	- Standard deviation: 0.27457
+Most complex genome '53776' of size (1, 3) belongs to specie '54' with distance to representative of 0.198
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.56
+Best genome: 
+	Key: 53776
+	Fitness: 0.5555555555555556
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-1.94, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 12 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   52      31      45       0.22       10  
+	   54      29      69       0.56       1   
+	   56      28      42       0.33       2   
+	   58      24      38       0.22       10  
+	   59      16      36       0.22       10  
+	   60      14      46       0.39       10  
+	   61      12      31       0.17       10  
+	   62      11      47       0.22       5   
+	   63       8      41       0.22       1   
+	   64       7      60       0.39       1   
+	   65       3      33       0.28       1   
+	   66       2      33        --        1   
+
+
+===> Selective genome creation at 71.89999999999999%, storing in csv 'topology_2222.csv' (10h-30m-57s) <===
+
+===> Training <===
+Best training fitness: 0.5824731181667995
+ > Species 58 with 38 members is stagnated (fitness: 0.21467): removed!
+ > Species 59 with 36 members is stagnated (fitness: 0.18149): removed!
+ > Species 52 with 45 members is stagnated (fitness: 0.15674): removed!
+ > Species 61 with 31 members is stagnated (fitness: 0.14265): removed!
+Genetic distance:
+	- Maximum: 1.46569
+	- Mean: 0.53751
+	- Minimum: 0.00000
+	- Standard deviation: 0.28732
+Most complex genome '53470' of size (1, 3) belongs to specie '56' with distance to representative of 0.026
+Best training fitness: 0.7152839470946846
+Genetic distance:
+	- Maximum: 1.51957
+	- Mean: 0.44561
+	- Minimum: 0.00000
+	- Standard deviation: 0.25962
+Most complex genome '53776' of size (1, 3) belongs to specie '68' with distance to representative of 0.015
+Best training fitness: 0.6750806795331434
+Genetic distance:
+	- Maximum: 1.61075
+	- Mean: 0.46342
+	- Minimum: 0.00000
+	- Standard deviation: 0.26802
+Most complex genome '55106' of size (1, 3) belongs to specie '68' with distance to representative of 0.063
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.61
+Best genome: 
+	Key: 55597
+	Fitness: 0.6111111111111112
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-1.94, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 10 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   54      32      42       0.22       2   
+	   56      31      52       0.33       3   
+	   60      17      61       0.44       3   
+	   62      14      39       0.22       8   
+	   63      11      55       0.22       1   
+	   64      10      62       0.33       2   
+	   65       6      56       0.28       1   
+	   66       5      25       0.11       2   
+	   67       3      62       0.44       1   
+	   68       3      60       0.61       1   
+
+
+===> Selective genome creation at 71.89999999999999%, storing in csv 'topology_2222.csv' (10h-31m-41s) <===
+
+===> Training <===
+Best training fitness: 0.6271121670462277
+Genetic distance:
+	- Maximum: 1.77744
+	- Mean: 0.46381
+	- Minimum: 0.00000
+	- Standard deviation: 0.27540
+Most complex genome '55725' of size (1, 3) belongs to specie '60' with distance to representative of 0.027
+Best training fitness: 0.7218421454869121
+Genetic distance:
+	- Maximum: 1.52719
+	- Mean: 0.50295
+	- Minimum: 0.00000
+	- Standard deviation: 0.28924
+Most complex genome '56120' of size (1, 3) belongs to specie '68' with distance to representative of 0.016
+Best training fitness: 0.6917641967943926
+ > Species 62 with 36 members is stagnated (fitness: 0.10209): removed!
+Genetic distance:
+	- Maximum: 1.86539
+	- Mean: 0.53444
+	- Minimum: 0.00000
+	- Standard deviation: 0.32130
+Most complex genome '56683' of size (1, 3) belongs to specie '56' with distance to representative of 0.01
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.61
+Best genome: 
+	Key: 56120
+	Fitness: 0.6111111111111112
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-1.94, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 12 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   54      35      36       0.22       5   
+	   56      34      70       0.33       1   
+	   60      20      61       0.33       3   
+	   63      14      32       0.22       4   
+	   64      13      58       0.39       1   
+	   65       9      41       0.33       3   
+	   66       8      29       0.11       3   
+	   67       6      74       0.56       1   
+	   68       6      56       0.61       2   
+	   69       3      38       0.22       1   
+	   70       3      30       0.22       2   
+	   71       1      1         --        1   
+
+
+===> Selective genome creation at 71.89999999999999%, storing in csv 'topology_2222.csv' (10h-32m-24s) <===
+
+===> Training <===
+Best training fitness: 0.6814019433775649
+Genetic distance:
+	- Maximum: 1.56195
+	- Mean: 0.50726
+	- Minimum: 0.00000
+	- Standard deviation: 0.27549
+Most complex genome '57182' of size (1, 3) belongs to specie '64' with distance to representative of 0.096
+Best training fitness: 0.7371651795797696
+Genetic distance:
+	- Maximum: 2.01114
+	- Mean: 0.51116
+	- Minimum: 0.00000
+	- Standard deviation: 0.29280
+Most complex genome '57589' of size (1, 3) belongs to specie '68' with distance to representative of 0.017
+Best training fitness: 0.764113853592711
+Genetic distance:
+	- Maximum: 1.52353
+	- Mean: 0.48717
+	- Minimum: 0.00000
+	- Standard deviation: 0.27034
+Most complex genome '55694' of size (1, 3) belongs to specie '64' with distance to representative of 0
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.61
+Best genome: 
+	Key: 56120
+	Fitness: 0.6111111111111112
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-1.94, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 13 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   54      38      50       0.22       8   
+	   56      37      32       0.33       4   
+	   60      23      40       0.33       6   
+	   63      17      45       0.17       1   
+	   64      16      60       0.39       1   
+	   65      12      32       0.22       6   
+	   66      11      24       0.11       6   
+	   67       9      47       0.56       2   
+	   68       9      54       0.61       2   
+	   69       6      4        0.11       2   
+	   70       6      47       0.22       1   
+	   71       4      36       0.22       2   
+	   72       2      61       0.22       1   
+
+
+===> Selective genome creation at 71.89999999999999%, storing in csv 'topology_2222.csv' (10h-33m-09s) <===
+
+===> Training <===
+Best training fitness: 0.5986309502765086
+Genetic distance:
+	- Maximum: 1.56325
+	- Mean: 0.47888
+	- Minimum: 0.00000
+	- Standard deviation: 0.25960
+Most complex genome '58560' of size (1, 3) belongs to specie '67' with distance to representative of 0.018
+Best training fitness: 0.680702919820905
+Genetic distance:
+	- Maximum: 1.59225
+	- Mean: 0.46073
+	- Minimum: 0.00000
+	- Standard deviation: 0.26657
+Most complex genome '58924' of size (1, 3) belongs to specie '67' with distance to representative of 0.014
+Best training fitness: 0.7307523595774746
+ > Species 54 with 31 members is stagnated (fitness: 0.24651): removed!
+Genetic distance:
+	- Maximum: 1.41481
+	- Mean: 0.49286
+	- Minimum: 0.00000
+	- Standard deviation: 0.26441
+Most complex genome '56559' of size (1, 3) belongs to specie '68' with distance to representative of 0.0
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.78
+Best genome: 
+	Key: 59878
+	Fitness: 0.7777777777777778
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-2.25, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 12 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   56      40      32       0.33       7   
+	   60      26      59       0.33       9   
+	   63      20      43       0.22       4   
+	   64      19      53       0.33       4   
+	   65      15      34       0.28       9   
+	   66      14      29       0.17       3   
+	   67      12      44       0.56       5   
+	   68      12      69       0.78       5   
+	   69       9      43       0.22       5   
+	   70       9      39       0.22       4   
+	   71       7      38       0.17       5   
+	   72       5      31       0.22       1   
+
+
+===> Selective genome creation at 71.89999999999999%, storing in csv 'topology_2222.csv' (10h-33m-54s) <===
+
+===> Training <===
+Best training fitness: 0.731231302851935
+Genetic distance:
+	- Maximum: 1.59239
+	- Mean: 0.53175
+	- Minimum: 0.00000
+	- Standard deviation: 0.28654
+Most complex genome '59865' of size (1, 3) belongs to specie '68' with distance to representative of 0
+Best training fitness: 0.7585340129802376
+ > Species 60 with 41 members is stagnated (fitness: 0.42378): removed!
+ > Species 65 with 41 members is stagnated (fitness: 0.28084): removed!
+Genetic distance:
+	- Maximum: 1.59795
+	- Mean: 0.51375
+	- Minimum: 0.00000
+	- Standard deviation: 0.29046
+Most complex genome '60334' of size (1, 3) belongs to specie '67' with distance to representative of 0.016
+Best training fitness: 0.7797223725493303
+Genetic distance:
+	- Maximum: 1.65618
+	- Mean: 0.55260
+	- Minimum: 0.00000
+	- Standard deviation: 0.30800
+Most complex genome '60899' of size (1, 3) belongs to specie '68' with distance to representative of 0.035
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.78
+Best genome: 
+	Key: 61230
+	Fitness: 0.7777777777777778
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-2.25, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 11 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   56      43      41       0.33       10  
+	   63      23      58       0.22       1   
+	   64      22      55       0.39       7   
+	   66      17      51       0.22       1   
+	   67      15      69       0.61       2   
+	   68      15      60       0.78       1   
+	   69      12      33       0.11       1   
+	   70      12      57       0.22       7   
+	   71      10      41       0.22       8   
+	   72       8      46       0.28       4   
+	   73       1      1         --        1   
+
+
+===> Selective genome creation at 71.89999999999999%, storing in csv 'topology_2222.csv' (10h-34m-38s) <===
+
+===> Training <===
+Best training fitness: 0.6713859820487433
+ > Species 56 with 41 members is stagnated (fitness: 0.38443): removed!
+Genetic distance:
+	- Maximum: 1.48293
+	- Mean: 0.51960
+	- Minimum: 0.00000
+	- Standard deviation: 0.28513
+Most complex genome '59935' of size (1, 3) belongs to specie '64' with distance to representative of 0.084
+Best training fitness: 0.7304677762234555
+Genetic distance:
+	- Maximum: 1.45112
+	- Mean: 0.50031
+	- Minimum: 0.00000
+	- Standard deviation: 0.28284
+Most complex genome '61827' of size (1, 3) belongs to specie '67' with distance to representative of 0.07
+Best training fitness: 0.6026837469753495
+ > Species 71 with 57 members is stagnated (fitness: 0.33197): removed!
+Genetic distance:
+	- Maximum: 1.66088
+	- Mean: 0.50652
+	- Minimum: 0.00000
+	- Standard deviation: 0.30746
+Most complex genome '60334' of size (1, 3) belongs to specie '67' with distance to representative of 0.017
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.61
+Best genome: 
+	Key: 62712
+	Fitness: 0.6111111111111112
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-1.94, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 10 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   63      26      44       0.17       4   
+	   64      25      61       0.33       10  
+	   66      20      52       0.28       1   
+	   67      18      75       0.61       5   
+	   68      18      82       0.61       4   
+	   69      15      15       0.17       4   
+	   70      15      40       0.22       10  
+	   72      11      74       0.28       7   
+	   73       4      68       0.11       1   
+	   74       1      2        0.11       1   
+
+
+===> Selective genome creation at 71.89999999999999%, storing in csv 'topology_2222.csv' (10h-35m-25s) <===
+
+===> Training <===
+Best training fitness: 0.7578073813312023
+ > Species 64 with 61 members is stagnated (fitness: 0.74364): removed!
+ > Species 70 with 40 members is stagnated (fitness: 0.20816): removed!
+Genetic distance:
+	- Maximum: 1.45414
+	- Mean: 0.47758
+	- Minimum: 0.00000
+	- Standard deviation: 0.27854
+Most complex genome '62655' of size (1, 3) belongs to specie '67' with distance to representative of 0.016
+Best training fitness: 0.6371943767127373
+Genetic distance:
+	- Maximum: 1.60473
+	- Mean: 0.44788
+	- Minimum: 0.00000
+	- Standard deviation: 0.28492
+Most complex genome '63188' of size (1, 3) belongs to specie '67' with distance to representative of 0.012
+Best training fitness: 0.7830014075612807
+Genetic distance:
+	- Maximum: 1.62063
+	- Mean: 0.44855
+	- Minimum: 0.00000
+	- Standard deviation: 0.27297
+Most complex genome '63679' of size (1, 3) belongs to specie '68' with distance to representative of 0.019
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.56
+Best genome: 
+	Key: 64085
+	Fitness: 0.5555555555555556
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-1.94, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 11 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   63      29      36       0.17       7   
+	   66      23      44       0.28       4   
+	   67      21      67       0.56       8   
+	   68      21      86       0.56       1   
+	   69      18      89       0.28       7   
+	   72      14      46       0.22       2   
+	   73       7      1        0.06       2   
+	   74       4      45       0.28       1   
+	   75       3      38       0.17       1   
+	   76       2      68       0.22       1   
+	   77       1      1        0.22       1   
+
+
+===> Selective genome creation at 71.89999999999999%, storing in csv 'topology_2222.csv' (10h-36m-10s) <===
+
+===> Training <===
+Best training fitness: 0.5573749502730692
+Genetic distance:
+	- Maximum: 1.51084
+	- Mean: 0.47559
+	- Minimum: 0.00000
+	- Standard deviation: 0.26223
+Most complex genome '64185' of size (1, 3) belongs to specie '67' with distance to representative of 0.087
+Best training fitness: 0.5985944593206564
+Genetic distance:
+	- Maximum: 1.56244
+	- Mean: 0.48066
+	- Minimum: 0.00000
+	- Standard deviation: 0.26353
+Most complex genome '64623' of size (1, 3) belongs to specie '68' with distance to representative of 0.058
+Best training fitness: 0.6817520964417236
+ > Species 67 with 45 members is stagnated (fitness: 0.68175): removed!
+Genetic distance:
+	- Maximum: 1.47293
+	- Mean: 0.50906
+	- Minimum: 0.00000
+	- Standard deviation: 0.27393
+Most complex genome '65123' of size (1, 3) belongs to specie '68' with distance to representative of 0.093
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.72
+Best genome: 
+	Key: 65560
+	Fitness: 0.7222222222222222
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-2.18, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 10 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   63      32      50       0.22       10  
+	   66      26      43       0.17       3   
+	   68      24      73       0.72       4   
+	   69      21      4        0.17       10  
+	   72      17      52       0.22       5   
+	   73      10      39       0.22       5   
+	   74       7     114       0.33       4   
+	   75       6      48       0.22       2   
+	   76       5      51       0.22       3   
+	   77       4      38       0.22       2   
+
+
+===> Selective genome creation at 71.89999999999999%, storing in csv 'topology_2222.csv' (10h-36m-55s) <===
+
+===> Training <===
+Best training fitness: 0.6945135376125957
+ > Species 63 with 50 members is stagnated (fitness: 0.32019): removed!
+ > Species 69 with 4 members is stagnated (fitness: 0.30969): removed!
+Genetic distance:
+	- Maximum: 1.46880
+	- Mean: 0.47635
+	- Minimum: 0.00000
+	- Standard deviation: 0.24384
+Most complex genome '65543' of size (1, 3) belongs to specie '68' with distance to representative of 0.067
+Best training fitness: 0.7121272794503385
+Genetic distance:
+	- Maximum: 1.37908
+	- Mean: 0.48766
+	- Minimum: 0.00000
+	- Standard deviation: 0.24976
+Most complex genome '65972' of size (1, 3) belongs to specie '68' with distance to representative of 0.09
+Best training fitness: 0.7085511251623533
+Genetic distance:
+	- Maximum: 1.69220
+	- Mean: 0.53730
+	- Minimum: 0.00000
+	- Standard deviation: 0.29639
+Most complex genome '66505' of size (1, 3) belongs to specie '68' with distance to representative of 0.092
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.72
+Best genome: 
+	Key: 66505
+	Fitness: 0.7222222222222222
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-1.94, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 10 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   66      29      64       0.22       1   
+	   68      27      84       0.72       7   
+	   72      20      50       0.22       8   
+	   73      13      36       0.22       3   
+	   74      10      65       0.22       7   
+	   75       9      35       0.17       3   
+	   76       8      83       0.22       3   
+	   77       7      81       0.22       3   
+	   78       3      9        0.17       1   
+	   79       1      4        0.11       1   
+
+
+===> Selective genome creation at 71.89999999999999%, storing in csv 'topology_2222.csv' (10h-37m-42s) <===
+
+===> Training <===
+Best training fitness: 0.6403276634609119
+Genetic distance:
+	- Maximum: 1.53665
+	- Mean: 0.50813
+	- Minimum: 0.00000
+	- Standard deviation: 0.27400
+Most complex genome '66947' of size (1, 3) belongs to specie '68' with distance to representative of 0.008
+Best training fitness: 0.7581082048215706
+Genetic distance:
+	- Maximum: 1.54922
+	- Mean: 0.46279
+	- Minimum: 0.00000
+	- Standard deviation: 0.24361
+Most complex genome '67415' of size (1, 3) belongs to specie '79' with distance to representative of 0.084
+Best training fitness: 0.673242583753869
+ > Species 72 with 12 members is stagnated (fitness: 0.35332): removed!
+Genetic distance:
+	- Maximum: 1.88243
+	- Mean: 0.50709
+	- Minimum: 0.00000
+	- Standard deviation: 0.29045
+Most complex genome '67856' of size (1, 3) belongs to specie '79' with distance to representative of 0.083
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.78
+Best genome: 
+	Key: 68351
+	Fitness: 0.7777777777777778
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-1.94, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 11 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   66      32      32       0.22       4   
+	   68      30      59       0.50       10  
+	   73      16      76       0.22       1   
+	   74      13      73       0.22       10  
+	   75      12      63       0.17       6   
+	   76      11      24       0.22       6   
+	   77      10      45       0.22       6   
+	   78       6      32       0.11       2   
+	   79       4      74       0.78       2   
+	   80       3      33       0.22       1   
+	   81       1      1         --        1   
+
+
+===> Selective genome creation at 71.89999999999999%, storing in csv 'topology_2222.csv' (10h-38m-26s) <===
+
+===> Training <===
+Best training fitness: 0.8366759115983726
+ > Species 68 with 59 members is stagnated (fitness: 0.68074): removed!
+ > Species 74 with 73 members is stagnated (fitness: 0.29764): removed!
+Genetic distance:
+	- Maximum: 1.55075
+	- Mean: 0.57289
+	- Minimum: 0.00000
+	- Standard deviation: 0.29223
+Most complex genome '68382' of size (1, 3) belongs to specie '79' with distance to representative of 0.084
+Best training fitness: 0.7777127828036772
+Genetic distance:
+	- Maximum: 1.49336
+	- Mean: 0.56427
+	- Minimum: 0.00000
+	- Standard deviation: 0.26049
+Most complex genome '68802' of size (1, 3) belongs to specie '79' with distance to representative of 0.086
+Best training fitness: 0.8080293041337594
+Genetic distance:
+	- Maximum: 1.66197
+	- Mean: 0.58560
+	- Minimum: 0.00000
+	- Standard deviation: 0.29054
+Most complex genome '67415' of size (1, 3) belongs to specie '79' with distance to representative of 0.016
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.72
+Best genome: 
+	Key: 67415
+	Fitness: 0.7222222222222222
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-1.94, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 12 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   66      35      40       0.17       7   
+	   73      19      37       0.22       4   
+	   75      15      49       0.17       9   
+	   76      14      70       0.22       1   
+	   77      13      51       0.22       9   
+	   78       9      39       0.22       5   
+	   79       7      95       0.72       3   
+	   80       6      42       0.17       2   
+	   81       4      38       0.22       2   
+	   82       3      50       0.22       1   
+	   83       1      2         --        1   
+	   84       1      1        0.22       1   
+
+
+===> Selective genome creation at 71.89999999999999%, storing in csv 'topology_2222.csv' (10h-39m-09s) <===
+
+===> Training <===
+Best training fitness: 0.8411699060289923
+Genetic distance:
+	- Maximum: 1.84106
+	- Mean: 0.55512
+	- Minimum: 0.00000
+	- Standard deviation: 0.28086
+Most complex genome '69795' of size (1, 3) belongs to specie '79' with distance to representative of 0.01
+Best training fitness: 0.7719243547221846
+ > Species 75 with 54 members is stagnated (fitness: 0.27233): removed!
+Genetic distance:
+	- Maximum: 1.72851
+	- Mean: 0.56653
+	- Minimum: 0.00000
+	- Standard deviation: 0.27916
+Most complex genome '70249' of size (1, 3) belongs to specie '79' with distance to representative of 0.018
+Best training fitness: 0.7764688256254735
+Genetic distance:
+	- Maximum: 1.68561
+	- Mean: 0.56494
+	- Minimum: 0.00000
+	- Standard deviation: 0.28231
+Most complex genome '69795' of size (1, 3) belongs to specie '79' with distance to representative of 0.01
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.78
+Best genome: 
+	Key: 70249
+	Fitness: 0.7777777777777778
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-1.94, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 11 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   66      38      53       0.33       10  
+	   73      22      28       0.22       7   
+	   76      17      45       0.22       4   
+	   77      16      39       0.22       2   
+	   78      12      49       0.11       8   
+	   79      10      84       0.78       3   
+	   80       9      55       0.28       5   
+	   81       7      43       0.22       5   
+	   82       6      44       0.22       4   
+	   83       4      47       0.28       1   
+	   84       4      29       0.22       2   
+
+
+===> Selective genome creation at 71.89999999999999%, storing in csv 'topology_2222.csv' (10h-39m-54s) <===
+
+===> Training <===
+Best training fitness: 0.8595666666666666
+ > Species 66 with 53 members is stagnated (fitness: 0.22864): removed!
+Genetic distance:
+	- Maximum: 1.62111
+	- Mean: 0.57140
+	- Minimum: 0.00000
+	- Standard deviation: 0.27172
+Most complex genome '70249' of size (1, 3) belongs to specie '79' with distance to representative of 0.019
+Best training fitness: 0.7658881583742791
+Genetic distance:
+	- Maximum: 1.86236
+	- Mean: 0.58221
+	- Minimum: 0.00000
+	- Standard deviation: 0.29197
+Most complex genome '71689' of size (1, 3) belongs to specie '79' with distance to representative of 0.024
+Best training fitness: 0.8459000000000001
+ > Species 78 with 50 members is stagnated (fitness: 0.19933): removed!
+Genetic distance:
+	- Maximum: 1.86537
+	- Mean: 0.58829
+	- Minimum: 0.00000
+	- Standard deviation: 0.28790
+Most complex genome '72109' of size (1, 3) belongs to specie '79' with distance to representative of 0.03
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.83
+Best genome: 
+	Key: 72582
+	Fitness: 0.8333333333333334
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-1.94, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 11 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   73      25      2         --        10  
+	   76      20      54       0.11       7   
+	   77      19      36       0.22       5   
+	   79      13      83       0.83       3   
+	   80      12      42       0.28       8   
+	   81      10      46       0.22       1   
+	   82       9      68       0.22       1   
+	   83       7      46       0.22       4   
+	   84       7      37       0.22       1   
+	   85       2     100       0.22       1   
+	   86       1      1        0.17       1   
+
+
+===> Selective genome creation at 72.2%, storing in csv 'topology_2222.csv' (10h-40m-39s) <===
+
+===> Training <===
+Best training fitness: 0.7513349830158573
+ > Species 73 with 2 members is stagnated (fitness: 0.06264): removed!
+Genetic distance:
+	- Maximum: 1.59623
+	- Mean: 0.56638
+	- Minimum: 0.00000
+	- Standard deviation: 0.26485
+Most complex genome '69795' of size (1, 3) belongs to specie '79' with distance to representative of 0
+Best training fitness: 0.6181189939171972
+Genetic distance:
+	- Maximum: 1.96499
+	- Mean: 0.61086
+	- Minimum: 0.00000
+	- Standard deviation: 0.31597
+Most complex genome '73104' of size (1, 3) belongs to specie '79' with distance to representative of 0.036
+Best training fitness: 0.7344612514266633
+Genetic distance:
+	- Maximum: 1.49899
+	- Mean: 0.58079
+	- Minimum: 0.00000
+	- Standard deviation: 0.26659
+Most complex genome '72109' of size (1, 3) belongs to specie '79' with distance to representative of 0.03
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.78
+Best genome: 
+	Key: 72109
+	Fitness: 0.7777777777777778
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-1.94, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 12 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   76      23      9        0.11       1   
+	   77      22      31       0.22       8   
+	   79      16      48       0.78       6   
+	   80      15      41       0.28       3   
+	   81      13      36       0.28       4   
+	   82      12      63       0.28       1   
+	   83      10      41       0.22       3   
+	   84      10      42       0.22       1   
+	   85       5      25       0.22       1   
+	   86       4      36       0.22       1   
+	   87       2     114       0.28       1   
+	   88       2      34       0.17       1   
+
+
+===> Selective genome creation at 72.2%, storing in csv 'topology_2222.csv' (10h-41m-26s) <===
+
+===> Training <===
+Best training fitness: 0.7229047162811545
+Genetic distance:
+	- Maximum: 1.51704
+	- Mean: 0.56690
+	- Minimum: 0.00000
+	- Standard deviation: 0.26057
+Most complex genome '74010' of size (1, 3) belongs to specie '79' with distance to representative of 0.098
+Best training fitness: 0.8133751108731764
+Genetic distance:
+	- Maximum: 1.58554
+	- Mean: 0.57559
+	- Minimum: 0.00000
+	- Standard deviation: 0.27182
+Most complex genome '69795' of size (1, 3) belongs to specie '79' with distance to representative of 0
+Best training fitness: 0.823040425820726
+ > Species 77 with 31 members is stagnated (fitness: 0.20627): removed!
+Genetic distance:
+	- Maximum: 1.65116
+	- Mean: 0.54876
+	- Minimum: 0.00000
+	- Standard deviation: 0.25039
+Most complex genome '74962' of size (1, 3) belongs to specie '79' with distance to representative of 0.027
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.83
+Best genome: 
+	Key: 74962
+	Fitness: 0.8333333333333334
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=-0.91)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-2.13, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 11 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   76      26      44       0.17       4   
+	   79      19      90       0.83       9   
+	   80      18      63       0.28       6   
+	   81      16      37       0.22       7   
+	   82      15      30       0.22       4   
+	   83      13      56       0.28       6   
+	   84      13      36       0.22       4   
+	   85       8      35       0.22       4   
+	   86       7      33       0.22       4   
+	   87       5      43       0.22       4   
+	   88       5      45       0.22       1   
+
+
+===> Selective genome creation at 73.2%, storing in csv 'topology_2222.csv' (10h-42m-14s) <===
+
+===> Training <===
+Best training fitness: 0.6866525211470039
+Genetic distance:
+	- Maximum: 1.40660
+	- Mean: 0.54584
+	- Minimum: 0.00000
+	- Standard deviation: 0.24688
+Most complex genome '75420' of size (1, 3) belongs to specie '79' with distance to representative of 0.042
+Best training fitness: 0.8041983849577476
+ > Species 79 with 66 members is stagnated (fitness: 0.8042): removed!
+Genetic distance:
+	- Maximum: 1.69497
+	- Mean: 0.54973
+	- Minimum: 0.00000
+	- Standard deviation: 0.26297
+Most complex genome '75941' of size (1, 3) belongs to specie '80' with distance to representative of 0.1
+Best training fitness: 0.8046576514649388
+Genetic distance:
+	- Maximum: 1.50600
+	- Mean: 0.55918
+	- Minimum: 0.00000
+	- Standard deviation: 0.25642
+Most complex genome '76355' of size (1, 3) belongs to specie '80' with distance to representative of 0.103
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.83
+Best genome: 
+	Key: 76819
+	Fitness: 0.8333333333333334
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=0.47)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-4.65, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 10 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   76      29      44       0.22       7   
+	   80      21      68       0.83       1   
+	   81      19      46       0.22       2   
+	   82      18      53       0.22       7   
+	   83      16      46       0.33       9   
+	   84      16      37       0.22       7   
+	   85      11      55       0.22       7   
+	   86      10      62       0.22       1   
+	   87       8      44       0.22       7   
+	   88       8      57       0.28       3   
+
+
+===> Selective genome creation at 73.3%, storing in csv 'topology_2222.csv' (10h-43m-03s) <===
+
+===> Training <===
+Best training fitness: 0.7838904927263727
+Genetic distance:
+	- Maximum: 1.63768
+	- Mean: 0.59227
+	- Minimum: 0.00000
+	- Standard deviation: 0.28571
+Most complex genome '76355' of size (1, 3) belongs to specie '80' with distance to representative of 0.067
+Best training fitness: 0.8148858216426307
+ > Species 83 with 64 members is stagnated (fitness: 0.37753): removed!
+Genetic distance:
+	- Maximum: 1.54818
+	- Mean: 0.55289
+	- Minimum: 0.00000
+	- Standard deviation: 0.27226
+Most complex genome '77234' of size (1, 3) belongs to specie '80' with distance to representative of 0.012
+Best training fitness: 0.8383957978252059
+Genetic distance:
+	- Maximum: 1.49114
+	- Mean: 0.52341
+	- Minimum: 0.00000
+	- Standard deviation: 0.23778
+Most complex genome '77234' of size (1, 3) belongs to specie '80' with distance to representative of 0.004
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.89
+Best genome: 
+	Key: 77234
+	Fitness: 0.8888888888888888
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=0.56)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-4.65, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 11 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   76      32      45       0.22       10  
+	   80      24      96       0.89       1   
+	   81      22      45       0.28       5   
+	   82      21      31       0.22       10  
+	   84      19      42       0.22       10  
+	   85      14      38       0.22       10  
+	   86      13      37       0.22       4   
+	   87      11      46       0.22       10  
+	   88      11      55       0.33       6   
+	   89       3      42       0.22       2   
+	   90       2      43       0.33       1   
+
+
+===> Selective genome creation at 75.9%, storing in csv 'topology_2222.csv' (10h-43m-48s) <===
+
+===> Training <===
+Best training fitness: 0.8693352040245006
+ > Species 82 with 31 members is stagnated (fitness: 0.32487): removed!
+ > Species 87 with 46 members is stagnated (fitness: 0.30513): removed!
+ > Species 85 with 38 members is stagnated (fitness: 0.29315): removed!
+ > Species 76 with 45 members is stagnated (fitness: 0.26181): removed!
+ > Species 84 with 42 members is stagnated (fitness: 0.25861): removed!
+Genetic distance:
+	- Maximum: 1.44619
+	- Mean: 0.48531
+	- Minimum: 0.00000
+	- Standard deviation: 0.23944
+Most complex genome '78180' of size (1, 3) belongs to specie '80' with distance to representative of 0.003
+Best training fitness: 0.8367333333333333
+Genetic distance:
+	- Maximum: 1.45298
+	- Mean: 0.45519
+	- Minimum: 0.00000
+	- Standard deviation: 0.23498
+Most complex genome '78701' of size (1, 3) belongs to specie '80' with distance to representative of 0.004
+Best training fitness: 0.8257448587588903
+Genetic distance:
+	- Maximum: 1.45592
+	- Mean: 0.41501
+	- Minimum: 0.00000
+	- Standard deviation: 0.21026
+Most complex genome '79210' of size (1, 3) belongs to specie '80' with distance to representative of 0.013
+
+===> EVALUATING <===
+Best evaluation finish ratio: 0.89
+Best genome: 
+	Key: 79210
+	Fitness: 0.8888888888888888
+	Nodes:
+		0 - OutputNodeGene(bias=1.5)
+		1 - OutputNodeGene(bias=0.56)
+		2 - GruNoResetNodeGene(inputs=[-1])
+	Connections:
+		(-1, 1) - ConnectionGene(weight=-4.65, enabled=True)
+		(-1, 2) - ConnectionGene(weight=1, enabled=True)
+		(2, 1) - ConnectionGene(weight=3, enabled=True)
+	
+
+Population 'topology_2222' has 10 species:
+	 specie    age    size    finished    stag 
+	========  =====  ======  ==========  ======
+	   80      27      92       0.89       3   
+	   81      25      46       0.28       8   
+	   86      16      54       0.22       7   
+	   88      14      47       0.33       9   
+	   89       6      43       0.28       2   
+	   90       5      68       0.28       2   
+	   91       3      56       0.22       1   
+	   92       3      56       0.28       2   
+	   93       2      49       0.22       1   
+	   94       1      2        0.28       1   
+
+
+===> Selective genome creation at 78.8%, storing in csv 'topology_2222.csv' (10h-44m-31s) <===
+
+===> Training <===
+Best training fitness: 0.8727666666666666
+Genetic distance:
+	- Maximum: 1.14538
+	- Mean: 0.40904
+	- Minimum: 0.00000
+	- Standard deviation: 0.18941
+Most complex genome '79210' of size (1, 3) belongs to specie '80' with distance to representative of 0.013
+Best training fitness: 0.8479411697938316
+ > Species 88 with 57 members is stagnated (fitness: 0.34368): removed!
+Genetic distance:
+	- Maximum: 1.65580
+	- Mean: 0.42699
+	- Minimum: 0.00000
+	- Standard deviation: 0.26095
+Most complex genome '80105' of size (1, 3) belongs to specie '80' with distance to representative of 0.021
+Best training fitness: 0.8665666666666667
+ > Species 81 with 65 members is stagnated (fitness: 0.37903): removed!
+Genetic distance:
+	- Maximum: 1.10324
+	- Mean: 0.34897
+	- Minimum: 0.00000
+	- Standard deviation: 0.17965
+Most complex genome '80646' of size (1, 3) belongs to specie '80' with distance to representative of 0.034
+
+===> EVALUATING <===
