@@ -6,7 +6,7 @@ evaluate_gen=1;  # Evaluate the generations  [bint]
 evaluate_pop=1;  # Combine population evaluations  [bint]
 evaluate_train=1;  # Compare the training fitness over the populations [bint]
 max_gen=100;  # Maximum generation for evaluation  [int]
-max_v=50;  # Maximum version for evaluation  [int]
+max_v=30;  # Maximum version for evaluation  [int]
 
 # Run the program
 for experiment in {7,}

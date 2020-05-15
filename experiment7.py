@@ -20,6 +20,7 @@ from main import get_folder, get_game_ids
 from population.population import Population
 from population.utils.gene_util.connection import ConnectionGene
 from population.utils.gene_util.gru import GruNodeGene
+from population.utils.gene_util.gru_no_reset import GruNoResetNodeGene
 from population.utils.gene_util.output_node import OutputNodeGene
 from population.utils.genome import Genome
 from population.utils.population_util.fitness_functions import calc_pop_fitness
@@ -27,7 +28,8 @@ from utils.dictionary import *
 
 P_DEFAULT = 'default'
 P_CONN = 'connection'
-SUPPORTED = [P_DEFAULT, P_CONN]
+P_GRU_NR = 'gru_nr'
+SUPPORTED = [P_DEFAULT, P_CONN, P_GRU_NR]
 
 
 # --------------------------------------------------> MAIN METHODS <-------------------------------------------------- #
@@ -156,18 +158,24 @@ def get_topology(pop_name, gid: int, cfg: Config):
     bias_range = cfg.genome.bias_max_value - cfg.genome.bias_min_value
     rnn_range = cfg.genome.rnn_max_value - cfg.genome.rnn_min_value
     
-    # Create the nodes
+    # Create the output nodes
     genome.nodes[0] = OutputNodeGene(key=0, cfg=cfg.genome)  # OutputNode 0
     genome.nodes[0].bias = 1.5  # Drive with 0.953 actuation by default
     genome.nodes[1] = OutputNodeGene(key=1, cfg=cfg.genome)  # OutputNode 1
     genome.nodes[1].bias = random() * bias_range + cfg.genome.bias_min_value  # Uniformly sampled bias
-    genome.nodes[2] = GruNodeGene(key=2, cfg=cfg.genome, input_keys=[-1], input_keys_full=[-1])  # Hidden node
-    genome.nodes[2].bias = 0  # Bias is irrelevant for GRU-node
     
-    # Uniformly sample the genome's GRU-component
-    genome.nodes[2].bias_h = rand_arr((3,)) * bias_range + cfg.genome.bias_min_value
-    genome.nodes[2].weight_xh_full = rand_arr((3, 1)) * rnn_range + cfg.genome.weight_min_value
-    genome.nodes[2].weight_hh = rand_arr((3, 1)) * rnn_range + cfg.genome.weight_min_value
+    # Setup the recurrent unit
+    if pop_name in [P_GRU_NR]:
+        genome.nodes[2] = GruNoResetNodeGene(key=2, cfg=cfg.genome, input_keys=[-1], input_keys_full=[-1])  # Hidden
+        genome.nodes[2].bias_h = rand_arr((2,)) * bias_range + cfg.genome.bias_min_value
+        genome.nodes[2].weight_xh_full = rand_arr((2, 1)) * rnn_range + cfg.genome.weight_min_value
+        genome.nodes[2].weight_hh = rand_arr((2, 1)) * rnn_range + cfg.genome.weight_min_value
+    else:
+        genome.nodes[2] = GruNodeGene(key=2, cfg=cfg.genome, input_keys=[-1], input_keys_full=[-1])  # Hidden node
+        genome.nodes[2].bias_h = rand_arr((3,)) * bias_range + cfg.genome.bias_min_value
+        genome.nodes[2].weight_xh_full = rand_arr((3, 1)) * rnn_range + cfg.genome.weight_min_value
+        genome.nodes[2].weight_hh = rand_arr((3, 1)) * rnn_range + cfg.genome.weight_min_value
+    genome.nodes[2].bias = 0  # Bias is irrelevant for GRU-node
     
     # Create the connections
     genome.connections = dict()
@@ -223,7 +231,7 @@ def get_config(name):
     cfg.genome.conn_disable_prob = 0  # No topology mutations allowed
     cfg.genome.enabled_mutate_rate = 0  # No topology mutations allowed
     cfg.population.pop_size = 512
-    if name == P_DEFAULT:
+    if name in [P_DEFAULT, P_GRU_NR]:
         cfg.population.compatibility_thr = 1  # Keep threshold low to enforce new species to be discovered
     elif name == P_CONN:
         cfg.population.compatibility_thr = 0.9  # Keep threshold low to enforce new species to be discovered
@@ -246,7 +254,7 @@ if __name__ == '__main__':
     # Run the program
     main(
             # pop_name=args.pop_name,  # TODO
-            pop_name=P_CONN,
+            pop_name=P_GRU_NR,
             version=args.version,
             iterations=args.iterations,
             batch=args.batch,
