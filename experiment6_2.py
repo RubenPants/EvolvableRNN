@@ -27,8 +27,8 @@ from utils.dictionary import *
 from utils.myutils import get_subfolder
 
 # Minimal ratio of evaluation games finished before added to the CSV
-# MIN_FINISHED = 0.8  # Finish 15/18 or more
-MIN_FINISHED = 0  # Finish 0/18 or more  # TODO: For the X0 variants (full search space)
+MIN_FINISHED = 0.8  # Finish 15/18 or more
+# MIN_FINISHED = 0  # Finish 0/18 or more  # TODO: For the X0 variants (full search space)
 # MIN_FINISHED = 0.2  # Finish 4/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
 # MIN_FINISHED = 0.25  # Finish 5/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
 
@@ -293,12 +293,16 @@ def get_csv_path(topology_id: int, use_backup: bool, batch_size: int):
                 head += ['bias_h', 'weight_xh', 'weight_hh']
             elif topology_id in [222]:
                 head += ['delay', 'scale']
+            elif topology_id in [2222]:
+                head += ['bias_z', 'bias_h',
+                         'weight_xz', 'weight_xh',
+                         'weight_hz', 'weight_hh']
             else:
                 raise Exception(f"Topology ID '{topology_id}' not supported!")
             
             if topology_id in [1]:
                 head += ['conn1', 'conn2']
-            elif topology_id in [2, 22, 222]:
+            elif topology_id in [2, 22, 222, 2222]:
                 head += ['bias_rw', 'conn2']
             elif topology_id in [3, 30, 33]:
                 head += ['bias_rw', 'conn0', 'conn1', 'conn2']
@@ -326,8 +330,8 @@ def execution_test():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate', type=bool, default=True)  # Evaluate new genomes
-    parser.add_argument('--topology_id', type=int, default=222)  # ID of the used topology
-    parser.add_argument('--batch', type=int, default=10000)  # Number of genomes evaluated per batch
+    parser.add_argument('--topology_id', type=int, default=2222)  # ID of the used topology
+    parser.add_argument('--batch', type=int, default=1000)  # Number of genomes evaluated per batch
     parser.add_argument('--min_finished', type=float, default=MIN_FINISHED)  # Minimal finish ratio before added to CSV
     parser.add_argument('--unused_cpu', type=int, default=2)  # Number of CPU cores not used during evaluation
     parser.add_argument('--save_population', type=bool, default=True)  # Save the final population after finishing
