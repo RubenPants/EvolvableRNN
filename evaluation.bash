@@ -22,5 +22,7 @@ do
 
   # Experiment 7 specific populations
 #  python3 evaluate_populations.py --folder_pop=default --evaluate_gen=$evaluate_gen --evaluate_pop=$evaluate_pop --evaluate_training=$evaluate_train --experiment=$experiment --max_gen=$max_gen --max_v=$max_v --unused_cpu=$unused_cpu;
-  python3 evaluate_populations.py --folder_pop=connection --evaluate_gen=$evaluate_gen --evaluate_pop=$evaluate_pop --evaluate_training=$evaluate_train --experiment=$experiment --max_gen=$max_gen --max_v=$max_v --unused_cpu=$unused_cpu;
+#  python3 evaluate_populations.py --folder_pop=connection --evaluate_gen=$evaluate_gen --evaluate_pop=$evaluate_pop --evaluate_training=$evaluate_train --experiment=$experiment --max_gen=$max_gen --max_v=$max_v --unused_cpu=$unused_cpu;
+  python3 evaluate_populations.py --folder_pop=gru_nr --evaluate_gen=$evaluate_gen --evaluate_pop=$evaluate_pop --evaluate_training=$evaluate_train --experiment=$experiment --max_gen=$max_gen --max_v=$max_v --unused_cpu=$unused_cpu;
+  python3 evaluate_populations.py --folder_pop=gru_nr_connection --evaluate_gen=$evaluate_gen --evaluate_pop=$evaluate_pop --evaluate_training=$evaluate_train --experiment=$experiment --max_gen=$max_gen --max_v=$max_v --unused_cpu=$unused_cpu;
 done
