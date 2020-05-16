@@ -144,14 +144,13 @@ def main(pop_name: str,
         for i, genome in genomes:
             genome.fitness = finished[i]
             if best is None or finished[i] > best.fitness: best = genome
+        pop.log(f"Best genome:\n{best}")
         
         # Solution is found
         if best.fitness == 1:
             pop.best_genome = best
-            pop.log(f"Solution found for genome\n{best}")
+            pop.log(f"Solution found!")
             solution_found = True  # End the outer while-loop
-        else:
-            pop.log(f"Best evaluation score: {best.fitness:.3f}")
         
         # Save the population with their evaluation results
         pop.save()
@@ -316,7 +315,8 @@ if __name__ == '__main__':
     
     # Run the program
     main(
-            pop_name=args.pop_name,
+            # pop_name=args.pop_name,
+            pop_name=P_GRU_NR_CONN,
             version=args.version,
             unused_cpu=args.unused_cpu,
             use_backup=args.use_backup,
