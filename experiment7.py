@@ -291,6 +291,7 @@ def get_config():
     cfg.bot.dist_enabled = True
     cfg.evaluation.fitness = D_DISTANCE
     cfg.game.duration = 60  # 60 seconds should be just enough to reach each of the spawned targets
+    cfg.genome.bias_mutate_rate = 0.05  # Give corresponding weights more time to adjust
     cfg.genome.conn_add_prob = 0  # No topology mutations allowed
     cfg.genome.conn_disable_prob = 0  # No topology mutations allowed
     cfg.genome.enabled_mutate_rate = 0  # No topology mutations allowed
@@ -298,6 +299,8 @@ def get_config():
     cfg.genome.node_disable_prob = 0  # No topology mutations allowed
     cfg.genome.rnn_mutate_power = 0.1  # Single recurrent unit is quite sensitive to change
     cfg.population.compatibility_thr = .5  # Keep threshold low to enforce new species to be discovered
+    cfg.population.genome_elitism = 3
+    cfg.population.min_specie_size = 16
     cfg.population.parent_selection = 0.1
     cfg.population.pop_size = 512
     cfg.population.specie_elitism = 1  # Only one elite species

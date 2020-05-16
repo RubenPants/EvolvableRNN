@@ -21,7 +21,7 @@ class PopulationConfig(BaseConfig):
         self.compatibility_thr: float = 2.
         # The function used to compute the species fitness  [def=D_MAX]
         self.fitness_func: str = D_MAX
-        # Number of generations the elite genome remains present in the specie  [def=5]
+        # Number of generations the elite genome remains present in the species  [def=5]
         self.genome_elite_stagnation: int = 5
         # Number of most fit individuals per specie that are preserved as-is from one generation to the next  [def=2]
         self.genome_elitism: int = 1
