@@ -124,8 +124,8 @@ def main(pop_name: str,
                                      species_set=pop.species,
                                      logger=pop.log)
         
-        # Test if evaluation finds a solution for the new generation, impossible if fitness < 0.6
-        if pop.best_genome.fitness > 0.6 or pop.generation % 10 == 0:
+        # Test if evaluation finds a solution for the new generation, impossible if fitness < 0.75 (makes exp faster!)
+        if pop.best_genome.fitness > 0.75 or pop.generation % 10 == 0:
             pop.log("\n===> EVALUATING <===")
             genomes = list(iteritems(pop.population))
             pool = mp.Pool(mp.cpu_count() - unused_cpu)
