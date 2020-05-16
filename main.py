@@ -381,12 +381,12 @@ if __name__ == '__main__':
     
     # Extra arguments
     parser.add_argument('--iterations', type=int, default=50)
-    parser.add_argument('--experiment', type=int, default=6)
+    parser.add_argument('--experiment', type=int, default=7)
     parser.add_argument('--unused_cpu', type=int, default=2)
     parser.add_argument('--version', type=int, default=0)
     parser.add_argument('--debug', type=bool, default=False)
     parser.add_argument('--duration', type=int, default=60)
-    parser.add_argument('--use_backup', type=bool, default=True)
+    parser.add_argument('--use_backup', type=bool, default=False)
     args = parser.parse_args()
     
     # Load in current config-file
@@ -400,7 +400,7 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='topology_2',
+            name='gru_nr_connection/v1',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment6',
             folder_name=get_folder(args.experiment),
@@ -414,7 +414,11 @@ if __name__ == '__main__':
     # pop.best_genome.nodes[2].delay = 59
     # pop.best_genome.nodes[2].scale[0] = 1.192
     # pop.best_genome = deepcopy(pop.population[3679])
-    # print(pop.best_genome)
+    print(pop.best_genome)
+    print(pop.best_genome.nodes[2])
+    pop.best_genome.update_rnn_nodes(pop.config.genome)
+    print(pop.best_genome.nodes[2])
+    raise Exception
     
     game_ids_train, game_ids_eval = get_game_ids(experiment_id=args.experiment)
     

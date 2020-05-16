@@ -144,7 +144,7 @@ def main(pop_name: str,
         for i, genome in genomes:
             genome.fitness = finished[i]
             if best is None or finished[i] > best.fitness: best = genome
-        pop.log(f"Best genome:\n{best}")
+        pop.log(f"Best genome:\n{best}\n{best.nodes[2]}")
         
         # Solution is found
         if best.fitness == 1:

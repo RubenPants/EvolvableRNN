@@ -33,9 +33,10 @@ class GruNoResetNodeGene(RnnNodeGene):
         )
     
     def __str__(self):
-        bias = str(round(self.bias_h, 2)).replace('\n', ',')
-        weight_hh = str(round(self.weight_hh, 2)).replace('\n', ',')
-        weight_xh = str(round(self.weight_xh, 2)).replace('\n', ',')
+        self.update_weight_xh()
+        bias = str(round(self.bias_h, 5)).replace('\n', ',')
+        weight_hh = str(round(self.weight_hh, 5)).replace('\n', ',')
+        weight_xh = str(round(self.weight_xh, 5)).replace('\n', ',')
         return f"GruNoResetNodeGene(\n" \
                f"\tkey={self.key}\n" \
                f"\tbias={bias},\n" \
