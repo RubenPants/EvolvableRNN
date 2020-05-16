@@ -44,7 +44,7 @@ def main(pop_name: str,
     # Check if valid population name
     if pop_name not in SUPPORTED: raise Exception(f"Population '{pop_name}' not supported!")
     # Create the population
-    cfg = get_config(pop_name)
+    cfg = get_config()
     folder = get_folder(experiment_id=7)
     pop = Population(
             name=f'{pop_name}/v{version}',
@@ -271,13 +271,13 @@ def enforce_topology(pop_name, genome: Genome):
             genome.connections[key].weight = 3
 
 
-def get_config(name):
+def get_config():
     cfg = Config()
     cfg.bot.angular_dir = []
     cfg.bot.delta_dist_enabled = False
     cfg.bot.dist_enabled = True
     cfg.evaluation.fitness = D_DISTANCE
-    cfg.game.duration = 60  # 200 seconds, similar to experiment 3
+    cfg.game.duration = 60  # 60 seconds should be just enough to reach each of the spawned targets
     cfg.genome.bias_mutate_power = 0.2  # More subtle changes
     cfg.genome.bias_replace_rate = 0.01  # More subtle changes (likely sparks new species)
     cfg.genome.conn_add_prob = 0  # No topology mutations allowed
@@ -289,12 +289,8 @@ def get_config(name):
     cfg.genome.weight_replace_rate = 0.01  # More subtle changes (likely sparks new species)
     cfg.population.pop_size = 512
     cfg.population.parent_selection = 0.1
-    if name in [P_DEFAULT, P_GRU_NR]:
-        cfg.population.compatibility_thr = 1  # Keep threshold low to enforce new species to be discovered
-    elif name in [P_CONN, P_GRU_NR_CONN]:
-        cfg.population.compatibility_thr = 0.9  # Keep threshold low to enforce new species to be discovered
-    else:
-        raise Exception(f"Population '{name}' not supported")
+    cfg.population.specie_stagnation = 5  # Keep a relative low stagnation threshold to make room for new species
+    cfg.population.compatibility_thr = .5  # Keep threshold low to enforce new species to be discovered
     cfg.update()
     return cfg
 
