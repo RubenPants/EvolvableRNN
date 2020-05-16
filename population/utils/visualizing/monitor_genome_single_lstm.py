@@ -360,13 +360,6 @@ def visualize_position(position_list: list, game: Game, save_path: str):
         x_min, x_max = min(x_min, t[0]), max(x_max, t[0])
         y_min, y_max = min(y_min, t[1]), max(y_max, t[1])
     
-    # Show the player's initial direction
-    x = game.player.init_pos[0]
-    y = game.player.init_pos[1]
-    dx = cos(game.player.noisy_init_angle)
-    dy = sin(game.player.noisy_init_angle)
-    plt.arrow(x, y, dx, dy, color='r', head_width=0.1, length_includes_head=True)
-    
     # Plot the player's path
     x_pos, y_pos = zip(*position_list)
     x_min, x_max = min(x_min, min(x_pos)), max(x_max, max(x_pos))
@@ -385,6 +378,13 @@ def visualize_position(position_list: list, game: Game, save_path: str):
                     ha="center", va="center",
                     arrowprops=dict(arrowstyle="->", connectionstyle="arc,rad=0."),
             )
+    
+    # Show the player's initial direction
+    x = game.player.init_pos[0]
+    y = game.player.init_pos[1]
+    dx = 0.5 * cos(game.player.noisy_init_angle)
+    dy = 0.5 * sin(game.player.noisy_init_angle)
+    plt.arrow(x, y, dx, dy, color='k', head_width=0.15, width=0.02, zorder=10, length_includes_head=True)
     
     # Constraint the plot's boundaries
     x_center = (x_max - x_min) / 2 + x_min

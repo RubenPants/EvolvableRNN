@@ -293,19 +293,21 @@ def get_csv_path(topology_id: int, use_backup: bool, batch_size: int):
             elif topology_id in [22, 33]:  # SRU populations
                 head += ['bias_h', 'weight_xh', 'weight_hh']
             elif topology_id in [222]:
-                head += ['delay', 'scale', 'bias_h']
-            elif topology_id in [2222]:
+                head += ['delay', 'scale', 'resting']
+            elif topology_id in [2222, 3333]:
                 head += ['bias_z', 'bias_h',
                          'weight_xz', 'weight_xh',
                          'weight_hz', 'weight_hh']
+            elif topology_id in [22222]:
+                head += ['bias_h', 'weight']
             else:
                 raise Exception(f"Topology ID '{topology_id}' not supported!")
             
             if topology_id in [1]:
                 head += ['conn1', 'conn2']
-            elif topology_id in [2, 22, 222, 2222]:
+            elif topology_id in [2, 22, 222, 2222, 22222]:
                 head += ['bias_rw', 'conn2']
-            elif topology_id in [3, 30, 33]:
+            elif topology_id in [3, 30, 33, 3333]:
                 head += ['bias_rw', 'conn0', 'conn1', 'conn2']
             else:
                 raise Exception(f"Topology ID '{topology_id}' not supported!")
@@ -331,8 +333,8 @@ def execution_test():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate', type=bool, default=True)  # Evaluate new genomes
-    parser.add_argument('--topology_id', type=int, default=3)  # ID of the used topology
-    parser.add_argument('--batch', type=int, default=1)  # Number of genomes evaluated per batch
+    parser.add_argument('--topology_id', type=int, default=3333)  # ID of the used topology
+    parser.add_argument('--batch', type=int, default=1000)  # Number of genomes evaluated per batch
     parser.add_argument('--min_finished', type=float, default=MIN_FINISHED)  # Minimal finish ratio before added to CSV
     parser.add_argument('--unused_cpu', type=int, default=2)  # Number of CPU cores not used during evaluation
     parser.add_argument('--save_population', type=bool, default=True)  # Save the final population after finishing

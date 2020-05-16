@@ -19,6 +19,7 @@ from six import iteritems
 from config import Config
 from main import get_game_ids
 from population.utils.gene_util.connection import ConnectionGene
+from population.utils.gene_util.convex_sru import ConvexSruNodeGene
 from population.utils.gene_util.fixed_rnn import FixedRnnNodeGene
 from population.utils.gene_util.gru import GruNodeGene
 from population.utils.gene_util.gru_no_reset import GruNoResetNodeGene
@@ -140,16 +141,18 @@ def get_genome_parameters(g, topology_id: int):
     """Unravel the genome's parameters as an ordered list."""
     if topology_id in [222, 333]:
         result = [g.nodes[2].delay, g.nodes[2].scale[0], g.nodes[2].bias_h[0]]
+    elif topology_id in [22222]:
+        result = [g.nodes[2].bias_h[0], g.nodes[2].weight]
     else:
         result = [v for v in g.nodes[2].bias_h]  # GRU biases
         result += [v[0] for v in g.nodes[2].weight_xh_full]  # GRU input->output
         result += [v[0] for v in g.nodes[2].weight_hh]  # GRU hidden->hidden
     if topology_id in [1]:
         result += [g.connections[(2, 1)].weight, g.connections[(-1, 1)].weight]
-    elif topology_id in [2, 22, 222, 2222]:
+    elif topology_id in [2, 22, 222, 2222, 22222]:
         result += [g.nodes[1].bias]
         result += [g.connections[(-1, 1)].weight]
-    elif topology_id in [3, 30, 33]:
+    elif topology_id in [3, 30, 33, 3333]:
         result += [g.nodes[1].bias]
         result += [g.connections[(-1, 2)].weight, g.connections[(2, 1)].weight, g.connections[(-1, 1)].weight]
     else:
@@ -202,18 +205,20 @@ def get_initial_keys(topology_id: int, use_backup: bool):
                 head += ['bias_h', 'weight_xh', 'weight_hh']
             elif topology_id in [222]:
                 head += ['delay', 'scale', 'bias_h']
-            elif topology_id in [2222]:
+            elif topology_id in [2222, 3333]:
                 head += ['bias_z', 'bias_h',
                          'weight_xz', 'weight_xh',
                          'weight_hz', 'weight_hh']
+            elif topology_id in [22222]:
+                head += ['bias_h', 'weight']
             else:
                 raise Exception(f"Topology ID '{topology_id}' not supported!")
             
             if topology_id in [1]:
                 head += ['conn1', 'conn2']
-            elif topology_id in [2, 22, 222]:
+            elif topology_id in [2, 22, 222, 2222, 22222]:
                 head += ['bias_rw', 'conn2']
-            elif topology_id in [3, 30, 33]:
+            elif topology_id in [3, 30, 33, 3333]:
                 head += ['bias_rw', 'conn0', 'conn1', 'conn2']
             else:
                 raise Exception(f"Topology ID '{topology_id}' not supported!")
@@ -236,10 +241,14 @@ def get_genome(topology_id: int, g_id: int, cfg: Config):
         topology = get_topology222
     elif topology_id == 2222:
         topology = get_topology2222
+    elif topology_id == 22222:
+        topology = get_topology22222
     elif topology_id in [3, 30]:
         topology = get_topology3
     elif topology_id == 33:
         topology = get_topology33
+    elif topology_id == 3333:
+        topology = get_topology3333
     else:
         raise Exception(f"Topology ID '{topology_id}' not supported")
     return topology(g_id, cfg)
@@ -249,11 +258,11 @@ def enforce_topology(g: Genome, topology_id: int):
     """Enforce the genome to the requested topology. It is assumed that topology hasn't changed."""
     if topology_id == 1:
         enforce_topology1(g)
-    elif topology_id in [2, 22, 2222]:
+    elif topology_id in [2, 22, 2222, 22222]:
         enforce_topology2(g)
     elif topology_id in [222]:
         enforce_topology222(g)
-    elif topology_id in [3, 30, 33]:
+    elif topology_id in [3, 30, 33, 3333]:
         enforce_topology3(g)
     else:
         raise Exception(f"Topology ID '{topology_id}' not supported")
@@ -562,6 +571,63 @@ def get_topology2222(gid: int, cfg: Config):
     return genome
 
 
+def get_topology22222(gid: int, cfg: Config):
+    """
+    Create a uniformly and randomly sampled genome of fixed topology:
+    Sigmoid with bias 1.5 --> Actuation default of 95,3%
+      (key=0, bias=1.5)      (key=1, bias=?)
+                     ____ /   /
+                   /         /
+               SRU-X        /
+                |     _____/
+                |   /
+              (key=-1)
+    """
+    # Create an initial dummy genome with fixed configuration
+    genome = Genome(
+            key=gid,
+            num_outputs=cfg.genome.num_outputs,
+            bot_config=cfg.bot,
+    )
+    
+    # Setup the parameter-ranges
+    conn_range = cfg.genome.weight_max_value - cfg.genome.weight_min_value
+    bias_range = cfg.genome.bias_max_value - cfg.genome.bias_min_value
+    rnn_range = cfg.genome.rnn_max_value - cfg.genome.rnn_min_value
+    
+    # Create the nodes
+    genome.nodes[0] = OutputNodeGene(key=0, cfg=cfg.genome)  # OutputNode 0
+    genome.nodes[0].bias = 1.5  # Drive with 0.953 actuation by default
+    genome.nodes[1] = OutputNodeGene(key=1, cfg=cfg.genome)  # OutputNode 1
+    genome.nodes[1].bias = random() * bias_range + cfg.genome.bias_min_value  # Uniformly sampled bias
+    genome.nodes[2] = ConvexSruNodeGene(key=2, cfg=cfg.genome, input_keys=[-1])  # Hidden node
+    genome.nodes[2].bias = 0  # Bias is irrelevant for GRU-node
+    
+    # Create the connections
+    genome.connections = dict()
+    
+    # input2gru
+    key = (-1, 2)
+    genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
+    genome.connections[key].weight = 1  # Simply forward distance
+    genome.connections[key].enabled = True
+    
+    # gru2output - Uniformly sampled
+    key = (2, 1)
+    genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
+    genome.connections[key].weight = 3  # Enforce capabilities of full spectrum
+    genome.connections[key].enabled = True
+    
+    # input2output - Uniformly sampled
+    key = (-1, 1)
+    genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
+    genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
+    genome.connections[key].enabled = True
+    
+    genome.update_rnn_nodes(config=cfg.genome)
+    return genome
+
+
 def get_topology3(gid: int, cfg: Config):
     """
     Create a uniformly and randomly sampled genome of fixed topology:
@@ -671,6 +737,68 @@ def get_topology33(gid: int, cfg: Config):
     genome.connections[key].enabled = True
     
     # gru2gru - Uniformly sampled
+    key = (2, 1)
+    genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
+    genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
+    genome.connections[key].enabled = True
+    
+    # input2output - Uniformly sampled
+    key = (-1, 1)
+    genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
+    genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
+    genome.connections[key].enabled = True
+    
+    genome.update_rnn_nodes(config=cfg.genome)
+    return genome
+
+
+def get_topology3333(gid: int, cfg: Config):
+    """
+    Create a uniformly and randomly sampled genome of fixed topology:
+    Sigmoid with bias 1.5 --> Actuation default of 95,3%
+      (key=0, bias=1.5)      (key=1, bias=?)
+                     ____ /   /
+                   /         /
+              GRU-NR        /
+                |     _____/
+                |   /
+              (key=-1)
+    """
+    # Create an initial dummy genome with fixed configuration
+    genome = Genome(
+            key=gid,
+            num_outputs=cfg.genome.num_outputs,
+            bot_config=cfg.bot,
+    )
+    
+    # Setup the parameter-ranges
+    conn_range = cfg.genome.weight_max_value - cfg.genome.weight_min_value
+    bias_range = cfg.genome.bias_max_value - cfg.genome.bias_min_value
+    rnn_range = cfg.genome.rnn_max_value - cfg.genome.rnn_min_value
+    
+    # Create the nodes
+    genome.nodes[0] = OutputNodeGene(key=0, cfg=cfg.genome)  # OutputNode 0
+    genome.nodes[0].bias = 1.5  # Drive with 0.953 actuation by default
+    genome.nodes[1] = OutputNodeGene(key=1, cfg=cfg.genome)  # OutputNode 1
+    genome.nodes[1].bias = random() * bias_range + cfg.genome.bias_min_value  # Uniformly sampled bias
+    genome.nodes[2] = GruNoResetNodeGene(key=2, cfg=cfg.genome, input_keys=[-1], input_keys_full=[-1])  # Hidden node
+    genome.nodes[2].bias = 0  # Bias is irrelevant for GRU-node
+    
+    # Uniformly sample the genome's GRU-component
+    genome.nodes[2].bias_h = rand_arr((2,)) * bias_range + cfg.genome.bias_min_value
+    genome.nodes[2].weight_xh_full = rand_arr((2, 1)) * rnn_range + cfg.genome.weight_min_value
+    genome.nodes[2].weight_hh = rand_arr((2, 1)) * rnn_range + cfg.genome.weight_min_value
+    
+    # Create the connections
+    genome.connections = dict()
+    
+    # input2gru
+    key = (-1, 2)
+    genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
+    genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
+    genome.connections[key].enabled = True
+    
+    # gru2output - Uniformly sampled
     key = (2, 1)
     genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
     genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value

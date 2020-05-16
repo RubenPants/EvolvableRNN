@@ -1,9 +1,8 @@
 """
-fixed_rnn.py
+convex_sru.py
 
-No real recurrent unit, just a hand-made delay between input and output.
+Modification of the SRU that has a convex recurrent weight (weight_xh and _hh are ignored).
 """
-from random import random
 
 import numpy as np
 from numpy.linalg import norm
@@ -13,11 +12,11 @@ from population.utils.attributes import rnn
 from population.utils.gene_util.rnn import RnnNodeGene
 
 
-class FixedRnnNodeGene(RnnNodeGene):
-    """Custom Fixed RNN cell implementation."""
+class ConvexSruNodeGene(RnnNodeGene):
+    """SRU modification to ensure convex connection."""
     
     __slots__ = {
-        'delay', 'scale',
+        'weight'
     }
     
     def __init__(self, key, cfg: GenomeConfig, input_keys=None):
@@ -28,34 +27,30 @@ class FixedRnnNodeGene(RnnNodeGene):
                 input_keys=input_keys,
                 input_keys_full=input_keys,
         )
-        self.delay = 50 + int(random() * 20)  # Delay until distance info is used
-        self.scale = rnn.init(cfg, hid_dim=len(input_keys))  # Scales the inputs before returning them
-        self.input_keys = input_keys
+        self.weight = np.clip(np.random.normal(0.5, 0.2), a_min=0, a_max=1)
     
     def __str__(self):
         return f"FixedRnnNodeGene(\n" \
                f"\tkey={self.key}\n" \
                f"\tdelay={self.bias_h[0]:.5f},\n" \
-               f"\tdelay={self.delay},\n" \
-               f"\tscale={self.scale[0]:.5f},\n" \
+               f"\tweight={self.weight:.5f},\n" \
+               f"\tscale={self.weight_hh[0, 0]:.5f},\n" \
                f"\tinput_keys={self.input_keys!r})"
     
     def __repr__(self):
-        return f"FixedRnnNodeGene(bias={self.bias_h[0]:.3f},delay={self.delay},scale={self.scale[0]:.3f})"
+        return f"FixedRnnNodeGene(bias={self.bias_h[0]:.3f},weight={self.weight:.3f},scale={self.weight_hh[0, 0]}:.3f)"
     
     def mutate(self, cfg: GenomeConfig):
         self.bias_h = rnn.mutate_1d(self.bias_h, cfg=cfg, bias=True)
-        self.scale = rnn.mutate_1d(self.scale, cfg=cfg)
-        if random() < cfg.bias_mutate_rate:
-            self.delay += int(np.random.normal() * 5)
-        if self.delay < 2: self.delay = 2
+        self.weight = np.clip(self.weight + np.random.normal(0, 0.01), a_min=0, a_max=1)  # Very sensitive!
+        self.weight_hh = rnn.mutate_2d(self.weight_hh, cfg=cfg)
     
     def distance(self, other, cfg: GenomeConfig):
         d = 0
         d += norm(self.bias_h - other.bias_h)
-        d += norm(self.scale - other.scale)
-        d += abs(self.delay - other.delay) / 10
-        d /= 3  # Average distance per component
+        d += abs(self.weight - other.weight)
+        d += norm(self.weight_hh - other.weight_hh)
+        d /= 2  # Average distance per component
         return d
     
     def update_weight_xh(self):
@@ -66,8 +61,8 @@ class FixedRnnNodeGene(RnnNodeGene):
         cell = FixedCell(
                 input_size=len(mapping[mapping]) if mapping is not None else len(self.input_keys),
                 bias=self.bias_h,
-                delay=self.delay,
-                scale=self.scale,
+                weight=self.weight,
+                scale=self.weight_hh[0, 0],
         )
         return cell
 
@@ -75,16 +70,16 @@ class FixedRnnNodeGene(RnnNodeGene):
 class FixedCell:
     """Small variation of the PyTorch implementation of the simple RNN-cell."""
     
-    def __init__(self, input_size: int, bias, delay: int, scale):
+    def __init__(self, input_size: int, bias, weight: float, scale: float):
         """
         Create the RNN-cell with the provided parameters.
 
         :param input_size: Number of inputs going into the cell
-        :param delay: Bias for the internal node
+        :param weight: Convex weight of the unit's connections
         """
         self.input_size: int = input_size
         self.bias = bias
-        self.delay: int = delay
+        self.weight = weight
         self.scale = scale
         self.hx: np.ndarray = None
     
@@ -97,8 +92,5 @@ class FixedCell:
         """
         if self.hx is None:  # (batch_size, hidden_size)
             self.hx = np.zeros((x.shape[0], 1), dtype=np.float64)
-        self.hx = np.concatenate((self.hx, x), axis=1)
-        if self.hx.shape[1] <= self.delay + 1:  # As long as delay does not kick in, use first reading
-            return self.hx[:, 1:2] * self.scale[0] + self.bias[0]
-        else:
-            return self.hx[:, -self.delay - 1:-self.delay] * self.scale[0] + self.bias[0]
+        self.hx = np.tanh(self.weight * self.hx + (1 - self.weight) * x * self.scale)
+        return self.hx
