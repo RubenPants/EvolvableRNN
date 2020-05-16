@@ -19,7 +19,6 @@ from experiment6 import get_multi_env
 from experiment6_2 import calc_finished_ratio
 from main import get_folder, get_game_ids
 from population.population import Population
-from population.utils.cache.genome_distance import GenomeDistanceCache
 from population.utils.gene_util.connection import ConnectionGene
 from population.utils.gene_util.gru import GruNodeGene
 from population.utils.gene_util.gru_no_reset import GruNoResetNodeGene
@@ -55,8 +54,7 @@ def main(pop_name: str,
     
     # Replace the population's initial population with the requested topologies genomes
     if pop.generation == 0:
-        for g_id in pop.population.keys():
-            pop.population[g_id] = get_topology(pop_name, gid=g_id, cfg=cfg)
+        for g_id in pop.population.keys(): pop.population[g_id] = get_topology(pop_name, gid=g_id, cfg=cfg)
         pop.species.speciate(config=pop.config,
                              population=pop.population,
                              generation=pop.generation,
@@ -117,26 +115,7 @@ def main(pop_name: str,
         pop.best_genome = best
         
         # Let population evolve
-        pop.evolve()
-        
-        # Constraint each of the population's new genomes to the given topology
-        for g in pop.population.values():
-            enforce_topology(pop_name, genome=g)
-        
-        # Check for unique genomes
-        cache = GenomeDistanceCache(cfg.genome)
-        genomes = list(pop.population.values())
-        for g1 in range(len(genomes)):
-            for g2 in range(g1 + 1, min(len(genomes), g1 + 50)):
-                if cache(genomes[g1], genomes[g2]) == 0:
-                    genomes[g1].mutate(pop.config.genome)
-                    enforce_topology(pop_name, genome=genomes[g1])
-                    cache.remove_genome(genomes[g1])
-                    break
-        pop.species.speciate(config=pop.config,
-                             population=pop.population,
-                             generation=pop.generation,
-                             logger=pop.log)
+        evolve(pop, pop_name)
         
         # End generation
         pop.reporters.end_generation(population=pop.population,
@@ -178,6 +157,39 @@ def main(pop_name: str,
 
 
 # -------------------------------------------------> HELPER METHODS <------------------------------------------------- #
+
+def evolve(pop: Population, pop_name: str):
+    """Evolve with the set constraints in mind."""
+    # Create the next generation from the current generation
+    pop.population = pop.reproduction.reproduce(
+            config=pop.config,
+            species=pop.species,
+            generation=pop.generation,
+            logger=pop.log,
+    )
+    
+    # Constraint each of the population's new genomes to the given topology
+    for g in pop.population.values(): enforce_topology(pop_name, genome=g)
+    
+    # Check for complete extinction
+    if not pop.species.species:
+        pop.reporters.complete_extinction(logger=pop.log)
+        
+        # If requested by the user, create a completely new population, otherwise raise an exception
+        pop.population = pop.reproduction.create_new(config=pop.config,
+                                                     num_genomes=pop.config.population.pop_size)
+    
+    # Divide the new population into species
+    pop.species.speciate(config=pop.config,
+                         population=pop.population,
+                         generation=pop.generation,
+                         logger=pop.log)
+    
+    # Add to each of the species its elites
+    pop.update_species_fitness_hist()
+    
+    # Increment generation count
+    pop.generation += 1
 
 
 def get_topology(pop_name, gid: int, cfg: Config):
@@ -278,19 +290,16 @@ def get_config():
     cfg.bot.dist_enabled = True
     cfg.evaluation.fitness = D_DISTANCE
     cfg.game.duration = 60  # 60 seconds should be just enough to reach each of the spawned targets
-    cfg.genome.bias_mutate_power = 0.2  # More subtle changes
-    cfg.genome.bias_replace_rate = 0.01  # More subtle changes (likely sparks new species)
     cfg.genome.conn_add_prob = 0  # No topology mutations allowed
     cfg.genome.conn_disable_prob = 0  # No topology mutations allowed
     cfg.genome.enabled_mutate_rate = 0  # No topology mutations allowed
     cfg.genome.node_add_prob = 0  # No topology mutations allowed
     cfg.genome.node_disable_prob = 0  # No topology mutations allowed
-    cfg.genome.weight_mutate_power = 0.2  # More subtle changes
-    cfg.genome.weight_replace_rate = 0.01  # More subtle changes (likely sparks new species)
-    cfg.population.pop_size = 512
-    cfg.population.parent_selection = 0.1
-    cfg.population.specie_stagnation = 5  # Keep a relative low stagnation threshold to make room for new species
     cfg.population.compatibility_thr = .5  # Keep threshold low to enforce new species to be discovered
+    cfg.population.parent_selection = 0.1
+    cfg.population.pop_size = 512
+    cfg.population.specie_elitism = 1  # Only one elite species
+    cfg.population.specie_stagnation = 10  # Keep a relative low stagnation threshold to make room for new species
     cfg.update()
     return cfg
 

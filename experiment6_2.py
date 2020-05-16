@@ -258,11 +258,11 @@ def get_config():
     cfg.genome.conn_add_prob = 0  # No topology mutations allowed
     cfg.genome.conn_disable_prob = 0  # No topology mutations allowed
     cfg.genome.enabled_mutate_rate = 0  # No topology mutations allowed
-    cfg.population.pop_size = 512
     cfg.population.compatibility_thr = .5  # Keep threshold low to enforce new species to be discovered
+    cfg.population.parent_selection = .1  # Low parent selection since large number of species used
+    cfg.population.pop_size = 512
     cfg.population.specie_elitism = 0  # Do not keep any specie after it stagnated
     cfg.population.specie_stagnation = 10  # Keep a relative low stagnation threshold to make room for new species
-    cfg.population.parent_selection = .1  # Low parent selection since large number of species used
     cfg.update()
     return cfg
 
@@ -331,8 +331,8 @@ def execution_test():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate', type=bool, default=True)  # Evaluate new genomes
-    parser.add_argument('--topology_id', type=int, default=222)  # ID of the used topology
-    parser.add_argument('--batch', type=int, default=1000)  # Number of genomes evaluated per batch
+    parser.add_argument('--topology_id', type=int, default=3)  # ID of the used topology
+    parser.add_argument('--batch', type=int, default=1)  # Number of genomes evaluated per batch
     parser.add_argument('--min_finished', type=float, default=MIN_FINISHED)  # Minimal finish ratio before added to CSV
     parser.add_argument('--unused_cpu', type=int, default=2)  # Number of CPU cores not used during evaluation
     parser.add_argument('--save_population', type=bool, default=True)  # Save the final population after finishing
