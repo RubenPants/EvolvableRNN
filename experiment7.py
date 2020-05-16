@@ -32,6 +32,7 @@ P_CONN = 'connection'
 P_GRU_NR = 'gru_nr'
 P_GRU_NR_CONN = 'gru_nr_connection'
 SUPPORTED = [P_DEFAULT, P_CONN, P_GRU_NR, P_GRU_NR_CONN]
+CONN_WEIGHT = 6
 
 
 # --------------------------------------------------> MAIN METHODS <-------------------------------------------------- #
@@ -242,7 +243,7 @@ def get_topology(pop_name, gid: int, cfg: Config):
     key = (-1, 2)
     genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
     if pop_name in [P_CONN, P_GRU_NR_CONN]:
-        genome.connections[key].weight = 3  # Maximize connection, GRU can always lower values flowing through
+        genome.connections[key].weight = CONN_WEIGHT  # Maximize connection, GRU can always lower values flowing through
     else:
         genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
     genome.connections[key].enabled = True
@@ -251,7 +252,7 @@ def get_topology(pop_name, gid: int, cfg: Config):
     key = (2, 1)
     genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
     if pop_name in [P_CONN, P_GRU_NR_CONN]:
-        genome.connections[key].weight = 3  # Maximize connection, GRU can always lower values flowing through
+        genome.connections[key].weight = CONN_WEIGHT  # Maximize connection, GRU can always lower values flowing through
     else:
         genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
     genome.connections[key].enabled = True
@@ -279,8 +280,9 @@ def enforce_topology(pop_name, genome: Genome):
     """
     genome.nodes[0].bias = 1.5  # Drive with 0.953 actuation by default
     if pop_name in [P_CONN, P_GRU_NR_CONN]:
+        genome.connections[(-1, 1)].weight = -abs(genome.connections[(-1, 1)].weight)
         for key in [(-1, 2), (2, 1)]:
-            genome.connections[key].weight = 3
+            genome.connections[key].weight = CONN_WEIGHT
 
 
 def get_config():
