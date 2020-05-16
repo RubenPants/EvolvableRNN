@@ -324,8 +324,7 @@ if __name__ == '__main__':
     
     # Run the program
     main(
-            # pop_name=args.pop_name,
-            pop_name=P_GRU_NR_CONN,
+            pop_name=args.pop_name,
             version=args.version,
             unused_cpu=args.unused_cpu,
             use_backup=args.use_backup,
