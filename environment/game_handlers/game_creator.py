@@ -289,7 +289,7 @@ def create_experiment_6(overwrite: bool = True, show: bool = True):
     ROBOT_INIT_POS = Vec2d(cfg.game.x_axis / 2, cfg.game.y_axis / 2)  # Initial position of the drone
     
     # Create the training game
-    spawn_f_train = SpawnRange(game_config=cfg.game, train=True, r_max=10, r_min=2)
+    spawn_f_train = SpawnRange(game_config=cfg.game, train=True, r_max=8, r_min=4)
     game = Game(
             config=cfg,
             player_noise=0,
@@ -345,4 +345,4 @@ if __name__ == '__main__':
     # create_experiment_1(overwrite=args.overwrite, show=args.show)
     # create_experiment_2(overwrite=args.overwrite, show=args.show)
     # create_experiment_3(overwrite=args.overwrite, show=args.show)
-    # create_experiment_6(overwrite=args.overwrite, show=args.show)
+    create_experiment_6(overwrite=args.overwrite, show=args.show)
