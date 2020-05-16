@@ -29,7 +29,8 @@ class FixedRnnNodeGene(RnnNodeGene):
                 input_keys_full=input_keys,
         )
         self.key = key
-        self.delay = int(random() * 20) + 1  # Delay until distance info is used
+        self.bias_h = rnn.init(cfg, hid_dim=len(input_keys), bias=True)
+        self.delay = 50 + int(random() * 20)  # Delay until distance info is used
         self.scale = rnn.init(cfg, hid_dim=len(input_keys))  # Scales the inputs before returning them
         self.input_keys = input_keys
         self.bias = 0
@@ -37,14 +38,16 @@ class FixedRnnNodeGene(RnnNodeGene):
     def __str__(self):
         return f"FixedRnnNodeGene(\n" \
                f"\tkey={self.key}\n" \
+               f"\tdelay={self.bias_h[0]:.5f},\n" \
                f"\tdelay={self.delay},\n" \
                f"\tscale={self.scale[0]:.5f},\n" \
                f"\tinput_keys={self.input_keys!r})"
     
     def __repr__(self):
-        return f"FixedRnnNodeGene(delay={self.delay},scale={self.scale[0]:.3f})"
+        return f"FixedRnnNodeGene(bias={self.bias_h[0]:.3f},delay={self.delay},scale={self.scale[0]:.3f})"
     
     def mutate(self, cfg: GenomeConfig):
+        self.bias_h = rnn.mutate_1d(self.bias_h, cfg=cfg, bias=True)
         self.scale = rnn.mutate_1d(self.scale, cfg=cfg)
         if random() < cfg.bias_mutate_rate:
             self.delay += int(np.random.normal() * 5)
@@ -52,6 +55,7 @@ class FixedRnnNodeGene(RnnNodeGene):
     
     def distance(self, other, cfg: GenomeConfig):
         d = 0
+        d += norm(self.bias_h - other.bias_h)
         d += norm(self.scale - other.scale)
         d += abs(self.delay - other.delay) / 10
         return d
@@ -63,6 +67,7 @@ class FixedRnnNodeGene(RnnNodeGene):
         """Return a RNNCell based on current configuration. The mapping denotes which columns to use."""
         cell = FixedCell(
                 input_size=len(mapping[mapping]) if mapping is not None else len(self.input_keys),
+                bias=self.bias_h,
                 delay=self.delay,
                 scale=self.scale,
         )
@@ -72,7 +77,7 @@ class FixedRnnNodeGene(RnnNodeGene):
 class FixedCell:
     """Small variation of the PyTorch implementation of the simple RNN-cell."""
     
-    def __init__(self, input_size: int, delay: int, scale: float):
+    def __init__(self, input_size: int, bias, delay: int, scale):
         """
         Create the RNN-cell with the provided parameters.
 
@@ -80,6 +85,7 @@ class FixedCell:
         :param delay: Bias for the internal node
         """
         self.input_size: int = input_size
+        self.bias = bias
         self.delay: int = delay
         self.scale = scale
         self.hx: np.ndarray = None
@@ -95,6 +101,6 @@ class FixedCell:
             self.hx = np.zeros((x.shape[0], 1), dtype=np.float64)
         self.hx = np.concatenate((self.hx, x), axis=1)
         if self.hx.shape[1] <= self.delay + 1:  # As long as delay does not kick in, use first reading
-            return self.hx[:, 1:2] * self.scale[0]
+            return self.hx[:, 1:2] * self.scale[0] + self.bias[0]
         else:
-            return self.hx[:, -self.delay - 1:-self.delay] * self.scale[0]
+            return self.hx[:, -self.delay - 1:-self.delay] * self.scale[0] + self.bias[0]

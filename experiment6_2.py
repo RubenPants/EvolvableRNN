@@ -27,7 +27,8 @@ from utils.dictionary import *
 from utils.myutils import get_subfolder
 
 # Minimal ratio of evaluation games finished before added to the CSV
-MIN_FINISHED = 0.8  # Finish 15/18 or more
+# MIN_FINISHED = 0.8  # Finish 15/18 or more  TODO: GRU default
+MIN_FINISHED = 1  # Go hard or go home
 # MIN_FINISHED = 0  # Finish 0/18 or more  # TODO: For the X0 variants (full search space)
 # MIN_FINISHED = 0.2  # Finish 4/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
 # MIN_FINISHED = 0.25  # Finish 5/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
@@ -61,9 +62,9 @@ def main(topology_id: int,
     # Replace the population's initial population with the requested topologies genomes
     for g_id in pop.population.keys(): pop.population[g_id] = get_genome(topology_id, g_id=g_id, cfg=cfg)
     pop.species.speciate(config=pop.config,
-		             population=pop.population,
-		             generation=pop.generation,
-		             logger=pop.log)
+                         population=pop.population,
+                         generation=pop.generation,
+                         logger=pop.log)
     
     # Set games and environment used for training and evaluation
     pop.log(f"\n\n\n===> RUNNING EXPERIMENT 6 <===\n")
@@ -292,7 +293,7 @@ def get_csv_path(topology_id: int, use_backup: bool, batch_size: int):
             elif topology_id in [22, 33]:  # SRU populations
                 head += ['bias_h', 'weight_xh', 'weight_hh']
             elif topology_id in [222]:
-                head += ['delay', 'scale']
+                head += ['delay', 'scale', 'bias_h']
             elif topology_id in [2222]:
                 head += ['bias_z', 'bias_h',
                          'weight_xz', 'weight_xh',
@@ -330,7 +331,7 @@ def execution_test():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate', type=bool, default=True)  # Evaluate new genomes
-    parser.add_argument('--topology_id', type=int, default=2222)  # ID of the used topology
+    parser.add_argument('--topology_id', type=int, default=222)  # ID of the used topology
     parser.add_argument('--batch', type=int, default=1000)  # Number of genomes evaluated per batch
     parser.add_argument('--min_finished', type=float, default=MIN_FINISHED)  # Minimal finish ratio before added to CSV
     parser.add_argument('--unused_cpu', type=int, default=2)  # Number of CPU cores not used during evaluation

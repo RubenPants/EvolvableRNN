@@ -74,7 +74,8 @@ def create_traces(traces: dict, games: list, gen: int, save_path: str, save_name
         y_min, y_max = min(g.y_axis / 2, g.target.y), max(g.y_axis / 2, g.target.y)
         
         # Add green dotted circle around targets
-        c = plt.Circle((g.target.x, g.target.y), 0.5, color='g', linestyle=':', linewidth=1.5, fill=False)
+        # c = plt.Circle((g.target.x, g.target.y), 0.5, color='g', linestyle=':', linewidth=1.5, fill=False)
+        c = plt.Circle((g.target.x, g.target.y), 0.5, color='g', linewidth=1.5, fill=True)
         plt.gca().add_artist(c)
         
         # Append the traces agent by agent
@@ -101,6 +102,10 @@ def create_traces(traces: dict, games: list, gen: int, save_path: str, save_name
         r = max((x_max - x_min) / 2 + .5, (y_max - y_min) / 2 + .5)
         plt.xlim(x_center - r, x_center + r)
         plt.ylim(y_center - r, y_center + r)
+        
+        # Overwrite axis limits to center graph (if requested)
+        plt.xlim(0, g.x_axis)
+        plt.ylim(0, g.y_axis)
         
         # Add title
         # plt.title(f"Game {g.id:05d}")

@@ -233,13 +233,13 @@ def trace_most_fit(population: Population,
                    ):
     """Create a trace evaluation for the given genome on the provided games."""
     from environment.env_visualizing import VisualizingEnv
-
+    
     game_config = deepcopy(population.config)
     if duration > 0: game_config.game.duration = duration
     
     population.log("\n===> CREATING GENOME TRACE <===\n")
     population.log(f"Creating traces for games: {games}")
-
+    
     visualizer = VisualizingEnv(
             game_config=game_config,
             games=games,
@@ -372,10 +372,10 @@ if __name__ == '__main__':
     parser.add_argument('--train_overview', type=bool, default=False)
     parser.add_argument('--blueprint', type=bool, default=False)
     parser.add_argument('--trace', type=bool, default=False)  # Keep it False
-    parser.add_argument('--trace_fit', type=bool, default=False)
+    parser.add_argument('--trace_fit', type=bool, default=True)
     parser.add_argument('--evaluate', type=bool, default=False)
     parser.add_argument('--genome', type=bool, default=False)
-    parser.add_argument('--monitor', type=bool, default=True)
+    parser.add_argument('--monitor', type=bool, default=False)
     parser.add_argument('--gru_analysis', type=bool, default=False)
     parser.add_argument('--live', type=bool, default=False)
     
@@ -386,7 +386,7 @@ if __name__ == '__main__':
     parser.add_argument('--version', type=int, default=0)
     parser.add_argument('--debug', type=bool, default=False)
     parser.add_argument('--duration', type=int, default=60)
-    parser.add_argument('--use_backup', type=bool, default=True)
+    parser.add_argument('--use_backup', type=bool, default=False)
     args = parser.parse_args()
     
     # Load in current config-file
@@ -400,13 +400,22 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='topology_2222',
+            name='topology_222',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment6',
             folder_name=get_folder(args.experiment),
             # config=config,  # Commented to prevent new populations from creating (if type in other fields)
             use_backup=args.use_backup,
     )
+    # for g in pop.population.values():
+    #     if g.fitness == 1:
+    #         pop.best_genome = deepcopy(g)
+    #         print(g)
+    # pop.best_genome.nodes[2].delay = 59
+    # pop.best_genome.nodes[2].scale[0] = 1.192
+    pop.best_genome = deepcopy(pop.population[3679])
+    print(pop.best_genome)
+    # raise Exception
     
     game_ids_train, game_ids_eval = get_game_ids(experiment_id=args.experiment)
     

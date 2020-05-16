@@ -139,7 +139,7 @@ def get_config():
 def get_genome_parameters(g, topology_id: int):
     """Unravel the genome's parameters as an ordered list."""
     if topology_id in [222, 333]:
-        result = [g.nodes[2].delay, g.nodes[2].scale[0]]
+        result = [g.nodes[2].delay, g.nodes[2].scale[0], g.nodes[2].bias_h[0]]
     else:
         result = [v for v in g.nodes[2].bias_h]  # GRU biases
         result += [v[0] for v in g.nodes[2].weight_xh_full]  # GRU input->output
@@ -201,7 +201,7 @@ def get_initial_keys(topology_id: int, use_backup: bool):
             elif topology_id in [22, 33]:  # SRU populations
                 head += ['bias_h', 'weight_xh', 'weight_hh']
             elif topology_id in [222]:
-                head += ['delay', 'scale']
+                head += ['delay', 'scale', 'bias_h']
             elif topology_id in [2222]:
                 head += ['bias_z', 'bias_h',
                          'weight_xz', 'weight_xh',
@@ -249,8 +249,10 @@ def enforce_topology(g: Genome, topology_id: int):
     """Enforce the genome to the requested topology. It is assumed that topology hasn't changed."""
     if topology_id == 1:
         enforce_topology1(g)
-    elif topology_id in [2, 22, 222, 2222]:
+    elif topology_id in [2, 22, 2222]:
         enforce_topology2(g)
+    elif topology_id in [222]:
+        enforce_topology222(g)
     elif topology_id in [3, 30, 33]:
         enforce_topology3(g)
     else:
@@ -446,7 +448,7 @@ def get_topology222(gid: int, cfg: Config):
     """
     Create a uniformly and randomly sampled genome of fixed topology:
     Sigmoid with bias 1.5 --> Actuation default of 95,3%
-      (key=0, bias=1.5)      (key=1, bias=?)
+      (key=0, bias=1.5)   (key=1, bias=2.11)
                      ____ /   /
                    /         /
                 FIXED       /
@@ -470,7 +472,7 @@ def get_topology222(gid: int, cfg: Config):
     genome.nodes[0] = OutputNodeGene(key=0, cfg=cfg.genome)  # OutputNode 0
     genome.nodes[0].bias = 1.5  # Drive with 0.953 actuation by default
     genome.nodes[1] = OutputNodeGene(key=1, cfg=cfg.genome)  # OutputNode 1
-    genome.nodes[1].bias = random() * bias_range + cfg.genome.bias_min_value  # Uniformly sampled bias
+    genome.nodes[1].bias = 2.11  # Found by GRU network it tries to mimic
     genome.nodes[2] = FixedRnnNodeGene(key=2, cfg=cfg.genome, input_keys=[-1])  # Hidden node
     
     # Create the connections
@@ -491,7 +493,7 @@ def get_topology222(gid: int, cfg: Config):
     # input2output - Uniformly sampled
     key = (-1, 1)
     genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
-    genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
+    genome.connections[key].weight = -2.82  # Found by GRU network it tries to mimic
     genome.connections[key].enabled = True
     
     genome.update_rnn_nodes(config=cfg.genome)
@@ -698,6 +700,15 @@ def enforce_topology2(g: Genome):
     g.connections[(2, 1)].weight = 3  # Enforce capabilities of full spectrum
 
 
+def enforce_topology222(g: Genome):
+    """Enforce the fixed parameters of topology222. It is assumed that topology hasn't changed."""
+    g.nodes[0].bias = 1.5  # Drive with 0.953 actuation by default
+    g.nodes[1].bias = 2.11  # Found by the GRU network it tries to mimic
+    g.connections[(-1, 2)].weight = 1  # Simply forward distance
+    g.connections[(2, 1)].weight = 3  # Enforce capabilities of full spectrum
+    g.connections[(-1, 1)].weight = -2.82  # Found by the GRU network it tries to mimic
+
+
 def enforce_topology3(g: Genome):
     """Enforce the fixed parameters of topology3. It is assumed that topology hasn't changed."""
     g.nodes[0].bias = 1.5  # Drive with 0.953 actuation by default
@@ -707,7 +718,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate', type=bool, default=True)  # Evaluate new genomes
     parser.add_argument('--topology_id', type=int, default=1)  # ID of the used topology
-    parser.add_argument('--batch', type=int, default=10000)  # Number of genomes evaluated per batch
+    parser.add_argument('--batch', type=int, default=0)  # Number of genomes evaluated per batch
     parser.add_argument('--unused_cpu', type=int, default=2)  # Number of CPU cores not used during evaluation
     parser.add_argument('--visualize', type=bool, default=True)  # Visualize the current results
     parser.add_argument('--use_backup', type=bool, default=False)  # Use the backup-data
