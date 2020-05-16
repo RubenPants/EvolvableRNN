@@ -369,10 +369,10 @@ if __name__ == '__main__':
     
     # Main methods
     parser.add_argument('--train', type=bool, default=False)
-    parser.add_argument('--train_overview', type=bool, default=False)
+    parser.add_argument('--train_overview', type=bool, default=True)
     parser.add_argument('--blueprint', type=bool, default=False)
     parser.add_argument('--trace', type=bool, default=False)  # Keep it False
-    parser.add_argument('--trace_fit', type=bool, default=True)
+    parser.add_argument('--trace_fit', type=bool, default=False)
     parser.add_argument('--evaluate', type=bool, default=False)
     parser.add_argument('--genome', type=bool, default=False)
     parser.add_argument('--monitor', type=bool, default=False)
@@ -381,7 +381,7 @@ if __name__ == '__main__':
     
     # Extra arguments
     parser.add_argument('--iterations', type=int, default=50)
-    parser.add_argument('--experiment', type=int, default=6)
+    parser.add_argument('--experiment', type=int, default=7)
     parser.add_argument('--unused_cpu', type=int, default=2)
     parser.add_argument('--version', type=int, default=0)
     parser.add_argument('--debug', type=bool, default=False)
@@ -400,7 +400,7 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='topology_222',
+            name='gru_nr/v2',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment6',
             folder_name=get_folder(args.experiment),
@@ -413,8 +413,8 @@ if __name__ == '__main__':
     #         print(g)
     # pop.best_genome.nodes[2].delay = 59
     # pop.best_genome.nodes[2].scale[0] = 1.192
-    pop.best_genome = deepcopy(pop.population[3679])
-    print(pop.best_genome)
+    # pop.best_genome = deepcopy(pop.population[3679])
+    # print(pop.best_genome)
     # raise Exception
     
     game_ids_train, game_ids_eval = get_game_ids(experiment_id=args.experiment)
