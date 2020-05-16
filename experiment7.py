@@ -298,7 +298,7 @@ def get_config():
     cfg.genome.node_add_prob = 0  # No topology mutations allowed
     cfg.genome.node_disable_prob = 0  # No topology mutations allowed
     cfg.genome.rnn_mutate_power = 0.1  # Single recurrent unit is quite sensitive to change
-    cfg.population.compatibility_thr = .5  # Keep threshold low to enforce new species to be discovered
+    cfg.population.compatibility_thr = .4  # Keep threshold low to enforce new species to be discovered
     cfg.population.genome_elitism = 3  # Higher likelihood of persisting better performing genome
     cfg.population.min_specie_size = 16  # Slightly slower species
     cfg.population.parent_selection = 0.1  # Higher selective pressure
