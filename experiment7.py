@@ -131,6 +131,8 @@ def main(pop_name: str,
                 if cache(genomes[g1], genomes[g2]) == 0:
                     genomes[g1].mutate(pop.config.genome)
                     enforce_topology(pop_name, genome=genomes[g1])
+                    cache.remove_genome(genomes[g1])
+                    break
         pop.species.speciate(config=pop.config,
                              population=pop.population,
                              generation=pop.generation,
