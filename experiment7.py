@@ -124,33 +124,34 @@ def main(pop_name: str,
                                      species_set=pop.species,
                                      logger=pop.log)
         
-        # Test if evaluation finds a solution for the new generation
-        pop.log("\n===> EVALUATING <===")
-        genomes = list(iteritems(pop.population))
-        pool = mp.Pool(mp.cpu_count() - unused_cpu)
-        manager = mp.Manager()
-        return_dict = manager.dict()
-        for genome in genomes:
-            pool.apply_async(func=eval_env.eval_genome, args=(genome, return_dict))
-        pool.close()  # Close the pool
-        pool.join()  # Postpone continuation until everything is finished
-        
-        # Calculate the fitness from the given return_dict
-        finished = calc_finished_ratio(
-                fitness_cfg=cfg.evaluation,
-                game_obs=return_dict,
-        )
-        best = None
-        for i, genome in genomes:
-            genome.fitness = finished[i]
-            if best is None or finished[i] > best.fitness: best = genome
-        pop.log(f"Best genome:\n{best}\n{best.nodes[2]}")
-        
-        # Solution is found
-        if best.fitness == 1:
-            pop.best_genome = best
-            pop.log(f"Solution found!")
-            solution_found = True  # End the outer while-loop
+        # Test if evaluation finds a solution for the new generation, impossible if fitness < 0.6
+        if pop.best_genome.fitness > 0.6 or pop.generation % 10 == 0:
+            pop.log("\n===> EVALUATING <===")
+            genomes = list(iteritems(pop.population))
+            pool = mp.Pool(mp.cpu_count() - unused_cpu)
+            manager = mp.Manager()
+            return_dict = manager.dict()
+            for genome in genomes:
+                pool.apply_async(func=eval_env.eval_genome, args=(genome, return_dict))
+            pool.close()  # Close the pool
+            pool.join()  # Postpone continuation until everything is finished
+            
+            # Calculate the fitness from the given return_dict
+            finished = calc_finished_ratio(
+                    fitness_cfg=cfg.evaluation,
+                    game_obs=return_dict,
+            )
+            best = None
+            for i, genome in genomes:
+                genome.fitness = finished[i]
+                if best is None or finished[i] > best.fitness: best = genome
+            pop.log(f"Best genome:\n{best}\n{best.nodes[2]}")
+            
+            # Solution is found
+            if best.fitness == 1:
+                pop.best_genome = best
+                pop.log(f"Solution found!")
+                solution_found = True  # End the outer while-loop
         
         # Save the population with their evaluation results
         pop.save()
@@ -291,7 +292,6 @@ def get_config():
     cfg.bot.dist_enabled = True
     cfg.evaluation.fitness = D_DISTANCE
     cfg.game.duration = 60  # 60 seconds should be just enough to reach each of the spawned targets
-    cfg.genome.bias_mutate_rate = 0.05  # Give corresponding weights more time to adjust
     cfg.genome.conn_add_prob = 0  # No topology mutations allowed
     cfg.genome.conn_disable_prob = 0  # No topology mutations allowed
     cfg.genome.enabled_mutate_rate = 0  # No topology mutations allowed
@@ -299,9 +299,9 @@ def get_config():
     cfg.genome.node_disable_prob = 0  # No topology mutations allowed
     cfg.genome.rnn_mutate_power = 0.1  # Single recurrent unit is quite sensitive to change
     cfg.population.compatibility_thr = .5  # Keep threshold low to enforce new species to be discovered
-    cfg.population.genome_elitism = 3
-    cfg.population.min_specie_size = 16
-    cfg.population.parent_selection = 0.1
+    cfg.population.genome_elitism = 3  # Higher likelihood of persisting better performing genome
+    cfg.population.min_specie_size = 16  # Slightly slower species
+    cfg.population.parent_selection = 0.1  # Higher selective pressure
     cfg.population.pop_size = 512
     cfg.population.specie_elitism = 1  # Only one elite species
     cfg.population.specie_stagnation = 10  # Keep a relative low stagnation threshold to make room for new species
