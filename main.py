@@ -400,7 +400,7 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='gru_nr/v2',
+            name='connection/v1',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment6',
             folder_name=get_folder(args.experiment),
