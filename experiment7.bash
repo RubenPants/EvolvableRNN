@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Default parameters
-pop_name=gru_nr;  # Topology-ID
+pop_name=gru_nr_connection;  # Topology-ID
 cpu=1;  # Number of unused CPUs
 push=10;  # After how many version git should push
 
