@@ -16,8 +16,10 @@ from six import iteritems, itervalues
 
 from config import Config
 from experiment6 import get_multi_env
+from experiment6_2 import calc_finished_ratio
 from main import get_folder, get_game_ids
 from population.population import Population
+from population.utils.cache.genome_distance import GenomeDistanceCache
 from population.utils.gene_util.connection import ConnectionGene
 from population.utils.gene_util.gru import GruNodeGene
 from population.utils.gene_util.gru_no_reset import GruNoResetNodeGene
@@ -37,8 +39,6 @@ SUPPORTED = [P_DEFAULT, P_CONN, P_GRU_NR, P_GRU_NR_CONN]
 
 def main(pop_name: str,
          version: int,
-         iterations: int,
-         batch: int = 10,
          unused_cpu: int = 2,
          use_backup: bool = False):
     # Check if valid population name
@@ -69,8 +69,10 @@ def main(pop_name: str,
     eval_env = get_multi_env(config=cfg)
     eval_env.set_games(games_eval, noise=False)
     
-    # Train the population
-    for _ in range(iterations):
+    solution_found = False
+    while not solution_found:
+        # Train the population for a single iteration
+        pop.log("\n===> TRAINING <===")
         train_env.set_games(games_train, noise=True)
         
         # Prepare the generation's reporters for the generation
@@ -121,15 +123,56 @@ def main(pop_name: str,
         for g in pop.population.values():
             enforce_topology(pop_name, genome=g)
         
+        # Check for unique genomes
+        cache = GenomeDistanceCache(cfg.genome)
+        genomes = list(pop.population.values())
+        for g1 in range(len(genomes)):
+            for g2 in range(g1 + 1, min(len(genomes), g1 + 50)):
+                if cache(genomes[g1], genomes[g2]) == 0:
+                    genomes[g1].mutate(pop.config.genome)
+                    enforce_topology(pop_name, genome=genomes[g1])
+        pop.species.speciate(config=pop.config,
+                             population=pop.population,
+                             generation=pop.generation,
+                             logger=pop.log)
+        
         # End generation
         pop.reporters.end_generation(population=pop.population,
                                      name=str(pop),
                                      species_set=pop.species,
                                      logger=pop.log)
         
-        # Save the population after training
-        if pop.generation % batch == 0:
-            pop.save()
+        # Test if evaluation finds a solution for the new generation
+        pop.log("\n===> EVALUATING <===")
+        genomes = list(iteritems(pop.population))
+        pool = mp.Pool(mp.cpu_count() - unused_cpu)
+        manager = mp.Manager()
+        return_dict = manager.dict()
+        for genome in genomes:
+            pool.apply_async(func=eval_env.eval_genome, args=(genome, return_dict))
+        pool.close()  # Close the pool
+        pool.join()  # Postpone continuation until everything is finished
+        
+        # Calculate the fitness from the given return_dict
+        finished = calc_finished_ratio(
+                fitness_cfg=cfg.evaluation,
+                game_obs=return_dict,
+        )
+        best = None
+        for i, genome in genomes:
+            genome.fitness = finished[i]
+            if best is None or finished[i] > best.fitness: best = genome
+        
+        # Solution is found
+        if best.fitness == 1:
+            pop.best_genome = best
+            pop.log(f"Solution found for genome\n{best}")
+            solution_found = True  # End the outer while-loop
+        else:
+            pop.log(f"Best evaluation score: {best.fitness:.3f}")
+        
+        # Save the population with their evaluation results
+        pop.save()
 
 
 # -------------------------------------------------> HELPER METHODS <------------------------------------------------- #
@@ -139,7 +182,7 @@ def get_topology(pop_name, gid: int, cfg: Config):
     """
     Create a uniformly and randomly sampled genome of fixed topology:
     Sigmoid with bias 1.5 --> Actuation default of 95,3%
-      (key=0, bias=1.5)      (key=1, bias=?)
+      (key=0, bias=1.5)   (key=1, bias=?)
                      ____ /   /
                    /         /
                 GRU         /
@@ -185,7 +228,7 @@ def get_topology(pop_name, gid: int, cfg: Config):
     key = (-1, 2)
     genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
     if pop_name in [P_CONN, P_GRU_NR_CONN]:
-        genome.connections[key].weight = 6  # Maximize connection, GRU can always lower values flowing through
+        genome.connections[key].weight = 3  # Maximize connection, GRU can always lower values flowing through
     else:
         genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
     genome.connections[key].enabled = True
@@ -194,7 +237,7 @@ def get_topology(pop_name, gid: int, cfg: Config):
     key = (2, 1)
     genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
     if pop_name in [P_CONN, P_GRU_NR_CONN]:
-        genome.connections[key].weight = 6  # Maximize connection, GRU can always lower values flowing through
+        genome.connections[key].weight = 3  # Maximize connection, GRU can always lower values flowing through
     else:
         genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
     genome.connections[key].enabled = True
@@ -223,7 +266,7 @@ def enforce_topology(pop_name, genome: Genome):
     genome.nodes[0].bias = 1.5  # Drive with 0.953 actuation by default
     if pop_name in [P_CONN, P_GRU_NR_CONN]:
         for key in [(-1, 2), (2, 1)]:
-            genome.connections[key].weight = 6
+            genome.connections[key].weight = 3
 
 
 def get_config(name):
@@ -231,14 +274,19 @@ def get_config(name):
     cfg.bot.angular_dir = []
     cfg.bot.delta_dist_enabled = False
     cfg.bot.dist_enabled = True
-    cfg.evaluation.fitness = D_DISTANCE_SCORE
-    cfg.game.duration = 200  # 200 seconds, similar to experiment 3
-    cfg.genome.node_add_prob = 0  # No topology mutations allowed
-    cfg.genome.node_disable_prob = 0  # No topology mutations allowed
+    cfg.evaluation.fitness = D_DISTANCE
+    cfg.game.duration = 60  # 200 seconds, similar to experiment 3
+    cfg.genome.bias_mutate_power = 0.2  # More subtle changes
+    cfg.genome.bias_replace_rate = 0.01  # More subtle changes (likely sparks new species)
     cfg.genome.conn_add_prob = 0  # No topology mutations allowed
     cfg.genome.conn_disable_prob = 0  # No topology mutations allowed
     cfg.genome.enabled_mutate_rate = 0  # No topology mutations allowed
+    cfg.genome.node_add_prob = 0  # No topology mutations allowed
+    cfg.genome.node_disable_prob = 0  # No topology mutations allowed
+    cfg.genome.weight_mutate_power = 0.2  # More subtle changes
+    cfg.genome.weight_replace_rate = 0.01  # More subtle changes (likely sparks new species)
     cfg.population.pop_size = 512
+    cfg.population.parent_selection = 0.1
     if name in [P_DEFAULT, P_GRU_NR]:
         cfg.population.compatibility_thr = 1  # Keep threshold low to enforce new species to be discovered
     elif name in [P_CONN, P_GRU_NR_CONN]:
@@ -253,18 +301,15 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--pop_name', type=str)  # ID of the used topology
     parser.add_argument('--version', type=int, default=1)  # Version of the population
-    parser.add_argument('--iterations', type=int, default=1)  # Number of training iterations
-    parser.add_argument('--batch', type=int, default=10)  # Hops of saving during training
     parser.add_argument('--unused_cpu', type=int, default=2)  # Number of CPU cores not used during evaluation
     parser.add_argument('--use_backup', type=bool, default=False)  # Use the backup-data
     args = parser.parse_args()
     
     # Run the program
     main(
-            pop_name=args.pop_name,
+            # pop_name=args.pop_name,
+            pop_name="default",  # TODO
             version=args.version,
-            iterations=args.iterations,
-            batch=args.batch,
             unused_cpu=args.unused_cpu,
             use_backup=args.use_backup,
     )

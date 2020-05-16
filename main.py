@@ -321,7 +321,7 @@ def get_game_ids(experiment_id):
     elif experiment_id in [2]:
         return [10000, ] * 10, \
                [20000 + i for i in range(1, 19)] + [20100 + i for i in range(1, 19)]
-    elif experiment_id in [3, 7]:
+    elif experiment_id in [3]:
         return [30000, ] * 10, \
                [30000 + i for i in range(1, 21)]
     elif experiment_id in [4]:  # Combines experiment1&2
@@ -329,7 +329,7 @@ def get_game_ids(experiment_id):
                [10000 + i for i in range(1, 21)] + \
                [20000 + i for i in range(1, 19)] + \
                [20100 + i for i in range(1, 19)]
-    elif experiment_id in [6]:
+    elif experiment_id in [6, 7]:
         return [60000, ] * 10, \
                [60000 + i for i in range(1, 19)]
     else:

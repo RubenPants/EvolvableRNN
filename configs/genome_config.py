@@ -75,7 +75,7 @@ class GenomeConfig(BaseConfig):
         self.rnn_max_value: float = 6.
         # The minimum allowed RNN-weight value, values below this will be clipped  [def=-3]
         self.rnn_min_value: float = -6.
-        # The standard deviation of the zero-centered gaussian from which a RNN value mutation is drawn  [def=0.2]
+        # The standard deviation of the zero-centered gaussian from which a RNN value mutation is drawn  [def=0.2]  TODO
         self.rnn_mutate_power: float = .2
         # Probability of a RNN value to mutate  [def=0.2]  TODO
         self.rnn_mutate_rate: float = .2
