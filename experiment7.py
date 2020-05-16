@@ -44,7 +44,7 @@ def main(pop_name: str,
     # Check if valid population name
     if pop_name not in SUPPORTED: raise Exception(f"Population '{pop_name}' not supported!")
     # Create the population
-    cfg = get_config()
+    cfg = get_config(pop_name)
     folder = get_folder(experiment_id=7)
     pop = Population(
             name=f'{pop_name}/v{version}',
@@ -285,7 +285,7 @@ def enforce_topology(pop_name, genome: Genome):
             genome.connections[key].weight = CONN_WEIGHT
 
 
-def get_config():
+def get_config(pop_name):
     cfg = Config()
     cfg.bot.angular_dir = []
     cfg.bot.delta_dist_enabled = False
@@ -298,7 +298,12 @@ def get_config():
     cfg.genome.node_add_prob = 0  # No topology mutations allowed
     cfg.genome.node_disable_prob = 0  # No topology mutations allowed
     cfg.genome.rnn_mutate_power = 0.1  # Single recurrent unit is quite sensitive to change
-    cfg.population.compatibility_thr = .4  # Keep threshold low to enforce new species to be discovered
+    if pop_name in [P_GRU_NR_CONN]:
+        cfg.population.compatibility_thr = .3  # Keep threshold low to enforce new species to be discovered
+    elif pop_name in [P_CONN]:
+        cfg.population.compatibility_thr = .4  # Keep threshold low to enforce new species to be discovered
+    else:
+        cfg.population.compatibility_thr = .5  # Keep threshold low to enforce new species to be discovered
     cfg.population.genome_elitism = 3  # Higher likelihood of persisting better performing genome
     cfg.population.min_specie_size = 16  # Slightly slower species
     cfg.population.parent_selection = 0.1  # Higher selective pressure
