@@ -309,7 +309,7 @@ def get_config():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--pop_name', type=str)  # ID of the used topology
-    parser.add_argument('--version', type=int, default=1)  # Version of the population
+    parser.add_argument('--version', type=int, default=0)  # Version of the population
     parser.add_argument('--unused_cpu', type=int, default=2)  # Number of CPU cores not used during evaluation
     parser.add_argument('--use_backup', type=bool, default=False)  # Use the backup-data
     args = parser.parse_args()
