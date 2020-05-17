@@ -400,7 +400,7 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='topology_22222',
+            name='topology_2222',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment6',
             folder_name=get_folder(args.experiment),
@@ -418,6 +418,7 @@ if __name__ == '__main__':
     # pop.best_genome = deepcopy(pop.population[589])
     print(pop.best_genome)
     print(pop.best_genome.nodes[2])
+    raise Exception
     
     game_ids_train, game_ids_eval = get_game_ids(experiment_id=args.experiment)
     
