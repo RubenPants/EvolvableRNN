@@ -27,11 +27,14 @@ from utils.dictionary import *
 from utils.myutils import get_subfolder
 
 # Minimal ratio of evaluation games finished before added to the CSV
-# MIN_FINISHED = 0.8  # Finish 15/18 or more  TODO: GRU default
-MIN_FINISHED = 1  # Go hard or go home
 # MIN_FINISHED = 0  # Finish 0/18 or more  # TODO: For the X0 variants (full search space)
 # MIN_FINISHED = 0.2  # Finish 4/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
 # MIN_FINISHED = 0.25  # Finish 5/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
+MIN_FINISHED = 0.5  # 'mhe' results
+
+
+# MIN_FINISHED = 1  # Go hard or go home
+# MIN_FINISHED = 0.8  # Finish 15/18 or more  TODO: GRU default
 
 
 # --------------------------------------------------> MAIN METHODS <-------------------------------------------------- #
@@ -154,6 +157,7 @@ def main(topology_id: int,
             # Give evaluation overview of population
             pop.log(f"Best evaluation finish ratio: {round(best.fitness, 2)}")
             best_str = str(best).replace("\n", "\n\t")
+            best_str += "\n\t" + str(best.nodes[2]).replace("\n", "\n\t")
             pop.log(f"Best genome: \n\t{best_str}")
             sids = list(iterkeys(pop.species.species))
             sids.sort()
@@ -333,8 +337,8 @@ def execution_test():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate', type=bool, default=True)  # Evaluate new genomes
-    parser.add_argument('--topology_id', type=int, default=3333)  # ID of the used topology
-    parser.add_argument('--batch', type=int, default=1000)  # Number of genomes evaluated per batch
+    parser.add_argument('--topology_id', type=int, default=22222)  # ID of the used topology
+    parser.add_argument('--batch', type=int, default=1)  # Number of genomes evaluated per batch
     parser.add_argument('--min_finished', type=float, default=MIN_FINISHED)  # Minimal finish ratio before added to CSV
     parser.add_argument('--unused_cpu', type=int, default=2)  # Number of CPU cores not used during evaluation
     parser.add_argument('--save_population', type=bool, default=True)  # Save the final population after finishing

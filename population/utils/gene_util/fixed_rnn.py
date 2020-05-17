@@ -35,7 +35,7 @@ class FixedRnnNodeGene(RnnNodeGene):
     def __str__(self):
         return f"FixedRnnNodeGene(\n" \
                f"\tkey={self.key}\n" \
-               f"\tdelay={self.bias_h[0]:.5f},\n" \
+               f"\tbias={self.bias_h[0]:.5f},\n" \
                f"\tdelay={self.delay},\n" \
                f"\tscale={self.scale[0]:.5f},\n" \
                f"\tinput_keys={self.input_keys!r})"

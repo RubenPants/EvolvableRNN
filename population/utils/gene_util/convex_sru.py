@@ -27,29 +27,26 @@ class ConvexSruNodeGene(RnnNodeGene):
                 input_keys=input_keys,
                 input_keys_full=input_keys,
         )
-        self.weight = np.clip(np.random.normal(0.5, 0.2), a_min=0, a_max=1)
+        self.weight = np.clip(np.random.normal(0.975, 0.01), a_min=0, a_max=1)
     
     def __str__(self):
-        return f"FixedRnnNodeGene(\n" \
+        return f"ConvexSruNodeGene(\n" \
                f"\tkey={self.key}\n" \
                f"\tdelay={self.bias_h[0]:.5f},\n" \
                f"\tweight={self.weight:.5f},\n" \
-               f"\tscale={self.weight_hh[0, 0]:.5f},\n" \
                f"\tinput_keys={self.input_keys!r})"
     
     def __repr__(self):
-        return f"FixedRnnNodeGene(bias={self.bias_h[0]:.3f},weight={self.weight:.3f},scale={self.weight_hh[0, 0]}:.3f)"
+        return f"ConvexSruNodeGene(bias={self.bias_h[0]:.3f},weight={self.weight:.3f})"
     
     def mutate(self, cfg: GenomeConfig):
         self.bias_h = rnn.mutate_1d(self.bias_h, cfg=cfg, bias=True)
-        self.weight = np.clip(self.weight + np.random.normal(0, 0.01), a_min=0, a_max=1)  # Very sensitive!
-        self.weight_hh = rnn.mutate_2d(self.weight_hh, cfg=cfg)
+        self.weight = np.clip(self.weight + np.random.normal(0, 0.001), a_min=0, a_max=1)  # Very sensitive!
     
     def distance(self, other, cfg: GenomeConfig):
         d = 0
         d += norm(self.bias_h - other.bias_h)
-        d += abs(self.weight - other.weight)
-        d += norm(self.weight_hh - other.weight_hh)
+        d += 10 * abs(self.weight - other.weight)
         d /= 2  # Average distance per component
         return d
     
@@ -62,7 +59,6 @@ class ConvexSruNodeGene(RnnNodeGene):
                 input_size=len(mapping[mapping]) if mapping is not None else len(self.input_keys),
                 bias=self.bias_h,
                 weight=self.weight,
-                scale=self.weight_hh[0, 0],
         )
         return cell
 
@@ -70,7 +66,7 @@ class ConvexSruNodeGene(RnnNodeGene):
 class FixedCell:
     """Small variation of the PyTorch implementation of the simple RNN-cell."""
     
-    def __init__(self, input_size: int, bias, weight: float, scale: float):
+    def __init__(self, input_size: int, bias, weight: float):
         """
         Create the RNN-cell with the provided parameters.
 
@@ -80,7 +76,6 @@ class FixedCell:
         self.input_size: int = input_size
         self.bias = bias
         self.weight = weight
-        self.scale = scale
         self.hx: np.ndarray = None
     
     def __call__(self, x: np.ndarray):
@@ -92,5 +87,5 @@ class FixedCell:
         """
         if self.hx is None:  # (batch_size, hidden_size)
             self.hx = np.zeros((x.shape[0], 1), dtype=np.float64)
-        self.hx = np.tanh(self.weight * self.hx + (1 - self.weight) * x * self.scale)
+        self.hx = np.tanh(self.weight * self.hx + (1 - self.weight) * x)
         return self.hx
