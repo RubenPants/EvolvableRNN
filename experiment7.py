@@ -168,6 +168,7 @@ def evolve(pop: Population, pop_name: str):
             generation=pop.generation,
             logger=pop.log,
     )
+    # TODO: Extend with X randomly generated genomes?
     
     # Constraint each of the population's new genomes to the given topology
     for g in pop.population.values(): enforce_topology(pop_name, genome=g)
@@ -298,16 +299,16 @@ def get_config(pop_name):
     cfg.genome.node_add_prob = 0  # No topology mutations allowed
     cfg.genome.node_disable_prob = 0  # No topology mutations allowed
     cfg.genome.rnn_mutate_power = 0.1  # Single recurrent unit is quite sensitive to change
-    if pop_name in [P_GRU_NR_CONN]:
-        cfg.population.compatibility_thr = .3  # Keep threshold low to enforce new species to be discovered
-    elif pop_name in [P_CONN]:
-        cfg.population.compatibility_thr = .4  # Keep threshold low to enforce new species to be discovered
-    else:
-        cfg.population.compatibility_thr = .5  # Keep threshold low to enforce new species to be discovered
+    # if pop_name in [P_GRU_NR_CONN]:
+    #     cfg.population.compatibility_thr = .3  # Keep threshold low to enforce new species to be discovered
+    # elif pop_name in [P_CONN]:
+    #     cfg.population.compatibility_thr = .4  # Keep threshold low to enforce new species to be discovered
+    # else:
+    #     cfg.population.compatibility_thr = .5  # Keep threshold low to enforce new species to be discovered
     cfg.population.genome_elitism = 3  # Higher likelihood of persisting better performing genome
-    cfg.population.min_specie_size = 16  # Slightly slower species
+    # cfg.population.min_specie_size = 16  # Slightly slower species
     cfg.population.parent_selection = 0.1  # Higher selective pressure
-    cfg.population.pop_size = 512
+    # cfg.population.pop_size = 512
     cfg.population.specie_elitism = 1  # Only one elite species
     cfg.population.specie_stagnation = 10  # Keep a relative low stagnation threshold to make room for new species
     cfg.update()
