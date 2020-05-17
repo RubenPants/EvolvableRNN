@@ -19,10 +19,6 @@ else:
 class GruNoResetNodeGene(RnnNodeGene):
     """Custom GRU cell implementation."""
     
-    __slots__ = {
-        'bias', 'bias_h', 'input_keys', 'input_keys_full', 'weight_hh', 'weight_xh', 'weight_xh_full',
-    }
-    
     def __init__(self, key, cfg: GenomeConfig, input_keys=None, input_keys_full=None):
         super().__init__(
                 key=key,

@@ -414,11 +414,11 @@ if __name__ == '__main__':
     # pop.best_genome.nodes[2].delay = 59
     # pop.best_genome.nodes[2].scale[0] = 1.192
     # pop.best_genome = deepcopy(pop.population[3679])
-    print(pop.best_genome)
-    print(pop.best_genome.nodes[2])
-    pop.best_genome.update_rnn_nodes(pop.config.genome)
-    print(pop.best_genome.nodes[2])
-    raise Exception
+    # print(pop.best_genome)
+    # print(pop.best_genome.nodes[2])
+    # pop.best_genome.update_rnn_nodes(pop.config.genome)
+    # print(pop.best_genome.nodes[2])
+    # raise Exception
     
     game_ids_train, game_ids_eval = get_game_ids(experiment_id=args.experiment)
     

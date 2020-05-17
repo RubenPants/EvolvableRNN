@@ -16,7 +16,7 @@ from six import iteritems, itervalues
 
 from config import Config
 from experiment6 import get_multi_env
-from experiment6_2 import calc_finished_ratio
+from experiment6_2 import calc_finished_ratio, get_config
 from main import get_folder, get_game_ids
 from population.population import Population
 from population.utils.gene_util.connection import ConnectionGene
@@ -25,7 +25,6 @@ from population.utils.gene_util.gru_no_reset import GruNoResetNodeGene
 from population.utils.gene_util.output_node import OutputNodeGene
 from population.utils.genome import Genome
 from population.utils.population_util.fitness_functions import calc_pop_fitness
-from utils.dictionary import *
 
 P_DEFAULT = 'default'
 P_CONN = 'connection'
@@ -44,7 +43,7 @@ def main(pop_name: str,
     # Check if valid population name
     if pop_name not in SUPPORTED: raise Exception(f"Population '{pop_name}' not supported!")
     # Create the population
-    cfg = get_config(pop_name)
+    cfg = get_config()
     folder = get_folder(experiment_id=7)
     pop = Population(
             name=f'{pop_name}/v{version}',
@@ -284,35 +283,6 @@ def enforce_topology(pop_name, genome: Genome):
         genome.connections[(-1, 1)].weight = -abs(genome.connections[(-1, 1)].weight)
         for key in [(-1, 2), (2, 1)]:
             genome.connections[key].weight = CONN_WEIGHT
-
-
-def get_config(pop_name):
-    cfg = Config()
-    cfg.bot.angular_dir = []
-    cfg.bot.delta_dist_enabled = False
-    cfg.bot.dist_enabled = True
-    cfg.evaluation.fitness = D_DISTANCE
-    cfg.game.duration = 60  # 60 seconds should be just enough to reach each of the spawned targets
-    cfg.genome.conn_add_prob = 0  # No topology mutations allowed
-    cfg.genome.conn_disable_prob = 0  # No topology mutations allowed
-    cfg.genome.enabled_mutate_rate = 0  # No topology mutations allowed
-    cfg.genome.node_add_prob = 0  # No topology mutations allowed
-    cfg.genome.node_disable_prob = 0  # No topology mutations allowed
-    cfg.genome.rnn_mutate_power = 0.1  # Single recurrent unit is quite sensitive to change
-    # if pop_name in [P_GRU_NR_CONN]:
-    #     cfg.population.compatibility_thr = .3  # Keep threshold low to enforce new species to be discovered
-    # elif pop_name in [P_CONN]:
-    #     cfg.population.compatibility_thr = .4  # Keep threshold low to enforce new species to be discovered
-    # else:
-    #     cfg.population.compatibility_thr = .5  # Keep threshold low to enforce new species to be discovered
-    cfg.population.genome_elitism = 3  # Higher likelihood of persisting better performing genome
-    # cfg.population.min_specie_size = 16  # Slightly slower species
-    cfg.population.parent_selection = 0.1  # Higher selective pressure
-    # cfg.population.pop_size = 512
-    cfg.population.specie_elitism = 1  # Only one elite species
-    cfg.population.specie_stagnation = 10  # Keep a relative low stagnation threshold to make room for new species
-    cfg.update()
-    return cfg
 
 
 if __name__ == '__main__':

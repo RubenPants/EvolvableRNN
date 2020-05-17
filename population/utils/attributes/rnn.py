@@ -9,7 +9,7 @@ from random import gauss, random
 from numpy import clip, float64, zeros
 
 from configs.genome_config import GenomeConfig
-from population.utils.attributes.bias import init as bias_init, mutate as bias_mutate
+from population.utils.attributes.bias import init as bias_init
 
 
 def init(cfg: GenomeConfig, hid_dim: int, input_size: int = None, bias: bool = False):
@@ -30,7 +30,7 @@ def single_init(cfg: GenomeConfig):
 def mutate_1d(v, cfg: GenomeConfig, bias: bool = False):
     """Mutate a 1-dimensional RNN-vector."""
     for i, elem in enumerate(v):
-        v[i] = mutate(elem, cfg=cfg) if not bias else bias_mutate(elem, cfg=cfg)
+        v[i] = mutate(elem, cfg=cfg, bias=bias)
     return v
 
 
@@ -42,12 +42,14 @@ def mutate_2d(v, cfg: GenomeConfig, mapping=None):
     return v
 
 
-def mutate(v, cfg: GenomeConfig):
+def mutate(v, cfg: GenomeConfig, bias: bool = False):
     """Mutate the given RNN-value based on the provided GenomeConfig file."""
     # Check if value must mutate
     r = random()
     if r < cfg.rnn_mutate_rate:
-        return clip(v + gauss(0.0, cfg.rnn_mutate_power), a_min=cfg.rnn_min_value, a_max=cfg.rnn_max_value)
+        return clip(v + gauss(0.0, cfg.rnn_mutate_power),
+                    a_min=cfg.bias_min_value if bias else cfg.rnn_min_value,
+                    a_max=cfg.bias_max_value if bias else cfg.rnn_max_value)
     
     # Check if value must be replaced
     elif r < cfg.rnn_replace_rate + cfg.rnn_mutate_rate:
