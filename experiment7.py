@@ -29,8 +29,7 @@ from population.utils.population_util.fitness_functions import calc_pop_fitness
 P_DEFAULT = 'default'
 P_CONN = 'connection'
 P_GRU_NR = 'gru_nr'
-P_GRU_NR_CONN = 'gru_nr_connection'
-SUPPORTED = [P_DEFAULT, P_CONN, P_GRU_NR, P_GRU_NR_CONN]
+SUPPORTED = [P_DEFAULT, P_CONN, P_GRU_NR]
 CONN_WEIGHT = 6
 
 
@@ -224,7 +223,7 @@ def get_topology(pop_name, gid: int, cfg: Config):
     genome.nodes[1].bias = random() * bias_range + cfg.genome.bias_min_value  # Uniformly sampled bias
     
     # Setup the recurrent unit
-    if pop_name in [P_GRU_NR, P_GRU_NR_CONN]:
+    if pop_name in [P_GRU_NR]:
         genome.nodes[2] = GruNoResetNodeGene(key=2, cfg=cfg.genome, input_keys=[-1], input_keys_full=[-1])  # Hidden
         genome.nodes[2].bias_h = rand_arr((2,)) * bias_range + cfg.genome.bias_min_value
         genome.nodes[2].weight_xh_full = rand_arr((2, 1)) * rnn_range + cfg.genome.weight_min_value
@@ -242,7 +241,7 @@ def get_topology(pop_name, gid: int, cfg: Config):
     # input2gru - Uniformly sampled on the positive spectrum
     key = (-1, 2)
     genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
-    if pop_name in [P_CONN, P_GRU_NR_CONN]:
+    if pop_name in [P_CONN]:
         genome.connections[key].weight = CONN_WEIGHT  # Maximize connection, GRU can always lower values flowing through
     else:
         genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
@@ -251,7 +250,7 @@ def get_topology(pop_name, gid: int, cfg: Config):
     # gru2output - Uniformly sampled on the positive spectrum
     key = (2, 1)
     genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
-    if pop_name in [P_CONN, P_GRU_NR_CONN]:
+    if pop_name in [P_CONN]:
         genome.connections[key].weight = CONN_WEIGHT  # Maximize connection, GRU can always lower values flowing through
     else:
         genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
@@ -279,7 +278,7 @@ def enforce_topology(pop_name, genome: Genome):
         always possible!)
     """
     genome.nodes[0].bias = 1.5  # Drive with 0.953 actuation by default
-    if pop_name in [P_CONN, P_GRU_NR_CONN]:
+    if pop_name in [P_CONN]:
         genome.connections[(-1, 1)].weight = -abs(genome.connections[(-1, 1)].weight)
         for key in [(-1, 2), (2, 1)]:
             genome.connections[key].weight = CONN_WEIGHT

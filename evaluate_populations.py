@@ -32,7 +32,7 @@ def evaluate_generations(experiment_id: int,
                          unused_cpu: int = 2):
     """Evaluate all the populations' generations in a given folder of a given experiment."""
     if pop_folder[-1] != '/': pop_folder += '/'
-    for v in range(1, max_v + 1):
+    for v in range(41, max_v + 1):  # TODO: Change 41 back to 1!
         print(f"\n===> EVALUATING POPULATION {pop_folder}v{v} <===")
         eval_gen(
                 name=f"{pop_folder}v{v}",
@@ -256,7 +256,6 @@ def plot_result(d: dict, ylabel: str, title: str, save_path: str):
     # Create the plot
     plt.figure(figsize=(12, 2.5))
     plt.boxplot(data, labels=[str(k) if k % 20 == 0 else '' for k in keys], whis=[0, 100])
-    # plt.title(title)  TODO: Title needed?
     plt.xticks(rotation=90)
     plt.xlabel("generations")
     plt.ylabel(ylabel)
