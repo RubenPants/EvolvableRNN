@@ -11,7 +11,7 @@ import argparse
 import multiprocessing as mp
 from random import random
 
-from numpy.random import random as rand_arr
+from numpy.random import normal, random as rand_arr
 from six import iteritems, itervalues
 
 from config import Config
@@ -27,10 +27,9 @@ from population.utils.genome import Genome
 from population.utils.population_util.fitness_functions import calc_pop_fitness
 
 P_DEFAULT = 'default'
-P_CONN = 'connection'
+P_BIASED = 'biased'
 P_GRU_NR = 'gru_nr'
-SUPPORTED = [P_DEFAULT, P_CONN, P_GRU_NR]
-CONN_WEIGHT = 6
+SUPPORTED = [P_DEFAULT, P_BIASED, P_GRU_NR]
 
 
 # --------------------------------------------------> MAIN METHODS <-------------------------------------------------- #
@@ -43,6 +42,7 @@ def main(pop_name: str,
     if pop_name not in SUPPORTED: raise Exception(f"Population '{pop_name}' not supported!")
     # Create the population
     cfg = get_config()
+    cfg.population.specie_elitism = 1
     folder = get_folder(experiment_id=7)
     pop = Population(
             name=f'{pop_name}/v{version}',
@@ -122,8 +122,8 @@ def main(pop_name: str,
                                      species_set=pop.species,
                                      logger=pop.log)
         
-        # Test if evaluation finds a solution for the new generation, impossible if fitness < 0.75 (makes exp faster!)
-        if pop.best_genome.fitness > 0.75 or pop.generation % 10 == 0:
+        # Test if evaluation finds a solution for the new generation, impossible if fitness < 0.7
+        if pop.best_genome.fitness > 0.7 or pop.generation % 10 == 0:
             pop.log("\n===> EVALUATING <===")
             genomes = list(iteritems(pop.population))
             pool = mp.Pool(mp.cpu_count() - unused_cpu)
@@ -166,7 +166,6 @@ def evolve(pop: Population, pop_name: str):
             generation=pop.generation,
             logger=pop.log,
     )
-    # TODO: Extend with X randomly generated genomes?
     
     # Constraint each of the population's new genomes to the given topology
     for g in pop.population.values(): enforce_topology(pop_name, genome=g)
@@ -220,7 +219,10 @@ def get_topology(pop_name, gid: int, cfg: Config):
     genome.nodes[0] = OutputNodeGene(key=0, cfg=cfg.genome)  # OutputNode 0
     genome.nodes[0].bias = 1.5  # Drive with 0.953 actuation by default
     genome.nodes[1] = OutputNodeGene(key=1, cfg=cfg.genome)  # OutputNode 1
-    genome.nodes[1].bias = random() * bias_range + cfg.genome.bias_min_value  # Uniformly sampled bias
+    if pop_name in [P_BIASED]:
+        genome.nodes[1].bias = normal(1.5, .1)  # Initially normally distributed around bias of other output
+    else:
+        genome.nodes[1].bias = random() * bias_range + cfg.genome.bias_min_value  # Uniformly sampled bias
     
     # Setup the recurrent unit
     if pop_name in [P_GRU_NR]:
@@ -241,8 +243,8 @@ def get_topology(pop_name, gid: int, cfg: Config):
     # input2gru - Uniformly sampled on the positive spectrum
     key = (-1, 2)
     genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
-    if pop_name in [P_CONN]:
-        genome.connections[key].weight = CONN_WEIGHT  # Maximize connection, GRU can always lower values flowing through
+    if pop_name in [P_BIASED]:
+        genome.connections[key].weight = 6  # Maximize connection, GRU can always lower values flowing through
     else:
         genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
     genome.connections[key].enabled = True
@@ -250,16 +252,15 @@ def get_topology(pop_name, gid: int, cfg: Config):
     # gru2output - Uniformly sampled on the positive spectrum
     key = (2, 1)
     genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
-    if pop_name in [P_CONN]:
-        genome.connections[key].weight = CONN_WEIGHT  # Maximize connection, GRU can always lower values flowing through
-    else:
-        genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
+    genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
+    if pop_name in [P_BIASED]: genome.connections[key].weight = abs(genome.connections[key].weight)  # Always positive!
     genome.connections[key].enabled = True
     
     # input2output - Uniformly sampled
     key = (-1, 1)
     genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
     genome.connections[key].weight = random() * conn_range + cfg.genome.weight_min_value
+    if pop_name in [P_BIASED]: genome.connections[key].weight = -abs(genome.connections[key].weight)  # Always negative!
     genome.connections[key].enabled = True
     
     # Enforce the topology constraints
@@ -278,10 +279,10 @@ def enforce_topology(pop_name, genome: Genome):
         always possible!)
     """
     genome.nodes[0].bias = 1.5  # Drive with 0.953 actuation by default
-    if pop_name in [P_CONN]:
+    if pop_name in [P_BIASED]:
         genome.connections[(-1, 1)].weight = -abs(genome.connections[(-1, 1)].weight)
-        for key in [(-1, 2), (2, 1)]:
-            genome.connections[key].weight = CONN_WEIGHT
+        genome.connections[(-1, 2)].weight = 6
+        genome.connections[(2, 1)].weight = abs(genome.connections[(2, 1)].weight)
 
 
 if __name__ == '__main__':
