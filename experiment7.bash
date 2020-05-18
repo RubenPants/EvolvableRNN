@@ -6,7 +6,7 @@ cpu=1;  # Number of unused CPUs
 push=10;  # After how many version git should push
 
 # Run the program
-for v in {1..10}
+for v in {11..20}
 do
   python3 experiment7.py --pop_name=$pop_name --version=$v --unused_cpu=$cpu;
 
