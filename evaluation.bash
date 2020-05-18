@@ -23,6 +23,6 @@ do
 
   # Experiment 7 specific populations
 #  python3 evaluate_populations.py --folder_pop=default --evaluate_gen=$evaluate_gen --experiment=$experiment --hops=$hops --max_v=$max_v --unused_cpu=$unused_cpu;
-#  python3 evaluate_populations.py --folder_pop=connection --evaluate_gen=$evaluate_gen --experiment=$experiment --hops=$hops --max_v=$max_v --unused_cpu=$unused_cpu;
-  python3 evaluate_populations.py --folder_pop=gru_nr --evaluate_gen=$evaluate_gen --experiment=$experiment --hops=$hops --max_v=$max_v --unused_cpu=$unused_cpu;
+  python3 evaluate_populations.py --folder_pop=biased --evaluate_gen=$evaluate_gen --experiment=$experiment --hops=$hops --max_v=$max_v --unused_cpu=$unused_cpu;
+#  python3 evaluate_populations.py --folder_pop=gru_nr --evaluate_gen=$evaluate_gen --experiment=$experiment --hops=$hops --max_v=$max_v --unused_cpu=$unused_cpu;
 done
