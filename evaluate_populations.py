@@ -24,7 +24,12 @@ from utils.myutils import get_subfolder, load_dict, update_dict
 HOPS = 10
 
 
-def evaluate_generations(experiment_id: int, pop_folder: str, folder: str = None, max_v: int = 50, unused_cpu: int = 2):
+def evaluate_generations(experiment_id: int,
+                         pop_folder: str,
+                         folder: str = None,
+                         hops: int = HOPS,
+                         max_v: int = 50,
+                         unused_cpu: int = 2):
     """Evaluate all the populations' generations in a given folder of a given experiment."""
     if pop_folder[-1] != '/': pop_folder += '/'
     for v in range(1, max_v + 1):
@@ -33,7 +38,7 @@ def evaluate_generations(experiment_id: int, pop_folder: str, folder: str = None
                 name=f"{pop_folder}v{v}",
                 experiment_id=experiment_id,
                 folder=folder,
-                hops=HOPS,
+                hops=hops,
                 unused_cpu=unused_cpu,
         )
 
@@ -534,6 +539,7 @@ if __name__ == '__main__':
     parser.add_argument('--experiment', type=int, default=3)
     parser.add_argument('--folder', type=str, default=None)
     parser.add_argument('--folder_pop', type=str, default='NEAT-SRU')
+    parser.add_argument('--hops', type=int, default=HOPS)
     parser.add_argument('--max_gen', type=int, default=100)
     parser.add_argument('--max_v', type=int, default=30)
     parser.add_argument('--unused_cpu', type=int, default=2)
@@ -558,6 +564,7 @@ if __name__ == '__main__':
         evaluate_generations(
                 experiment_id=args.experiment,
                 folder=f,
+                hops=args.hops,
                 pop_folder=args.folder_pop,
                 max_v=args.max_v,
                 unused_cpu=args.unused_cpu,
