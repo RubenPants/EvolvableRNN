@@ -65,7 +65,6 @@ def main(pop_name: str,
     
     for iteration in range(iterations):
         # Train the population for a single iteration
-        pop.log(f"\n===> TRAINING - ITERATION {iteration} <===")
         train_env.set_games(games_train, noise=True)
         
         # Prepare the generation's reporters for the generation
@@ -129,7 +128,7 @@ def get_config():
     cfg.bot.dist_enabled = True
     cfg.evaluation.fitness = D_DISTANCE_SCORE
     cfg.game.duration = 200  # Experiment3 environments!
-    cfg.population.compatibility_thr = 1  # Keep threshold low since variation constrained for populations
+    cfg.population.compatibility_thr = 1.  # Keep threshold low since variation constrained for populations
     cfg.genome.node_add_prob = 0  # No topology mutations allowed
     cfg.genome.node_disable_prob = 0  # No topology mutations allowed
     cfg.genome.conn_add_prob = 0  # No topology mutations allowed
@@ -141,9 +140,9 @@ def get_config():
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
-    parser.add_argument('--pop_name', type=str, default=P_DEFAULT)  # ID of the used topology
+    parser.add_argument('--pop_name', type=str)  # ID of the used topology
     parser.add_argument('--version', type=int, default=0)  # Version of the population
-    parser.add_argument('--iterations', type=int, default=10)  # Version of the population
+    parser.add_argument('--iterations', type=int, default=10)  # Number of training iterations  TODO: Change!
     parser.add_argument('--unused_cpu', type=int, default=2)  # Number of CPU cores not used during evaluation
     parser.add_argument('--use_backup', type=bool, default=False)  # Use the backup-data
     args = parser.parse_args()
