@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Default parameters
-cpu=2;  # Number of unused CPUs
+cpu=1;  # Number of unused CPUs
 push=10;  # After how many version git should push
 
 # Run the program
