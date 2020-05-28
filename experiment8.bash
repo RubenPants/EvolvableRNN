@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Default parameters
-cpu=1;  # Number of unused CPUs
+cpu=2;  # Number of unused CPUs
 push=10;  # After how many version git should push
 
 # Run the program
-for v in {11..20}
+for v in {21..30}
 do
   for pop_name in default gru_nr biased
   do
