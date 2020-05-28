@@ -321,7 +321,7 @@ def get_game_ids(experiment_id):
     elif experiment_id in [2]:
         return [10000, ] * 10, \
                [20000 + i for i in range(1, 19)] + [20100 + i for i in range(1, 19)]
-    elif experiment_id in [3]:
+    elif experiment_id in [3, 8]:
         return [30000, ] * 10, \
                [30000 + i for i in range(1, 21)]
     elif experiment_id in [4]:  # Combines experiment1&2
@@ -375,7 +375,7 @@ if __name__ == '__main__':
     parser.add_argument('--trace_fit', type=bool, default=True)
     parser.add_argument('--evaluate', type=bool, default=False)
     parser.add_argument('--genome', type=bool, default=False)
-    parser.add_argument('--monitor', type=bool, default=False)
+    parser.add_argument('--monitor', type=bool, default=True)
     parser.add_argument('--gru_analysis', type=bool, default=False)
     parser.add_argument('--live', type=bool, default=False)
     
@@ -400,7 +400,7 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='topology_2222',
+            name='sru_v11',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment6',
             folder_name=get_folder(args.experiment),
@@ -416,9 +416,9 @@ if __name__ == '__main__':
     # print(pop.best_genome.nodes[2])
     # pop.best_genome.update_rnn_nodes(pop.config.genome)
     # pop.best_genome = deepcopy(pop.population[589])
-    print(pop.best_genome)
-    print(pop.best_genome.nodes[2])
-    raise Exception
+    # print(pop.best_genome)
+    # print(pop.best_genome.nodes[2])
+    # raise Exception
     
     game_ids_train, game_ids_eval = get_game_ids(experiment_id=args.experiment)
     

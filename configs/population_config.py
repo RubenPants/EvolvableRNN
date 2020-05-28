@@ -33,12 +33,12 @@ class PopulationConfig(BaseConfig):
         self.pop_size: int = 512
         # Maximum number of species  [def=15]
         self.specie_count_max = 15
-        # Target number of species  [def=8]
+        # Target number of species  [def=5]
         self.specie_count_target = 5
         # Number of generations before a previous elite specie can become stagnant  [def=5]
         self.specie_elite_stagnation: int = 5
-        # Number of the best species that will be protected from stagnation  [def=1]
-        self.specie_elitism: int = 1
+        # Number of the best species that will be protected from stagnation  [def=2]
+        self.specie_elitism: int = 2
         # Remove a specie if it hasn't improved over this many number of generations  [def=25]
         self.specie_stagnation: int = 25
     

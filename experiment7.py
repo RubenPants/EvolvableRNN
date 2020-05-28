@@ -1,7 +1,7 @@
 """
 experiment7.py
 
-Evaluate a network of fixed topology on the games found in experiment3.
+Evaluate a network of fixed topology on the games found in experiment6.
 
 Supported populations:
  * default: No changes

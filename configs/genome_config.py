@@ -64,7 +64,7 @@ class GenomeConfig(BaseConfig):
         # Node-indexer helps with the generation of node-keys  [def=/]
         self.node_indexer = None
         # Number of inputs, which are the robot's sensors  [def=/]
-        self.num_inputs: int = 0
+        self.num_inputs: int = 1
         # Number of output nodes, which are the wheels: [left_wheel, right_wheel]  [def=2]
         self.num_outputs: int = 2
         # Mean of the gaussian distribution used to select the RNN attribute values  [def=0]
