@@ -112,13 +112,13 @@ def create_traces(traces: dict, games: list, gen: int, save_path: str, save_name
         
         # Save figure
         plt.tight_layout()
-        # Default option
-        # plt.savefig(f'{get_subfolder(save_path, "game{id:05d}".format(id=g.id))}{save_name}_gen{gen:05d}',
-        #             bbox_inches='tight',
-        #             pad_inches=0.02)
+        # Default option  TODO
+        plt.savefig(f'{get_subfolder(save_path, "game{id:05d}".format(id=g.id))}{save_name}_gen{gen:05d}',
+                    bbox_inches='tight',
+                    pad_inches=0.02)
         # Places in delete_me folder
-        plt.savefig(f'delete_me/game{g.id}.png', bbox_inches='tight', pad_inches=0.02)
-        plt.savefig(f'delete_me/game{g.id}.eps', format='eps', bbox_inches='tight', pad_inches=0.02)
+        # plt.savefig(f'delete_me/game{g.id}.png', bbox_inches='tight', pad_inches=0.02)
+        # plt.savefig(f'delete_me/game{g.id}.eps', format='eps', bbox_inches='tight', pad_inches=0.02)
         plt.close()
 
 

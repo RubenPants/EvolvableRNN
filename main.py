@@ -126,7 +126,7 @@ def monitor(game_id: int,
     elif node_type == SimpleRnnNodeGene or node_type == FixedRnnNodeGene:
         from population.utils.visualizing.monitor_genome_single_sru import main as sru_monitor
         sru_monitor(
-                average=2,
+                average=0,  # TODO: No averaging on the hidden state!
                 population=population,
                 game_id=game_id,
                 genome=genome,
@@ -372,7 +372,7 @@ if __name__ == '__main__':
     parser.add_argument('--train_overview', type=bool, default=False)
     parser.add_argument('--blueprint', type=bool, default=False)
     parser.add_argument('--trace', type=bool, default=False)  # Keep it False
-    parser.add_argument('--trace_fit', type=bool, default=True)
+    parser.add_argument('--trace_fit', type=bool, default=False)
     parser.add_argument('--evaluate', type=bool, default=False)
     parser.add_argument('--genome', type=bool, default=False)
     parser.add_argument('--monitor', type=bool, default=True)
@@ -385,7 +385,7 @@ if __name__ == '__main__':
     parser.add_argument('--unused_cpu', type=int, default=2)
     parser.add_argument('--version', type=int, default=0)
     parser.add_argument('--debug', type=bool, default=False)
-    parser.add_argument('--duration', type=int, default=60)
+    parser.add_argument('--duration', type=int, default=200)
     parser.add_argument('--use_backup', type=bool, default=True)
     args = parser.parse_args()
     
@@ -401,6 +401,7 @@ if __name__ == '__main__':
     # Setup the population
     pop = Population(
             name='sru_v11',
+            # name='gru_v6',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment6',
             folder_name=get_folder(args.experiment),

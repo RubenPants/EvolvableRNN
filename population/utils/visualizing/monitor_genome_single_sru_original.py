@@ -1,5 +1,5 @@
 """
-monitor_genome_single_sru.py
+monitor_genome_single_sru_original.py  TODO: Make this file back the default! (remove "_original")
 
 Monitor a single genome during its run on a single game. This monitoring focuses on the SRU-cell that must be present
 in the genome.
@@ -10,7 +10,7 @@ from math import cos, sin
 
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.ticker import FormatStrFormatter
+from matplotlib.ticker import FormatStrFormatter, MaxNLocator
 
 from config import Config
 from configs.game_config import GameConfig
@@ -28,7 +28,7 @@ from utils.myutils import get_subfolder
 # Parameters
 TIME_SERIES_WIDTH = 8
 TIME_SERIES_HEIGHT = 1.5
-CORRECTION = 0.6
+CORRECTION = 0.3
 
 
 def main(population: Population,
@@ -71,8 +71,7 @@ def main(population: Population,
     distance = []
     delta_distance = []
     position = []
-    Ht1 = []
-    Ht2 = []
+    Ht = []
     target_found = []
     score = 0
     
@@ -81,14 +80,13 @@ def main(population: Population,
     distance.append(state[0])
     delta_distance.append(0)
     position.append(game.player.pos.get_tuple())
-    Ht1.append(net.rnn_state[0, 0, 0])  # First SRU
-    Ht2.append(net.rnn_state[0, 1, 0])  # Second SRU
+    Ht.append(net.rnn_state[0, 0, 0])
     if debug:
         print(f"Step: {step_num}")
         print(f"\t> Actuation: {(round(actuation[-1][0], 5), round(actuation[-1][1], 5))!r}")
         print(f"\t> Distance: {round(distance[-1], 5)} - Delta distance: {round(delta_distance[-1], 5)}")
         print(f"\t> Position: {(round(position[-1][0], 2), round(position[-1][1], 2))!r}")
-        print(f"\t> SRU state: Ht=[{round(Ht1[-1], 5)},{round(Ht2[-1], 5)}]")
+        print(f"\t> SRU state: Ht={round(Ht[-1], 5)}")
     
     # Start monitoring
     while True:
@@ -122,14 +120,13 @@ def main(population: Population,
         distance.append(state[0])
         delta_distance.append(distance[-2] - distance[-1])
         position.append(game.player.pos.get_tuple())
-        Ht1.append(net.rnn_state[0, 0, 0])
-        Ht2.append(net.rnn_state[0, 1, 0])
+        Ht.append(net.rnn_state[0, 0, 0])
         if debug:
             print(f"Step: {step_num}")
             print(f"\t> Actuation: {(round(actuation[-1][0], 5), round(actuation[-1][1], 5))!r}")
             print(f"\t> Distance: {round(distance[-1], 5)} - Delta distance: {round(delta_distance[-1], 5)}")
             print(f"\t> Position: {(round(position[-1][0], 2), round(position[-1][1], 2))!r}")
-            print(f"\t> SRU state: Ht=[{round(Ht1[-1], 5)},{round(Ht2[-1], 5)}]")
+            print(f"\t> SRU state: Ht={round(Ht[-1], 5)}")
     
     if average > 1:
         # Average out the noise
@@ -139,23 +136,14 @@ def main(population: Population,
         actuation = list(zip(x, y))
         distance = SMA(distance, window=average)
         delta_distance = SMA(delta_distance, window=average)
-        Ht1 = SMA(Ht1, window=average)
-        Ht2 = SMA(Ht2, window=average)
+        Ht = SMA(Ht, window=average)
         
         # Resolve weird artifacts at the beginning
         for i in range(average, 0, -1):
             actuation[i - 1] = actuation[i]
             distance[i - 1] = distance[i]
             delta_distance[i - 1] = delta_distance[i]
-            Ht1[i - 1] = Ht1[i]
-            Ht2[i - 1] = Ht2[i]
-    
-    # For debugging
-    # print(f"actuation: {actuation!r}")
-    # print(f"distance: {distance!r}")
-    # print(f"Ht1: {Ht1!r}")
-    # print(f"Ht2: {Ht2!r}")
-    # print(f"Position: {position!r}")
+            Ht[i - 1] = Ht[i]
     
     # Visualize the monitored values
     path = get_subfolder(f"population{'_backup' if population.use_backup else ''}/"
@@ -173,14 +161,10 @@ def main(population: Population,
                        target_found=target_found,
                        game_cfg=game_cfg.game,
                        save_path=f"{path}distance.png")
-    visualize_hidden_state1(Ht1,
-                            target_found=target_found,
-                            game_cfg=game_cfg.game,
-                            save_path=f"{path}hidden_state1.png")
-    visualize_hidden_state2(Ht2,
-                            target_found=target_found,
-                            game_cfg=game_cfg.game,
-                            save_path=f"{path}hidden_state2.png")
+    visualize_hidden_state(Ht,
+                           target_found=target_found,
+                           game_cfg=game_cfg.game,
+                           save_path=f"{path}hidden_state.png")
     visualize_position(position,
                        game=game,
                        save_path=f"{path}trace.png")
@@ -201,8 +185,7 @@ def visualize_actuation(actuation_list: list, target_found: list, game_cfg: Game
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.legend()
     plt.grid()
-    plt.xticks([i * 20 for i in range(11)])
-    # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Actuation force - Normalized")
     plt.xlim(0)
@@ -222,8 +205,7 @@ def visualize_distance(distance_list: list, target_found: list, game_cfg: GameCo
     plt.plot(time, distance_list)
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
-    plt.xticks([i * 20 for i in range(11)])
-    # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Distance to target - Normalized")
     plt.xlim(0)
@@ -234,7 +216,7 @@ def visualize_distance(distance_list: list, target_found: list, game_cfg: GameCo
     plt.close()
 
 
-def visualize_hidden_state1(hidden_state: list, target_found: list, game_cfg: GameConfig, save_path: str):
+def visualize_hidden_state(hidden_state: list, target_found: list, game_cfg: GameConfig, save_path: str):
     """Create a graph of the hidden stat's value over time"""
     time = [i / game_cfg.fps for i in range(len(hidden_state))]
     
@@ -243,31 +225,9 @@ def visualize_hidden_state1(hidden_state: list, target_found: list, game_cfg: Ga
     plt.plot(time, hidden_state)
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
-    plt.xticks([i * 20 for i in range(11)])
-    # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
-    plt.title("First hidden state")
-    plt.xlim(0)
-    # plt.ylabel("SRU output value")
-    # plt.xlabel("Simulation time (s)")
-    plt.tight_layout()
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
-    plt.close()
-
-
-def visualize_hidden_state2(hidden_state: list, target_found: list, game_cfg: GameConfig, save_path: str):
-    """Create a graph of the hidden stat's value over time"""
-    time = [i / game_cfg.fps for i in range(len(hidden_state))]
-    
-    # Create the graph
-    ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT)).gca()
-    plt.plot(time, hidden_state)
-    for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
-    plt.grid()
-    plt.xticks([i * 20 for i in range(11)])
-    # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
-    ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
-    plt.title("Second hidden state")
+    plt.title("Hidden state")
     plt.xlim(0)
     # plt.ylabel("SRU output value")
     # plt.xlabel("Simulation time (s)")
@@ -278,7 +238,7 @@ def visualize_hidden_state2(hidden_state: list, target_found: list, game_cfg: Ga
 
 def visualize_position(position_list: list, game: Game, save_path: str):
     """Create a trace-graph."""
-    plt.figure(figsize=(TIME_SERIES_HEIGHT * 4 - CORRECTION, TIME_SERIES_HEIGHT * 4 - CORRECTION)).gca()
+    plt.figure(figsize=(TIME_SERIES_HEIGHT * 3 - CORRECTION, TIME_SERIES_HEIGHT * 3 - CORRECTION)).gca()
     x_min, x_max = game.x_axis / 2, game.x_axis / 2
     y_min, y_max = game.y_axis / 2, game.y_axis / 2
     
@@ -305,14 +265,14 @@ def visualize_position(position_list: list, game: Game, save_path: str):
     for p in range(0, len(x_pos), 5):
         plt.plot(x_pos[p], y_pos[p], 'ro', markersize=2)
         
-        # Annotate every 20 seconds
-        if p % (20 * game.game_config.fps) == 0 and p > 0:
+        # Annotate every 5 seconds
+        if p % (5 * game.game_config.fps) == 0 and p > 0:
             # offset = (x_pos[p + 1] - x_pos[p], y_pos[p + 1] - y_pos[p])
-            offset = (y_pos[p] - y_pos[p - 1], x_pos[p - 1] - x_pos[p])
+            offset = (y_pos[p - 1] - y_pos[p], x_pos[p] - x_pos[p - 1])
             plt.annotate(
                     str(int(p / game.game_config.fps)),
                     xy=(x_pos[p], y_pos[p]),
-                    xytext=(x_pos[p] + offset[0] * 15, y_pos[p] + offset[1] * 15),
+                    xytext=(x_pos[p] + offset[0] * 20, y_pos[p] + offset[1] * 20),
                     ha="center", va="center",
                     arrowprops=dict(arrowstyle="->", connectionstyle="arc,rad=0."),
             )
@@ -342,7 +302,7 @@ def merge(title: str, path: str):  # TODO
     """Merge each of the previously created images together"""
     # Load in all the images to merge
     # images = [plt.imread('population/utils/visualizing/images/white.png')]
-    image_names = ['actuation', 'distance', 'hidden_state1', 'hidden_state2']
+    image_names = ['actuation', 'distance', 'hidden_state']
     images = [plt.imread(f'{path}{n}.png') for n in image_names]
     trace = plt.imread(f'{path}trace.png')
     

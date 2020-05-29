@@ -30,11 +30,9 @@ from utils.myutils import get_subfolder
 # MIN_FINISHED = 0  # Finish 0/18 or more  # TODO: For the X0 variants (full search space)
 # MIN_FINISHED = 0.2  # Finish 4/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
 # MIN_FINISHED = 0.25  # Finish 5/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
-MIN_FINISHED = 0.5  # 'mhe' results
-
-
+# MIN_FINISHED = 0.5  # 'mhe' results
 # MIN_FINISHED = 1  # Go hard or go home
-# MIN_FINISHED = 0.8  # Finish 15/18 or more  TODO: GRU default
+MIN_FINISHED = 0.8  # Finish 15/18 or more  TODO: GRU default
 
 
 # --------------------------------------------------> MAIN METHODS <-------------------------------------------------- #
@@ -337,8 +335,8 @@ def execution_test():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate', type=bool, default=True)  # Evaluate new genomes
-    parser.add_argument('--topology_id', type=int, default=22222)  # ID of the used topology
-    parser.add_argument('--batch', type=int, default=1)  # Number of genomes evaluated per batch
+    parser.add_argument('--topology_id', type=int, default=3)  # ID of the used topology
+    parser.add_argument('--batch', type=int, default=100)  # Number of solutions
     parser.add_argument('--min_finished', type=float, default=MIN_FINISHED)  # Minimal finish ratio before added to CSV
     parser.add_argument('--unused_cpu', type=int, default=2)  # Number of CPU cores not used during evaluation
     parser.add_argument('--save_population', type=bool, default=True)  # Save the final population after finishing
