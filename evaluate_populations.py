@@ -132,14 +132,15 @@ def combine_all_populations(folder: str,
     if len(populations) == 0: return
     
     # Collect all the measure options
-    OPTIONS = ['distance', 'finished', 'fitness', 'score', 'time', 'training']
+    # OPTIONS = ['distance', 'finished', 'fitness', 'score', 'time', 'training']
+    OPTIONS = ['fitness']
     
     # Go over all possibilities
     print(f"\n===> COMBINING POPULATIONS OF FOLDER {folder} <===")
     path = f"population_backup/storage/{folder}/"
     path_images = get_subfolder(path, 'images')
     for option in OPTIONS:
-        plt.figure(figsize=(10, 3))
+        plt.figure(figsize=(8, 2.5))
         max_data = 0
         max_gen = 0
         for pop in populations:
@@ -176,20 +177,22 @@ def combine_all_populations(folder: str,
         
         # Finalize the figure
         leg = plt.legend(loc='upper center',
-                         bbox_to_anchor=(0.5, 1.18),
+                         bbox_to_anchor=(0.5, 1.25),
                          fancybox=True,
                          fontsize=10,
                          ncol=len(populations))
         for line in leg.get_lines():
             line.set_linewidth(4.0)
+        # plt.xticks([i * 100 for i in range(11)])  # TODO
         plt.xlabel("generation")
         plt.xlim(0, max_gen)
+        # plt.yticks([i for i in range(7)])  # TODO
         plt.ylabel(option)
         plt.ylim(0, max(max_data * 1.05, 1.05))
         plt.grid()
         plt.tight_layout()
         plt.savefig(f"{path_images}comb_{option}.png", bbox_inches='tight', pad_inches=0.02)
-        plt.savefig(f"{path_images}comb_{option}.eps", format="eps", bbox_inches='tight', pad_inches=0.02)
+        # plt.savefig(f"{path_images}comb_{option}.eps", format="eps", bbox_inches='tight', pad_inches=0.02)
         # plt.show()
         plt.close()
 
@@ -334,7 +337,6 @@ def plot_distribution(folder: str,
                          ncol=len(populations))
         for line in leg.get_lines():
             line.set_linewidth(4.0)
-            line.set_linewidth(4.0)
         plt.tight_layout()
         plt.savefig(f"{path_images}dist_{option}.png", bbox_inches='tight', pad_inches=0.02)
         plt.savefig(f"{path_images}dist_{option}.eps", format='eps', bbox_inches='tight', pad_inches=0.02)
@@ -424,7 +426,7 @@ def compute_complexity(folder: str,
                      fontsize=10,
                      ncol=len(populations))
     for line in leg.get_lines():
-        line.set_linewidthset_linewidth(4.0)
+        line.set_linewidth(4.0)
     plt.grid(axis='y')
     plt.tight_layout()
     plt.xlabel("complexity expressed in #genes")
@@ -479,7 +481,7 @@ def compute_complexity(folder: str,
                          fontsize=10,
                          ncol=len(populations))
         for line in leg.get_lines():
-            line.set_linewidthset_linewidth(4.0)
+            line.set_linewidth(4.0)
         plt.tight_layout()
         plt.savefig(f"population_backup/storage/{folder}/images/complexity_violin.png",
                     bbox_inches='tight',
@@ -530,7 +532,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate_gen', type=int, default=0)
     parser.add_argument('--evaluate_pop', type=int, default=0)
-    parser.add_argument('--combine_pop', type=int, default=0)  # Goes over all the populations types
+    parser.add_argument('--combine_pop', type=int, default=1)  # Goes over all the populations types
     parser.add_argument('--evaluate_training', type=int, default=0)
     parser.add_argument('--plot_distribution', type=int, default=0)  # Goes over all the populations types
     parser.add_argument('--compute_topology', type=int, default=0)  # Goes over all the populations types
@@ -539,7 +541,7 @@ if __name__ == '__main__':
     parser.add_argument('--folder', type=str, default=None)
     parser.add_argument('--folder_pop', type=str, default='NEAT-SRU')
     parser.add_argument('--hops', type=int, default=HOPS)
-    parser.add_argument('--max_gen', type=int, default=100)
+    parser.add_argument('--max_gen', type=int, default=1000)
     parser.add_argument('--max_v', type=int, default=30)
     parser.add_argument('--unused_cpu', type=int, default=2)
     args = parser.parse_args()
