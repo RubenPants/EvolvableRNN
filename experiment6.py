@@ -656,9 +656,9 @@ def get_topology3(gid: int, cfg: Config):
     
     # Create the nodes
     genome.nodes[0] = OutputNodeGene(key=0, cfg=cfg.genome)  # OutputNode 0
-    genome.nodes[0].bias = abs(random() * bias_range + cfg.genome.bias_min_value)  # Uniformly sampled bias
+    genome.nodes[0].bias = 1.37
     genome.nodes[1] = OutputNodeGene(key=1, cfg=cfg.genome)  # OutputNode 1
-    genome.nodes[1].bias = abs(random() * bias_range + cfg.genome.bias_min_value)  # Uniformly sampled bias
+    genome.nodes[1].bias = 1.3
     genome.nodes[2] = GruNodeGene(key=2, cfg=cfg.genome, input_keys=[-1], input_keys_full=[-1])  # Hidden node
     genome.nodes[2].bias = 0  # Bias is irrelevant for GRU-node
     
@@ -673,21 +673,22 @@ def get_topology3(gid: int, cfg: Config):
     # input2gru
     key = (-1, 2)
     genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
-    genome.connections[key].weight = abs(random() * conn_range + cfg.genome.weight_min_value)
+    genome.connections[key].weight = 2
     genome.connections[key].enabled = True
     
     # gru2output - Uniformly sampled
     key = (2, 0)
     genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
-    genome.connections[key].weight = abs(random() * conn_range + cfg.genome.weight_min_value)
+    genome.connections[key].weight = 2
     genome.connections[key].enabled = True
     
     # input2output - Uniformly sampled
     key = (-1, 0)
     genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
-    genome.connections[key].weight = -abs(random() * conn_range + cfg.genome.weight_min_value)
+    genome.connections[key].weight = -6
     genome.connections[key].enabled = True
     
+    enforce_topology3(genome)
     genome.update_rnn_nodes(config=cfg.genome)
     return genome
 
@@ -846,6 +847,10 @@ def enforce_topology3(g: Genome):
     g.connections[(-1, 2)].weight = abs(g.connections[(-1, 2)].weight)
     g.connections[(2, 0)].weight = abs(g.connections[(2, 0)].weight)
     g.connections[(-1, 0)].weight = -abs(g.connections[(-1, 0)].weight)
+    g.nodes[2].bias_h[1] = abs(g.nodes[2].bias_h[1])
+    g.nodes[2].weight_xh_full[0, 0] = abs(g.nodes[2].weight_xh_full[0, 0])
+    g.nodes[2].weight_xh_full[1, 0] = abs(g.nodes[2].weight_xh_full[1, 0])
+    g.nodes[2].weight_xh_full[2, 0] = abs(g.nodes[2].weight_xh_full[2, 0])
 
 
 if __name__ == '__main__':

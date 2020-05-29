@@ -117,7 +117,7 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
         step_num += 1
         
         # Update the containers
-        actuation.append(action[0])
+        actuation.append(list(action[0]))
         distance.append(state[0])
         position.append(game.player.pos.get_tuple())
         ht, ht_tilde, rt, zt = get_gru_states(net=net, x=np.asarray([state]))
@@ -137,13 +137,13 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
                   f"\t\tZt={round(Zt[-1], 5)}")
     
     # For debugging
-    print(f"actuation: {actuation!r}")
-    print(f"distance: {distance!r}")
-    print(f"Ht: {Ht!r}")
-    print(f"Ht_tilde: {Ht_tilde!r}")
-    print(f"Rt: {Rt!r}")
-    print(f"Zt: {Zt!r}")
-    print(f"Position: {position!r}")
+    print(f"actuation = {actuation!r}")
+    print(f"distance = {distance!r}")
+    print(f"Ht = {Ht!r}")
+    print(f"Ht_tilde = {Ht_tilde!r}")
+    print(f"Rt = {Rt!r}")
+    print(f"Zt = {Zt!r}")
+    print(f"position = {position!r}")
     
     # Visualize the monitored values
     path = get_subfolder(f"population{'_backup' if population.use_backup else ''}/"
@@ -210,7 +210,7 @@ def visualize_actuation(actuation_list: list, target_found: list, game_cfg: Game
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.legend()
     plt.grid()
-    plt.xticks([i * 5 for i in range(10)])
+    plt.xticks([i * 5 for i in range(7)])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Actuation force - Normalized")
@@ -231,7 +231,7 @@ def visualize_distance(distance_list: list, target_found: list, game_cfg: GameCo
     plt.plot(time, distance_list)
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
-    plt.xticks([i * 5 for i in range(10)])
+    plt.xticks([i * 5 for i in range(7)])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Distance to target - Normalized")
@@ -252,7 +252,7 @@ def visualize_hidden_state(hidden_state: list, target_found: list, game_cfg: Gam
     plt.plot(time, hidden_state)
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
-    plt.xticks([i * 5 for i in range(10)])
+    plt.xticks([i * 5 for i in range(7)])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Hidden state")
@@ -273,7 +273,7 @@ def visualize_candidate_hidden_state(c_hidden_state: list, target_found: list, g
     plt.plot(time, c_hidden_state)
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
-    plt.xticks([i * 5 for i in range(10)])
+    plt.xticks([i * 5 for i in range(7)])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Candidate hidden state")
@@ -294,7 +294,7 @@ def visualize_reset_gate(reset_gate: list, target_found: list, game_cfg: GameCon
     plt.plot(time, reset_gate)
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
-    plt.xticks([i * 5 for i in range(10)])
+    plt.xticks([i * 5 for i in range(7)])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Reset gate")
@@ -315,7 +315,7 @@ def visualize_update_gate(update_gate: list, target_found: list, game_cfg: GameC
     plt.plot(time, update_gate)
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
-    plt.xticks([i * 5 for i in range(10)])
+    plt.xticks([i * 5 for i in range(7)])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Update gate")

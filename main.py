@@ -386,7 +386,7 @@ if __name__ == '__main__':
     parser.add_argument('--version', type=int, default=0)
     parser.add_argument('--debug', type=bool, default=False)
     parser.add_argument('--duration', type=int, default=200)
-    parser.add_argument('--use_backup', type=bool, default=True)
+    parser.add_argument('--use_backup', type=bool, default=False)
     args = parser.parse_args()
     
     # Load in current config-file
@@ -400,7 +400,7 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='sru_v11',
+            name='topology_3',
             # name='gru_v6',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment6',
@@ -428,7 +428,31 @@ if __name__ == '__main__':
     
     # Chosen genome used for genome-evaluation
     chosen_genome = None
-    # chosen_genome = pop.population[47280]
+    # bias_r,bias_z,bias_h,weight_xr,weight_xz,weight_xh,weight_hr,weight_hz,weight_hh,bias_rw,conn0,conn1,conn2
+    chosen_genome = deepcopy(pop.best_genome)
+    chosen_genome.connections[(-1, 2)].weight = 1.98
+    chosen_genome.connections[(2, 0)].weight = 2.03
+    chosen_genome.nodes[2].weight_xh_full[0, 0] = abs(chosen_genome.nodes[2].weight_xh_full[0, 0])/10
+    chosen_genome.nodes[2].weight_hh[0, 0] = abs(chosen_genome.nodes[2].weight_hh[0, 0])/10
+    chosen_genome.update_rnn_nodes(pop.config.genome)
+    # chosen_genome.nodes[2].bias_h[0], \
+    # chosen_genome.nodes[2].bias_h[1], \
+    # chosen_genome.nodes[2].bias_h[2], \
+    # chosen_genome.nodes[2].weight_xh_full[0, 0], \
+    # chosen_genome.nodes[2].weight_xh_full[1, 0], \
+    # chosen_genome.nodes[2].weight_xh_full[2, 0], \
+    # chosen_genome.nodes[2].weight_hh[0, 0], \
+    # chosen_genome.nodes[2].weight_hh[1, 0], \
+    # chosen_genome.nodes[2].weight_hh[2, 0], \
+    # chosen_genome.nodes[0].bias, \
+    # chosen_genome.nodes[1].bias, \
+    # chosen_genome.connections[(-1, 2)].weight, \
+    # chosen_genome.connections[(2, 0)].weight, \
+    # chosen_genome.connections[(-1, 0)].weight = \
+    #     2.213598137873923,1.3312183950826315,-1.9571023626996016,0.7207092237291512,1.9408572504872108,3.3725305479064653,0.46160010861990974,-1.4779361644200266,-2.61920436804554,2.3097603633446995,2.3097603633446995,3.443916195368128,3.696325243768999,-6.0
+    #
+    # print(chosen_genome)
+    # print(chosen_genome.nodes[2])
     
     try:
         if args.train:
@@ -480,7 +504,7 @@ if __name__ == '__main__':
             monitor(
                     debug=args.debug,
                     duration=args.duration,
-                    game_id=game_ids_eval[8],
+                    game_id=game_ids_eval[0],  # TODO
                     genome=chosen_genome,
                     population=pop,
             )

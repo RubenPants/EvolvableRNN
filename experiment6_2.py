@@ -31,8 +31,8 @@ from utils.myutils import get_subfolder
 # MIN_FINISHED = 0.2  # Finish 4/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
 # MIN_FINISHED = 0.25  # Finish 5/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
 # MIN_FINISHED = 0.5  # 'mhe' results
-# MIN_FINISHED = 1  # Go hard or go home
-MIN_FINISHED = 0.8  # Finish 15/18 or more  TODO: GRU default
+MIN_FINISHED = 1  # Go hard or go home
+# MIN_FINISHED = 0.8  # Finish 15/18 or more  TODO: GRU default
 
 
 # --------------------------------------------------> MAIN METHODS <-------------------------------------------------- #
@@ -309,6 +309,8 @@ def get_csv_path(topology_id: int, use_backup: bool, batch_size: int):
                 head += ['conn1', 'conn2']
             elif topology_id in [2, 22, 222, 2222, 22222]:
                 head += ['bias_rw', 'conn2']
+            elif topology_id in [3]:
+                head += ['bias_lw', 'bias_rw', 'conn0', 'conn1', 'conn2']
             elif topology_id in [3, 30, 33, 3333]:
                 head += ['bias_rw', 'conn0', 'conn1', 'conn2']
             else:
