@@ -31,8 +31,8 @@ from utils.myutils import get_subfolder
 # MIN_FINISHED = 0.2  # Finish 4/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
 # MIN_FINISHED = 0.25  # Finish 5/18 or more  TODO: SRU (topology22/33) is incapable, lower threshold!
 # MIN_FINISHED = 0.5  # 'mhe' results
-MIN_FINISHED = 1  # Go hard or go home
-# MIN_FINISHED = 0.8  # Finish 15/18 or more  TODO: GRU default
+# MIN_FINISHED = 1  # Go hard or go home
+MIN_FINISHED = 0.8  # Finish 15/18 or more  TODO: GRU default
 
 
 # --------------------------------------------------> MAIN METHODS <-------------------------------------------------- #
@@ -294,7 +294,7 @@ def get_csv_path(topology_id: int, use_backup: bool, batch_size: int):
                          'weight_hr', 'weight_hz', 'weight_hh']
             elif topology_id in [22, 33]:  # SRU populations
                 head += ['bias_h', 'weight_xh', 'weight_hh']
-            elif topology_id in [222]:
+            elif topology_id in [222, 333]:
                 head += ['delay', 'scale', 'resting']
             elif topology_id in [2222, 3333]:
                 head += ['bias_z', 'bias_h',
@@ -309,7 +309,7 @@ def get_csv_path(topology_id: int, use_backup: bool, batch_size: int):
                 head += ['conn1', 'conn2']
             elif topology_id in [2, 22, 222, 2222, 22222]:
                 head += ['bias_rw', 'conn2']
-            elif topology_id in [3]:
+            elif topology_id in [3, 333]:
                 head += ['bias_lw', 'bias_rw', 'conn0', 'conn1', 'conn2']
             elif topology_id in [3, 30, 33, 3333]:
                 head += ['bias_rw', 'conn0', 'conn1', 'conn2']
@@ -337,8 +337,8 @@ def execution_test():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate', type=bool, default=True)  # Evaluate new genomes
-    parser.add_argument('--topology_id', type=int, default=3)  # ID of the used topology
-    parser.add_argument('--batch', type=int, default=100)  # Number of solutions
+    parser.add_argument('--topology_id', type=int, default=333)  # ID of the used topology
+    parser.add_argument('--batch', type=int, default=1000)  # Number of solutions
     parser.add_argument('--min_finished', type=float, default=MIN_FINISHED)  # Minimal finish ratio before added to CSV
     parser.add_argument('--unused_cpu', type=int, default=2)  # Number of CPU cores not used during evaluation
     parser.add_argument('--save_population', type=bool, default=True)  # Save the final population after finishing

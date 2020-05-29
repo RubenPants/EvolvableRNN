@@ -147,13 +147,14 @@ def get_genome_parameters(g, topology_id: int):
         result = [v for v in g.nodes[2].bias_h]  # GRU biases
         result += [v[0] for v in g.nodes[2].weight_xh_full]  # GRU input->output
         result += [v[0] for v in g.nodes[2].weight_hh]  # GRU hidden->hidden
+    
     if topology_id in [1]:
         result += [g.connections[(2, 1)].weight, g.connections[(-1, 1)].weight]
     elif topology_id in [2, 22, 222, 2222, 22222]:
         result += [g.nodes[1].bias]
         result += [g.connections[(-1, 1)].weight]
-    elif topology_id in [3]:
-        result += [g.nodes[0].bias, g.nodes[0].bias]
+    elif topology_id in [3, 333]:
+        result += [g.nodes[0].bias, g.nodes[1].bias]
         result += [g.connections[(-1, 2)].weight, g.connections[(2, 0)].weight, g.connections[(-1, 0)].weight]
     elif topology_id in [30, 33, 3333]:
         result += [g.nodes[1].bias]
@@ -252,6 +253,8 @@ def get_genome(topology_id: int, g_id: int, cfg: Config):
         topology = get_topology3
     elif topology_id == 33:
         topology = get_topology33
+    elif topology_id == 333:
+        topology = get_topology333
     elif topology_id == 3333:
         topology = get_topology3333
     else:
@@ -269,6 +272,8 @@ def enforce_topology(g: Genome, topology_id: int):
         enforce_topology222(g)
     elif topology_id in [3, 30, 33, 3333]:
         enforce_topology3(g)
+    elif topology_id in [333]:
+        enforce_topology333(g)
     else:
         raise Exception(f"Topology ID '{topology_id}' not supported")
 
@@ -755,6 +760,45 @@ def get_topology33(gid: int, cfg: Config):
     return genome
 
 
+def get_topology333(gid: int, cfg: Config):
+    """
+    Fixed delay component as substitute of modified GRU (GRU of modified solution I mean).
+    """
+    # Create an initial dummy genome with fixed configuration
+    genome = Genome(
+            key=gid,
+            num_outputs=cfg.genome.num_outputs,
+            bot_config=cfg.bot,
+    )
+    # Create the nodes
+    genome.nodes[0] = OutputNodeGene(key=0, cfg=cfg.genome)  # OutputNode 0
+    genome.nodes[0].bias = 1.37
+    genome.nodes[1] = OutputNodeGene(key=1, cfg=cfg.genome)  # OutputNode 1
+    genome.nodes[1].bias = 1.77
+    genome.nodes[2] = FixedRnnNodeGene(key=2, cfg=cfg.genome, input_keys=[-1])  # Hidden node
+    genome.nodes[2].bias = 0  # Bias is irrelevant for GRU-node
+    # Create the connections
+    genome.connections = dict()
+    # input2gru
+    key = (-1, 2)
+    genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
+    genome.connections[key].weight = 1.98
+    genome.connections[key].enabled = True
+    # gru2output - Uniformly sampled
+    key = (2, 0)
+    genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
+    genome.connections[key].weight = 2.03
+    genome.connections[key].enabled = True
+    # input2output - Uniformly sampled
+    key = (-1, 0)
+    genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
+    genome.connections[key].weight = -6
+    genome.connections[key].enabled = True
+    
+    genome.update_rnn_nodes(config=cfg.genome)
+    return genome
+
+
 def get_topology3333(gid: int, cfg: Config):
     """
     Create a uniformly and randomly sampled genome of fixed topology:
@@ -851,6 +895,15 @@ def enforce_topology3(g: Genome):
     g.nodes[2].weight_xh_full[0, 0] = abs(g.nodes[2].weight_xh_full[0, 0])
     g.nodes[2].weight_xh_full[1, 0] = abs(g.nodes[2].weight_xh_full[1, 0])
     g.nodes[2].weight_xh_full[2, 0] = abs(g.nodes[2].weight_xh_full[2, 0])
+
+
+def enforce_topology333(g: Genome):
+    """Enforce the fixed parameters of topology3. It is assumed that topology hasn't changed."""
+    g.nodes[0].bias = 1.37
+    g.nodes[1].bias = 1.77
+    g.connections[(-1, 2)].weight = 1.98
+    g.connections[(2, 0)].weight = 2.03
+    g.connections[(-1, 0)].weight = -6
 
 
 if __name__ == '__main__':

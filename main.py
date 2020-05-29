@@ -123,9 +123,19 @@ def monitor(game_id: int,
                 game_cfg=game_config,
                 debug=debug,
         )
-    elif node_type == SimpleRnnNodeGene or node_type == FixedRnnNodeGene:
+    elif node_type == SimpleRnnNodeGene:
         from population.utils.visualizing.monitor_genome_single_sru import main as sru_monitor
         sru_monitor(
+                average=0,  # TODO: No averaging on the hidden state!
+                population=population,
+                game_id=game_id,
+                genome=genome,
+                game_cfg=game_config,
+                debug=debug,
+        )
+    elif node_type == FixedRnnNodeGene:
+        from population.utils.visualizing.monitor_genome_single_fru import main as fru_monitor
+        fru_monitor(
                 average=0,  # TODO: No averaging on the hidden state!
                 population=population,
                 game_id=game_id,
@@ -374,7 +384,7 @@ if __name__ == '__main__':
     parser.add_argument('--trace', type=bool, default=False)  # Keep it False
     parser.add_argument('--trace_fit', type=bool, default=False)
     parser.add_argument('--evaluate', type=bool, default=False)
-    parser.add_argument('--genome', type=bool, default=False)
+    parser.add_argument('--genome', type=bool, default=True)
     parser.add_argument('--monitor', type=bool, default=True)
     parser.add_argument('--gru_analysis', type=bool, default=False)
     parser.add_argument('--live', type=bool, default=False)
@@ -386,7 +396,7 @@ if __name__ == '__main__':
     parser.add_argument('--version', type=int, default=0)
     parser.add_argument('--debug', type=bool, default=False)
     parser.add_argument('--duration', type=int, default=200)
-    parser.add_argument('--use_backup', type=bool, default=False)
+    parser.add_argument('--use_backup', type=bool, default=True)
     args = parser.parse_args()
     
     # Load in current config-file
@@ -400,7 +410,7 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='topology_3',
+            name='topology_333',
             # name='gru_v6',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment6',
@@ -429,12 +439,14 @@ if __name__ == '__main__':
     # Chosen genome used for genome-evaluation
     chosen_genome = None
     # bias_r,bias_z,bias_h,weight_xr,weight_xz,weight_xh,weight_hr,weight_hz,weight_hh,bias_rw,conn0,conn1,conn2
-    chosen_genome = deepcopy(pop.best_genome)
-    chosen_genome.connections[(-1, 2)].weight = 1.98
-    chosen_genome.connections[(2, 0)].weight = 2.03
-    chosen_genome.nodes[2].weight_xh_full[0, 0] = abs(chosen_genome.nodes[2].weight_xh_full[0, 0])/10
-    chosen_genome.nodes[2].weight_hh[0, 0] = abs(chosen_genome.nodes[2].weight_hh[0, 0])/10
-    chosen_genome.update_rnn_nodes(pop.config.genome)
+    # chosen_genome = deepcopy(pop.best_genome)
+    # pop.best_genome.nodes[2].bias_h[0] = -0.26
+    # chosen_genome.nodes[2].scale[0] = 1.61
+    # chosen_genome.connections[(-1, 2)].weight = 1.98
+    # chosen_genome.connections[(2, 0)].weight = 2.03
+    # chosen_genome.nodes[2].weight_xh_full[0, 0] = abs(chosen_genome.nodes[2].weight_xh_full[0, 0])/10
+    # chosen_genome.nodes[2].weight_hh[0, 0] = abs(chosen_genome.nodes[2].weight_hh[0, 0])/10
+    # chosen_genome.update_rnn_nodes(pop.config.genome)
     # chosen_genome.nodes[2].bias_h[0], \
     # chosen_genome.nodes[2].bias_h[1], \
     # chosen_genome.nodes[2].bias_h[2], \
