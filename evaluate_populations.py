@@ -32,7 +32,8 @@ def evaluate_generations(experiment_id: int,
                          unused_cpu: int = 2):
     """Evaluate all the populations' generations in a given folder of a given experiment."""
     if pop_folder[-1] != '/': pop_folder += '/'
-    for v in range(1, max_v + 1):
+    # for v in range(1, max_v + 1):  TODO
+    for v in [5,22]:
         print(f"\n===> EVALUATING POPULATION {pop_folder}v{v} <===")
         eval_gen(
                 name=f"{pop_folder}v{v}",
@@ -530,18 +531,18 @@ def correctness_check(folder: str,
 # TODO: Usage of backed-up populations is assumed
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
-    parser.add_argument('--evaluate_gen', type=int, default=0)
+    parser.add_argument('--evaluate_gen', type=int, default=1)
     parser.add_argument('--evaluate_pop', type=int, default=0)
-    parser.add_argument('--combine_pop', type=int, default=1)  # Goes over all the populations types
+    parser.add_argument('--combine_pop', type=int, default=0)  # Goes over all the populations types
     parser.add_argument('--evaluate_training', type=int, default=0)
     parser.add_argument('--plot_distribution', type=int, default=0)  # Goes over all the populations types
     parser.add_argument('--compute_topology', type=int, default=0)  # Goes over all the populations types
     parser.add_argument('--test_correctness', type=int, default=0)
-    parser.add_argument('--experiment', type=int, default=3)
+    parser.add_argument('--experiment', type=int, default=8)
     parser.add_argument('--folder', type=str, default=None)
-    parser.add_argument('--folder_pop', type=str, default='NEAT-SRU')
+    parser.add_argument('--folder_pop', type=str, default='gru_nr')
     parser.add_argument('--hops', type=int, default=HOPS)
-    parser.add_argument('--max_gen', type=int, default=1000)
+    parser.add_argument('--max_gen', type=int, default=100)
     parser.add_argument('--max_v', type=int, default=30)
     parser.add_argument('--unused_cpu', type=int, default=2)
     args = parser.parse_args()
