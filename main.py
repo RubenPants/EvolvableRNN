@@ -372,7 +372,7 @@ if __name__ == '__main__':
     parser.add_argument('--train_overview', type=bool, default=False)
     parser.add_argument('--blueprint', type=bool, default=False)
     parser.add_argument('--trace', type=bool, default=False)  # Keep it False
-    parser.add_argument('--trace_fit', type=bool, default=True)
+    parser.add_argument('--trace_fit', type=bool, default=False)
     parser.add_argument('--evaluate', type=bool, default=False)
     parser.add_argument('--genome', type=bool, default=False)
     parser.add_argument('--monitor', type=bool, default=True)
@@ -400,7 +400,7 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='sru_v11',
+            name='fru_v6',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment6',
             folder_name=get_folder(args.experiment),
@@ -479,7 +479,7 @@ if __name__ == '__main__':
             monitor(
                     debug=args.debug,
                     duration=args.duration,
-                    game_id=game_ids_eval[8],
+                    game_id=game_ids_eval[0],
                     genome=chosen_genome,
                     population=pop,
             )
