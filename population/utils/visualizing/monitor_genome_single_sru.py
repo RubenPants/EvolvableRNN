@@ -151,11 +151,11 @@ def main(population: Population,
             Ht2[i - 1] = Ht2[i]
     
     # For debugging
-    print(f"actuation = {actuation!r}")
-    print(f"distance = {distance!r}")
-    print(f"Ht1 = {Ht1!r}")
-    print(f"Ht2 = {Ht2!r}")
-    print(f"position = {position!r}")
+    # print(f"actuation = {actuation!r}")
+    # print(f"distance = {distance!r}")
+    # print(f"Ht1 = {Ht1!r}")
+    # print(f"Ht2 = {Ht2!r}")
+    # print(f"position = {position!r}")
     
     # Visualize the monitored values
     path = get_subfolder(f"population{'_backup' if population.use_backup else ''}/"
@@ -201,7 +201,7 @@ def visualize_actuation(actuation_list: list, target_found: list, game_cfg: Game
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.legend()
     plt.grid()
-    plt.xticks([i * 5 for i in range(13)])
+    plt.xticks([i * 10 for i in range(9)])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Actuation force - Normalized")
@@ -222,7 +222,7 @@ def visualize_distance(distance_list: list, target_found: list, game_cfg: GameCo
     plt.plot(time, distance_list)
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
-    plt.xticks([i * 5 for i in range(13)])
+    plt.xticks([i * 10 for i in range(9)])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Distance to target - Normalized")
@@ -243,7 +243,7 @@ def visualize_hidden_state1(hidden_state: list, target_found: list, game_cfg: Ga
     plt.plot(time, hidden_state)
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
-    plt.xticks([i * 5 for i in range(13)])
+    plt.xticks([i * 10 for i in range(9)])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("First hidden state")
@@ -264,7 +264,7 @@ def visualize_hidden_state2(hidden_state: list, target_found: list, game_cfg: Ga
     plt.plot(time, hidden_state)
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
-    plt.xticks([i * 5 for i in range(13)])
+    plt.xticks([i * 10 for i in range(9)])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Second hidden state")
@@ -305,8 +305,8 @@ def visualize_position(position_list: list, game: Game, save_path: str):
     for p in range(0, len(x_pos), 5):
         plt.plot(x_pos[p], y_pos[p], 'ro', markersize=2)
         
-        # Annotate every 5 seconds
-        if p % (5 * game.game_config.fps) == 0 and p > 0:
+        # Annotate every 10 seconds
+        if p % (10 * game.game_config.fps) == 0 and p > 0:
             # offset = (x_pos[p + 1] - x_pos[p], y_pos[p + 1] - y_pos[p])
             offset = (y_pos[p] - y_pos[p - 1], x_pos[p - 1] - x_pos[p])
             plt.annotate(

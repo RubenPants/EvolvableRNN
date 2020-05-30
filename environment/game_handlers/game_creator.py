@@ -55,9 +55,16 @@ def check_and_save_game(g, show: bool = True, randomize: bool = True):
 
 def create_dummy_game(i: int = 0, overwrite: bool = True, show: bool = True):
     cfg = get_shared_config()
+
+    # Robot
+    ROBOT_INIT_ANGLE = pi / 2  # Looking up
     ROBOT_INIT_POS = Vec2d(cfg.game.x_axis / 2, cfg.game.y_axis / 2)  # Initial position of the drone
+    
+    # Target
     spawn_f = SpawnSimple(game_config=cfg, train=True)
-    spawn_f.add_location((1, 1))
+    spawn_f.add_location((9, 10))
+    
+    # Create the game
     game = Game(
             config=cfg,
             game_id=get_game_id(i, experiment_id=0),
@@ -65,6 +72,7 @@ def create_dummy_game(i: int = 0, overwrite: bool = True, show: bool = True):
             spawn_func=spawn_f,
     )
     game.player = Robot(game=game)
+    game.set_player_init_angle(a=ROBOT_INIT_ANGLE)
     game.set_player_init_pos(p=ROBOT_INIT_POS)
     check_and_save_game(game, show=show)
 
@@ -340,9 +348,10 @@ if __name__ == '__main__':
     os.chdir('../../')
     
     # Create the experiments
+    create_dummy_game(i=0, overwrite=args.overwrite, show=args.show)
     # for i in [0, -1, -2, -3, -4]:
     #     create_dummy_game(i=i, overwrite=args.overwrite, show=args.show)
     # create_experiment_1(overwrite=args.overwrite, show=args.show)
     # create_experiment_2(overwrite=args.overwrite, show=args.show)
     # create_experiment_3(overwrite=args.overwrite, show=args.show)
-    create_experiment_6(overwrite=args.overwrite, show=args.show)
+    # create_experiment_6(overwrite=args.overwrite, show=args.show)

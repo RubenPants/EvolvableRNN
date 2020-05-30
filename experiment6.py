@@ -774,7 +774,7 @@ def get_topology333(gid: int, cfg: Config):
     genome.nodes[0] = OutputNodeGene(key=0, cfg=cfg.genome)  # OutputNode 0
     genome.nodes[0].bias = 1.37
     genome.nodes[1] = OutputNodeGene(key=1, cfg=cfg.genome)  # OutputNode 1
-    genome.nodes[1].bias = 1.77
+    genome.nodes[1].bias = 1.3
     genome.nodes[2] = FixedRnnNodeGene(key=2, cfg=cfg.genome, input_keys=[-1])  # Hidden node
     genome.nodes[2].bias = 0  # Bias is irrelevant for GRU-node
     # Create the connections
@@ -782,17 +782,17 @@ def get_topology333(gid: int, cfg: Config):
     # input2gru
     key = (-1, 2)
     genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
-    genome.connections[key].weight = 1.98
+    genome.connections[key].weight = 2.22
     genome.connections[key].enabled = True
     # gru2output - Uniformly sampled
     key = (2, 0)
     genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
-    genome.connections[key].weight = 2.03
+    genome.connections[key].weight = 1.78
     genome.connections[key].enabled = True
     # input2output - Uniformly sampled
     key = (-1, 0)
     genome.connections[key] = ConnectionGene(key=key, cfg=cfg.genome)
-    genome.connections[key].weight = -6
+    genome.connections[key].weight = -3.62
     genome.connections[key].enabled = True
     
     genome.update_rnn_nodes(config=cfg.genome)
@@ -900,10 +900,10 @@ def enforce_topology3(g: Genome):
 def enforce_topology333(g: Genome):
     """Enforce the fixed parameters of topology3. It is assumed that topology hasn't changed."""
     g.nodes[0].bias = 1.37
-    g.nodes[1].bias = 1.77
-    g.connections[(-1, 2)].weight = 1.98
-    g.connections[(2, 0)].weight = 2.03
-    g.connections[(-1, 0)].weight = -6
+    g.nodes[1].bias = 1.3
+    g.connections[(-1, 2)].weight = 2.22
+    g.connections[(2, 0)].weight = 1.78
+    g.connections[(-1, 0)].weight = -3.62
 
 
 if __name__ == '__main__':

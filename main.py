@@ -126,7 +126,7 @@ def monitor(game_id: int,
     elif node_type == SimpleRnnNodeGene:
         from population.utils.visualizing.monitor_genome_single_sru import main as sru_monitor
         sru_monitor(
-                average=2,  # TODO: No averaging on the hidden state!
+                average=0,  # TODO: No averaging on the hidden state!
                 population=population,
                 game_id=game_id,
                 genome=genome,
@@ -391,11 +391,11 @@ if __name__ == '__main__':
     
     # Extra arguments
     parser.add_argument('--iterations', type=int, default=50)
-    parser.add_argument('--experiment', type=int, default=6)
+    parser.add_argument('--experiment', type=int, default=3)
     parser.add_argument('--unused_cpu', type=int, default=2)
     parser.add_argument('--version', type=int, default=0)
     parser.add_argument('--debug', type=bool, default=False)
-    parser.add_argument('--duration', type=int, default=60)
+    parser.add_argument('--duration', type=int, default=80)
     parser.add_argument('--use_backup', type=bool, default=True)
     args = parser.parse_args()
     
@@ -410,8 +410,10 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='sru_v11',
+            name='NEAT-SRU/v11',
+            # name='sru_v11',
             # name='gru_v6',
+            # name='fru_v6',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment6',
             folder_name=get_folder(args.experiment),
@@ -428,7 +430,7 @@ if __name__ == '__main__':
     # pop.best_genome.update_rnn_nodes(pop.config.genome)
     # pop.best_genome = deepcopy(pop.population[589])
     # print(pop.best_genome)
-    # print(pop.best_genome.nodes[2])
+    # print(pop.best_genome.nodes[5])
     # raise Exception
     
     game_ids_train, game_ids_eval = get_game_ids(experiment_id=args.experiment)
@@ -439,14 +441,7 @@ if __name__ == '__main__':
     # Chosen genome used for genome-evaluation
     chosen_genome = None
     # bias_r,bias_z,bias_h,weight_xr,weight_xz,weight_xh,weight_hr,weight_hz,weight_hh,bias_rw,conn0,conn1,conn2
-    chosen_genome = deepcopy(pop.best_genome)
-    # pop.best_genome.nodes[2].bias_h[0] = -0.26
-    # chosen_genome.nodes[2].scale[0] = 1.61
-    # chosen_genome.connections[(-1, 2)].weight = 1.98
-    # chosen_genome.connections[(2, 0)].weight = 2.03
-    # chosen_genome.nodes[2].weight_xh_full[0, 0] = abs(chosen_genome.nodes[2].weight_xh_full[0, 0])/10
-    # chosen_genome.nodes[2].weight_hh[0, 0] = abs(chosen_genome.nodes[2].weight_hh[0, 0])/10
-    # chosen_genome.update_rnn_nodes(pop.config.genome)
+    # chosen_genome = deepcopy(pop.best_genome)
     # chosen_genome.nodes[2].bias_h[0], \
     # chosen_genome.nodes[2].bias_h[1], \
     # chosen_genome.nodes[2].bias_h[2], \
@@ -460,14 +455,23 @@ if __name__ == '__main__':
     # chosen_genome.nodes[1].bias, \
     # chosen_genome.connections[(-1, 2)].weight, \
     # chosen_genome.connections[(2, 0)].weight, \
-    # chosen_genome.connections[(-1, 0)].weight = \
-    #     2.213598137873923,1.3312183950826315,-1.9571023626996016,0.7207092237291512,1.9408572504872108,3.3725305479064653,0.46160010861990974,-1.4779361644200266,-2.61920436804554,2.3097603633446995,2.3097603633446995,3.443916195368128,3.696325243768999,-6.0
+    # chosen_genome.connections[(-1, 0)].weight, _ = \
+    #     -1.9579192454381686,1.5325976113875865,-0.557113871561735,2.6435250635411847,1.3717691947555204,2.7222706248306725,1.063472562368718,0.06427083843822622,-0.7191764144218553,1.37,1.37,1.8921583205407804,2.153210647547125,-6,1.0
     #
-    chosen_genome.connections[(-1,72)].weight = abs(chosen_genome.connections[(-1,72)].weight)
-    chosen_genome.nodes[72].weight_xh_full[0,0] = abs(chosen_genome.nodes[72].weight_xh_full[0,0])
-    chosen_genome.update_rnn_nodes(pop.config.genome)
+    # chosen_genome.connections[(-1,72)].weight = abs(chosen_genome.connections[(-1,72)].weight)
+    # chosen_genome.nodes[2].bias_h[1] = chosen_genome.nodes[2].bias_h[1] + 0.1
+    # chosen_genome.nodes[2].weight_xh_full[2,0] = chosen_genome.nodes[2].weight_xh_full[2,0] + 0.1
+    # chosen_genome.update_rnn_nodes(pop.config.genome)
+    # for i in range(10):
+    #     print("-"*50)
+    #     print(999-i)
+    #     chosen_genome = deepcopy(pop.best_genome_hist[999-i][1])
+    # pop.best_genome.nodes[2].delay, \
+    # pop.best_genome.nodes[2].scale[0], \
+    # pop.best_genome.nodes[2].bias_h[0] = \
+    #     45, 1.3330602903149906, -0.4937881437795899
     # print(chosen_genome)
-    # print(chosen_genome.nodes[72])
+    # print(chosen_genome.nodes[2])
     # raise Exception
     
     try:
@@ -516,11 +520,12 @@ if __name__ == '__main__':
             )
         
         if args.monitor:
-            # for k in range(18):  # TODO: Remove for-loop
+            # for g in game_ids_eval:  # TODO: Remove for-loop
             monitor(
                     debug=args.debug,
                     duration=args.duration,
-                    game_id=game_ids_eval[0],  # TODO
+                    game_id=game_ids_eval[6],  # TODO
+                    # game_id=g,  # TODO
                     genome=chosen_genome,
                     population=pop,
             )
