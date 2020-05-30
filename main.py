@@ -382,10 +382,10 @@ if __name__ == '__main__':
     parser.add_argument('--train_overview', type=bool, default=False)
     parser.add_argument('--blueprint', type=bool, default=False)
     parser.add_argument('--trace', type=bool, default=False)  # Keep it False
-    parser.add_argument('--trace_fit', type=bool, default=True)
+    parser.add_argument('--trace_fit', type=bool, default=False)
     parser.add_argument('--evaluate', type=bool, default=False)
-    parser.add_argument('--genome', type=bool, default=False)
-    parser.add_argument('--monitor', type=bool, default=False)
+    parser.add_argument('--genome', type=bool, default=True)
+    parser.add_argument('--monitor', type=bool, default=True)
     parser.add_argument('--gru_analysis', type=bool, default=False)
     parser.add_argument('--live', type=bool, default=False)
     
@@ -395,7 +395,7 @@ if __name__ == '__main__':
     parser.add_argument('--unused_cpu', type=int, default=2)
     parser.add_argument('--version', type=int, default=0)
     parser.add_argument('--debug', type=bool, default=False)
-    parser.add_argument('--duration', type=int, default=200)
+    parser.add_argument('--duration', type=int, default=60)
     parser.add_argument('--use_backup', type=bool, default=True)
     args = parser.parse_args()
     
@@ -410,7 +410,7 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='fru_v6',
+            name='sru_v11',
             # name='gru_v6',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment6',
@@ -439,7 +439,7 @@ if __name__ == '__main__':
     # Chosen genome used for genome-evaluation
     chosen_genome = None
     # bias_r,bias_z,bias_h,weight_xr,weight_xz,weight_xh,weight_hr,weight_hz,weight_hh,bias_rw,conn0,conn1,conn2
-    # chosen_genome = deepcopy(pop.best_genome)
+    chosen_genome = deepcopy(pop.best_genome)
     # pop.best_genome.nodes[2].bias_h[0] = -0.26
     # chosen_genome.nodes[2].scale[0] = 1.61
     # chosen_genome.connections[(-1, 2)].weight = 1.98
@@ -463,8 +463,12 @@ if __name__ == '__main__':
     # chosen_genome.connections[(-1, 0)].weight = \
     #     2.213598137873923,1.3312183950826315,-1.9571023626996016,0.7207092237291512,1.9408572504872108,3.3725305479064653,0.46160010861990974,-1.4779361644200266,-2.61920436804554,2.3097603633446995,2.3097603633446995,3.443916195368128,3.696325243768999,-6.0
     #
-    # print(chosen_genome)
-    # print(chosen_genome.nodes[2])
+    chosen_genome.connections[(-1,72)].weight = abs(chosen_genome.connections[(-1,72)].weight)
+    chosen_genome.nodes[72].weight_xh_full[0,0] = abs(chosen_genome.nodes[72].weight_xh_full[0,0])
+    chosen_genome.update_rnn_nodes(pop.config.genome)
+    print(chosen_genome)
+    print(chosen_genome.nodes[72])
+    # raise Exception
     
     try:
         if args.train:
