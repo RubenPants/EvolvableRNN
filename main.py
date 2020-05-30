@@ -126,7 +126,7 @@ def monitor(game_id: int,
     elif node_type == SimpleRnnNodeGene:
         from population.utils.visualizing.monitor_genome_single_sru import main as sru_monitor
         sru_monitor(
-                average=0,  # TODO: No averaging on the hidden state!
+                average=2,  # TODO: No averaging on the hidden state!
                 population=population,
                 game_id=game_id,
                 genome=genome,
@@ -384,7 +384,7 @@ if __name__ == '__main__':
     parser.add_argument('--trace', type=bool, default=False)  # Keep it False
     parser.add_argument('--trace_fit', type=bool, default=False)
     parser.add_argument('--evaluate', type=bool, default=False)
-    parser.add_argument('--genome', type=bool, default=True)
+    parser.add_argument('--genome', type=bool, default=False)
     parser.add_argument('--monitor', type=bool, default=True)
     parser.add_argument('--gru_analysis', type=bool, default=False)
     parser.add_argument('--live', type=bool, default=False)
@@ -466,8 +466,8 @@ if __name__ == '__main__':
     chosen_genome.connections[(-1,72)].weight = abs(chosen_genome.connections[(-1,72)].weight)
     chosen_genome.nodes[72].weight_xh_full[0,0] = abs(chosen_genome.nodes[72].weight_xh_full[0,0])
     chosen_genome.update_rnn_nodes(pop.config.genome)
-    print(chosen_genome)
-    print(chosen_genome.nodes[72])
+    # print(chosen_genome)
+    # print(chosen_genome.nodes[72])
     # raise Exception
     
     try:

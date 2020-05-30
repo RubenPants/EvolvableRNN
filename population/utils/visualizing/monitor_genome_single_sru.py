@@ -118,7 +118,7 @@ def main(population: Population,
         step_num += 1
         
         # Update the containers
-        actuation.append(action[0])
+        actuation.append(list(action[0]))
         distance.append(state[0])
         delta_distance.append(distance[-2] - distance[-1])
         position.append(game.player.pos.get_tuple())
@@ -151,11 +151,11 @@ def main(population: Population,
             Ht2[i - 1] = Ht2[i]
     
     # For debugging
-    # print(f"actuation: {actuation!r}")
-    # print(f"distance: {distance!r}")
-    # print(f"Ht1: {Ht1!r}")
-    # print(f"Ht2: {Ht2!r}")
-    # print(f"Position: {position!r}")
+    print(f"actuation = {actuation!r}")
+    print(f"distance = {distance!r}")
+    print(f"Ht1 = {Ht1!r}")
+    print(f"Ht2 = {Ht2!r}")
+    print(f"position = {position!r}")
     
     # Visualize the monitored values
     path = get_subfolder(f"population{'_backup' if population.use_backup else ''}/"
