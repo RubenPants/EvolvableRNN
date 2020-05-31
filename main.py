@@ -391,7 +391,7 @@ if __name__ == '__main__':
     
     # Extra arguments
     parser.add_argument('--iterations', type=int, default=50)
-    parser.add_argument('--experiment', type=int, default=3)
+    parser.add_argument('--experiment', type=int, default=6)
     parser.add_argument('--unused_cpu', type=int, default=2)
     parser.add_argument('--version', type=int, default=0)
     parser.add_argument('--debug', type=bool, default=False)
@@ -410,9 +410,10 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='NEAT-SRU/v11',
+            # name='NEAT-SRU/v11',
             # name='sru_v11',
             # name='gru_v6',
+            name='gru_nr_v6',
             # name='fru_v6',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment6',
@@ -429,8 +430,8 @@ if __name__ == '__main__':
     # print(pop.best_genome.nodes[2])
     # pop.best_genome.update_rnn_nodes(pop.config.genome)
     # pop.best_genome = deepcopy(pop.population[589])
-    # print(pop.best_genome)
-    # print(pop.best_genome.nodes[5])
+    print(pop.best_genome)
+    print(pop.best_genome.nodes[2])
     # raise Exception
     
     game_ids_train, game_ids_eval = get_game_ids(experiment_id=args.experiment)
@@ -444,20 +445,17 @@ if __name__ == '__main__':
     # chosen_genome = deepcopy(pop.best_genome)
     # chosen_genome.nodes[2].bias_h[0], \
     # chosen_genome.nodes[2].bias_h[1], \
-    # chosen_genome.nodes[2].bias_h[2], \
     # chosen_genome.nodes[2].weight_xh_full[0, 0], \
     # chosen_genome.nodes[2].weight_xh_full[1, 0], \
-    # chosen_genome.nodes[2].weight_xh_full[2, 0], \
     # chosen_genome.nodes[2].weight_hh[0, 0], \
     # chosen_genome.nodes[2].weight_hh[1, 0], \
-    # chosen_genome.nodes[2].weight_hh[2, 0], \
     # chosen_genome.nodes[0].bias, \
     # chosen_genome.nodes[1].bias, \
     # chosen_genome.connections[(-1, 2)].weight, \
     # chosen_genome.connections[(2, 0)].weight, \
     # chosen_genome.connections[(-1, 0)].weight, _ = \
-    #     -1.9579192454381686,1.5325976113875865,-0.557113871561735,2.6435250635411847,1.3717691947555204,2.7222706248306725,1.063472562368718,0.06427083843822622,-0.7191764144218553,1.37,1.37,1.8921583205407804,2.153210647547125,-6,1.0
-    #
+    #     1.4480716317767224, -0.4203142812348327, 0.998943747448997, 1.303402660572161, 0.041513106884810164, 1.030812948314574, 1.37, 1.3, 2.22, 1.78, -3.62, 1.0
+    
     # chosen_genome.connections[(-1,72)].weight = abs(chosen_genome.connections[(-1,72)].weight)
     # chosen_genome.nodes[2].bias_h[1] = chosen_genome.nodes[2].bias_h[1] + 0.1
     # chosen_genome.nodes[2].weight_xh_full[2,0] = chosen_genome.nodes[2].weight_xh_full[2,0] + 0.1
@@ -524,7 +522,7 @@ if __name__ == '__main__':
             monitor(
                     debug=args.debug,
                     duration=args.duration,
-                    game_id=game_ids_eval[6],  # TODO
+                    game_id=game_ids_eval[0],  # TODO
                     # game_id=g,  # TODO
                     genome=chosen_genome,
                     population=pop,
