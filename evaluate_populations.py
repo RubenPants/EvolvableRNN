@@ -32,8 +32,8 @@ def evaluate_generations(experiment_id: int,
                          unused_cpu: int = 2):
     """Evaluate all the populations' generations in a given folder of a given experiment."""
     if pop_folder[-1] != '/': pop_folder += '/'
-    for v in range(31, max_v + 1):
-    # for v in [5,22]:
+    # for v in range(31, max_v + 1):
+    for v in [51,52]:
         print(f"\n===> EVALUATING POPULATION {pop_folder}v{v} <===")
         eval_gen(
                 name=f"{pop_folder}v{v}",
@@ -540,7 +540,7 @@ if __name__ == '__main__':
     parser.add_argument('--test_correctness', type=int, default=0)
     parser.add_argument('--experiment', type=int, default=8)
     parser.add_argument('--folder', type=str, default=None)
-    parser.add_argument('--folder_pop', type=str, default='gru_nr')
+    parser.add_argument('--folder_pop', type=str, default='default')
     parser.add_argument('--hops', type=int, default=HOPS)
     parser.add_argument('--max_gen', type=int, default=100)
     parser.add_argument('--max_v', type=int, default=30)
