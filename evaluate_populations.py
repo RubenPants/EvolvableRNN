@@ -32,8 +32,8 @@ def evaluate_generations(experiment_id: int,
                          unused_cpu: int = 2):
     """Evaluate all the populations' generations in a given folder of a given experiment."""
     if pop_folder[-1] != '/': pop_folder += '/'
-    # for v in range(1, max_v + 1):  TODO
-    for v in [5,22]:
+    for v in range(31, max_v + 1):
+    # for v in [5,22]:
         print(f"\n===> EVALUATING POPULATION {pop_folder}v{v} <===")
         eval_gen(
                 name=f"{pop_folder}v{v}",
