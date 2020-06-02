@@ -133,8 +133,8 @@ def combine_all_populations(folder: str,
     if len(populations) == 0: return
     
     # Collect all the measure options
-    # OPTIONS = ['distance', 'finished', 'fitness', 'score', 'time', 'training']
-    OPTIONS = ['fitness']
+    OPTIONS = ['distance', 'finished', 'fitness', 'score', 'time', 'training']
+    # OPTIONS = ['fitness']
     
     # Go over all possibilities
     print(f"\n===> COMBINING POPULATIONS OF FOLDER {folder} <===")
@@ -190,9 +190,10 @@ def combine_all_populations(folder: str,
         # plt.yticks([i for i in range(7)])  # TODO
         plt.ylabel(option)
         plt.ylim(0, max(max_data * 1.05, 1.05))
+        # plt.ylim(0, 6)  # TODO
         plt.grid()
         plt.tight_layout()
-        plt.savefig(f"{path_images}comb_{option}.png", bbox_inches='tight', pad_inches=0.02)
+        plt.savefig(f"{path_images}comb_{option}.png", bbox_inches='tight', pad_inches=0.02, dpi=500)
         # plt.savefig(f"{path_images}comb_{option}.eps", format="eps", bbox_inches='tight', pad_inches=0.02)
         # plt.show()
         plt.close()
@@ -266,7 +267,7 @@ def plot_result(d: dict, ylabel: str, title: str, save_path: str):
     plt.ylim(0, max(np.max(data) * 1.05, 1.05))
     plt.grid()
     plt.tight_layout()
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
+    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02, dpi=500)
     # plt.show()
     plt.close()
 
@@ -531,14 +532,14 @@ def correctness_check(folder: str,
 # TODO: Usage of backed-up populations is assumed
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
-    parser.add_argument('--evaluate_gen', type=int, default=1)
+    parser.add_argument('--evaluate_gen', type=int, default=0)
     parser.add_argument('--evaluate_pop', type=int, default=0)
-    parser.add_argument('--combine_pop', type=int, default=0)  # Goes over all the populations types
+    parser.add_argument('--combine_pop', type=int, default=1)  # Goes over all the populations types
     parser.add_argument('--evaluate_training', type=int, default=0)
     parser.add_argument('--plot_distribution', type=int, default=0)  # Goes over all the populations types
     parser.add_argument('--compute_topology', type=int, default=0)  # Goes over all the populations types
     parser.add_argument('--test_correctness', type=int, default=0)
-    parser.add_argument('--experiment', type=int, default=8)
+    parser.add_argument('--experiment', type=int, default=3)
     parser.add_argument('--folder', type=str, default=None)
     parser.add_argument('--folder_pop', type=str, default='default')
     parser.add_argument('--hops', type=int, default=HOPS)
