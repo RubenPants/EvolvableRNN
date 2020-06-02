@@ -28,7 +28,7 @@ from utils.myutils import get_subfolder
 # Parameters
 TIME_SERIES_WIDTH = 8
 TIME_SERIES_HEIGHT = 1.5
-CORRECTION = 0.6
+CORRECTION = 0.8
 
 
 def main(population: Population,
@@ -196,12 +196,13 @@ def visualize_actuation(actuation_list: list, target_found: list, game_cfg: Game
     
     # Create the graph
     ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT)).gca()
-    plt.plot(time, lw_a, label="left")
+    # plt.plot(time, lw_a, label="left")
+    plt.plot(time, lw_a, label="left", linewidth=0.8)  # TODO: to visualise the fluctuations better
     plt.plot(time, rw_a, label="right")
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.legend()
     plt.grid()
-    plt.xticks([i * 10 for i in range(9)])
+    plt.xticks([i * 5 for i in range(13)])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Actuation force - Normalized")
@@ -209,7 +210,7 @@ def visualize_actuation(actuation_list: list, target_found: list, game_cfg: Game
     # plt.ylabel("Normalized force")
     # plt.xlabel("Simulation time (s)")
     plt.tight_layout()
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
+    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02, dpi=500)
     plt.close()
 
 
@@ -222,7 +223,7 @@ def visualize_distance(distance_list: list, target_found: list, game_cfg: GameCo
     plt.plot(time, distance_list)
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
-    plt.xticks([i * 10 for i in range(9)])
+    plt.xticks([i * 5 for i in range(13)])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Distance to target - Normalized")
@@ -230,7 +231,7 @@ def visualize_distance(distance_list: list, target_found: list, game_cfg: GameCo
     # plt.ylabel("Normalized distance")
     # plt.xlabel("Simulation time (s)")
     plt.tight_layout()
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
+    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02, dpi=500)
     plt.close()
 
 
@@ -240,10 +241,11 @@ def visualize_hidden_state1(hidden_state: list, target_found: list, game_cfg: Ga
     
     # Create the graph
     ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT)).gca()
-    plt.plot(time, hidden_state)
+    # plt.plot(time, hidden_state)
+    plt.plot(time, hidden_state, linewidth=1)  # TODO: To put a small emphasis on its fluctionations
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
-    plt.xticks([i * 10 for i in range(9)])
+    plt.xticks([i * 5 for i in range(13)])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("First hidden state")
@@ -251,7 +253,7 @@ def visualize_hidden_state1(hidden_state: list, target_found: list, game_cfg: Ga
     # plt.ylabel("SRU output value")
     # plt.xlabel("Simulation time (s)")
     plt.tight_layout()
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
+    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02, dpi=500)
     plt.close()
 
 
@@ -260,19 +262,20 @@ def visualize_hidden_state2(hidden_state: list, target_found: list, game_cfg: Ga
     time = [i / game_cfg.fps for i in range(len(hidden_state))]
     
     # Create the graph
-    ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT)).gca()
-    plt.plot(time, hidden_state)
+    ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT * 1.1)).gca()
+    # plt.plot(time, hidden_state)
+    plt.plot(time, hidden_state, linewidth=0.8)  # TODO: To visualise fluctuations clearly
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
-    plt.xticks([i * 10 for i in range(9)])
+    plt.xticks([i * 5 for i in range(13)])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Second hidden state")
     plt.xlim(0)
     # plt.ylabel("SRU output value")
-    # plt.xlabel("Simulation time (s)")
+    plt.xlabel("Simulation time (s)")
     plt.tight_layout()
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
+    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02, dpi=500)
     plt.close()
 
 
@@ -287,11 +290,11 @@ def visualize_position(position_list: list, game: Game, save_path: str):
         t = game.spawn_function.locations[i]
         
         # Plot the targets
-        plt.plot(t[0], t[1], 'go', markersize=3)
-        plt.annotate(str(i + 1), xy=(t[0] + 0.3, t[1] + 0.3))
+        plt.plot(t[0], t[1], 'go')
+        # plt.annotate(str(i + 1), xy=(t[0] + 0.3, t[1] + 0.3))  # TODO: Uncomment if multiple targets
         
         # Add green dotted circle around targets
-        c = plt.Circle((t[0], t[1]), 0.5, color='g', linestyle=':', linewidth=1, fill=False)
+        c = plt.Circle((t[0], t[1]), 0.5, color='g', linestyle=':', linewidth=2, fill=False)
         plt.gca().add_artist(c)
         
         # Update the boundaries
@@ -305,8 +308,8 @@ def visualize_position(position_list: list, game: Game, save_path: str):
     for p in range(0, len(x_pos), 5):
         plt.plot(x_pos[p], y_pos[p], 'ro', markersize=2)
         
-        # Annotate every 10 seconds
-        if p % (10 * game.game_config.fps) == 0 and p > 0:
+        # Annotate every 5 seconds
+        if p % (5 * game.game_config.fps) == 0 and p > 0:
             # offset = (x_pos[p + 1] - x_pos[p], y_pos[p + 1] - y_pos[p])
             offset = (y_pos[p] - y_pos[p - 1], x_pos[p - 1] - x_pos[p])
             plt.annotate(
@@ -334,7 +337,7 @@ def visualize_position(position_list: list, game: Game, save_path: str):
     plt.grid()
     plt.title("Driving trace")
     plt.tight_layout()
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
+    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02, dpi=500)
     plt.close()
 
 
@@ -348,20 +351,38 @@ def merge(title: str, path: str):  # TODO
     
     # Make sure width of all images is the same
     for i in range(len(images)):
-        while images[i].shape[1] > 774:
+        while images[i].shape[1] > 3868:
             images[i] = images[i][:, :-1, :]
-        while images[i].shape[1] < 774:
+        while images[i].shape[1] < 3868:
             images[i] = np.concatenate((images[i], np.ones((images[i].shape[0], 1, images[i].shape[2]))), axis=1)
     
     # Concatenate the images, time_series vertical, and trace on the right
-    images.append(plt.imread('population/utils/visualizing/images/time774.png'))
+    # images.append(plt.imread('population/utils/visualizing/images/time774.png'))
     # images.append(plt.imread('population/utils/visualizing/images/white.png'))
     time_series = np.concatenate(images, axis=0)
     height = time_series.shape[0]
     while trace.shape[0] > height:
-        trace = trace[:-1, :, :]
+        if trace.shape[0] == height + 1:
+            trace = trace[:-1, :, :]
+        else:  # Symmetric prune
+            trace = trace[1:-1, :, :]
     while trace.shape[0] < height:
-        trace = np.concatenate((trace, np.ones((1, trace.shape[1], trace.shape[2]))), axis=0)
+        if trace.shape[0] == height - 1:
+            trace = np.concatenate((trace,
+                                    np.ones((1, trace.shape[1], trace.shape[2]))), axis=0)
+        else:  # Symmetric addition
+            if trace.shape[0] < height - 200:  # The big guns
+                trace = np.concatenate((np.ones((100, trace.shape[1], trace.shape[2])),
+                                        trace,
+                                        np.ones((100, trace.shape[1], trace.shape[2]))), axis=0)
+            elif trace.shape[0] < height - 20:  # The normal guns
+                trace = np.concatenate((np.ones((10, trace.shape[1], trace.shape[2])),
+                                        trace,
+                                        np.ones((10, trace.shape[1], trace.shape[2]))), axis=0)
+            else:  # Baby-steps
+                trace = np.concatenate((np.ones((1, trace.shape[1], trace.shape[2])),
+                                        trace,
+                                        np.ones((1, trace.shape[1], trace.shape[2]))), axis=0)
     result = np.concatenate([time_series, trace], axis=1)
     
     # Create the figure
@@ -370,7 +391,7 @@ def merge(title: str, path: str):  # TODO
     # plt.title(title, fontsize=24, fontweight='bold')
     plt.imshow(result)
     plt.tight_layout()
-    plt.savefig(f"{path[:-1]}.png", bbox_inches='tight', pad_inches=0)
+    plt.savefig(f"{path[:-1]}.png", bbox_inches='tight', pad_inches=0, dpi=500)
     plt.close()
 
 

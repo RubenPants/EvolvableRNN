@@ -395,7 +395,7 @@ if __name__ == '__main__':
     parser.add_argument('--unused_cpu', type=int, default=2)
     parser.add_argument('--version', type=int, default=0)
     parser.add_argument('--debug', type=bool, default=False)
-    parser.add_argument('--duration', type=int, default=80)
+    parser.add_argument('--duration', type=int, default=60)
     parser.add_argument('--use_backup', type=bool, default=True)
     args = parser.parse_args()
     
@@ -411,10 +411,10 @@ if __name__ == '__main__':
     # Setup the population
     pop = Population(
             # name='NEAT-SRU/v11',
-            # name='sru_v11',
+            # name='fru_v6',
             # name='gru_v6',
             name='gru_nr_v6',
-            # name='fru_v6',
+            # name='sru_v11',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment6',
             folder_name=get_folder(args.experiment),
@@ -430,8 +430,8 @@ if __name__ == '__main__':
     # print(pop.best_genome.nodes[2])
     # pop.best_genome.update_rnn_nodes(pop.config.genome)
     # pop.best_genome = deepcopy(pop.population[589])
-    print(pop.best_genome)
-    print(pop.best_genome.nodes[2])
+    # print(pop.best_genome)
+    # print(pop.best_genome.nodes[2])
     # raise Exception
     
     game_ids_train, game_ids_eval = get_game_ids(experiment_id=args.experiment)

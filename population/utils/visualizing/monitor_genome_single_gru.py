@@ -210,7 +210,7 @@ def visualize_actuation(actuation_list: list, target_found: list, game_cfg: Game
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.legend()
     plt.grid()
-    plt.xticks([i * 10 for i in range(9)])
+    plt.xticks([i * 5 for i in range(10)])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Actuation force - Normalized")
@@ -218,7 +218,7 @@ def visualize_actuation(actuation_list: list, target_found: list, game_cfg: Game
     # plt.ylabel("Normalized force")
     # plt.xlabel("Simulation time (s)")
     plt.tight_layout()
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
+    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02, dpi=500)
     plt.close()
 
 
@@ -231,7 +231,7 @@ def visualize_distance(distance_list: list, target_found: list, game_cfg: GameCo
     plt.plot(time, distance_list)
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
-    plt.xticks([i * 10 for i in range(9)])
+    plt.xticks([i * 5 for i in range(10)])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Distance to target - Normalized")
@@ -239,7 +239,7 @@ def visualize_distance(distance_list: list, target_found: list, game_cfg: GameCo
     # plt.ylabel("Normalized distance")
     # plt.xlabel("Simulation time (s)")
     plt.tight_layout()
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
+    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02, dpi=500)
     plt.close()
 
 
@@ -252,8 +252,8 @@ def visualize_hidden_state(hidden_state: list, target_found: list, game_cfg: Gam
     plt.plot(time, hidden_state)
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
-    plt.xticks([i * 10 for i in range(9)])
-    # plt.yticks([0, 0.2, 0.4])
+    plt.xticks([i * 5 for i in range(10)])
+    plt.yticks([0, 0.2, 0.4])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Hidden state")
@@ -261,7 +261,7 @@ def visualize_hidden_state(hidden_state: list, target_found: list, game_cfg: Gam
     # plt.ylabel("GRU output value")
     # plt.xlabel("Simulation time (s)")
     plt.tight_layout()
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
+    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02, dpi=500)
     plt.close()
 
 
@@ -274,7 +274,7 @@ def visualize_candidate_hidden_state(c_hidden_state: list, target_found: list, g
     plt.plot(time, c_hidden_state)
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
-    plt.xticks([i * 10 for i in range(9)])
+    plt.xticks([i * 5 for i in range(10)])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Candidate hidden state")
@@ -282,7 +282,7 @@ def visualize_candidate_hidden_state(c_hidden_state: list, target_found: list, g
     # plt.ylabel("GRU output value")
     # plt.xlabel("Simulation time (s)")
     plt.tight_layout()
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
+    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02, dpi=500)
     plt.close()
 
 
@@ -295,8 +295,8 @@ def visualize_reset_gate(reset_gate: list, target_found: list, game_cfg: GameCon
     plt.plot(time, reset_gate)
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
-    plt.xticks([i * 10 for i in range(9)])
-    # plt.yticks([0.8, 0.9, 1])
+    plt.xticks([i * 5 for i in range(10)])
+    plt.yticks([0.8, 0.9, 1])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Reset gate")
@@ -304,7 +304,7 @@ def visualize_reset_gate(reset_gate: list, target_found: list, game_cfg: GameCon
     # plt.ylabel("Gate value")
     # plt.xlabel("Simulation time (s)")
     plt.tight_layout()
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
+    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02, dpi=500)
     plt.close()
 
 
@@ -313,20 +313,20 @@ def visualize_update_gate(update_gate: list, target_found: list, game_cfg: GameC
     time = [i / game_cfg.fps for i in range(len(update_gate))]
     
     # Create the graph
-    ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT)).gca()
+    ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT * 1.1)).gca()  # Higher since label
     plt.plot(time, update_gate)
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
-    plt.xticks([i * 10 for i in range(9)])
-    # plt.yticks([0.98, 0.985, 0.99, 0.995])
+    plt.xticks([i * 5 for i in range(10)])
+    plt.yticks([0.98, 0.985, 0.99, 0.995])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Update gate")
     plt.xlim(0)
     # plt.ylabel("Gate value")
-    # plt.xlabel("Simulation time (s)")
+    plt.xlabel("Simulation time (s)")
     plt.tight_layout()
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
+    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02, dpi=500)
     plt.close()
 
 
@@ -342,7 +342,7 @@ def visualize_position(position_list: list, game: Game, save_path: str):
         
         # Plot the targets
         plt.plot(t[0], t[1], 'go')
-        plt.annotate(str(i + 1), xy=(t[0] + 0.1, t[1] + 0.1))
+        # plt.annotate(str(i + 1), xy=(t[0] + 0.1, t[1] + 0.1))  # TODO: Uncomment if multiple targets
         
         # Add green dotted circle around targets
         c = plt.Circle((t[0], t[1]), 0.5, color='g', linestyle=':', linewidth=2, fill=False)
@@ -359,8 +359,8 @@ def visualize_position(position_list: list, game: Game, save_path: str):
     for p in range(0, len(x_pos), 5):
         plt.plot(x_pos[p], y_pos[p], 'ro', markersize=2)
         
-        # Annotate every 10 seconds
-        if p % (10 * game.game_config.fps) == 0 and p > 0:
+        # Annotate every 5 seconds
+        if p % (5 * game.game_config.fps) == 0 and p > 0:
             # offset = (x_pos[p + 1] - x_pos[p], y_pos[p + 1] - y_pos[p])
             offset = (y_pos[p] - y_pos[p - 1], x_pos[p - 1] - x_pos[p])
             plt.annotate(
@@ -388,7 +388,7 @@ def visualize_position(position_list: list, game: Game, save_path: str):
     plt.grid()
     plt.title("Driving trace")
     plt.tight_layout()
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02)
+    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02, dpi=500)
     plt.close()
 
 
@@ -401,13 +401,13 @@ def merge(title: str, path: str):
     
     # Make sure width of all images is the same
     for i in range(len(images)):
-        while images[i].shape[1] > 774:
+        while images[i].shape[1] > 3868:
             images[i] = images[i][:, :-1, :]
-        while images[i].shape[1] < 774:
+        while images[i].shape[1] < 3868:
             images[i] = np.concatenate((images[i], np.ones((images[i].shape[0], 1, images[i].shape[2]))), axis=1)
     
     # Concatenate the images, time_series vertical, and trace on the right
-    images.append(plt.imread('population/utils/visualizing/images/time774.png'))
+    # images.append(plt.imread('population/utils/visualizing/images/time774.png'))
     time_series = np.concatenate(images, axis=0)
     height = time_series.shape[0]
     while trace.shape[0] > height:
@@ -420,9 +420,18 @@ def merge(title: str, path: str):
             trace = np.concatenate((trace,
                                     np.ones((1, trace.shape[1], trace.shape[2]))), axis=0)
         else:  # Symmetric addition
-            trace = np.concatenate((np.ones((1, trace.shape[1], trace.shape[2])),
-                                    trace,
-                                    np.ones((1, trace.shape[1], trace.shape[2]))), axis=0)
+            if trace.shape[0] < height - 200:  # The big guns
+                trace = np.concatenate((np.ones((100, trace.shape[1], trace.shape[2])),
+                                        trace,
+                                        np.ones((100, trace.shape[1], trace.shape[2]))), axis=0)
+            elif trace.shape[0] < height - 20:  # The normal guns
+                trace = np.concatenate((np.ones((10, trace.shape[1], trace.shape[2])),
+                                        trace,
+                                        np.ones((10, trace.shape[1], trace.shape[2]))), axis=0)
+            else:  # Baby-steps
+                trace = np.concatenate((np.ones((1, trace.shape[1], trace.shape[2])),
+                                        trace,
+                                        np.ones((1, trace.shape[1], trace.shape[2]))), axis=0)
     result = np.concatenate([time_series, trace], axis=1)
     
     # Create the figure
@@ -431,7 +440,7 @@ def merge(title: str, path: str):
     # plt.title(title, fontsize=24, fontweight='bold')
     plt.imshow(result)
     plt.tight_layout()
-    plt.savefig(f"{path[:-1]}.png", bbox_inches='tight', pad_inches=0)
+    plt.savefig(f"{path[:-1]}.png", bbox_inches='tight', pad_inches=0, dpi=500)
     plt.close()
 
 
