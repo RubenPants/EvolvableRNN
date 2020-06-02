@@ -69,15 +69,18 @@ def main(population: Population,
     # Containers to monitor
     actuation = []
     distance = []
+    in2out = []
     delta_distance = []
     position = []
     Ht = []
     target_found = []
     score = 0
+    in2out_conn = genome.connections[(-1, 0)].weight
     
     # Initialize the containers
     actuation.append([0, 0])
     distance.append(state[0])
+    in2out.append(state[0] * in2out_conn)
     delta_distance.append(0)
     position.append(game.player.pos.get_tuple())
     Ht.append(net.rnn_state[0, 0, 0])
@@ -118,6 +121,7 @@ def main(population: Population,
         # Update the containers
         actuation.append(action[0])
         distance.append(state[0])
+        in2out.append(state[0] * in2out_conn)
         delta_distance.append(distance[-2] - distance[-1])
         position.append(game.player.pos.get_tuple())
         Ht.append(net.rnn_state[0, 0, 0])
@@ -161,6 +165,10 @@ def main(population: Population,
                        target_found=target_found,
                        game_cfg=game_cfg.game,
                        save_path=f"{path}distance.png")
+    visualize_in2out(in2out,
+                     target_found=target_found,
+                     game_cfg=game_cfg.game,
+                     save_path=f"{path}in2out.png")
     visualize_hidden_state(Ht,
                            target_found=target_found,
                            game_cfg=game_cfg.game,
@@ -211,6 +219,28 @@ def visualize_distance(distance_list: list, target_found: list, game_cfg: GameCo
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Distance to target - Normalized")
+    plt.xlim(0)
+    # plt.ylabel("Normalized distance")
+    # plt.xlabel("Simulation time (s)")
+    plt.tight_layout()
+    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02, dpi=500)
+    plt.close()
+
+
+def visualize_in2out(in2out_list: list, target_found: list, game_cfg: GameConfig, save_path: str):
+    """Create a graph of the value received at the output directly from the network's input"""
+    time = [i / game_cfg.fps for i in range(len(in2out_list))]
+    
+    # Create the graph
+    ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT)).gca()
+    plt.plot(time, in2out_list)
+    for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
+    plt.grid()
+    plt.xticks([i * 5 for i in range(9)])
+    plt.yticks([-1, -0.5, 0])
+    # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
+    ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
+    plt.title("Direct influence of distance on output")
     plt.xlim(0)
     # plt.ylabel("Normalized distance")
     # plt.xlabel("Simulation time (s)")
@@ -306,7 +336,7 @@ def merge(title: str, path: str):  # TODO
     """Merge each of the previously created images together"""
     # Load in all the images to merge
     # images = [plt.imread('population/utils/visualizing/images/white.png')]
-    image_names = ['actuation', 'distance', 'hidden_state']
+    image_names = ['actuation', 'distance', 'in2out', 'hidden_state']
     images = [plt.imread(f'{path}{n}.png') for n in image_names]
     trace = plt.imread(f'{path}trace.png')
     

@@ -61,6 +61,7 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
     # Containers to monitor
     actuation = []
     distance = []
+    in2out = []
     position = []
     Ht = []
     Ht_tilde = []
@@ -68,10 +69,12 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
     Zt = []
     target_found = []
     score = 0
+    in2out_conn = genome.connections[(-1, 0)].weight
     
     # Initialize the containers
     actuation.append([0, 0])
     distance.append(state[0])
+    in2out.append(state[0] * in2out_conn)
     position.append(game.player.pos.get_tuple())
     ht, ht_tilde, rt, zt = get_gru_states(net=net, x=np.asarray([state]))
     Ht.append(ht)
@@ -119,6 +122,7 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
         # Update the containers
         actuation.append(list(action[0]))
         distance.append(state[0])
+        in2out.append(state[0] * in2out_conn)
         position.append(game.player.pos.get_tuple())
         ht, ht_tilde, rt, zt = get_gru_states(net=net, x=np.asarray([state]))
         Ht.append(ht)
@@ -161,6 +165,10 @@ def main(population: Population, game_id: int, genome: Genome = None, game_cfg: 
                        target_found=target_found,
                        game_cfg=game_cfg.game,
                        save_path=f"{path}distance.png")
+    visualize_in2out(in2out,
+                     target_found=target_found,
+                     game_cfg=game_cfg.game,
+                     save_path=f"{path}in2out.png")
     visualize_hidden_state(Ht,
                            target_found=target_found,
                            game_cfg=game_cfg.game,
@@ -211,6 +219,7 @@ def visualize_actuation(actuation_list: list, target_found: list, game_cfg: Game
     plt.legend()
     plt.grid()
     plt.xticks([i * 5 for i in range(10)])
+    plt.yticks([.84, .87, .9, .93])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Actuation force - Normalized")
@@ -235,6 +244,28 @@ def visualize_distance(distance_list: list, target_found: list, game_cfg: GameCo
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Distance to target - Normalized")
+    plt.xlim(0)
+    # plt.ylabel("Normalized distance")
+    # plt.xlabel("Simulation time (s)")
+    plt.tight_layout()
+    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02, dpi=500)
+    plt.close()
+
+
+def visualize_in2out(in2out_list: list, target_found: list, game_cfg: GameConfig, save_path: str):
+    """Create a graph of the value received at the output directly from the network's input"""
+    time = [i / game_cfg.fps for i in range(len(in2out_list))]
+    
+    # Create the graph
+    ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT)).gca()
+    plt.plot(time, in2out_list)
+    for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
+    plt.grid()
+    plt.xticks([i * 5 for i in range(10)])
+    plt.yticks([-1, -0.5, 0])
+    # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
+    ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
+    plt.title("Direct influence of distance on output")
     plt.xlim(0)
     # plt.ylabel("Normalized distance")
     # plt.xlabel("Simulation time (s)")
@@ -395,7 +426,8 @@ def visualize_position(position_list: list, game: Game, save_path: str):
 def merge(title: str, path: str):
     """Merge each of the previously created images together"""
     # Load in all the images to merge
-    image_names = ['actuation', 'distance', 'hidden_state', 'candidate_hidden_state', 'reset_gate', 'update_gate']
+    image_names = ['actuation', 'distance', 'in2out', 'hidden_state', 'candidate_hidden_state', 'reset_gate',
+                   'update_gate']
     images = [plt.imread(f'{path}{n}.png') for n in image_names]
     trace = plt.imread(f'{path}trace.png')
     
@@ -410,7 +442,7 @@ def merge(title: str, path: str):
     # images.append(plt.imread('population/utils/visualizing/images/time774.png'))
     time_series = np.concatenate(images, axis=0)
     height = time_series.shape[0]
-    while trace.shape[0] > height:
+    while trace.shape[0] > height:  # Unlikely to be the case
         if trace.shape[0] == height + 1:
             trace = trace[:-1, :, :]
         else:  # Symmetric prune
