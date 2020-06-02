@@ -382,10 +382,10 @@ if __name__ == '__main__':
     parser.add_argument('--train_overview', type=bool, default=False)
     parser.add_argument('--blueprint', type=bool, default=False)
     parser.add_argument('--trace', type=bool, default=False)  # Keep it False
-    parser.add_argument('--trace_fit', type=bool, default=False)
+    parser.add_argument('--trace_fit', type=bool, default=True)
     parser.add_argument('--evaluate', type=bool, default=False)
     parser.add_argument('--genome', type=bool, default=False)
-    parser.add_argument('--monitor', type=bool, default=True)
+    parser.add_argument('--monitor', type=bool, default=False)
     parser.add_argument('--gru_analysis', type=bool, default=False)
     parser.add_argument('--live', type=bool, default=False)
     
@@ -412,8 +412,8 @@ if __name__ == '__main__':
     pop = Population(
             # name='NEAT-SRU/v11',
             # name='fru_v6',
-            # name='gru_v6',
-            name='gru_nr_v6',
+            name='gru_v6_mod',
+            # name='gru_nr_v6',
             # name='sru_v11',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment6',
@@ -432,6 +432,8 @@ if __name__ == '__main__':
     # pop.best_genome = deepcopy(pop.population[589])
     # print(pop.best_genome)
     # print(pop.best_genome.nodes[2])
+    # pop.best_genome.connections[(-1,2)].enabled = False
+    # pop.best_genome.connections[(-1,0)].weight = -1
     # raise Exception
     
     game_ids_train, game_ids_eval = get_game_ids(experiment_id=args.experiment)

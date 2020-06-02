@@ -131,6 +131,12 @@ def main(population: Population,
             print(f"\t> Position: {(round(position[-1][0], 2), round(position[-1][1], 2))!r}")
             print(f"\t> SRU state: Ht=[{round(Ht1[-1], 5)},{round(Ht2[-1], 5)}]")
     
+    # Extra plots
+    Ht2_avg = SMA(Ht2, window=2)
+    fluctuation_width = [abs(Ht2[i] - Ht2[i + 1]) / 2 for i in range(len(Ht2) - 1)]
+    fluctuation_width.append(fluctuation_width[-1])
+    Ht2_avg[0] = Ht2_avg[1]
+    
     if average > 1:
         # Average out the noise
         x, y = zip(*actuation)
@@ -181,6 +187,14 @@ def main(population: Population,
                             target_found=target_found,
                             game_cfg=game_cfg.game,
                             save_path=f"{path}hidden_state2.png")
+    visualize_hidden_state2_avg(Ht2_avg,
+                                target_found=target_found,
+                                game_cfg=game_cfg.game,
+                                save_path=f"{path}hidden_state2_avg.png")
+    visualize_fluctuation_width(fluctuation_width,
+                                target_found=target_found,
+                                game_cfg=game_cfg.game,
+                                save_path=f"{path}fluctuation_width.png")
     visualize_position(position,
                        game=game,
                        save_path=f"{path}trace.png")
@@ -203,6 +217,7 @@ def visualize_actuation(actuation_list: list, target_found: list, game_cfg: Game
     plt.legend()
     plt.grid()
     plt.xticks([i * 5 for i in range(13)])
+    plt.yticks([.6, .8, 1])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Actuation force - Normalized")
@@ -224,6 +239,7 @@ def visualize_distance(distance_list: list, target_found: list, game_cfg: GameCo
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
     plt.xticks([i * 5 for i in range(13)])
+    plt.yticks([0, .1, .2, .3])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Distance to target - Normalized")
@@ -246,6 +262,7 @@ def visualize_hidden_state1(hidden_state: list, target_found: list, game_cfg: Ga
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
     plt.xticks([i * 5 for i in range(13)])
+    plt.yticks([-1, -.5, 0, .5])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("First hidden state")
@@ -262,7 +279,7 @@ def visualize_hidden_state2(hidden_state: list, target_found: list, game_cfg: Ga
     time = [i / game_cfg.fps for i in range(len(hidden_state))]
     
     # Create the graph
-    ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT * 1.1)).gca()
+    ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT)).gca()
     # plt.plot(time, hidden_state)
     plt.plot(time, hidden_state, linewidth=0.8)  # TODO: To visualise fluctuations clearly
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
@@ -271,6 +288,50 @@ def visualize_hidden_state2(hidden_state: list, target_found: list, game_cfg: Ga
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Second hidden state")
+    plt.xlim(0)
+    # plt.ylabel("SRU output value")
+    # plt.xlabel("Simulation time (s)")
+    plt.tight_layout()
+    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02, dpi=500)
+    plt.close()
+
+
+def visualize_hidden_state2_avg(hidden_state_avg: list, target_found: list, game_cfg: GameConfig, save_path: str):
+    """Create a graph of the hidden stat's value over time"""
+    time = [i / game_cfg.fps for i in range(len(hidden_state_avg))]
+    
+    # Create the graph
+    ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT)).gca()
+    # plt.plot(time, hidden_state)
+    plt.plot(time, hidden_state_avg)
+    for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
+    plt.grid()
+    plt.xticks([i * 5 for i in range(13)])
+    # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
+    ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
+    plt.title("Second hidden state (average)")
+    plt.xlim(0)
+    # plt.ylabel("SRU output value")
+    # plt.xlabel("Simulation time (s)")
+    plt.tight_layout()
+    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02, dpi=500)
+    plt.close()
+
+
+def visualize_fluctuation_width(fluctuation_width: list, target_found: list, game_cfg: GameConfig, save_path: str):
+    """Create a graph of the hidden stat's value over time"""
+    time = [i / game_cfg.fps for i in range(len(fluctuation_width))]
+    
+    # Create the graph
+    ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT * 1.1)).gca()
+    # plt.plot(time, hidden_state)
+    plt.plot(time, fluctuation_width)
+    for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
+    plt.grid()
+    plt.xticks([i * 5 for i in range(13)])
+    # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
+    ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
+    plt.title("Second hidden state (fluctuation width, divided by two)")
     plt.xlim(0)
     # plt.ylabel("SRU output value")
     plt.xlabel("Simulation time (s)")
@@ -345,7 +406,7 @@ def merge(title: str, path: str):  # TODO
     """Merge each of the previously created images together"""
     # Load in all the images to merge
     # images = [plt.imread('population/utils/visualizing/images/white.png')]
-    image_names = ['actuation', 'distance', 'hidden_state1', 'hidden_state2']
+    image_names = ['actuation', 'distance', 'hidden_state1', 'hidden_state2', 'hidden_state2_avg', 'fluctuation_width']
     images = [plt.imread(f'{path}{n}.png') for n in image_names]
     trace = plt.imread(f'{path}trace.png')
     

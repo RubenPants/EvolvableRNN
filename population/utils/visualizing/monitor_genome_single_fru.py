@@ -28,7 +28,7 @@ from utils.myutils import get_subfolder
 # Parameters
 TIME_SERIES_WIDTH = 8
 TIME_SERIES_HEIGHT = 1.5
-CORRECTION = 0.5
+CORRECTION = 0
 
 
 def main(population: Population,
