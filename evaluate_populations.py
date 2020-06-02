@@ -33,7 +33,7 @@ def evaluate_generations(experiment_id: int,
     """Evaluate all the populations' generations in a given folder of a given experiment."""
     if pop_folder[-1] != '/': pop_folder += '/'
     # for v in range(31, max_v + 1):
-    for v in [51,52]:
+    for v in [51, 52]:
         print(f"\n===> EVALUATING POPULATION {pop_folder}v{v} <===")
         eval_gen(
                 name=f"{pop_folder}v{v}",
@@ -95,23 +95,23 @@ def evaluate_populations(folder: str, pop_folder: str, max_v: int = 50):
     plot_result(d=fitness_dict,
                 ylabel="fitness",
                 title="Average fitness",
-                save_path=f'{path_images}fitness.png')
+                save_path=f'{path_images}fitness')
     plot_result(d=finished_dict,
                 ylabel="finished ratio",
                 title="Averaged finished ratio",
-                save_path=f'{path_images}finished.png')
+                save_path=f'{path_images}finished')
     plot_result(d=score_dict,
                 ylabel="score",
                 title="Average score",
-                save_path=f'{path_images}score.png')
+                save_path=f'{path_images}score')
     plot_result(d=distance_dict,
                 ylabel="distance (m)",
                 title="Average final distance to target",
-                save_path=f'{path_images}distance.png')
+                save_path=f'{path_images}distance')
     plot_result(d=time_dict,
                 ylabel="time (s)",
                 title="Average simulation time",
-                save_path=f'{path_images}time.png')
+                save_path=f'{path_images}time')
 
 
 def combine_all_populations(folder: str,
@@ -247,7 +247,7 @@ def evaluate_training(experiment_id: int, pop_folder: str, folder: str = None, m
     plot_result(d=training_fitness,
                 ylabel="fitness",
                 title="Average training fitness",
-                save_path=f'{path_images}training.png')
+                save_path=f'{path_images}training')
 
 
 def plot_result(d: dict, ylabel: str, title: str, save_path: str):
@@ -263,11 +263,14 @@ def plot_result(d: dict, ylabel: str, title: str, save_path: str):
     plt.boxplot(data, labels=[str(k) if k % 20 == 0 else '' for k in keys], whis=[0, 100])
     plt.xticks(rotation=90)
     plt.xlabel("generations")
+    plt.yticks([2 * i for i in range(6)])
     plt.ylabel(ylabel)
-    plt.ylim(0, max(np.max(data) * 1.05, 1.05))
+    # plt.ylim(0, max(np.max(data) * 1.05, 1.05))
+    plt.ylim(0, 10)  # TODO: Fixed to have fair comparison
     plt.grid()
     plt.tight_layout()
-    plt.savefig(save_path, bbox_inches='tight', pad_inches=0.02, dpi=500)
+    plt.savefig(save_path + ".png", bbox_inches='tight', pad_inches=0.02, dpi=500)
+    plt.savefig(save_path + ".eps", format='eps', bbox_inches='tight', pad_inches=0.02)
     # plt.show()
     plt.close()
 
@@ -533,15 +536,15 @@ def correctness_check(folder: str,
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--evaluate_gen', type=int, default=0)
-    parser.add_argument('--evaluate_pop', type=int, default=0)
-    parser.add_argument('--combine_pop', type=int, default=1)  # Goes over all the populations types
+    parser.add_argument('--evaluate_pop', type=int, default=1)
+    parser.add_argument('--combine_pop', type=int, default=0)  # Goes over all the populations types
     parser.add_argument('--evaluate_training', type=int, default=0)
     parser.add_argument('--plot_distribution', type=int, default=0)  # Goes over all the populations types
     parser.add_argument('--compute_topology', type=int, default=0)  # Goes over all the populations types
     parser.add_argument('--test_correctness', type=int, default=0)
     parser.add_argument('--experiment', type=int, default=3)
     parser.add_argument('--folder', type=str, default=None)
-    parser.add_argument('--folder_pop', type=str, default='default')
+    parser.add_argument('--folder_pop', type=str, default='NEAT-GRU')
     parser.add_argument('--hops', type=int, default=HOPS)
     parser.add_argument('--max_gen', type=int, default=100)
     parser.add_argument('--max_v', type=int, default=30)
