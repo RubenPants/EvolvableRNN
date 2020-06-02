@@ -373,19 +373,19 @@ if __name__ == '__main__':
     parser.add_argument('--blueprint', type=bool, default=False)
     parser.add_argument('--trace', type=bool, default=False)  # Keep it False
     parser.add_argument('--trace_fit', type=bool, default=False)
-    parser.add_argument('--evaluate', type=bool, default=False)
+    parser.add_argument('--evaluate', type=bool, default=True)
     parser.add_argument('--genome', type=bool, default=False)
-    parser.add_argument('--monitor', type=bool, default=True)
+    parser.add_argument('--monitor', type=bool, default=False)
     parser.add_argument('--gru_analysis', type=bool, default=False)
     parser.add_argument('--live', type=bool, default=False)
     
     # Extra arguments
     parser.add_argument('--iterations', type=int, default=50)
-    parser.add_argument('--experiment', type=int, default=6)
+    parser.add_argument('--experiment', type=int, default=3)
     parser.add_argument('--unused_cpu', type=int, default=2)
     parser.add_argument('--version', type=int, default=0)
     parser.add_argument('--debug', type=bool, default=False)
-    parser.add_argument('--duration', type=int, default=60)
+    parser.add_argument('--duration', type=int, default=200)
     parser.add_argument('--use_backup', type=bool, default=True)
     args = parser.parse_args()
     
@@ -407,6 +407,7 @@ if __name__ == '__main__':
             # config=config,  # Commented to prevent new populations from creating (if type in other fields)
             use_backup=args.use_backup,
     )
+    pop.config.evaluation.fitness = D_DISTANCE_SCORE
     # for g in pop.population.values():
     #     if g.fitness == 1:
     #         pop.best_genome = deepcopy(g)
