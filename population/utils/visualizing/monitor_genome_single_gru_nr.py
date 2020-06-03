@@ -199,7 +199,8 @@ def visualize_actuation(actuation_list: list, target_found: list, game_cfg: Game
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.legend()
     plt.grid()
-    plt.xticks([i * 5 for i in range(10)])
+    plt.xticks([i * 5 for i in range(7)])
+    plt.yticks([.8, .85, .9])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Actuation force - Normalized")
@@ -220,7 +221,7 @@ def visualize_distance(distance_list: list, target_found: list, game_cfg: GameCo
     plt.plot(time, distance_list)
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
-    plt.xticks([i * 5 for i in range(10)])
+    plt.xticks([i * 5 for i in range(7)])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Distance to target - Normalized")
@@ -241,7 +242,7 @@ def visualize_in2out(in2out_list: list, target_found: list, game_cfg: GameConfig
     plt.plot(time, in2out_list)
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
-    plt.xticks([i * 5 for i in range(10)])
+    plt.xticks([i * 5 for i in range(7)])
     plt.yticks([-1, -0.5, 0])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
@@ -263,7 +264,8 @@ def visualize_hidden_state(hidden_state: list, target_found: list, game_cfg: Gam
     plt.plot(time, hidden_state)
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
-    plt.xticks([i * 5 for i in range(10)])
+    plt.xticks([i * 5 for i in range(7)])
+    plt.yticks([0, .1, .2, .3])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Hidden state")
@@ -284,7 +286,7 @@ def visualize_candidate_hidden_state(c_hidden_state: list, target_found: list, g
     plt.plot(time, c_hidden_state)
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
-    plt.xticks([i * 5 for i in range(10)])
+    plt.xticks([i * 5 for i in range(7)])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Candidate hidden state")
@@ -301,12 +303,12 @@ def visualize_update_gate(update_gate: list, target_found: list, game_cfg: GameC
     time = [i / game_cfg.fps for i in range(len(update_gate))]
     
     # Create the graph
-    ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT*1.1)).gca()
+    ax = plt.figure(figsize=(TIME_SERIES_WIDTH, TIME_SERIES_HEIGHT * 1.1)).gca()
     plt.plot(time, update_gate)
     for t in target_found: plt.axvline(x=t / game_cfg.fps, color='g', linestyle=':', linewidth=2)
     plt.grid()
-    plt.xticks([i * 5 for i in range(10)])
-    plt.yticks([.96, .98])
+    plt.xticks([i * 5 for i in range(7)])
+    plt.yticks([.99, .995, 1])
     # ax.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forces to use only integers
     ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     plt.title("Update gate")

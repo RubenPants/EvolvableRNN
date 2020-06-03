@@ -382,10 +382,10 @@ if __name__ == '__main__':
     parser.add_argument('--train_overview', type=bool, default=False)
     parser.add_argument('--blueprint', type=bool, default=False)
     parser.add_argument('--trace', type=bool, default=False)  # Keep it False
-    parser.add_argument('--trace_fit', type=bool, default=True)
+    parser.add_argument('--trace_fit', type=bool, default=False)
     parser.add_argument('--evaluate', type=bool, default=False)
     parser.add_argument('--genome', type=bool, default=False)
-    parser.add_argument('--monitor', type=bool, default=False)
+    parser.add_argument('--monitor', type=bool, default=True)
     parser.add_argument('--gru_analysis', type=bool, default=False)
     parser.add_argument('--live', type=bool, default=False)
     
@@ -396,7 +396,7 @@ if __name__ == '__main__':
     parser.add_argument('--version', type=int, default=0)
     parser.add_argument('--debug', type=bool, default=False)
     parser.add_argument('--duration', type=int, default=60)
-    parser.add_argument('--use_backup', type=bool, default=True)
+    parser.add_argument('--use_backup', type=bool, default=False)
     args = parser.parse_args()
     
     # Load in current config-file
@@ -412,9 +412,10 @@ if __name__ == '__main__':
     pop = Population(
             # name='NEAT-SRU/v11',
             # name='fru_v6',
-            name='gru_v6_mod',
+            # name='gru_v6',
             # name='gru_nr_v6',
             # name='sru_v11',
+            name='topology_3333',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment6',
             folder_name=get_folder(args.experiment),
@@ -432,8 +433,8 @@ if __name__ == '__main__':
     # pop.best_genome = deepcopy(pop.population[589])
     # print(pop.best_genome)
     # print(pop.best_genome.nodes[2])
-    # pop.best_genome.connections[(-1,2)].enabled = False
-    # pop.best_genome.connections[(-1,0)].weight = -1
+    # print(pop.best_genome.nodes[5])
+    # print(pop.best_genome.nodes[5].weight_hh)
     # raise Exception
     
     game_ids_train, game_ids_eval = get_game_ids(experiment_id=args.experiment)
@@ -456,8 +457,9 @@ if __name__ == '__main__':
     # chosen_genome.connections[(-1, 2)].weight, \
     # chosen_genome.connections[(2, 0)].weight, \
     # chosen_genome.connections[(-1, 0)].weight, _ = \
-    #     1.4480716317767224, -0.4203142812348327, 0.998943747448997, 1.303402660572161, 0.041513106884810164, 1.030812948314574, 1.37, 1.3, 2.22, 1.78, -3.62, 1.0
-    
+    #     2.94, -1.0492866, -0.22754294016380175, 3.167045727084131, -1.616905588773046, -0.27529698795822916, 1.37, 1.3, 2.22, 1.78, -3.62, 0.8333333333333334
+    # pop.best_genome = chosen_genome
+    # pop.save()
     # chosen_genome.connections[(-1,72)].weight = abs(chosen_genome.connections[(-1,72)].weight)
     # chosen_genome.nodes[2].bias_h[1] = chosen_genome.nodes[2].bias_h[1] + 0.1
     # chosen_genome.nodes[2].weight_xh_full[2,0] = chosen_genome.nodes[2].weight_xh_full[2,0] + 0.1

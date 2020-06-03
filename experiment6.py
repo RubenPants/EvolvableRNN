@@ -222,9 +222,9 @@ def get_initial_keys(topology_id: int, use_backup: bool):
                 head += ['conn1', 'conn2']
             elif topology_id in [2, 22, 222, 2222, 22222]:
                 head += ['bias_rw', 'conn2']
-            elif topology_id in [3]:
+            elif topology_id in [3, 3333]:
                 head += ['bias_lw', 'bias_rw', 'conn0', 'conn1', 'conn2']
-            elif topology_id in [30, 33, 3333]:
+            elif topology_id in [30, 33]:
                 head += ['bias_rw', 'conn0', 'conn1', 'conn2']
             else:
                 raise Exception(f"Topology ID '{topology_id}' not supported!")
@@ -803,12 +803,7 @@ def get_topology3333(gid: int, cfg: Config):
     """
     Create a uniformly and randomly sampled genome of fixed topology:
     Sigmoid with bias 1.5 --> Actuation default of 95,3%
-      (key=0, bias=1.5)      (key=1, bias=?)
-                     ____ /   /
-                   /         /
-              GRU-NR        /
-                |     _____/
-                |   /
+      (key=0, bias=)      (key=1, bias=?)
               (key=-1)
     """
     # Create an initial dummy genome with fixed configuration
@@ -818,11 +813,6 @@ def get_topology3333(gid: int, cfg: Config):
             bot_config=cfg.bot,
     )
     
-    # Setup the parameter-ranges
-    conn_range = cfg.genome.weight_max_value - cfg.genome.weight_min_value
-    bias_range = cfg.genome.bias_max_value - cfg.genome.bias_min_value
-    rnn_range = cfg.genome.rnn_max_value - cfg.genome.rnn_min_value
-    
     # Create the nodes
     genome.nodes[0] = OutputNodeGene(key=0, cfg=cfg.genome)  # OutputNode 0
     genome.nodes[0].bias = 1.37
@@ -831,10 +821,11 @@ def get_topology3333(gid: int, cfg: Config):
     genome.nodes[2] = GruNoResetNodeGene(key=2, cfg=cfg.genome, input_keys=[-1], input_keys_full=[-1])  # Hidden node
     genome.nodes[2].bias = 0  # Bias is irrelevant for GRU-node
     
-    # Uniformly sample the genome's GRU-component
-    genome.nodes[2].bias_h = rand_arr((2,)) * bias_range + cfg.genome.bias_min_value
-    genome.nodes[2].weight_xh_full = rand_arr((2, 1)) * rnn_range + cfg.genome.weight_min_value
-    genome.nodes[2].weight_hh = rand_arr((2, 1)) * rnn_range + cfg.genome.weight_min_value
+    # Initialize with the OG's parameters
+    genome.nodes[2].bias_h[0], genome.nodes[2].bias_h[1] = 2.93656771, -1.0492866
+    genome.nodes[2].weight_xh_full[0, 0], genome.nodes[2].weight_xh_full[1, 0] = -2.6152137, 3.16996657
+    genome.nodes[2].weight_hh[0, 0], genome.nodes[2].weight_hh[1, 0] = 2.52344581, -1.86091256
+    genome.update_rnn_nodes(cfg.genome)
     
     # Create the connections
     genome.connections = dict()
