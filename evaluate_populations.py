@@ -259,11 +259,11 @@ def plot_result(d: dict, ylabel: str, title: str, save_path: str):
         data[:, i] = d[k]
     
     # Create the plot
-    plt.figure(figsize=(12, 2.5))
+    plt.figure(figsize=(12, 3.5))  # TODO: Better comparison
     plt.boxplot(data, labels=[str(k) if k % 20 == 0 else '' for k in keys], whis=[0, 100])
     plt.xticks(rotation=90)
     plt.xlabel("generations")
-    plt.yticks([2 * i for i in range(6)])
+    plt.yticks([i for i in range(11)])
     plt.ylabel(ylabel)
     # plt.ylim(0, max(np.max(data) * 1.05, 1.05))
     plt.ylim(0, 10)  # TODO: Fixed to have fair comparison
@@ -544,7 +544,7 @@ if __name__ == '__main__':
     parser.add_argument('--test_correctness', type=int, default=0)
     parser.add_argument('--experiment', type=int, default=3)
     parser.add_argument('--folder', type=str, default=None)
-    parser.add_argument('--folder_pop', type=str, default='NEAT-GRU')
+    parser.add_argument('--folder_pop', type=str, default='NEAT-SRU')
     parser.add_argument('--hops', type=int, default=HOPS)
     parser.add_argument('--max_gen', type=int, default=100)
     parser.add_argument('--max_v', type=int, default=30)

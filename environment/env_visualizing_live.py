@@ -3,6 +3,8 @@ env_visualizing_live.py
 
 The visualizer gives a live visualization of a bot's run.
 """
+import time
+
 import numpy as np
 import pyglet
 import pymunk
@@ -112,12 +114,12 @@ class LiveVisualizer:
         target_body = pymunk.Body(body_type=pymunk.Body.KINEMATIC)
         target_body.position = game.target * self.p2m
         target_shape = pymunk.Circle(body=target_body,
-                                     radius=game.bot_config.radius * self.p2m)
+                                     radius=game.bot_config.radius * self.p2m * 3)  # TODO: Thick boi
         target_shape.sensor = True
         target_shape.color = (0, 128, 0)
         space.add(target_body, target_shape)
         
-        # Init player²
+        # Init player
         m = pymunk.moment_for_circle(mass=2,
                                      inner_radius=0,
                                      outer_radius=game.bot_config.radius * self.p2m)
@@ -125,7 +127,7 @@ class LiveVisualizer:
         player_body.position = game.player.pos * self.p2m
         player_body.angle = game.player.angle
         player_shape = pymunk.Circle(body=player_body,
-                                     radius=game.bot_config.radius * self.p2m)
+                                     radius=game.bot_config.radius * self.p2m * 3)  # TODO: Thick boi
         player_shape.color = (255, 0, 0)
         space.add(player_body, player_shape)
         label = pyglet.text.Label(f'{self.time}',
@@ -181,5 +183,6 @@ class LiveVisualizer:
             space.step(dt)
         
         # Run the game
+        time.sleep(5)  # TODO: Waiting time to start recording
         pyglet.clock.schedule_interval(update_method, 1.0 / (game.game_config.fps * self.speedup))
         pyglet.app.run()

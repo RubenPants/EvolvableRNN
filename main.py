@@ -373,19 +373,19 @@ if __name__ == '__main__':
     parser.add_argument('--blueprint', type=bool, default=False)
     parser.add_argument('--trace', type=bool, default=False)  # Keep it False
     parser.add_argument('--trace_fit', type=bool, default=False)
-    parser.add_argument('--evaluate', type=bool, default=True)
+    parser.add_argument('--evaluate', type=bool, default=False)
     parser.add_argument('--genome', type=bool, default=False)
-    parser.add_argument('--monitor', type=bool, default=False)
+    parser.add_argument('--monitor', type=bool, default=True)
     parser.add_argument('--gru_analysis', type=bool, default=False)
     parser.add_argument('--live', type=bool, default=False)
     
     # Extra arguments
-    parser.add_argument('--iterations', type=int, default=50)
+    parser.add_argument('--iterations', type=int, default=0)
     parser.add_argument('--experiment', type=int, default=3)
     parser.add_argument('--unused_cpu', type=int, default=2)
     parser.add_argument('--version', type=int, default=0)
     parser.add_argument('--debug', type=bool, default=False)
-    parser.add_argument('--duration', type=int, default=200)
+    parser.add_argument('--duration', type=int, default=60)
     parser.add_argument('--use_backup', type=bool, default=True)
     args = parser.parse_args()
     
@@ -400,7 +400,7 @@ if __name__ == '__main__':
     
     # Setup the population
     pop = Population(
-            name='fru_v6',
+            name='NEAT-GRU/v6',
             # name=get_name(cfg=config, version=args.version),
             # folder_name='experiment6',
             folder_name=get_folder(args.experiment),
@@ -512,12 +512,12 @@ if __name__ == '__main__':
         if args.live:
             live(
                     debug=args.debug,
-                    game_id=game_ids_eval[8],
+                    game_id=game_ids_eval[0],
                     # game_id=30001,
                     duration=args.duration,
                     genome=chosen_genome if chosen_genome else pop.best_genome,
                     population=pop,
-                    speedup=3,
+                    speedup=4,
             )
     except Exception as e:
         pop.log(traceback.format_exc(), print_result=False)
