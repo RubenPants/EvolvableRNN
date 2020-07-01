@@ -390,8 +390,8 @@ if __name__ == '__main__':
     parser.add_argument('--live', type=bool, default=False)
     
     # Extra arguments
-    parser.add_argument('--iterations', type=int, default=50)
-    parser.add_argument('--experiment', type=int, default=6)
+    parser.add_argument('--iterations', type=int, default=0)
+    parser.add_argument('--experiment', type=int, default=3)
     parser.add_argument('--unused_cpu', type=int, default=2)
     parser.add_argument('--version', type=int, default=0)
     parser.add_argument('--debug', type=bool, default=False)
@@ -403,17 +403,17 @@ if __name__ == '__main__':
     config = Config()
     # config.bot.delta_dist_enabled = True
     # config.bot.angular_dir = [True, False]
-    config.bot.dist_enabled = True
-    config.evaluation.fitness = D_DISTANCE_SCORE
-    config.genome.rnn_prob_gru = 0.6
+    # config.bot.dist_enabled = True
+    # config.evaluation.fitness = D_DISTANCE_SCORE
+    # config.genome.rnn_prob_gru = 0.6
     config.update()
     
     # Setup the population
     pop = Population(
-            # name='NEAT-SRU/v11',
+            name='NEAT-GRU/v6',
             # name='fru_v6',
             # name='gru_v6',
-            name='gru_nr_v6',
+            # name='gru_nr_v6',
             # name='sru_v11',
             # name='topology_3333',
             # name=get_name(cfg=config, version=args.version),
@@ -431,11 +431,11 @@ if __name__ == '__main__':
     # print(pop.best_genome.nodes[2])
     # pop.best_genome.update_rnn_nodes(pop.config.genome)
     # pop.best_genome = deepcopy(pop.population[589])
-    print(pop.best_genome)
-    print(pop.best_genome.nodes[2])
+    # print(pop.best_genome)
+    # print(pop.best_genome.nodes[2])
     # print(pop.best_genome.nodes[5])
     # print(pop.best_genome.nodes[5].weight_hh)
-    raise Exception
+    # raise Exception
     
     game_ids_train, game_ids_eval = get_game_ids(experiment_id=args.experiment)
     

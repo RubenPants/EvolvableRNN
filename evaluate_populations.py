@@ -537,12 +537,12 @@ if __name__ == '__main__':
     parser.add_argument('--plot_distribution', type=int, default=0)  # Goes over all the populations types
     parser.add_argument('--compute_topology', type=int, default=0)  # Goes over all the populations types
     parser.add_argument('--test_correctness', type=int, default=0)
-    parser.add_argument('--experiment', type=int, default=3)
+    parser.add_argument('--experiment', type=int, default=2)
     parser.add_argument('--folder', type=str, default=None)
     parser.add_argument('--folder_pop', type=str, default='NEAT-SRU')
     parser.add_argument('--hops', type=int, default=HOPS)
-    parser.add_argument('--max_gen', type=int, default=1000)
-    parser.add_argument('--max_v', type=int, default=30)
+    parser.add_argument('--max_gen', type=int, default=500)
+    parser.add_argument('--max_v', type=int, default=50)
     parser.add_argument('--unused_cpu', type=int, default=2)
     args = parser.parse_args()
     
@@ -582,10 +582,10 @@ if __name__ == '__main__':
         combine_all_populations(
                 folder=f,
                 max_v=args.max_v,
-                neat=False,
-                neat_gru=True,
+                neat=True,
+                neat_gru=False,
                 neat_lstm=False,
-                neat_sru=True,
+                neat_sru=False,
                 neat_sru_s=False,
         )
     
