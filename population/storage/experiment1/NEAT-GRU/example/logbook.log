@@ -17850,3 +17850,35 @@ Population 'NEAT-GRU/v1' loaded successfully! Current generation: 500
 Population 'NEAT-GRU/v1' loaded successfully! Current generation: 500
 
 Population 'NEAT-GRU/v1' loaded successfully! Current generation: 500
+
+Population 'NEAT-GRU/example' loaded successfully! Current generation: 500
+
+===> CREATING BLUEPRINTS <===
+
+Creating blueprints for games: [10001, 10002, 10003, 10004, 10005, 10006, 10007, 10008, 10009, 10010, 10011, 10012, 10013, 10014, 10015, 10016, 10017, 10018, 10019, 10020]
+
+Population 'NEAT-GRU/example' loaded successfully! Current generation: 500
+
+===> CREATING TRACES <===
+
+Creating traces for games: [10001]
+
+===> CREATING GENOME TRACE <===
+
+Creating traces for games: [10001]
+
+Population 'NEAT-GRU/example' loaded successfully! Current generation: 500
+
+===> CREATING TRACES <===
+
+Creating traces for games: [10001, 10002, 10003, 10004, 10005, 10006, 10007, 10008, 10009, 10010, 10011, 10012, 10013, 10014, 10015, 10016, 10017, 10018, 10019, 10020]
+
+Population 'NEAT-GRU/example' loaded successfully! Current generation: 500
+
+===> CREATING TRACES <===
+
+Creating traces for games: [10001]
+
+===> CREATING GENOME TRACE <===
+
+Creating traces for games: [10001]

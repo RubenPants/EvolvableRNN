@@ -155,4 +155,5 @@ cache_populations/**/
 runs/
 
 # Ignore the delete_me folder (used to store intermediate images)
-delete_me/
+delete_me/*
+!delete_me/__init__.py

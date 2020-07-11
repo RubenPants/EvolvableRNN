@@ -370,17 +370,17 @@ if __name__ == '__main__':
     parser.add_argument('--train', type=bool, default=False)
     parser.add_argument('--train_overview', type=bool, default=False)
     parser.add_argument('--blueprint', type=bool, default=False)
-    parser.add_argument('--trace', type=bool, default=False)  # Keep it False
-    parser.add_argument('--trace_fit', type=bool, default=False)
+    parser.add_argument('--trace', type=bool, default=True)  # Keep it False
+    parser.add_argument('--trace_fit', type=bool, default=True)
     parser.add_argument('--evaluate', type=bool, default=False)
     parser.add_argument('--genome', type=bool, default=False)
     parser.add_argument('--monitor', type=bool, default=False)
     parser.add_argument('--gru_analysis', type=bool, default=False)
-    parser.add_argument('--live', type=bool, default=True)
+    parser.add_argument('--live', type=bool, default=False)
     
     # Extra arguments
     parser.add_argument('--iterations', type=int, default=0)
-    parser.add_argument('--experiment', type=int, default=3)
+    parser.add_argument('--experiment', type=int, default=1)
     parser.add_argument('--unused_cpu', type=int, default=2)
     parser.add_argument('--version', type=int, default=0)
     parser.add_argument('--debug', type=bool, default=False)
@@ -433,7 +433,7 @@ if __name__ == '__main__':
             trace(
                     debug=args.debug,
                     duration=args.duration,
-                    games=game_ids_eval,
+                    games=[game_ids_eval[0]],
                     population=pop,
                     unused_cpu=args.unused_cpu,
             )
@@ -442,7 +442,7 @@ if __name__ == '__main__':
             trace_most_fit(
                     debug=args.debug,
                     duration=args.duration,
-                    games=game_ids_eval,
+                    games=[game_ids_eval[0]],
                     # games=[-11],
                     genome=chosen_genome if chosen_genome else pop.best_genome,
                     population=pop,

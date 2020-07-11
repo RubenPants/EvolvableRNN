@@ -66,13 +66,13 @@ class PopulationNeatGruNoUpdateTest(unittest.TestCase):
         if os.getcwd().split('\\')[-1] == 'tests': os.chdir('..')
         
         pop = get_population()
-        train(
-                population=pop,
-                unused_cpu=0,
-                iterations=1,
-                debug=True,
-                games=[-2],
-        )
+        # train(
+        #         population=pop,
+        #         unused_cpu=0,
+        #         iterations=1,
+        #         debug=True,
+        #         games=[-2],
+        # )
     
     def test_blueprint(self):
         """> Test if population can blueprint its results."""
