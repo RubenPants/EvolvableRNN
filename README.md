@@ -114,9 +114,10 @@ Performance of the population, as represented by its elite genome, throughout th
 </p>
 
 #### Architectural Timeline
-Representation of all the architectural changes throughout the complete population timeline.
+Representation of all the architectural changes throughout the complete population timeline. Note that the image is cut
+for this demonstrative visualisation since it would grow to big otherwise.
 <p align="center">
-  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/elites/architecture_timeline.png"/>
+  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/elites/architecture_timeline_cut.png"/>
 </p>
 
 #### Species Representatives
@@ -155,7 +156,7 @@ that was evolved for the third experiment.
 Detailed graph of the genome's architecture, which shows both the configurations of all of its connections as well as 
 its internal nodes.
 <p align="center">
-  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/architecture_debug/genome_482171.png"/>
+  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/architectures_debug/genome_482171.png"/>
 </p>
 
 #### Monitor
@@ -184,5 +185,5 @@ possible to manually set targets to the environment, this to better analyse the 
 Visualisations showing the configuration of the game, which are the positions of the potential targets, as well as the
 initial position as well as the starting direction of the robot.
 <p align="center">
-  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/environment/visualisations/30001.png"/>
+  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/environment/visualisations/blueprint_game30001.png"/>
 </p>
