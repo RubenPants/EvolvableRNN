@@ -185,5 +185,5 @@ possible to manually set targets to the environment, this to better analyse the 
 Visualisations showing the configuration of the game, which are the positions of the potential targets, as well as the
 initial position as well as the starting direction of the robot.
 <p align="center">
-  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/environment/visualisations/blueprint_game30001.png"/>
+  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/environment/visualizations/blueprint_game30001.png"/>
 </p>
