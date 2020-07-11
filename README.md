@@ -99,7 +99,7 @@ Visualisations comparing the performance of the different population types. The 
 successfully finished simulations for each of the population types over the full evolutionary cycle for the first 
 experiment.
 <p align="center">
-  <img src="https://github.com/RubenPants/TransferLearningKerasDemo/blob/master/population/storage/experiment1/images/comb_finished.png"/>
+  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment1/images/comb_finished.png"/>
 </p>
 
 
@@ -110,32 +110,32 @@ population that was evolved for the third experiment.
 #### Population Performance
 Performance of the population, as represented by its elite genome, throughout the full evolutionary cycle.
 <p align="center">
-  <img src="https://github.com/RubenPants/TransferLearningKerasDemo/blob/master/population/storage/experiment3/NEAT-GRU/example/images/elites/gen_1000.png"/>
+  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/elites/gen_1000.png"/>
 </p>
 
 #### Architectural Timeline
 Representation of all the architectural changes throughout the complete population timeline.
 <p align="center">
-  <img src="https://github.com/RubenPants/TransferLearningKerasDemo/blob/master/population/storage/experiment3/NEAT-GRU/example/images/elites/architecture_timeline.png"/>
+  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/elites/architecture_timeline.png"/>
 </p>
 
 #### Species Representatives
 The genome architecture of each species' representative.
 <p align="center">
-  <img src="https://github.com/RubenPants/TransferLearningKerasDemo/blob/master/population/storage/experiment3/NEAT-GRU/example/images/species/representatives_gen1000.png"/>
+  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/species/representatives_gen1000.png"/>
 </p>
 
 #### Species Distance
 The genome distance between each two species' representatives.
 <p align="center">
-  <img src="https://github.com/RubenPants/TransferLearningKerasDemo/blob/master/population/storage/experiment3/NEAT-GRU/example/images/species/distances_gen_1000.png"/>
+  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/species/distances_gen_1000.png"/>
 </p>
 
 #### Game Blueprint
 A blueprint of all the final positions of the population's genome. Note that this is only useful when the simulation
 ends when the target is found, hence the example given is that of the NEAT-GRU population on the first experiment.
 <p align="center">
-  <img src="https://github.com/RubenPants/TransferLearningKerasDemo/blob/master/population/storage/experiment1/NEAT-GRU/example/images/games/game10001/blueprint_gen00500.png"/>
+  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment1/NEAT-GRU/example/images/games/game10001/blueprint_gen00500.png"/>
 </p>
 
 #### Trace
@@ -143,7 +143,7 @@ An extension on the blueprint plot shown above, where also the traces of each re
 also shows the NEAT-GRU population of the first experiment. Note that it is possible to show only the best X genomes, 
 which results in a cleaner graph.
 <p align="center">
-  <img src="https://github.com/RubenPants/TransferLearningKerasDemo/blob/master/population/storage/experiment1/NEAT-GRU/example/images/games/game10001/trace_gen00500.png"/>
+  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment1/NEAT-GRU/example/images/games/game10001/trace_gen00500.png"/>
 </p>
 
 
@@ -155,28 +155,28 @@ that was evolved for the third experiment.
 Detailed graph of the genome's architecture, which shows both the configurations of all of its connections as well as 
 its internal nodes.
 <p align="center">
-  <img src="https://github.com/RubenPants/TransferLearningKerasDemo/blob/master/population/storage/experiment3/NEAT-GRU/example/images/architecture_debug/genome_482171.png"/>
+  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/architecture_debug/genome_482171.png"/>
 </p>
 
 #### Monitor
 A plot that shows how a genome's internal changes during a single simulation. Note that this plot assumes that the 
 genome consists of only a single hidden node.
 <p align="center">
-  <img src="https://github.com/RubenPants/TransferLearningKerasDemo/blob/master/population/storage/experiment3/NEAT-GRU/example/images/monitor/482171/30001.png"/>
+  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/monitor/482171/30001.png"/>
 </p>
 
 #### Trace
 Creates the trace of the genome on a specific environment. The trace shown is that of the NEAT-GRU population its elite
 genome of the first experiment.
 <p align="center">
-  <img src="https://github.com/RubenPants/TransferLearningKerasDemo/blob/master/population/storage/experiment1/NEAT-GRU/example/images/games/game10001/trace_239823_gen00500.png"/>
+  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment1/NEAT-GRU/example/images/games/game10001/trace_239823_gen00500.png"/>
 </p>
 
 #### Live
 A live visualisation which shows how the genome behaves in a certain environment. During this live visualisation, it is
 possible to manually set targets to the environment, this to better analyse the network's capabilities.
 <p align="center">
-  <img src="https://github.com/RubenPants/TransferLearningKerasDemo/blob/master/population/storage/experiment3/NEAT-GRU/example/images/live_example.gif"/>
+  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/live_example.gif"/>
 </p>
 
 
@@ -184,5 +184,5 @@ possible to manually set targets to the environment, this to better analyse the 
 Visualisations showing the configuration of the game, which are the positions of the potential targets, as well as the
 initial position as well as the starting direction of the robot.
 <p align="center">
-  <img src="https://github.com/RubenPants/TransferLearningKerasDemo/blob/master/environment/visualisations/30001.png"/>
+  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/environment/visualisations/30001.png"/>
 </p>
