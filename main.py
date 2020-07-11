@@ -18,7 +18,6 @@ from population.utils.gene_util.simple_node import SimpleNodeGene
 from population.utils.gene_util.simple_rnn import SimpleRnnNodeGene
 from population.utils.genome import Genome
 from process_killer import main as process_killer
-from utils.dictionary import *
 
 
 def blueprint(population: Population,
@@ -375,9 +374,9 @@ if __name__ == '__main__':
     parser.add_argument('--trace_fit', type=bool, default=False)
     parser.add_argument('--evaluate', type=bool, default=False)
     parser.add_argument('--genome', type=bool, default=False)
-    parser.add_argument('--monitor', type=bool, default=True)
+    parser.add_argument('--monitor', type=bool, default=False)
     parser.add_argument('--gru_analysis', type=bool, default=False)
-    parser.add_argument('--live', type=bool, default=False)
+    parser.add_argument('--live', type=bool, default=True)
     
     # Extra arguments
     parser.add_argument('--iterations', type=int, default=0)
@@ -386,40 +385,15 @@ if __name__ == '__main__':
     parser.add_argument('--version', type=int, default=0)
     parser.add_argument('--debug', type=bool, default=False)
     parser.add_argument('--duration', type=int, default=60)
-    parser.add_argument('--use_backup', type=bool, default=True)
+    parser.add_argument('--use_backup', type=bool, default=False)
     args = parser.parse_args()
-    
-    # Load in current config-file
-    config = Config()
-    # config.bot.delta_dist_enabled = True
-    # config.bot.angular_dir = [True, False]
-    config.bot.dist_enabled = True
-    config.evaluation.fitness = D_DISTANCE_SCORE
-    config.genome.rnn_prob_gru = 0.6
-    config.update()
     
     # Setup the population
     pop = Population(
-            name='NEAT-GRU/v6',
-            # name=get_name(cfg=config, version=args.version),
-            # folder_name='experiment6',
+            name='NEAT-GRU/example',
             folder_name=get_folder(args.experiment),
-            # config=config,  # Commented to prevent new populations from creating (if type in other fields)
             use_backup=args.use_backup,
     )
-    pop.config.evaluation.fitness = D_DISTANCE_SCORE
-    # for g in pop.population.values():
-    #     if g.fitness == 1:
-    #         pop.best_genome = deepcopy(g)
-    #         print(g)
-    # pop.best_genome.nodes[2].delay = 59
-    # pop.best_genome.nodes[2].scale[0] = 1.192
-    # print(pop.best_genome.nodes[2])
-    # pop.best_genome.update_rnn_nodes(pop.config.genome)
-    # pop.best_genome = deepcopy(pop.population[589])
-    # print(pop.best_genome)
-    # print(pop.best_genome.nodes[2])
-    # raise Exception
     
     game_ids_train, game_ids_eval = get_game_ids(experiment_id=args.experiment)
     
@@ -476,7 +450,6 @@ if __name__ == '__main__':
             )
         
         if args.monitor:
-            # for k in range(18):  # TODO: Remove for-loop
             monitor(
                     debug=args.debug,
                     duration=args.duration,
