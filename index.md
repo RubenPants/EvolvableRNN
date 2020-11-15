@@ -98,6 +98,7 @@ project.
 Visualisations comparing the performance of the different population types. The example below shows the ratio of 
 successfully finished simulations for each of the population types over the full evolutionary cycle for the first 
 experiment.
+
 ![Population Type Comparison](https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment1/images/comb_finished.png?raw=true)
 
 ### Population Analysis
@@ -106,30 +107,36 @@ population that was evolved for the third experiment.
 
 #### Population Performance
 Performance of the population, as represented by its elite genome, throughout the full evolutionary cycle.
+
 ![Population Performance](https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/elites/gen_1000.png?raw=true)
 
 #### Architectural Timeline
 Representation of all the architectural changes throughout the complete population timeline. Note that the image is cut
 for this demonstrative visualisation since it would grow to big otherwise.
+
 ![Architectural Timeline](https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/elites/architecture_timeline_cut.png?raw=true)
 
 #### Species Representatives
 The genome architecture of each species' representative.
+
 ![Species Representatives](https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/species/representatives_gen1000.png?raw=true)
 
 #### Species Distance
 The genome distance between each two species' representatives.
+
 ![Species Distance](https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/species/distances_gen_1000.png?raw=true)
 
 #### Game Blueprint
 A blueprint of all the final positions of the population's genome. Note that this is only useful when the simulation
 ends when the target is found, hence the example given is that of the NEAT-GRU population on the first experiment.
+
 ![Game Blueprint](https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment1/NEAT-GRU/example/images/games/game10001/blueprint_gen00500.png?raw=true)
 
 #### Trace
 An extension on the blueprint plot shown above, where also the traces of each respective genome are shown. This plot 
 also shows the NEAT-GRU population of the first experiment. Note that it is possible to show only the best X genomes, 
 which results in a cleaner graph.
+
 ![Riding Trace](https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment1/NEAT-GRU/example/images/games/game10001/trace_gen00500.png?raw=true)
 
 
@@ -140,21 +147,25 @@ that was evolved for the third experiment.
 #### Architecture
 Detailed graph of the genome's architecture, which shows both the configurations of all of its connections as well as 
 its internal nodes.
+
 ![Genome Architecture](https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/architectures_debug/genome_482171.png?raw=true)
 
 #### Monitor
 A plot that shows how a genome's internal changes during a single simulation. Note that this plot assumes that the 
 genome consists of only a single hidden node.
+
 ![Monitoring](https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/monitor/482171/30001.png?raw=true)
 
 #### Trace
 Creates the trace of the genome on a specific environment. The trace shown is that of the NEAT-GRU population its elite
 genome of the first experiment.
+
 ![Game Trace](https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment1/NEAT-GRU/example/images/games/game10001/trace_239823_gen00500.png?raw=true)
 
 #### Live
 A live visualisation which shows how the genome behaves in a certain environment. During this live visualisation, it is
 possible to manually set targets to the environment, this to better analyse the network's capabilities.
+
 ![Live Game](https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/live_example.gif?raw=true)
 
 
