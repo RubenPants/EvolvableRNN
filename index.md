@@ -1,5 +1,3 @@
-# EvolvableRNN
-
 ## Brief Overview
 This project performs the experiments I performed for my Master's thesis: *An Empirical Investigation of Using Gated 
 Recurrent Units in Evolved Robotic Controllers*. My supervisors were Prof. dr. K. Tuyls and Dr. ir. W. Meert, with daily
@@ -100,10 +98,7 @@ project.
 Visualisations comparing the performance of the different population types. The example below shows the ratio of 
 successfully finished simulations for each of the population types over the full evolutionary cycle for the first 
 experiment.
-<p align="center">
-  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment1/images/comb_finished.png"/>
-</p>
-
+![Population Type Comparison](https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment1/images/comb_finished.png?raw=true)
 
 ### Population Analysis
 Visualisations that help to analyse a population's performance. The examples shown in this section are fom the NEAT-GRU
