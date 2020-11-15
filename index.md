@@ -1,3 +1,5 @@
+# EvolvableRNN
+
 ## Brief Overview
 This project performs the experiments I performed for my Master's thesis: *An Empirical Investigation of Using Gated 
 Recurrent Units in Evolved Robotic Controllers*. My supervisors were Prof. dr. K. Tuyls and Dr. ir. W. Meert, with daily
