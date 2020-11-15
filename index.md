@@ -106,43 +106,31 @@ population that was evolved for the third experiment.
 
 #### Population Performance
 Performance of the population, as represented by its elite genome, throughout the full evolutionary cycle.
-<p align="center">
-  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/elites/gen_1000.png"/>
-</p>
+![Population Performance](https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/elites/gen_1000.png?raw=true)
 
 #### Architectural Timeline
 Representation of all the architectural changes throughout the complete population timeline. Note that the image is cut
 for this demonstrative visualisation since it would grow to big otherwise.
-<p align="center">
-  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/elites/architecture_timeline_cut.png"/>
-</p>
+![Architectural Timeline](https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/elites/architecture_timeline_cut.png?raw=true)
 
 #### Species Representatives
 The genome architecture of each species' representative.
-<p align="center">
-  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/species/representatives_gen1000.png"/>
-</p>
+![Species Representatives](https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/species/representatives_gen1000.png?raw=true)
 
 #### Species Distance
 The genome distance between each two species' representatives.
-<p align="center">
-  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/species/distances_gen_1000.png"/>
-</p>
+![Species Distance](https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/species/distances_gen_1000.png?raw=true)
 
 #### Game Blueprint
 A blueprint of all the final positions of the population's genome. Note that this is only useful when the simulation
 ends when the target is found, hence the example given is that of the NEAT-GRU population on the first experiment.
-<p align="center">
-  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment1/NEAT-GRU/example/images/games/game10001/blueprint_gen00500.png"/>
-</p>
+![Game Blueprint](https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment1/NEAT-GRU/example/images/games/game10001/blueprint_gen00500.png?raw=true)
 
 #### Trace
 An extension on the blueprint plot shown above, where also the traces of each respective genome are shown. This plot 
 also shows the NEAT-GRU population of the first experiment. Note that it is possible to show only the best X genomes, 
 which results in a cleaner graph.
-<p align="center">
-  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment1/NEAT-GRU/example/images/games/game10001/trace_gen00500.png"/>
-</p>
+![Riding Trace](https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment1/NEAT-GRU/example/images/games/game10001/trace_gen00500.png?raw=true)
 
 
 ### Genome Analysis
@@ -152,35 +140,25 @@ that was evolved for the third experiment.
 #### Architecture
 Detailed graph of the genome's architecture, which shows both the configurations of all of its connections as well as 
 its internal nodes.
-<p align="center">
-  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/architectures_debug/genome_482171.png"/>
-</p>
+![Genome Architecture](https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/architectures_debug/genome_482171.png?raw=true)
 
 #### Monitor
 A plot that shows how a genome's internal changes during a single simulation. Note that this plot assumes that the 
 genome consists of only a single hidden node.
-<p align="center">
-  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/monitor/482171/30001.png"/>
-</p>
+![Monitoring](https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/monitor/482171/30001.png?raw=true)
 
 #### Trace
 Creates the trace of the genome on a specific environment. The trace shown is that of the NEAT-GRU population its elite
 genome of the first experiment.
-<p align="center">
-  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment1/NEAT-GRU/example/images/games/game10001/trace_239823_gen00500.png"/>
-</p>
+![Game Trace](https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment1/NEAT-GRU/example/images/games/game10001/trace_239823_gen00500.png?raw=true)
 
 #### Live
 A live visualisation which shows how the genome behaves in a certain environment. During this live visualisation, it is
 possible to manually set targets to the environment, this to better analyse the network's capabilities.
-<p align="center">
-  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/live_example.gif"/>
-</p>
+![Live Game](https://github.com/RubenPants/EvolvableRNN/blob/master/population/storage/experiment3/NEAT-GRU/example/images/live_example.gif?raw=true)
 
 
 ### Game
 Visualisations showing the configuration of the game, which are the positions of the potential targets, as well as the
 initial position as well as the starting direction of the robot.
-<p align="center">
-  <img src="https://github.com/RubenPants/EvolvableRNN/blob/master/environment/visualizations/blueprint_game30001.png"/>
-</p>
+![Game Setup](https://github.com/RubenPants/EvolvableRNN/blob/master/environment/visualizations/blueprint_game30001.png?raw=true)
